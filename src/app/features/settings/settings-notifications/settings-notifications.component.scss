@@ -1,0 +1,37 @@
+@import '../../../../assets/color-palette.scss'; 
+@import '../../../../assets/typography.scss'; 
+@import '../../../shared/input/input.component.scss'; 
+ 
+.my-main-container { 
+	display: flex; 
+	flex-direction: column; 
+	flex: 1; 
+	height: 100%; 
+	width: 100%; 
+} 
+ 
+.line-content {  
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center; 
+	margin-top: 22px; 
+} 
+ 
+.p-secondary { 
+	margin-bottom: 0; 
+} 
+ 
+.item-2 { 
+	position: relative; 
+} 
+ 
+.toggle { 
+	position: absolute; 
+	top: -11px; 
+	left: -36px; 
+} 
+ 
+hr { 
+	margin: 18px 0; 
+} 
+ 

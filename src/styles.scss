@@ -1,0 +1,30 @@
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+@import "app/shared/components/datepicker/datePicker";
+@import "./assets/color-palette";
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/typography";
+//Importing C3js styles for charts
+@import "~c3/c3.min.css";
+
+body {
+  overflow: overlay;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b6b6b6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary;
+}

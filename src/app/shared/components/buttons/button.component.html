@@ -1,0 +1,21 @@
+<button
+	class="button"
+	[ngClass]="btnClass"
+	[style.width]="btnWidth"
+	[style.height]="btnHeight"
+	[disabled]="isDisable"
+>
+	<i *ngIf="icon" class="{{ icon }}"></i>
+	{{ text }}
+</button>
+
+<!-- SAMPLE USAGE IN PARENT COMPONENT -->
+
+<!-- <app-button 
+    btnClass = "primary"
+    btnHeight="20px"
+    btnWidth="20px"
+    [isDisable] = 'false'
+    icon="fab fa-accessible-icon"
+    text="TEST">
+</app-button> -->

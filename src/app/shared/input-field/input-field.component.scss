@@ -1,0 +1,68 @@
+@import '../../../assets/color-palette.scss';
+@import '../../../assets/typography.scss';
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css');
+
+:host ::ng-deep input {
+	height: 52px;
+	width: 100%;
+	border: 1px solid $outline;
+	border-radius: 3px;
+	margin-top: 12px;
+	padding-left: 15px;
+	font-family: $font-primary;
+
+	&:disabled {
+		color: $secondary-light;
+	}
+	&:focus {
+		outline-color: $secondary-light;
+	}
+	&::placeholder {
+		color: $secondary-light;
+		font-family: $font-primary;
+	}
+}
+.input-div {
+	//height: 90px;
+	font-size: 14px;
+
+	label {
+		display: block;
+		color: $primary-dark;
+		font-family: $font-primary;
+	}
+}
+
+.input-warn {
+	::ng-deep input {
+		border: 1px solid $secondary-pink;
+	}
+	i {
+		display: inline-block;
+		position: relative;
+		z-index: 1;
+		top: -38px;
+		left: 90%;
+		font-size: 16px;
+		color: $primary-dark;
+	}
+}
+
+.input-success {
+	::ng-deep input {
+		border: 1px solid $secondary-green;
+	}
+	i {
+		display: inline-block;
+		position: relative;
+		z-index: 1;
+		top: -40px;
+		left: 90%;
+		font-size: 20px;
+		color: $primary-dark;
+	}
+}
+
+.custom-input {
+	height: 100px;
+}

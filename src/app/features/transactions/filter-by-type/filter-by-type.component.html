@@ -1,0 +1,11 @@
+<div class="dropdown-container">
+    <div class="label">
+        <i class="fas fa-briefcase"></i>
+        <span>TYPE:</span>
+    </div>
+    <div class="search-dropdown">
+        <app-dropdown [fontSize]="'12px'" [list]="['All','Phone payment','Bank transfer','Online payment']"
+            (selectedItem)="sortByType($event)" [invisibleBorder]="true">
+        </app-dropdown>
+    </div>
+</div>

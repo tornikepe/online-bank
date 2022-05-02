@@ -1,0 +1,165 @@
+<div class="main">
+    <app-tabs-group>
+        <app-tab [TitleText]="'Currency'">
+            <div class="page">
+                <table class="table">
+                    <tbody>
+                        <!-- //======================================= -->
+                        <tr *ngFor="let i of currency_arr">
+                            <td>
+                                <!--                <img-->
+                                <!--                  style="width: 50px; height: 30px"-->
+                                <!--                  src="{{i.icon}}"-->
+                                <!--                  alt="img"-->
+                                <!--                  onError="this.src = '../../../../assets/images/auth/Bitcoin-PNG-Background.png'"-->
+                                <!--                />-->
+                                <div class="currency-flag currency-flag-{{i.code.toLocaleLowerCase()}}"></div>
+
+                                <td>
+                                    {{i.code}}
+                                </td>
+                                <td>
+                                    {{i.name}}
+                                </td>
+                                <td>
+                                    {{i.date |date}}
+                                </td>
+                                <!-- color :  #FE4D97
+opacity 9%
+color  : #6DD230; -->
+                                <td [style]="i.color">
+                                    {{i.rateFormated}}
+                                </td>
+                                <td>
+                                    {{i.rate/i.quantity| number:"1.1-3"}}
+                                </td>
+                                <td [ngStyle]="{
+                  color: colorChanger(i.diff)
+                    ? 'green'
+                    : 'red'
+                }">
+                                    {{sign(i.diff)+i.diff| percent: "1.1-2" }}
+                                </td>
+                                <td>
+                                    {{i.date| date:"mediumTime"}}
+                                </td>
+                        </tr>
+
+                        <!-- //======================================================== -->
+                        <div class="overlay"></div>
+                    </tbody>
+                </table>
+            </div>
+        </app-tab>
+
+        <app-tab [TitleText]="'Crypto'">
+            <div class="page">
+                <div class="search">
+                    <form class="input" [formGroup]="form">
+                        <label for="cryptoSearcch"><span><i class="fas fa-search"></i></span> FIND
+              CRYPTOCURRENCY</label
+            >
+
+            <!-- <input
+              (keyup)="search()"
+              formControlName="crypto"
+              type="text"
+              name="cryptoSearcch"
+              id="cryptoSearcch"
+              placeholder="TYPE TO SEARCH"
+            /> -->
+
+            <app-input-field
+              [formGroup]="form"
+              (keyup)="search()"
+              [width]="'300px'"
+            >
+              <input
+                formControlName="crypto"
+                type="text"
+                name="cryptoSearcch"
+                id="cryptoSearcch"
+                placeholder="TYPE TO SEARCH"
+              />
+            </app-input-field>
+          </form>
+          <div class="curency_option">
+            <p>
+              <span><i class="fas fa-filter"></i></span> CURRENCY
+            </p>
+            <p>
+              USD <span><i class="fas fa-dollar-sign"></i></span>
+            </p>
+          </div>
+        </div>
+        <hr />
+        <table class="table">
+          <thead class="thead">
+            <tr>
+              <th>
+                Name & Symbol <span><i class="fab fa-uncharted"></i></span>
+              </th>
+              <th></th>
+              <th>
+                <span> <i class="fas fa-dollar-sign"></i></span> Price USD
+              </th>
+              <th><i class="fas fa-chart-pie"></i> Market Cap</th>
+              <th><i class="fas fa-chart-line"></i> Volume</th>
+              <th><i class="fas fa-chart-bar"></i> Total Vol.</th>
+              <th><i class="fas fa-chart-area"></i> Chg 24H</th>
+              <th><i class="fas fa-signal"></i> Chg 7D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let crypto of cryptoArray">
+              <td>
+                <img
+                  style="width: 30px; height: 30px"
+                  src="{{ iconMap.get(crypto.symbol) }}"
+                  alt="img"
+                  onError="this.src = '../../../../assets/images/auth/Bitcoin-PNG-Background.png'"
+                /><span>{{ crypto.name }}</span>
+              </td>
+              <td id="second-child">{{ crypto.symbol }}</td>
+              <td>
+                {{ mathRounding(crypto.quote.USD.price) | number: "1.2" }}
+              </td>
+              <td>${{ crypto.quote.USD.market_cap | numberSuffix }}</td>
+              <td>${{ crypto.quote.USD.volume_24h | numberSuffix }}</td>
+              <td>
+                {{ crypto.quote.USD.volume_24h / VolumeSum | percent: "0.1-2" }}
+              </td>
+
+              <td
+                [ngStyle]="{
+                  color: colorChanger(crypto.quote.USD.percent_change_24h)
+                    ? 'green'
+                    : 'red'
+                }"
+              >
+                {{ sign(crypto.quote.USD.percent_change_24h)
+                }}{{
+                  crypto.quote.USD.percent_change_24h / 100 | percent: "0.1-2"
+                }}
+              </td>
+
+              <td
+                [ngStyle]="{
+                  color: colorChanger(crypto.quote.USD.percent_change_7d)
+                    ? 'green'
+                    : 'red'
+                }"
+              >
+                {{ sign(crypto.quote.USD.percent_change_7d)
+                }}{{
+                  crypto.quote.USD.percent_change_7d / 100 | percent: "0.1-2"
+                }}
+              </td>
+            </tr>
+            <div class="overlay"></div>
+          </tbody>
+        </table>
+      </div>
+    </app-tab>
+  </app-tabs-group>
+</div>

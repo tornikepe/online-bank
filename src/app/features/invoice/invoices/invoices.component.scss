@@ -1,0 +1,303 @@
+@import '../../../../assets/color-palette.scss';
+@import '../../../../assets/typography.scss';
+.main-box {
+	margin: 14px 4px 4px 4px;
+	display: flex;
+	gap: 37px;
+	position: relative;
+	.select {
+		position: absolute;
+		z-index: 1;
+		// border: 1px solid black;
+		width: 250px;
+		height: 60px;
+		top: 0%;
+		left: 38%;
+		display: flex;
+		justify-content: space-between;
+		.month {
+			width: 150px;
+			height: 60px;
+			// border: 1px solid black;
+		}
+		.year {
+			width: 100px;
+			height: 60px;
+			// border: 1px solid black;
+		}
+	}
+	.invoice_list {
+		flex-grow: 1;
+
+		.invoice_container {
+			//width: 44.5vw;
+			margin-top: 4px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			.single_invoce {
+				cursor: pointer;
+				width: 100%;
+				height: 53px;
+				border-bottom: 1px solid #e8ecef;
+				display: flex;
+				justify-content: space-between;
+				& > :first-child {
+					width: 15.8%;
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-start;
+					gap: 13px;
+					.icon {
+						border-radius: 50%;
+						// background-color: #F5F2ED;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						transform: translate(50%, 50%);
+					}
+					.success_background {
+						background: linear-gradient(241deg, #68b83d, #45f91d, #14d724, #5bbe63);
+					}
+					.pending_background {
+						background: linear-gradient(
+							241deg,
+							rgb(253, 242, 79),
+							rgb(192, 218, 78),
+							rgb(160, 168, 37),
+							orange
+						);
+					}
+					.cancel_background {
+						background: linear-gradient(241deg, #ddb47a, #ec6747, #f44a0c, #ff0000);
+					}
+					.main_animation {
+						width: 15px;
+						height: 15px;
+						border-radius: 50%;
+						transform: translate(35%, 28%);
+						background-size: 800% 800%;
+						-webkit-animation: AnimationName 1s ease infinite;
+						-moz-animation: AnimationName 1s ease infinite;
+						animation: AnimationName 1s ease infinite;
+					}
+					@-webkit-keyframes AnimationName {
+						0% {
+							background-position: 0% 58%;
+						}
+						50% {
+							background-position: 100% 43%;
+						}
+						100% {
+							background-position: 0% 58%;
+						}
+					}
+					@-moz-keyframes AnimationName {
+						0% {
+							background-position: 0% 58%;
+						}
+						50% {
+							background-position: 100% 43%;
+						}
+						100% {
+							background-position: 0% 58%;
+						}
+					}
+					@keyframes AnimationName {
+						0% {
+							background-position: 0% 58%;
+						}
+						50% {
+							background-position: 100% 43%;
+						}
+						100% {
+							background-position: 0% 58%;
+						}
+					}
+					.title {
+						width: 73px;
+						height: 100%;
+						h5 {
+							color: #252631;
+							font-size: 16px;
+							position: absolute;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+						}
+						p {
+							margin: 0px;
+							padding: 0px;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+							font-size: 14px;
+							color: #98a9bc;
+							transform: translateY(100%);
+						}
+					}
+				}
+				& > :last-child {
+					width: 51.5%;
+					display: flex;
+					gap: 53px;
+					.date {
+						width: 90px;
+						height: 100%;
+						display: flex;
+						flex-direction: column;
+						justify-content: flex-start;
+						h5 {
+							font-size: 14px;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+							color: #252631;
+							transform: translate(3%, 10%);
+						}
+						p {
+							font-size: 14px;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+							color: #98a9bc;
+							transform: translate(3%, -30%);
+						}
+					}
+					.amount {
+						width: 60px;
+						height: 100%;
+						transform: translateX(-5%);
+						h5 {
+							font-size: 14px;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+							color: #252631;
+							transform: translate(3%, 10%);
+						}
+						p {
+							font-size: 14px;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 400;
+							color: #98a9bc;
+							transform: translate(3%, -30%);
+						}
+					}
+					.status {
+						min-width: 82px;
+						height: 36px;
+						background-color: #f8fafb;
+						border-radius: 10px;
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						gap: 9px;
+						padding-left: 0px;
+						padding-right: 18px;
+						.light_green {
+							background-color: #6dd230;
+						}
+						.light_orange {
+							background-color: #ffab2b;
+						}
+						.light_red {
+							background-color: #fe4d97;
+						}
+						.light {
+							width: 10px;
+							height: 10px;
+							border-radius: 50%;
+							transform: translate(100%, 0%);
+						}
+						p {
+							margin: 0px;
+							font-size: 14px;
+							color: #252631;
+							transform: translate(20%, 0%);
+						}
+					}
+				}
+			}
+		}
+	}
+	.right-sidebar {
+		width: 262px;
+		height: 716px;
+		display: flex;
+		flex-direction: column;
+		gap: 28px;
+		.new-invoce {
+			// border: 1px solid black;
+			flex: 1;
+			.inv_title {
+				height: 56px;
+				border-bottom: 1px solid #f2f4f6;
+				h5 {
+					font-size: 1rem;
+					color: #252631;
+					transform: translate(9%, 81%);
+					font-family: 'Roboto', sans-serif;
+					font-weight: 400;
+				}
+			}
+			.select-label {
+				font-size: 14px;
+				color: #252631;
+				margin-top: 22px;
+				transform: translateX(9%);
+			}
+			.drop-down {
+				width: 218px;
+				height: 60px;
+				margin-top: 14px;
+				margin-left: 22px;
+			}
+			p {
+				font-family: 'Roboto', sans-serif;
+				font-weight: 300;
+				font-size: 14px;
+				color: #252631;
+				transform: translate(8%, 14%);
+			}
+			a {
+				display: block;
+				// text-decoration: none;
+				cursor: pointer;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 500;
+				color: #252631;
+				font-size: 12px;
+				transform: translate(18%, 168%);
+			}
+		}
+		.overview {
+			flex-direction: column;
+			flex: 1;
+			display: flex;
+			.inv_title {
+				height: 56px;
+				border-bottom: 1px solid #f2f4f6;
+				h5 {
+					font-size: 1rem;
+					color: #252631;
+					transform: translate(9%, 81%);
+					font-family: 'Roboto', sans-serif;
+					font-weight: 400;
+				}
+			}
+			h3 {
+				margin: 20px 0px 10px 20px;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 400;
+				color: #252631;
+				font-size: 26px;
+			}
+			p {
+				margin: -13px 0px 0px 20px;
+				font-size: 14px;
+				color: #98a9bc;
+			}
+			.graph {
+				height: 218px;
+				width: 300px;
+				transform: translateX(-10%);
+			}
+		}
+	}
+}

@@ -1,0 +1,125 @@
+@import '../../../../assets/color-palette.scss';
+@import '../../../../assets/typography.scss';
+
+.main-box {
+	width: 100%;
+	height: 501px;
+	display: flex;
+	flex-direction: column;
+
+	div {
+		box-sizing: border-box;
+
+		h5 {
+			margin-top: 4px;
+			font-size: 16px;
+			font-family: 'Roboto', sans-serif;
+			font-weight: 450;
+			color: #252631;
+			transform: translate(0%, -20%);
+		}
+	}
+
+	input {
+		margin-top: 15px;
+	}
+
+	.title {
+		height: 16px;
+	}
+
+	.box-content {
+		height: 455px;
+		margin-top: 33px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 35px;
+
+		.content_child {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 26px;
+
+			.content-title {
+				height: 20px;
+				padding-bottom: 3px;
+
+				p {
+					font-size: 14px;
+					color: #98a9bc;
+					font-family: 'Roboto', sans-serif;
+					font-weight: 400;
+					border-bottom: 1px solid #e8ecef;
+					margin: 0px;
+					transform: translateY(-14%);
+					padding-bottom: 5px;
+				}
+			}
+
+			.content-spent {
+				height: 80px;
+				display: flex;
+				justify-content: space-between;
+
+				.content_spent_first_child {
+					width: 48%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+
+					span {
+						color: red;
+						transform: translateY(-85%);
+						font-size: 13.5px;
+					}
+
+					h6 {
+						font-size: 14px;
+						color: #252631;
+						font-weight: 300;
+					}
+				}
+
+				.content_spent_second_child {
+					width: 48%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					.second_child_title {
+						display: flex;
+						justify-content: space-between;
+
+						h6 {
+							font-size: 14px;
+							color: #252631;
+							font-weight: 300;
+							margin: 0px;
+						}
+
+						h5 {
+							font-size: 14px;
+							color: #252631;
+							font-family: 'Roboto', sans-serif;
+							font-weight: 500;
+						}
+					}
+
+					.progresbar {
+						height: 52px;
+						background-color: #f8fafb;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}
+				}
+			}
+
+			&_middle,
+			&_last {
+				margin-top: 3px;
+			}
+		}
+	}
+}

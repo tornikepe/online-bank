@@ -1,0 +1,115 @@
+.main {
+  display: flex;
+  background-color: #f8fafb;
+  .nav {
+    background-color: white;
+    width: 100%;
+    padding-left: 40px;
+    height: 60px;
+    padding-top: 25px;
+    h1 {
+      display: inline-block;
+      color: #778ca2;
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 23px;
+      padding-bottom: 15px;
+      cursor: pointer;
+      &:hover {
+        border-bottom: 1px solid #778ca2;
+        color: #3a444e;
+      }
+    }
+  }
+}
+.column-1 {
+  width: 50%;
+
+  .div-1 {
+    width: 100%;
+    height: 75vh;
+    overflow-y: scroll;
+
+    padding: 20px;
+    background-color: white;
+    a {
+      cursor: pointer;
+      display: flex;
+      padding: 20px;
+      border-bottom: 4px solid #f8fafb;
+      &:hover {
+        background-color: rgba(209, 209, 209, 0.13);
+      }
+
+      img {
+        height: 90px;
+        width: 130px;
+      }
+    }
+    .content {
+      margin-left: 20px;
+      width: 570px;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #252631;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      h6 {
+        color: #98a9bc;
+        font-size: 14px;
+      }
+      p {
+        color: #252631;
+        font-size: 16px;
+        display: -webkit-box;
+        max-width: 100%;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+  }
+}
+.column-2 {
+  overflow-y: scroll;
+  width: 50%;
+  height: 75vh;
+  background-color: white;
+  margin-left: 2%;
+  padding: 30px;
+  .hr {
+    height: 4px;
+    color: #98a9bc;
+  }
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 30px;
+  }
+  .content {
+    padding: 10px;
+    h3 {
+      font-size: 32px;
+      font-weight: 400;
+      color: #252631;
+    }
+    h6 {
+      color: #98a9bc;
+      font-size: 17px;
+    }
+    p {
+      color: #252631;
+      font-size: 17px;
+      max-width: 100%;
+    }
+  }
+}
+.underline {
+  border-bottom: 1px solid #778ca2;
+  color: #000000 !important;
+}

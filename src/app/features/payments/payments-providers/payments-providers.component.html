@@ -1,0 +1,30 @@
+<div class="providers-container">
+  <div class="providers-container-header">
+    <h3 class="heading-3">Payments providers</h3>
+  </div>
+  <div #allPayment class="providers-container-content">
+    <div
+      #currentPayment
+      (click)="getCurrentCard(currentPayment, allPayment)"
+      (click)="getCurrentTransferName(payment)"
+      *ngFor="let payment of paymentsArray"
+      class="content-cards">
+
+      <div class="icon-circle">
+        <i [class]="payment.icon"></i>
+      </div>
+      
+      <div class="cards-info">
+        <div class="cards-name heading-3">{{ payment.name }}</div>
+        <div class="providers-name-container">
+          <div
+            *ngFor="let providersName of payment.providers"
+            class="providers-name p-secondary"
+          >
+            {{ providersName.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

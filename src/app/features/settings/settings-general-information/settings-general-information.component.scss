@@ -1,0 +1,194 @@
+@import '../../../../assets/color-palette.scss';  
+@import '../../../../assets/typography.scss'; 
+@import '../../../shared/input/input.component.scss'; 
+.user-pic-container { 
+	height: 7.7rem; 
+	border: 2px solid $background-dark; 
+	margin-top: 1.4375rem; 
+	border-radius: 5px; 
+	display: flex;  
+	align-items: center; 
+} 
+.user-pic-circle { 
+	height: 4.1rem; 
+	width: 4.1rem; 
+	background: #f2f4f6; 
+	border-radius: 50%; 
+	margin: 1.4375rem;  
+	margin-right: 1.3rem; 
+	float: left; 
+	//Circle Animation 
+	background: linear-gradient(305deg, #ea6528, #ea6528, #58afea, #58afea); 
+	background-size: 800% 800%; 
+	-webkit-animation: AnimationName 3s ease infinite; 
+	-moz-animation: AnimationName 3s ease infinite; 
+	animation: AnimationName 3s ease infinite; 
+} 
+@-webkit-keyframes AnimationName { 
+	0% {  
+		background-position: 0% 14%; 
+	} 
+	50% { 
+		background-position: 100% 87%; 
+	} 
+	100% { 
+		background-position: 0% 14%; 
+	} 
+} 
+@-moz-keyframes AnimationName { 
+	0% { 
+		background-position: 0% 14%; 
+	} 
+	50% { 
+		background-position: 100% 87%; 
+	} 
+	100% { 
+		background-position: 0% 14%;  
+	} 
+} 
+@keyframes AnimationName {
+	0% {
+		background-position: 0% 14%;
+	}
+	50% {
+		background-position: 100% 87%;
+	}
+	100% {
+		background-position: 0% 14%;
+	}
+}
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
+}
+.input-div {
+	height: 83px;
+	input {
+		border-radius: 3px;
+		font-family: $font-primary;
+	}
+
+	.noMargin {
+		position: relative;
+		bottom: 24px;
+		font-size: 12px;
+	}
+}
+.main-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 43.4375rem;
+	margin-top: 1.75rem;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	grid-gap: 17px;
+	gap: 1.4375rem;
+}
+
+.dropdown-container {
+	margin-top: -6px;
+}
+
+.label-text {
+	color: $primary-dark;
+	margin-bottom: 12px;
+}
+.column-1,
+.column-2 {
+	display: flex;
+	flex-direction: column;
+}
+
+.dropdown-container {
+	margin-top: -5px;
+	height: 3.375rem;
+}
+.css-selector-modal {
+	background: $background-light;
+}
+
+#modal {
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	z-index: 10000;
+	border-radius: 4px;
+	transition: 1ms;
+	.modal-header {
+		.btn-close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin: 10px 0 0 370px;
+		}
+	}
+	.modal-body {
+		// margin: 4rem 0 0 .5rem;
+		font-size: 1.2rem;
+		color: white;
+		&:focus {
+			outline: none;
+		}
+		.modal-body-correct-email {
+			.modal-password {
+				margin-top: 50px;
+				margin-left: 20px;
+				input {
+					width: 360px;
+					height: 52px;
+					margin-top: 14px;
+					border-radius: 4px;
+					border: 1px solid $outline;
+					outline: none;
+					padding-left: 10px;
+					&::placeholder {
+						font-size: 14px;
+						line-height: 17px;
+						word-spacing: 1;
+						font-family: 'Roboto', sans-serif;
+						font-weight: 400;
+						padding-left: 15px;
+					}
+				}
+				.ng-invalid {
+					border: 2px solid red;
+					outline: none;
+				}
+				.ng-valid {
+					border: 2px solid green;
+					outline: none;
+				}
+				.ng-untouched {
+					border: 1px solid $outline;
+					outline: none;
+				}
+			}
+		}
+		.modal-body-incorrect-email {
+			&:focus {
+				outline: none;
+			}
+			.incorectEmail {
+				margin: 6rem 0 0 2.5rem;
+				font-size: 1.2rem;
+				color: $primary;
+			}
+		}
+	}
+	.modal-footer {
+		margin: 80px 23px 0 0;
+		button {
+			width: 70px;
+			margin-left: 10px;
+		}
+	}
+	.btn-close {
+		margin: 10px 0 0 370px;
+	}
+}

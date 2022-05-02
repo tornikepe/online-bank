@@ -1,0 +1,54 @@
+@import '../../../../assets/typography.scss';
+@import '../../../../assets/color-palette.scss';
+
+.my-main-container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.security-header {
+	margin-bottom: 1.4375rem;
+}
+
+.form-title-hr {
+	margin: 3px 0 21px 0;
+	color: $secondary-light;
+}
+
+.p-light {
+	width: 48%;
+}
+
+.settings-input-container {
+	width: 48%;
+	position: relative;
+}
+
+.settings-icon {
+	position: absolute;
+	right: 4.2%;
+	top: 58%;
+}
+
+.new-password-form {
+	margin-bottom: 4%;
+}
+
+.settings-pass-fields {
+	display: flex;
+	grid-gap: 4%;
+}
+
+.settings-qa {
+	display: flex;
+	grid-gap: 4%;
+}
+
+.settings-qa-top {
+	margin-top: 3.7%;
+	margin-bottom: 3%;
+}
+
+.settings-icon {
+}

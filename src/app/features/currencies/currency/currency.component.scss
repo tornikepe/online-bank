@@ -1,0 +1,106 @@
+@import "../../../../assets/color-palette.scss";
+@import "../../../../assets/typography.scss";
+@import "../../../../../node_modules/currency-flags/dist/currency-flags.min.css";
+.main {
+    //margin-left: 50px;
+}
+
+.page {
+    //width: 1200px;
+    .search {
+        display: flex;
+        justify-content: space-between;
+        .input {
+            label {
+                font-family: "Roboto-Medium", sans-serif;
+                font-size: 12px;
+                color: $secondary-dark;
+            }
+            input {
+                font-size: 12px;
+                font-family: "Roboto-Medium", sans-serif;
+                color: $primary-dark;
+                border: none;
+                width: auto;
+                max-width: 300px;
+                height: 40px;
+                outline: none;
+            }
+        }
+        .curency_option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 7px;
+            p {
+                &:first-child {
+                    font-size: 12px;
+                    font-family: "Roboto-Medium", sans-serif;
+                    color: $secondary-dark;
+                    margin: 0 5px 0 5px;
+                }
+                &:last-child {
+                    margin-top: 15px;
+                    font-size: 12px;
+                    font-family: "Roboto-Medium", sans-serif;
+                    color: $primary-dark;
+                }
+            }
+        }
+    }
+    .table {
+        thead {
+            border-bottom: none;
+            tr {
+                margin-bottom: 50px;
+                border-style: hidden !important;
+                th {
+                    font-size: 13px;
+                    font-family: "Roboto-Regular", sans-serif;
+                    color: $secondary-light;
+                    i {
+                        color: black;
+                    }
+                    &:nth-child(2) {
+                        //margin-left: -50px !important;
+                    }
+                    &:not(:first-child) {
+                        position: relative;
+                        //left: -40px;
+                    }
+                }
+            }
+        }
+        tbody {
+            border-top: none;
+            tr {
+                td {
+                    position: relative;
+                    margin: 10px 15px 5px 15px;
+                    &:first-child {
+                        span {
+                            margin-left: 15px;
+                        }
+                    }
+                    font-size: 14px;
+                    font-family: "Roboto-Medium",
+                    sans-serif;
+                    //line-height: 12px;
+                    color: $primary-dark;
+                }
+                #second-child {
+                    position: relative;
+                    //right: 100px;
+                }
+            }
+            .overlay {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                height: 100px;
+                width: 100%;
+                background: linear-gradient( to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            }
+        }
+    }
+}

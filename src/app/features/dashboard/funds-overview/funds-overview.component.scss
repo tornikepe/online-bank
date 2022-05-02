@@ -1,0 +1,256 @@
+@import "../../../../assets/color-palette";
+
+::-webkit-scrollbar {
+  height: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  color: $secondary-dark;
+}
+
+.headers {
+  a {
+    margin-top: 4px;
+    margin-right: 5px;
+    color: $primary-dark;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  @media screen and (max-width: 349px) {
+    flex-direction: column;
+  }
+  &.collapsedHeaders {
+    @media screen and (max-width: 519px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.no-data {
+  margin-top: 19px;
+  background-color: #fff;
+  border-radius: 4px;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 51.1px;
+    width: 50%;
+  }
+  p {
+    margin-top: 26px;
+    padding-bottom: 58px;
+    text-align: center;
+  }
+}
+
+.charts {
+  display: flex;
+  margin-top: 19px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+  .left,
+  .right {
+    width: 48%;
+    background-color: #fff;
+    border-radius: 4px;
+    .options {
+      padding: 0 21px;
+      overflow-x: scroll;
+      border-bottom: 1px solid $outline;
+      .list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 14px;
+        color: $secondary-dark;
+        li {
+          margin-right: 32px;
+          padding: 19px 0 13px 0;
+          cursor: pointer;
+          &:hover {
+            color: $primary-dark;
+          }
+          &.active {
+            color: $primary-dark;
+            border-bottom: 2px solid $primary-dark;
+          }
+        }
+      }
+      .icon {
+        padding: 12px 0;
+        color: $secondary-dark;
+        font-size: 20px;
+      }
+    }
+    .chart-container {
+      position: relative;
+      padding: 0 10px;
+      overflow-x: scroll;
+      .info {
+        margin-left: 10px;
+        margin-right: 19px;
+        margin-bottom: -20px;
+        z-index: 8;
+        .total,
+        .avg {
+          p {
+            margin-top: 16px;
+            &:first-child {
+              font-size: 26px;
+              color: $primary-dark;
+            }
+            &:last-child {
+              margin-top: -2px;
+              font-size: 14px;
+            }
+          }
+        }
+        .legend {
+          margin-top: 27px;
+          text-transform: capitalize;
+          .income,
+          .expenses {
+            padding: 5px 15px;
+            background-color: $background-light;
+            color: $primary-dark;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          .income::before,
+          .expenses::before {
+            content: "";
+            display: inline-block;
+            margin-right: 11px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
+          .income::before {
+            background-color: $income;
+          }
+          .expenses::before {
+            background-color: $expenses;
+          }
+        }
+        @media screen and (max-width: 419px) {
+          margin: auto;
+          align-items: center;
+          flex-direction: column;
+          text-align: center;
+          margin-bottom: 0 !important;
+          .legend {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+  .right {
+    .chart-container {
+      padding: 0 10px 0 3px;
+      .avg {
+        padding-left: 7px;
+        .arrow-up {
+          font-size: 14px;
+          color: $secondary-green;
+          vertical-align: text-top;
+        }
+        .arrow-down {
+          font-size: 14px;
+          color: $secondary-pink;
+          vertical-align: text-bottom;
+        }
+      }
+      .change {
+        margin-top: 27px;
+        .increase {
+          color: $secondary-green;
+        }
+        .decrease {
+          color: $secondary-pink;
+        }
+        @media screen and (max-width: 419px) {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .left,
+    .right {
+      width: 100%;
+    }
+    .left {
+      margin-bottom: 25px;
+    }
+  }
+  &.uncollapsedSidebar {
+    @media screen and (max-width: 579px) {
+      .info {
+        margin: auto;
+        margin-bottom: 0 !important;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        .legend {
+          margin-top: 5px !important;
+        }
+        .change {
+          margin-top: 5px !important;
+        }
+      }
+    }
+    @media screen and (max-width: 913px) {
+      flex-wrap: wrap !important;
+      .left,
+      .right {
+        width: 100%;
+      }
+      .left {
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+/* Custom Chart Styles */
+
+::ng-deep {
+  .apexcharts-tooltip {
+    width: 107px;
+    height: 60px;
+    .apexcharts-tooltip-title {
+      background-color: transparent !important;
+      padding-left: 17px !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+      font-size: 14px !important;
+      border-bottom: none !important;
+    }
+    .apexcharts-tooltip-marker {
+      display: none;
+    }
+    .apexcharts-tooltip-text-y-label {
+      display: none;
+    }
+    .apexcharts-tooltip-text-y-value {
+      &::before {
+        content: "$";
+      }
+      margin-top: -28px;
+      font-size: 18px !important;
+      font-weight: bold;
+    }
+  }
+  .apexcharts-xaxistooltip {
+    display: none;
+  }
+}

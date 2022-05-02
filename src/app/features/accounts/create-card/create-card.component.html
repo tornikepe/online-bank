@@ -1,0 +1,102 @@
+<app-notifications></app-notifications>
+
+
+<div class="content-bg">
+    <div class="card-a">
+        <div class="header border-bottom">
+            <div class="visa">
+                <div class="visa-bg">
+                    <img *ngIf='type == "mastercard"' width=30px src="../../../../assets/img/mastercard.png" alt="">
+                    <img *ngIf='type == "visa"' width=30px src="../../../../assets/img/visa.png" alt="">
+
+                </div>
+                <div class="visa-txt">Add new card</div>
+            </div>
+            <div class="carrency">
+                <div class="carrency-txt"> $0.00</div>
+            </div>
+        </div>
+        <div class="add-a">
+            <div class="bg-plus">
+                <div class="plus"></div>
+                <div class="plus-txt">
+                    <div class="txt-md">Add new card</div>
+                    <div class="txt-rg">Start process</div>
+                </div>
+            </div>
+        </div>
+        <form class="card-input" [formGroup]="form" (ngSubmit)="submit()">
+
+            <div class="card-value border-bottom">
+                <div class="card-name">Card name</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="name" class="input-st" placeholder="Please add your card type name">
+                </div>
+            </div>
+            <div class="card-value border-bottom">
+                <div class="card-name">Account number</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="account" class="input-st "
+                        placeholder="Please add your IBAN">
+                </div>
+            </div>
+            <div class="card-value border-bottom">
+                <div class="card-name">Card number</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="card" class="input-st"
+                        placeholder="Please add your card 16 digit number">
+                </div>
+            </div>
+            <div class="card-value border-bottom">
+                <div class="card-name">Cardholder</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="cardholder" class="input-st" placeholder="Please add your name">
+                </div>
+            </div>
+            <div class="card-value border-bottom">
+                <div class="card-name">Expiration date</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="date" class="input-st"
+                        placeholder="expiration date month/year">
+                </div>
+            </div>
+            <div class="card-value border-bottom">
+                <div class="card-name">Available amount</div>
+                <div class="card-input-v">
+                    <input type="text" formControlName="amount" class="input-st"
+                        placeholder="Please add your available amount">
+                </div>
+            </div>
+            <div class="card-value security">
+                <div class="card-name">3D Security</div>
+                <div class="card-input-v toggle">
+                    <app-toggle (value)="security($event)"></app-toggle>
+                </div>
+            </div>
+            <div class="btn-input-add">
+                <button type="submit" [class.btn-disabled]="!form.valid" [class.btn-input]='form.valid'
+                    [disabled]="!form.valid" (click)="submit()">ADD CARD</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-b">
+        <div class="header border-bottom">
+            <div class="transaction">Latest transactions</div>
+            <div class="date">DATE:
+
+                <div class="date-value"></div>
+            </div>
+        </div>
+
+
+
+        <div class="illustration">
+            <div class="img-a">
+            </div>
+            <div class="tr-txt">Your transactioms will appear here</div>
+        </div>
+
+
+    </div>
+</div>

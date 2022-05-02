@@ -1,0 +1,82 @@
+<div> 
+	<div id="modal"> 
+		<div class="left"> 
+			<div class="header"> 
+				<div class="header-inside"> 
+					<span>invoice #</span> 
+					<p>IO-BN-{{ singleInvoice.invoiceNumber }}</p> 
+				</div> 
+				<div class="paymentStatus"> 
+					<span 
+						[ngClass]="{ 
+							paid_light: singleInvoice.status == 'Paid',  
+							pending_light: singleInvoice.status == 'Pending',  
+							cancelled_light: singleInvoice.status == 'Cancelled' 
+						}" 
+						>{{ singleInvoice.status }}</span 
+					> 
+				</div> 
+			</div> 
+			<div class="middle">  
+				<span>To</span> 
+				<p>Vodafone LLC</p> 
+				<span>{{ singleInvoice?.address }}</span> 
+			</div> 
+			<div class="footer"> 
+				<span>Date Of Creation</span> 
+				<p>{{ singleInvoice.dateOfCreation | date: 'd MMM y' }}</p> 
+				<span>Due to</span> 
+				<p>{{ singleInvoice.dueDate | date: 'd MMM y' }}</p> 
+				<span class="print-button" onclick="window.print()" 
+					><i class="fas fa-print"></i> PRINT RECEIPT</span 
+				> 
+			</div> 
+		</div> 
+		<div class="right"> 
+			<div class="close"><span (click)="cancelModal()">&times;</span></div> 
+			<div class="left-main-content"> 
+				<table> 
+					<thead> 
+						<tr> 
+							<th>Description</th>   
+							<th>Rate.</th> 
+							<th>Qty.</th> 
+							<th>Total</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<tr *ngFor="let item of singleInvoice.items"> 
+							<td>{{ item.billingAddress }}</td>  
+							<td>{{ item.price | currency: 'USD':true:'1.0-2' }}</td> 
+							<td>{{ item.itemQty }}</td>  
+							<td>{{ sumItemPrices(item) | currency: 'USD':true:'1.0-2' }}</td> 
+						</tr> 
+						<tr class="count-tr"> 
+							<td></td> 
+							<td><span class="p-secondary">Subtotal:</span></td> 
+							<td></td> 
+							<td class="p-light"> 
+								{{ getsubtotal(singleInvoice.amount, 10) | currency }} 
+							</td> 
+						</tr>  
+						<tr class="count-tr"> 
+							<td></td> 
+							<td><span class="p-secondary">Tax 10%:</span></td> 
+							<td></td> 
+							<td class="p-light"> 
+								{{ getTax(singleInvoice.amount, 10) | currency }} 
+							</td> 
+						</tr> 
+					</tbody> 
+				</table>  
+				<div class="last"> 
+					<div> 
+						<span class="p-link">Total:</span> 
+					</div> 
+					<p class="p-link">{{ singleInvoice.amount | currency }}</p> 
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+</div> 
+<div class="modal-backdrop fade show" id="backdrop"></div> 

@@ -1,0 +1,36 @@
+.dropdown-container {
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    margin-right: 55px;
+    display: flex;
+
+    &::-webkit-scrollbar {
+        display: none!important;
+    }
+
+    
+
+    .label {
+        position: relative;
+        top: 19px;
+        right: 5px;
+        display: flex;
+        font-size: 12px;
+        // color: $secondary-dark; // ERROR??
+        color: #778ca2;
+        cursor: default;
+
+        i {
+            color: black;
+            font-size: 14px;
+            margin-right: 7px;
+            margin-right: 7px;
+        }
+    }
+    .search-dropdown {
+        width: 100px;
+    }
+}
+
+// 

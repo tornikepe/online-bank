@@ -1,0 +1,77 @@
+<form class="my-main-container" [formGroup]="form">
+	<h3 class="security-header heading-5">Security</h3>
+	<!-- Notification -->
+	<app-notifications>
+	</app-notifications>
+
+	<div class="new-password-form">
+		<span class="form-title p-secondary">Change password</span>
+		<hr class="form-title-hr" />
+		<div class="settings-pass-fields">
+			<div class="settings-input-container p-light">
+				<i
+					*ngIf="showIcon"
+					class="bi bi-question-square settings-icon fa-lg btn-outline-secondary"
+				></i>
+
+				<app-input-field [label]="'Current password'" [inputClass]="passInputValidClass">
+					<input
+						type="password"
+						placeholder="Enter your password"
+						formControlName="oldPassword"
+					/>
+				</app-input-field>
+			</div>
+
+			<div class="settings-input-container p-light">
+				<i
+					*ngIf="showIcon"
+					class="bi bi-question-square settings-icon fa-lg btn-outline-secondary"
+				></i>
+
+				<app-input-field [label]="'New password'" [inputClass]="passInputValidClass">
+					<input
+						type="password"
+						placeholder="Enter New Password"
+						formControlName="newPassword"
+					/>
+				</app-input-field>
+			</div>
+		</div>
+	</div>
+
+	<div class="settings-question-form">
+		<span class="form-title p-secondary">Security questions</span>
+		<hr class="form-title-hr" />
+		<div class="settings-qa settings-qa-top">
+			<div class="settings-input-container p-light">
+				<i class="bi bi-question-square settings-icon fa-lg btn-outline-secondary"></i>
+
+				<app-input-field [label]="'Question #1'">
+					<input
+						type="text"
+						placeholder="Please select question"
+						value="What is your friend's name ?"
+					/>
+				</app-input-field>
+			</div>
+
+			<app-input-field class="p-light" [label]="'Answer'">
+				<input type="text" placeholder="Answer" value="John" />
+			</app-input-field>
+		</div>
+		<div class="settings-qa">
+			<div class="settings-input-container p-light">
+				<i class="bi bi-question-square settings-icon fa-lg btn-outline-secondary"></i>
+
+				<app-input-field [label]="'Question #2'">
+					<input type="text" placeholder="Please select question" />
+				</app-input-field>
+			</div>
+
+			<app-input-field class="p-light" [label]="'Answer'">
+				<input type="text" placeholder="Enter your answer" />
+			</app-input-field>
+		</div>
+	</div>
+</form>

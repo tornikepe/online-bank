@@ -1,0 +1,134 @@
+@import "/src/assets/color-palette.scss";
+
+// .datePicker {
+//   bottom: 15px;
+//   left: 28px;
+//   display: flex;
+//   width: 150px;
+//   margin-right: 15px;
+// }
+* {
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    background: transparent !important;
+  }
+}
+
+.datePicker {
+  bottom: 15px;
+  left: 28px;
+  display: flex;
+  width: 150px;
+  margin-right: 15px;
+}
+
+.transactions {
+  background-color: white;
+  height: 100%;
+  //margin: 30px;
+  margin-right: 0;
+  // width: 1140px;
+  z-index: 2;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  border-bottom: 1px solid $border-light;
+
+  .sorters-wraper {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search {
+    width: 60%;
+  }
+}
+
+.gradient {
+  width: 100%;
+  height: 45px;
+  bottom: 45px;
+
+  position: relative;
+
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 10%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  // background-color: green;
+}
+
+.transaction-container {
+  // margin: 21px 290px;
+
+  overflow-y: scroll;
+  // max-height: 633px;
+  height: 87%;
+  padding: 0 20px;
+
+  .transaction-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid $border-light;
+
+    &:last-child {
+      margin-bottom: 40px;
+    }
+
+    cursor: pointer;
+    .transaction-row-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .flex-end {
+    text-align: right;
+    margin-right: 20px;
+  }
+}
+
+span {
+  &:nth-child(2) {
+    color: $secondary-light;
+  }
+}
+
+.page {
+  overflow: hidden;
+  //position: absolute;
+  width: 100%;
+  //height: 76%;
+  background-color: #f8fafb;
+
+  .page-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    // &::-webkit-scrollbar {
+    //   width: 0;
+    //   background: transparent;
+    // }
+  }
+}
+
+.transfer-debit {
+  color: $secondary-green;
+}

@@ -1,0 +1,68 @@
+@import "../../../assets/color-palette";
+
+.pagination-container {
+  margin: auto;
+  width: max-content;
+  .pagination {
+    width: max-content;
+    .page-link {
+      margin: 0 2px;
+      padding: 8px 0;
+      text-align: center;
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+      color: #000;
+      box-shadow: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      &:focus {
+        background: none;
+      }
+      .prev-text {
+        margin-left: 10px;
+      }
+      .next-text {
+        margin-right: 10px;
+      }
+      &:hover,
+      &.active {
+        background-color: $primary;
+        color: #fff !important;
+      }
+      &.left-arrow,
+      &.right-arrow {
+        padding: 8px 15px;
+        width: max-content;
+        color: $secondary-dark;
+        &.filled {
+          width: 40px;
+          height: 40px;
+          background-color: $background-dark;
+          color: $secondary-dark;
+          &:hover,
+          &.active {
+            color: $primary !important;
+          }
+        }
+      }
+      &.left-arrow {
+        margin-right: 32px;
+      }
+      &.right-arrow {
+        margin-left: 32px;
+      }
+      &.border {
+        background: none;
+        color: $secondary-dark;
+        border-color: $outline !important;
+        &:hover,
+        &.active {
+          background: none;
+          color: $primary !important;
+        }
+      }
+    }
+  }
+}

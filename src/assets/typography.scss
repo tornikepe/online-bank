@@ -1,0 +1,150 @@
+@import './color-palette.scss';
+
+$font-primary: 'Roboto', sans-serif;
+
+body {
+	font-family: $font-primary;
+}
+
+// Example class="heading-3 heading-3--center heading-3--colored"
+%heading {
+	font-family: $font-primary;
+	font-weight: 400;
+}
+
+.heading-1 {
+	@extend %heading;
+	font-size: 1.875rem;
+	color: #1b1e24;
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
+	&--right {
+		text-align: right;
+	}
+}
+
+.heading-2 {
+	@extend %heading;
+	font-size: 1.625rem;
+	line-height: 2.125rem;
+	letter-spacing: 0.00769em;
+	color: $primary-dark;
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
+	&--right {
+		text-align: right;
+	}
+}
+
+.heading-3 {
+	@extend %heading;
+	font-size: 1.25rem;
+	line-height: 1.625rem;
+	letter-spacing: 0.01em;
+	color: $primary-dark;
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
+	&--right {
+		text-align: right;
+	}
+	&--colored {
+		color: $income;
+	}
+}
+
+.heading-4 {
+	@extend %heading;
+	font-size: 1.125rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.01111em;
+	color: $primary-dark;
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
+	&--right {
+		text-align: right;
+	}
+	&--colored {
+		color: $income;
+	}
+	&--secondary {
+		color: $secondary-dark;
+	}
+}
+
+.heading-5 {
+	@extend %heading;
+	font-size: 1rem;
+	line-height: 1.3125rem;
+	letter-spacing: 0.0125em;
+	color: $primary-dark;
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
+	&--right {
+		text-align: right;
+	}
+	&--colored {
+		color: $income;
+	}
+	&--secondary {
+		color: $secondary-dark;
+	}
+}
+
+.caption {
+	font-weight: 400;
+	font-size: 0.875rem;
+	line-height: 1.1875rem;
+	color: #1b1e24;
+}
+
+.button-label {
+	font-weight: 500;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	color: $primary-dark;
+}
+
+%text {
+	font-family: $font-primary;
+	font-size: 0.875rem;
+	line-height: 1.3125rem;
+	color: $primary-dark;
+}
+
+// Regular text and p-light is same
+.p-light {
+	@extend %text;
+	font-weight: 300;
+}
+
+.p-secondary {
+	@extend %text;
+	font-weight: 400;
+	color: $secondary-light;
+}
+
+.p-link {
+	@extend %text;
+	font-weight: 500;
+	line-height: 1.1875rem;
+}

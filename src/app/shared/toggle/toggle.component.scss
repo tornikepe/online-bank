@@ -1,0 +1,73 @@
+@import '../../../assets/color-palette.scss';
+
+.toggleComponent{
+    display: flex;
+    .toggle{
+        height: 22px;
+        width: 40px;
+        border-radius: 34px;
+        background-color: $primary;
+        padding: 3px 4px;
+        transition: all 0.3s ease;
+        div{
+            transition: all 0.3s ease;
+            height: 16px;
+            width: 16px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+        }
+    }
+    .toggle.toggleOff{
+        background-color: $background-dark;
+        div{
+            background-color: $secondary-light;
+        }
+    }
+    .toggle.toggleOn{
+        background-color: $primary;
+        padding-left: 20px;
+        div{
+            background-color: #FFFFFF;
+        }
+    }
+    .toggle.errorToggleOff{
+        background-color: $secondary-pink;
+        div{
+            background-color: #FFFFFF;
+        }
+    }
+    .toggle.successToggleOn{
+        background-color: $secondary-green;
+        padding-left: 20px;
+        div{
+            background-color: #FFFFFF;
+        }
+    }
+    
+    .toggle.disabled{
+        opacity: 0.9;
+        div{
+            opacity: 0.9;
+        }
+    }
+    p{
+        font-size: 14px;
+        margin-left: 18px;
+        margin-top: 2px;
+    }
+    p.toggleOff{
+        color: $secondary-dark;
+    }
+    p.toggleOn{
+        color: $primary-dark;
+    }
+    p.errorToggleOff{
+        color: $secondary-pink;
+    }
+    p.successToggleOn{
+        color: $secondary-green;
+    }
+    p.disabled{
+        opacity: 0.7;
+    }
+}

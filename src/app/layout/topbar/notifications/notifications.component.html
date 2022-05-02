@@ -1,0 +1,15 @@
+<div class="container-head">
+    <fa-icon class="notf" [icon]="['fas','bell']" [styles]="{'color': '#98a9bc'}" (click)="toggleShow()"></fa-icon>
+</div>
+
+<div class="notf-container" *ngIf="show">
+    <div class="single-notification" *ngFor="let notf of notificationData.reverse()">
+        <div class="notf-text" [routerLink]="notf.link">
+            <h1 class="p-light">{{notf.title}}</h1>
+            <h1 class="p-secondary">{{notf.value}}</h1>
+        </div>
+        <div>
+            <button class="btn-close" (click)="deletenotf(notf.id)"></button>
+        </div>
+    </div>
+</div>

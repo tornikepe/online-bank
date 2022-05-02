@@ -1,0 +1,58 @@
+<div id="User_q" class="d-flex">
+  <div class="d-flex" (click)="toggleShow()" (clickOutside)="isShown = false">
+    <div id="User_s">
+      <div [class.bg_border]="isShown" class="bg">
+        <div id="img">
+          <img src="../../../../assets/img/avatar.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="Barry_Armstrong">
+      <span>{{ userOb.Full_Name }}</span>
+    </div>
+  </div>
+
+  <div id="UserMenu" *ngIf="isShown" (clickOutside)="toggleShow()">
+    <div id="colored_us">
+      <div id="BarryArmstrong">
+        <span>{{ userOb.Full_Name }}</span>
+      </div>
+      <div id="BArmstrongGmailCo">
+        <span>{{ userOb.email }}</span>
+      </div>
+      <div id="User_">
+        <img id="User_ba" src="../../../../assets/img/avatar.svg" />
+      </div>
+    </div>
+    <div id="Duplicate">
+      <div id="Text">
+        <span
+          ><img class="profile" src="../../../../assets/img/icon.png"
+        /></span>
+      </div>
+      <div id="Lable">
+        <a (click)="btnClicked()" (click)="toggleShow()">YOUR PROFILE</a><br />
+      </div>
+    </div>
+    <div id="Notification">
+      <div id="Text_bc">
+        <a
+          ><img class="settings" src="../../../../assets/img/settings.png"
+        /></a>
+      </div>
+      <div id="Lable_bd">
+        <a (click)="btnClick()" (click)="toggleShow()">SETTINGS</a>
+      </div>
+    </div>
+    <div id="Rename">
+      <div id="Text_bf">
+        <span
+          ><img class="logout" src="../../../../assets/img/logout.png"
+        /></span>
+      </div>
+      <div id="Lable_bg">
+        <span (click)="onLogout()">SIGN OUT</span>
+      </div>
+    </div>
+  </div>
+</div>

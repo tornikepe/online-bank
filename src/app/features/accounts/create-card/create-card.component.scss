@@ -1,0 +1,250 @@
+@import "../../../../assets/color-palette";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.content-bg {
+  width: 100%;
+  height: 774px;
+  background: $background-light;
+  display: flex;
+  //padding: 28px;
+  gap: 30px;
+  font-family: "Roboto", sans-serif;
+}
+
+.card-a {
+  width: 555px;
+  height: 716px;
+  background: #ffffff;
+}
+
+.card-b {
+  width: 555px;
+  height: 716px;
+  background: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 15px;
+}
+
+.visa-bg {
+  width: 42px;
+  height: 28px;
+  // background: url('/assets/img/bg-visa.png');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .visa-a {
+    width: 28px;
+    height: 9px;
+    // background: url('/assets/img/visa.png');
+  }
+}
+
+.visa {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 10px;
+  column-gap: 16px;
+  .visa-txt {
+    font-size: 14px;
+    color: $primary-dark;
+    font-weight: 500;
+  }
+}
+
+.carrency {
+  font-size: 14px;
+  color: $secondary-light;
+  font-weight: 400;
+  .carrency-txt {
+    margin-top: 7px;
+    margin-right: 5px;
+  }
+}
+
+.add-a {
+  margin-top: 48px;
+  margin-left: 114px;
+  .bg-plus {
+    background: url("../../../../assets/img/bg-plus.png");
+    width: 328px;
+    height: 200px;
+    row-gap: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .plus {
+      margin-top: 10px;
+      background: url("../../../../assets/img/bg-plus.png");
+      width: 62px;
+      height: 63px;
+    }
+    .txt-md {
+      font-size: 18px;
+      color: $primary-dark;
+      font-weight: 500;
+    }
+    .txt-rg {
+      font-size: 13px;
+      color: $secondary-dark;
+      font-weight: 400;
+    }
+    .plus-txt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      line-height: 20px;
+    }
+  }
+}
+
+.card-input {
+  margin-top: 55px;
+  padding: 0 24px 0 24px;
+  height: 254px;
+  font-size: 14px;
+  color: $secondary-light;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-value {
+  padding: 15px 0 13px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 41px;
+}
+
+.input-st {
+  text-align: right;
+  width: 227px;
+  outline: none;
+  border: none;
+  color: $primary-dark;
+  margin: 0;
+  height: 25px;
+}
+
+.card-input-v {
+  cursor: pointer;
+}
+
+.security {
+  margin-top: 0px;
+}
+
+.input-st::placeholder {
+  color: $secondary-light;
+}
+
+.btn-input-add {
+  margin-top: 7px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.alert-st {
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-input {
+  text-align: center;
+  border: none;
+  width: 207px;
+  height: 46px;
+  background: $primary;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-disabled {
+  text-align: center;
+  border: none;
+  width: 207px;
+  height: 46px;
+  background: rgba(151, 148, 148, 0.452);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  //   cursor: pointer;
+}
+
+.toggle {
+  margin-right: -16px;
+}
+
+.transaction {
+  margin-left: 11px;
+  margin-top: 5px;
+  font-size: 16px;
+  color: $primary-dark;
+  font-weight: 400;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 12px;
+  color: $secondary-light;
+}
+
+.date-value {
+  color: $primary-dark;
+}
+
+.illustration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 575px;
+  row-gap: 30px;
+}
+
+.img-a {
+  background: url("../../../../assets/img/il.png");
+  width: 452px;
+  height: 307px;
+}
+
+.tr-txt {
+  font-size: 16px;
+  color: $secondary-dark;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.ng-invalid:not(form).ng-touched  {
+  border-right: 1px solid red;
+  border-radius: 0;
+  height: 30px;
+  animation: validation 150ms ease-in-out;
+}
+
+.ng-valid:not(form) {
+  border-right: 1px solid $primary;
+  border-radius: 0;
+  height: 30px;
+  animation: validation 150ms ease-in-out;
+}
+
+@keyframes validation {
+  0% { height: 0 }
+  100% { height: 30px }
+}

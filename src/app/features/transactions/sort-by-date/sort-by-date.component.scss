@@ -1,0 +1,28 @@
+.dummy-date {
+  padding: 0;
+  margin: 0;
+  display: flex;
+
+  .date-dropdown {
+    width: 160px;
+    position: relative;
+    right: 10px;
+  }
+  .label {
+    position: relative;
+    top: 19px;
+    display: flex;
+    font-size: 12px;
+    // color: $secondary-dark; // ERROR??
+    color: #778ca2;
+    cursor: default;
+    margin-right: 17px;
+  }
+  i {
+    color: black;
+    position: relative;
+    top: 1px;
+    font-size: 15px;
+    margin-right: 8px;
+  }
+}

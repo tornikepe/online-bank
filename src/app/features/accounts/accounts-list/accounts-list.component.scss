@@ -1,0 +1,356 @@
+@import "../../../../assets/color-palette";
+@import "../../../../assets/typography";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+
+#main {
+  width: 100%;
+  .charts {
+    width: 80vw;
+  }
+  // height: 764px;
+  //padding: 29px;
+  background-color: $background-light;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  .heading-button {
+    display: flex;
+    justify-content: space-between;
+
+    .card-title {
+      font-size: 16px;
+      color: $secondary-dark;
+      margin-top: 18px;
+      margin-bottom: 22px;
+      width: 120px;
+    }
+    .title-button {
+      cursor: pointer;
+      width: 120px;
+      font-size: 12px;
+      color: $primary-dark;
+      margin-top: 16px;
+      font-weight: bolder;
+      text-align: right;
+      // position: relative;
+      // left: 984px;
+      i {
+        color: $primary;
+        font-size: 16px;
+      }
+      // margin-bottom: 22px;
+    }
+  }
+
+  // ===== SCROLLBAR STYLES ===== //
+  /* width */
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $outline;
+    border-radius: 10px;
+  }
+
+  .deposit-title {
+    font-size: 16px;
+    color: $secondary-dark;
+    margin-top: 18px;
+    margin-bottom: 22px;
+  }
+  .image {
+    height: 430px;
+    width: 50%;
+    margin: 0 auto;
+    // padding-left: 30%;
+    padding-top: 50px;
+  }
+  //  /////////// EMPTY CARD STYLES
+  .div-card {
+    display: grid;
+    grid-template-columns: 300px 700px auto;
+    margin-bottom: 20px;
+    border-radius: 7px;
+    .img-text {
+      display: grid;
+      grid-template-columns: 60px 156px;
+      gap: 22px;
+      .text {
+        .p1 {
+          font-size: 16px;
+          color: $primary-dark;
+          font-weight: 500;
+          margin: 0;
+          cursor: pointer;
+        }
+        .p2 {
+          font-size: 14px;
+          color: $secondary-light;
+          margin: 0;
+        }
+      }
+
+      .img-background {
+        width: 60px;
+        height: 40px;
+        background-color: rgba($color: #ffab2b, $alpha: 0.11);
+        text-align: center;
+        border-radius: 4px;
+        padding-top: 10px;
+        color: $primary;
+        cursor: pointer;
+      }
+    }
+    //width: 1140px;
+    height: 76px;
+    background-color: #ffffff;
+    padding: 18px 23px 18px 23px;
+    .card-icon {
+      padding-top: 13px;
+      text-align: right;
+    }
+    .div-text {
+      display: flex;
+      .inner-div-1 {
+        height: 100%;
+        width: 35%;
+        padding: 10px 0 8px 66px;
+        .text-div-1 {
+          width: 157px;
+          height: 8px;
+          background-color: $outline;
+          margin-bottom: 7px;
+        }
+        .text-div-2 {
+          width: 104px;
+          height: 6px;
+          background-color: $outline;
+        }
+      }
+      .inner-div-2 {
+        height: 100%;
+        width: 65%;
+        padding: 10px 0 8px 55px;
+        .text-div-1 {
+          width: 222px;
+          height: 8px;
+          background-color: $outline;
+          margin-bottom: 7px;
+        }
+        .text-div-2 {
+          width: 147 + px;
+          height: 6px;
+          background-color: $outline;
+        }
+      }
+    }
+  }
+  // /////////// EPMTY DEPOSIT STYLES
+  .div-deposit {
+    display: grid;
+    grid-template-columns: 300px 700px auto;
+    border-radius: 7px;
+    cursor: pointer;
+    .img-text {
+      display: grid;
+      grid-template-columns: 60px 156px;
+      gap: 22px;
+      .text {
+        .p1 {
+          font-size: 16px;
+          color: $primary-dark;
+          font-weight: 500;
+          margin: 0;
+          cursor: pointer;
+        }
+        .p2 {
+          font-size: 14px;
+          color: $secondary-light;
+          margin: 0;
+        }
+      }
+
+      .img-background {
+        width: 60px;
+        height: 40px;
+        background-color: rgba($color: #ffab2b, $alpha: 0.11);
+        text-align: center;
+        border-radius: 4px;
+        padding-top: 10px;
+        color: $primary;
+        cursor: pointer;
+      }
+    }
+    //width: 1140px;
+    height: 76px;
+    background-color: #ffffff;
+    padding: 18px 23px 18px 23px;
+  }
+  .deposit-icon {
+    padding-top: 13px;
+    text-align: right;
+  }
+  .div-text {
+    display: flex;
+    .inner-div-1 {
+      height: 100%;
+      width: 35%;
+      padding: 10px 0 8px 60px;
+      .text-div-1 {
+        width: 157px;
+        height: 8px;
+        background-color: $outline;
+        margin-bottom: 7px;
+      }
+      .text-div-2 {
+        width: 104px;
+        height: 6px;
+        background-color: $outline;
+      }
+    }
+    .inner-div-2 {
+      height: 100%;
+      width: 65%;
+      padding: 10px 0 8px 60px;
+      .text-div-1 {
+        width: 222px;
+        height: 8px;
+        background-color: $outline;
+        margin-bottom: 7px;
+      }
+      .text-div-2 {
+        width: 147 + px;
+        height: 6px;
+        background-color: $outline;
+      }
+    }
+  }
+  //  ////////// UNDERLINE BETWEEN DIVS (CARDS, LOANS, DEPOSITES)
+  .underline {
+    border-bottom: 2px solid $outline;
+  }
+  //  /////////////// SAME STYLES FOR DIVS
+  .non-empty {
+    border-radius: 7px;
+    //width: 1146px;
+    background-color: white;
+    padding: 0 25px 0 23px;
+    #div-group {
+      padding: 18px 0 18px 0;
+      display: grid;
+      // background-color: #ffab2b;
+      // grid-template-rows: 400px;
+      grid-template-columns: 400px auto;
+      height: 76px;
+      background-color: #ffffff;
+      cursor: pointer;
+      .img-text {
+        display: grid;
+        grid-template-columns: 60px auto;
+        gap: 22px;
+        .text {
+          .p1 {
+            font-size: 16px;
+            color: $primary-dark;
+            font-weight: 500;
+            margin: 0;
+          }
+          .p2 {
+            font-size: 14px;
+            color: $secondary-light;
+            margin: 0;
+          }
+        }
+        .img-background {
+          width: 60px;
+          height: 40px;
+          background-color: rgba($color: #ffab2b, $alpha: 0.11);
+          text-align: center;
+          border-radius: 4px;
+          padding-top: 10px;
+          color: $primary;
+        }
+      }
+      .information {
+        display: grid;
+        grid-template-columns: 2fr 3fr 1fr 1fr;
+        gap: 5px;
+        div {
+          font-size: 16px;
+          color: $primary-dark;
+          font-weight: 500;
+          p {
+            margin: 0;
+          }
+        }
+        .p1 {
+          font-size: 16px;
+          color: $primary-dark;
+          font-weight: 500;
+          margin: 0;
+        }
+        .p2 {
+          font-size: 14px;
+          color: $secondary-light;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  //  /////////////// CARDS
+  #main-cards-group {
+
+    .information {
+      .item-1 {
+        padding-left: 32px;
+      }
+      .item-2 {
+        padding-left: 30px;
+      }
+      .item-3 {
+        padding-left: 13px;
+      }
+      .item-4 {
+        padding-left: 50px;
+      }
+    }
+  }
+
+  // /////////////// DEPOSIT
+  #main-deposits-group {
+    .deposits-information {
+      .item-1 {
+        padding-left: 32px;
+      }
+      .item-2 {
+        padding-left: 30px;
+      }
+      .item-3 {
+        padding-left: 13px;
+      }
+      .item-4 {
+        padding-left: 20px;
+      }
+    }
+  }
+  //  /////////////// CREDITS
+  #main-credits-group {
+    .credits-information {
+      .item-1 {
+        padding-left: 32px;
+      }
+      .item-2 {
+        padding-left: 30px;
+      }
+      .item-3 {
+        padding-left: 13px;
+      }
+      .item-4 {
+        padding-left: 50px;
+      }
+    }
+  }
+}

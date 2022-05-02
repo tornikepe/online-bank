@@ -1,0 +1,149 @@
+@import "/src/assets/color-palette.scss";
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 100px;
+    padding: 0;
+
+    .select-box {
+        display: flex;
+        width: 100%;
+        height: calc(100% + 8px);
+        flex-direction: column;
+
+        .selected {
+            border: 2px solid $outline;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            order: 0;
+
+            &::-webkit-scrollbar {
+                width: 0;
+                background: transparent;
+            }
+        }
+
+        .selected > div > i,
+        .option-with-icon > div > i {
+            padding-right: 21px;
+            font-size: 25px;
+            transform: translateY(20%);
+            color: $secondary-blue;
+        }
+
+        .selected > span,
+        .option-with-icon > span {
+            transform: translateY(40%);
+            padding-right: 39px;
+            color: $secondary-dark;
+        }
+
+        .option-with-icon {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 13px;
+            padding-bottom: 18px;
+        }
+
+        .option:last-child {
+            padding-bottom: 20px;
+        }
+
+        .option,
+        .selected {
+            padding: 12px 13px;
+            padding-top: 16px;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            background-color: white;
+
+            .radio {
+                display: none;
+            }
+        }
+
+        .disabled {
+            cursor: auto;
+        }
+
+        .option:hover {
+            color: $primary;
+        }
+
+        label {
+            cursor: pointer;
+            margin-left: 2px;
+        }
+    }
+    .options-container {
+        position: absolute;
+        top: 100%;
+        z-index: 2;
+        max-height: 0;
+        border: 0.5px solid rgb(228, 228, 228);
+        box-shadow: -1px 0px 20px 2px rgba(0, 0, 0, 0.6);
+        width: 100%;
+        opacity: 0;
+        transition: all 0.4s;
+        border-radius: 5px;
+        overflow: hidden;
+        order: 1;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+
+        &.active {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 10px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        &::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+    }
+
+    .hide-overflow {
+        width: 40px;
+        height: 100%;
+        background-color: white;
+        position: absolute;
+        top: 15%;
+
+        right: 1px;
+        pointer-events: none;
+    }
+
+    .placeholder {
+        color: $secondary-dark;
+    }
+
+    .picked {
+        color: $primary;
+    }
+
+    .far {
+        padding-right: 8px;
+        font-size: 16px;
+    }
+
+    .fa-angle-down {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        pointer-events: none;
+        font-size: 24px;
+    }
+}

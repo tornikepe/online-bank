@@ -1,0 +1,10 @@
+<div class="toggleComponent">
+    <div class='toggle' [ngClass]="{toggleOff: !validityChecker && !checked, toggleOn: !validityChecker && checked, errorToggleOff: validityChecker && !checked, successToggleOn: validityChecker && checked, disabled: disabled}" (click)="clickButton()">
+        <div></div>
+    </div>
+    <p [ngClass]="{toggleOff: !validityChecker && !checked, toggleOn: !validityChecker && checked, errorToggleOff: validityChecker && !checked, successToggleOn: validityChecker && checked, disabled: disabled}">{{text}}</p>
+</div>
+
+
+
+

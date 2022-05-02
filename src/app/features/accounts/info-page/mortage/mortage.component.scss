@@ -1,0 +1,68 @@
+@import '../info-page.component';
+
+.card {
+  background: $secondary-green;
+  filter: drop-shadow(0 0 0.25rem $secondary-green);
+
+  &:hover {
+    filter: drop-shadow(0 0 0.75rem $secondary-green);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+}
+
+.right {
+  height: 716px;
+  display: flex;
+  flex-direction: column;
+  .bottom {
+    height: 50%;
+    width: 100%;
+
+    .heading {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding-left: 23px;
+      border-bottom: 1px solid $outline;
+    }
+
+    .chart {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .top {
+    max-height: 50%;
+    overflow: hidden;
+    position: relative;
+
+    .fade-gradient {
+      height: 70px;
+      position: absolute;
+      background: linear-gradient(rgba(255, 255, 255, 0) 0%, #fff 100%);
+      bottom: 0;
+    }
+  }
+}
+
+::ng-deep {
+  .apexcharts-legend-series {
+    padding: 7px 0;
+    background-color: $background-light;
+    border-radius: 18px;
+
+    .apexcharts-legend-marker {
+      margin-left: 15px;
+      margin-right: 8px;
+    }
+
+    .apexcharts-legend-text {
+      text-align: left !important;
+      padding-right: 12px;
+    }
+  }
+}

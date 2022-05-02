@@ -1,0 +1,123 @@
+@import "../../../../assets/typography.scss";
+@import "../../../../assets/color-palette.scss";
+
+.instant-container {
+  width: 100%;
+  max-width: 100%;
+  min-height: 30%;
+  background: $white;
+  color: $primary-dark;
+  font-weight: 300;
+  .instant-header {
+    width: 100%;
+    height: 10%;
+    border-bottom: 1px solid #707070;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  .account {
+    width: 100%;
+    height: 10%;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    label {
+      font-size: 14px;
+    }
+
+    .card-details {
+      height: 50px;
+      margin-bottom: 20px;
+      margin-top: 12px;
+    }
+  }
+  .transfer-input {
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .transfer-detail {
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .amount {
+      width: 48%;
+    }
+    .transfer {
+      &-dropdown {
+        width: 48%;
+
+        &-label {
+          font-size: 14px;
+        }
+        div {
+          margin-bottom: 14px;
+        }
+      }
+
+      &-type {
+        height: 50px;
+      }
+    }
+  }
+
+  .pay {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .button-pay {
+      width: 45%;
+    }
+    .fee {
+      width: 45%;
+      height: 46px;
+      display: flex;
+      margin-top: 22px;
+      padding-left: 45px;
+      text-align: center;
+    }
+  }
+  .err-msg {
+    color: red;
+    font-size: 13px;
+    line-height: 15px;
+
+    &:not(.checkbox-error) {
+      width: 250px;
+    }
+  }
+}
+.help-block {
+  display: flex;
+  color: red;
+  font-size: 13px;
+}
+
+input {
+  &.ng-invalid {
+    &.ng-touched {
+      border: 2px solid red;
+    }
+  }
+}
+
+.btn-container {
+  background: transparent;
+  border: none;
+  width: 50%;
+  outline: none;
+}

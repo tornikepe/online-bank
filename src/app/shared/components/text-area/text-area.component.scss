@@ -1,0 +1,48 @@
+@import "../../../../assets/color-palette.scss";
+@import "../../../../assets/typography";
+
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 360px;
+  height: 90px;
+  margin: 50px;
+  .textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+
+    color: $secondary-light;
+    background-color: white;
+    font-size: 14px;
+    line-height: 19px;
+    font-family: $font-primary;
+    border-radius: 4px;
+    border: 1px solid $outline;
+    padding: 15px 19px;
+
+    &:disabled {
+      background-color: $background-light;
+    }
+
+    &:focus {
+      outline: none;
+      // border: 1px $outline;
+      color: #1b1e24;
+    }
+  }
+  .fa-grin {
+    cursor: pointer;
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    color: $secondary-light;
+    font-size: 16px;
+  }
+}
+
+::placeholder {
+  color: $secondary-light;
+  font-size: 14px;
+}

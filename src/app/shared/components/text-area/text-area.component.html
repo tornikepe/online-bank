@@ -1,0 +1,19 @@
+<div [formGroup]="form" class="container">
+  <textarea
+    class="textarea"
+    [placeholder]="placeholderText"
+    formControlName="textarea"
+    (change)="getValue($event)"
+    
+    [attr.disabled]="isDisabled"
+  ></textarea>
+
+  <i
+    class="far fa-grin"
+    (click)="toggled = !toggled"
+    [(emojiPickerIf)]="toggled"
+    (emojiPickerSelect)="handleSelection($event)"
+  ></i>
+</div>
+
+<!-- <button (click)="getValueTextarea()"></button> -->

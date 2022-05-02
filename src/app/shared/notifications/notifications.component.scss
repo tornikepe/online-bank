@@ -1,0 +1,118 @@
+@import "../../../assets/color-palette.scss";
+
+$border: #707070;
+
+.notif{
+    position: absolute;
+    right: 10px;
+    display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 555px;
+
+      .close-2i{
+          position: relative;
+          right: 7px;
+      }
+
+      .bell-1i{
+          position: relative;
+          left: 7px;
+      }
+  }
+  
+
+.div-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 555px;
+    // height: 64px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+p{
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+.notification-text{
+    width: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 11px;
+}
+
+.blue{
+    background-color: $secondary-blue;
+    color: $background-light;
+}
+
+.primary-dark{
+    background-color: $primary-dark;
+    color: $background-light;
+}
+
+.secondary-dark{
+    background-color: $secondary-dark;
+    color: $background-light;
+}
+
+.secondary-light{
+    background-color: $secondary-light;
+    color: $background-light;
+}
+
+.primary{
+    background-color: $primary;
+    color: $background-light;
+}
+
+.secondary-green{
+    background-color: $secondary-green;
+    color: $background-light;
+}
+
+.secondary-pink{
+    background-color: $secondary-pink;
+    color: $background-light;
+}
+
+.secondary-light-blue{
+    background-color: $secondary-light-blue;
+    color: $background-light;
+}
+
+.outline{
+    background-color: $outline;
+    color: $secondary-light;
+}
+
+.background-dark{
+    background-color: $background-dark;
+    color: $secondary-light;
+}
+
+.background-light{
+    background-color: $background-light;
+    color: $secondary-light;
+}
+
+.border{
+    border: 2px solid $border;
+    color: $secondary-light;
+}
+
+.icon-bell-1{
+
+    height: 30px;
+    width: 14px;
+}
+
+.icon-bell-2{
+    height: 24px;
+    width: 12px;
+}
+

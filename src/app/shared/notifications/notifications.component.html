@@ -1,0 +1,25 @@
+<div class="notif">
+    <div [ngClass]="notifClass" *ngIf="isDisplay" class="notification-1 div-div">
+        <div class="icon-bell-1">
+            <i class="far fa-bell bell-1i"></i>
+        </div>
+        <div class="notification-text">
+            <p>{{text}}</p>
+        </div>
+        <div (click)="toggleDisplay()" class="icon-close-1">
+            <i class="far fa-times-circle close-2i"></i>
+        </div>
+    </div>
+</div>
+
+<!-- How to use?
+
+    Here is an example:
+
+    this.notification.open({
+        class: 'blue',
+        text: 'Some Notification'
+    });
+
+
+    Good Luck :) -->

@@ -1,0 +1,62 @@
+<div id="body">
+    <div id="image-left">
+        <img src="../../../assets/images/auth/new_tbc.jpg" />
+    </div>
+    <form class="form" [formGroup]="form" (submit)="onSubmit()">
+        <header class="header">
+            <p><span>TBC</span> Banking</p>
+        </header>
+        <div class="name_of_action">
+            <h3 class="h3 heading-3">Recover password</h3>
+            <p class="notification_of_action">
+                Please sign in to your personal account if you want to <br /> use all our premium products
+            </p>
+        </div>
+        <div class="user-input">
+            <app-input-field [label]="'Your email'" [inputClass]="input_class" [formGroup]="form" [inputClass]="''">
+                <input formControlName="email" id="email" type="email" #asd placeholder="Enter your email" [disabled]="false" />
+            </app-input-field>
+        </div>
+        <div class="user-submit">
+            <label for="submit"></label>
+            <app-button [btnClass]="'primary'" [btnHeight]="'46px'" [btnWidth]="'360px'" id="submit" type="submit" [isDisable]="valid" [text]="'SEND CONFIRMATION'"></app-button>
+        </div>
+        <div class="footer">
+            <footer>
+                <p class="p-link">
+                    Don’t have an account?
+                    <span><a routerLink="/sign-up"> Sign up here</a></span>
+                </p>
+            </footer>
+        </div>
+    </form>
+</div>
+
+<div id="modal" *ngIf="modalTriger">
+    <div class="modal-header">
+        <button (click)="close()" type="button" class="btn-close" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="triger1" class="modal-body-correct-email">
+            <form class="modal-password" [formGroup]="form_2">
+                <label for="password">Enter new password</label>
+                <input formControlName="password" type="password" id="password" name="password" placeholder="password" />
+            </form>
+        </div>
+        <div *ngIf="triger2" class="modal-body-incorrect-email">
+            <h1 class="heading-1 incorectEmail">
+                Email is incorect, please try againg!
+            </h1>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="dismiss" type="button" class="btn btn-secondary" (click)="reset()">
+      Close
+    </button>
+        <button *ngIf="triger1" (click)="Update()" id="agree" type="button" class="btn btn-warning">
+      Update
+    </button>
+    </div>
+</div>

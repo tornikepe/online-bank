@@ -1,0 +1,128 @@
+@import '../../../assets/color-palette.scss';
+
+
+.layout{
+    width: 242px;
+    max-height: 100vh;
+    padding-top: 18px;
+    transition: all 0.8s ease;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &.collapsed{
+        width: 75px;
+    }
+    .layout-title{
+        font-size: 20px;
+        color: $primary;
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        p:first-child{
+            font-weight: 500;
+            margin-left: 70px;
+            transition: 0.6s ease-in-out;
+            &.disappear{
+                margin-left: 17px;
+            }
+        }
+        p:nth-child(2){
+            margin-left: 5px;
+            transition: 0.6s ease-in-out;
+            &.disappear{
+                opacity: 0;
+                overflow: hidden;
+            }
+        }
+    }
+    .layout-icons{
+        a{
+            text-decoration: none;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid white;
+            &:hover,&.active{
+                border-left: 3px solid $primary;
+                background-color: $background-light;
+                fa-icon{
+                    color: $primary;
+                }
+            }
+            &.disappear{
+                transition: 0.6s ease-in-out;
+            }
+            fa-icon{
+                height: 24px;
+                width: 16px;
+                color: $secondary-dark;
+                margin-left: 25px;
+            }
+            p{
+                margin-top: 15px;
+                margin-left: 24px;
+                font-weight: 400;
+                font-size: 14px;
+                color: $secondary-dark;
+                white-space: nowrap;
+                transition: 0.8s ease-in-out;
+                overflow: hidden;
+                &.disappear{
+                    opacity: 0;
+                    margin-left: 40px;
+                }
+            }
+        }
+    }
+    .layout-cards{
+        margin-top: 22px;
+        .layout-cards-title{
+            color: $secondary-dark;
+            font-size: 14px;
+            margin-left: 30px;
+            transition: 0.8s;
+            &.disappear{
+                opacity: 0;
+                margin-left: 0;
+            }
+        }
+
+        .card-container{
+            display: flex;
+            height: 46px;
+            border-left: 3px solid white;
+            &:hover{
+                border-left: 3px solid $primary;
+                .card1{
+                    border: 2px solid $primary
+                }
+            }
+            .card1{
+                margin-top: 16px;
+                height: 15px;
+                min-width: 20px;
+                border: 2px solid $secondary-dark;
+                border-radius: 3px;
+                margin-left: 26px;
+            }
+            p{
+                margin-left: 18px;
+                margin-top: 13px;
+                font-size: 15px;
+                color: $secondary-dark;
+                white-space: nowrap;
+                transition: 0.8s ease-in-out;
+                overflow: hidden;
+                &.disappear{
+                    opacity: 0;
+                    margin-left: 40px
+                }
+            };
+        }
+    }
+}
+
+::-webkit-scrollbar{
+    width: 0;
+}

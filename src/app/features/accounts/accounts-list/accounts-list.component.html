@@ -1,0 +1,182 @@
+<app-notifications></app-notifications>
+
+<div id="main" >
+    <!-- //////////////// C H A R T S /////////////////////// -->
+    <div class="charts" style="display: flex; gap: 30px" *ngIf="cardsArray.length">
+        <app-charts [color]="'#6DD230'" [type]="charts[0][0]?.name" [amount]="124800" [chartValues]="charts[0][0]?.data"></app-charts>
+        <app-charts [color]="'#FFAB2B'" [type]="charts[0][1]?.name" [amount]="56400" [chartValues]="this.charts[0][1]?.data"></app-charts>
+        <app-charts [color]="'#FE4D97'" [type]="charts[0][2]?.name" [amount]="24800" [chartValues]="this.charts[0][2]?.data"></app-charts>
+    </div>
+    <!-- //////////////// E M P T Y  P A G E  P H O T O /////////////////////// -->
+    <div class="image" *ngIf="!cardsArray.length">
+        <img src="../../../../assets/img/account-empty.png" alt="account-empty">
+    </div>
+    <!-- //////////////// E M P T Y  C A R D /////////////////////// -->
+    <div class="heading-button">
+        <h4 class="card-title">Your Cards</h4>
+        <h4 *ngIf='cardsArray.length' class="title-button" (click)='addCard()'><i class="bi bi-plus-lg"></i> NEW CARD
+        </h4>
+    </div>
+    <div class="div-card" *ngIf="!cardsArray.length" (click)='addCard()'>
+        <div class="img-text">
+            <div class="img-background" ><i class="bi bi-plus-lg"></i></div>
+            <div class="text">
+                <p class="p1" (click)='addCard()'>Add your new card</p>
+                <p class="p2">Card details</p>
+            </div>
+        </div>
+        <div class="div-text">
+            <div class="inner-div-1">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+            <div class="inner-div-2">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+        </div>
+        <div class="card-icon">
+            <i class="bi bi-app"></i>
+        </div>
+    </div>
+
+    <!-- ////////////////////  C A R D S  ////////////////////// -->
+    <div id="main-cards-group " class="non-empty">
+        <div *ngFor='let card of cardsArray; last as last'>
+            <div id="div-group" *ngIf="cardsArray.length" [class.underline]="!last" (click) = navigteCardPage(card.id)>
+                <div class="img-text">
+                    <div class="img-background">
+                        <img *ngIf = 'card.card[0] == 4' width="30px" src="../../../../assets/img/visa.png" alt="">
+                        <img *ngIf='card.card[0] != 4' width="30px" src="../../../../assets/img/mastercard.png" alt="">
+                    </div>
+                    <div class="text">
+                        <p class="p1">{{card.card | creditcard}}</p>
+                        <p class="p2">Card number</p>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="item-1">
+                        <p class="p1">${{card.amount}}</p>
+                        <p class="p2">Balance</p>
+                    </div>
+                    <div class="item-2">
+                        <p class="p1">$520</p>
+                        <p class="p2">Blocked amount</p>
+                    </div>
+                    <div class="item-3">
+                        <p class="p1">{{card.date}}</p>
+                        <p class="p2">Valid</p>
+                    </div>
+                    <div class="item-4">
+                        <p class="p1">Active</p>
+                        <p class="p2">Status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /////////////// E M P T Y  D E P O S I T////////////////////// -->
+    <!-- <h4 class="deposit-title">Open Deposit</h4> -->
+    <div class="heading-button">
+        <h4 class="card-title">Open Deposit</h4>
+        <h4 class="title-button" *ngIf='depositsArray.length' (click)='openDeposit()'><i class="bi bi-plus-lg"></i> NEW
+            DEPOSIT </h4>
+    </div>
+    <div class="div-deposit" *ngIf="!depositsArray.length" (click)='openDeposit()'>
+        <div class="img-text">
+            <div class="img-background" ><i class="bi bi-plus-lg"></i></div>
+            <div class="text">
+                <p class="p1" (click)='openDeposit()'>Open new deposit</p>
+                <p class="p2">Card details</p>
+            </div>
+        </div>
+        <div class="div-text">
+            <div class="inner-div-1">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+            <div class="inner-div-2">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+        </div>
+        <div class="deposit-icon">
+            <i class="bi bi-app"></i>
+        </div>
+    </div>
+
+    <!-- ///////////////D E P O S I T S////////////////////// -->
+    <div id="main-deposits-group" class="non-empty">
+        <div *ngFor='let deposit of depositsArray; last as last'>
+            <div id="div-group" *ngIf="depositsArray.length" [class.underline]="!last" [routerLink]="['/accounts/info/cumulative', deposit.id]">
+                <div class="img-text">
+                    <div class="img-background"></div>
+                    <div class="text">
+                        <p class="p1">{{deposit.name}}</p>
+                        <p class="p2">Name</p>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="item-1">
+                        <p class="p1">${{deposit.balance}}</p>
+                        <p class="p2">Balance</p>
+                    </div>
+                    <div class="item-2">
+                        <p class="p1">${{deposit.accured}}</p>
+                        <p class="p2">Accured</p>
+                    </div>
+                    <div class="item-3">
+                        <p class="p1">{{deposit.rate}}%</p>
+                        <p class="p2">Rate</p>
+                    </div>
+                    <div class="item-4">
+                        <p class="p1">{{deposit.date}}</p>
+                        <p class="p2">End date</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ////////////////////  L O A N S ////////////////////// -->
+    <!-- <h4 class="card-title" *ngIf="creditsArray.length">Your Credits</h4> -->
+    <div class="heading-button" *ngIf="loansArray.length">
+        <h4 class="card-title">Your Credits</h4>
+        <h4 class="title-button" (click)='openDeposit()'><i class="bi bi-plus-lg"></i> NEW DEPOSIT </h4>
+    </div>
+    <div id="main-group" class="non-empty">
+        <div *ngFor='let loan of loansArray; last as last'>
+            <div id="div-group" *ngIf="loansArray.length" [class.underline]="!last" [routerLink]="['/accounts/info/mortage', loan.id]">
+                <div class="img-text">
+                    <div class="img-background"></div>
+                    <div class="text">
+                        <p class="p1">{{loan.name}}</p>
+                        <p class="p2">Name</p>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="item-1">
+                        <p class="p1">${{loan.startingAmount}}</p>
+                        <p class="p2">Amount</p>
+                    </div>
+                    <div class="item-2">
+                        <p class="p1">${{loan.paidAmount}}</p>
+                        <p class="p2">Paid amount</p>
+                    </div>
+                    <div class="item-3">
+                        <p class="p1">{{loan.rate}}%</p>
+                        <p class="p2">Rate</p>
+                    </div>
+                    <div class="item-4">
+<!--                        <p class="p1">{{loan.status}}</p>-->
+                        <p *ngIf="loan.startingAmount > loan.paidAmount">active</p>
+                        <p *ngIf="loan.startingAmount < loan.paidAmount">inactive</p>
+                        <p class="p2">Status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+    <!-- Error Cases -->
+    <ng-container *ngIf="formField?.dirty">
+        <span class="field-error"
+            *ngIf="formField?.hasError('required')">
+            This is required field.
+        </span>
+
+        <span class="field-error"
+            *ngIf="formField?.hasError('...')">
+            Please enter a valid name.
+        </span>
+
+    </ng-container>
+
+
+    <!-- Error Cases -->

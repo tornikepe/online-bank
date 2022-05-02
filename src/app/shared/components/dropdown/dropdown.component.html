@@ -1,0 +1,34 @@
+<div class="container" [ngStyle]="{'font-size': fontSize}">
+    <div class="select-box">
+        <div class="options-container" [ngClass]="{active: itemSelection}">
+            <div class="option" *ngFor="let item of list" (click)="onSelectItem(item)">
+                <input type="radio" class="radio" [id]="item" name="category" />
+                <label [for]="item" [ngClass]="displaySelected(item)"><i class="far fa-heart" *ngIf="includeIcons"></i>
+                    {{item}}</label>
+            </div>
+            <div *ngIf="listWithIcons">
+                <div class="option" *ngFor="let item of listWithIcons" (click)="onSelectItem(item)">
+                    <input type="radio" class="radio" [id]="item.value" name="category" />
+                    <label class="option-with-icon" [for]="item.value" [ngClass]="displaySelected(item.value)">
+                        <div>
+                            <i [class]="item.iconClass"></i>
+                            <span>{{item.value}}</span>
+                        </div>
+                        <span *ngIf="item.secondValue">{{item.secondValue}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="selected" (click)="onClick()" [ngClass]="displayPlaceholder()"
+            [ngStyle]="{'border-color': invisibleBorder ? 'transparent' : '$outline', 'padding': invisibleBorder ? '' : '12px 13px' }">
+            <div>
+                <i *ngIf="listWithIcons" [class]="iconClass"></i>
+                <span>{{ selected || firstItem}}</span>
+            </div>
+            <span *ngIf="listWithIcons">{{secondValue}}</span>
+            <div [ngStyle]="{'background-color': disabled ? '$background-light' : 'white'}" class="hide-overflow"></div>
+        </div>
+    </div>
+    <i class="fas fa-angle-down" [ngClass]="{picked: itemSelection}"></i>
+</div>

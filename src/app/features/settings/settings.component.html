@@ -1,0 +1,58 @@
+<div class="main-container">
+	<div class="my-container">
+		<div class="my-row">
+			<div class="content-col">
+				<router-outlet></router-outlet>
+
+				<div class="settings-buttons-container">
+					<app-button
+						[isDisable]="disableUpdateButton"
+						class="update-btn"
+						[text]="'UPDATE SETTINGS'"
+						btnClass="primary"
+						(click)="onUpdateButton()"
+					></app-button>
+					<app-button
+						*ngIf="showCancelButton"
+						[text]="'CANCEL'"
+						btnClass="button"
+						class="cancel-btn"
+						(click)="onCancelButton()"
+					></app-button>
+				</div>
+			</div>
+			<div class="tab-col">
+				<div class="tap-options">
+					<a
+						class="tab-link p-secondary"
+						[routerLink]="['/settings']"
+						routerLinkActive="p-link"
+						[routerLinkActiveOptions]="{ exact: true }"
+						>General information</a
+					>
+					<a
+						class="tab-link p-secondary"
+						[routerLink]="['security']"
+						routerLinkActive="p-link"
+						>Security</a
+					>
+					<a
+						class="tab-link p-secondary"
+						[routerLink]="['payments']"
+						routerLinkActive="p-link"
+						>Payment limits</a
+					>
+					<a
+						class="tab-link p-secondary"
+						[routerLink]="['notification']"
+						routerLinkActive="p-link"
+						>Notifications</a
+					>
+				</div>
+				<div class="tap-options--bottom">
+					<a class="tab-link p-secondary" (click)="onCloseAccount()">Close account</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

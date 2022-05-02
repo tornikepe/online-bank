@@ -1,0 +1,21 @@
+<nav class="pagination-container">
+    <ul class="pagination">
+        <li class="page-item" [ngClass]="{disabled: currentPage === 1}">
+            <a class="page-link left-arrow" [ngClass]="{filled: border}" (click)="prevClickHandler()">
+                <fa-icon [icon]="['fas', 'chevron-left']"></fa-icon>
+                <span *ngIf="!border" class="prev-text">Prev</span>
+            </a>
+        </li>
+        <li *ngFor="let page of displayedPages" class="page-item">
+            <a class="page-link" [ngClass]="{border: border, active: page === currentPage}" (click)="pageClickHandler(page)">
+                {{ page }}
+            </a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled: currentPage === pagesArr.length}">
+            <a class="page-link right-arrow" [ngClass]="{filled: border}" (click)="nextClickHandler()">
+                <span *ngIf="!border" class="next-text">Next</span>
+                <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            </a>
+        </li>
+    </ul>
+</nav>
