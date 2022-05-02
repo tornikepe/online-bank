@@ -1,0 +1,16 @@
+<app-notifications></app-notifications>
+<div class="container">
+  <div class="providers-container">
+    <app-payments-providers
+      (currentTransferWindow)="getTransferWindow($event)"
+    ></app-payments-providers>
+  </div>
+  <div class="transfer-container">
+    <app-bank-transfer *ngIf="bankTransferOpen"></app-bank-transfer>
+    <app-instant-transfer *ngIf="instantTransferOpen"></app-instant-transfer>
+    <app-electronic-transfer
+      (makeCloseTransfer)="closeETransfer()"
+      *ngIf="onlineTransferOpen"
+    ></app-electronic-transfer>
+  </div>
+</div>

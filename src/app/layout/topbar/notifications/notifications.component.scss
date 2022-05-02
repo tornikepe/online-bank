@@ -1,0 +1,56 @@
+@import 'src/assets/color-palette';
+
+.notf {
+  cursor: pointer;
+  position: relative;
+}
+
+.notf-container {
+  position: absolute;
+  right: 3%;
+  //height: fit-content;
+  //min-width: 300px;
+  max-height: 500px;
+  width: 300px;
+  overflow: scroll;
+  background-color: white;
+  border-radius: 4px;
+  filter: drop-shadow(0 0 0.75rem $outline);
+  border: 1px solid $outline;
+  padding: 15px;
+  display: flex;
+  gap: .4rem;
+  flex-direction: column;
+  align-items: center;
+  animation: openClose 150ms ease-in;
+
+  @keyframes openClose {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+  }
+
+  .notf-text {
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.single-notification {
+  background-color: white;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  padding: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    background-color: $outline;
+  }
+}

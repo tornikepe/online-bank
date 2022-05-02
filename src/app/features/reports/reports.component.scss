@@ -1,0 +1,188 @@
+@import "../../../assets/color-palette.scss";
+
+.reports-empty{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img{
+        width: 45%;
+        margin-top: 20px;
+    }
+    p{
+        font-size: 16px;
+        color:$secondary-dark;
+        margin-top: 15px;
+        width: 400px;
+        text-align: center;
+        font-weight: 350;
+    }
+    .btn{
+        font-size: 14px;
+    }
+}
+
+.reports-primary{
+    padding-top: 5px;
+    width: 100%;
+    // border:1px solid $outline;
+    .chart1{
+        width: 100%;
+        border:1px solid $outline;
+        // height: 368px;
+        background-color: white;
+        // overflow-x: scroll;
+        padding-right: 20px;
+        .chart1-header{
+            height: 56.25px;
+            border-bottom: 1px solid $outline;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 25px 0 20px;
+            overflow: auto;
+            p{
+                font-size: 16px;
+                color:$secondary-dark;
+                margin: 0;
+                cursor: pointer;
+            }
+            .chart1-header-links{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p{
+                    font-size: 14px;
+                    margin-left: 33px;
+                    color:$secondary-dark;
+                    &:hover{
+                        color: $primary-dark;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    .charts-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 25px 0;
+        @media screen and (max-width: 940px) {
+            flex-wrap: wrap;
+        }
+        .chart2{
+            border:1px solid $outline;
+            height: 324px;
+            width: 50%;
+            background-color: white;
+            .chart2-header{
+                height: 56.25px;
+                border-bottom: 1px solid $outline;
+                padding: 17px 26px;
+                p{
+                    font-size: 16px;
+                    color:$secondary-dark;
+                    cursor: pointer;
+                }
+                fa-icon{
+                    color: $secondary-dark;
+                    font-size: 22px;
+                }
+            }
+            .chart2-content{
+                padding: 20px 20px 0 20px;
+                .chart2-content-titles{
+                    margin:0;
+                    margin-bottom: 10px;
+                    p{
+                        margin:0;
+                        color: $secondary-dark;
+                        font-size: 14px;
+                        cursor: pointer;
+                    }
+                }
+                .chart2-content-titles:not(:first-child){
+                    margin-top: 20px;
+                }
+                hr{
+                    margin: 20px 0;
+                    color:$secondary-dark;
+                }
+                .chart2-list{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    p{
+                        color: $secondary-dark;
+                    }
+                }
+            }
+            @media screen and (max-width: 940px) {
+                width: 100%;
+            }
+        }
+        .chart3{
+            border:1px solid $outline;
+            width: 50%;
+            height: 324px;
+            margin-left:25px;
+            background-color: white;
+            .chart3-header{
+                padding: 17px 26px;
+                height: 56.25px;
+                border-bottom: 1px solid $outline;
+                p{
+                    font-size: 16px;
+                    color:$secondary-dark;
+                    cursor: pointer;
+                }
+                fa-icon{
+                    color: $secondary-dark;
+                    font-size: 22px;
+                }
+            }
+            .chart3-content{
+                padding: 15px;
+            }
+            @media screen and (max-width: 940px) {
+                width: 100%;
+                margin-left:0;
+                margin-top: 25px
+            }
+        }
+    }
+}
+
+
+
+::ng-deep{
+    .apexcharts-legend-series {
+      padding: 7px 0;
+      background-color: $background-light;
+      border-radius: 18px;
+      .apexcharts-legend-marker {
+        margin-left: 15px;
+        margin-right: 8px;
+      }
+      .apexcharts-legend-text {
+        text-align: left !important;
+        padding-right: 12px;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar{
+      display: none;
+  }
+
+  @keyframes identifier {
+      0%{
+          width: 0;
+      }
+      100%{
+          width: 100%;
+      }
+  }

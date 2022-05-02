@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Roboto&family=Roboto+Slab:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Roboto&family=Roboto+Slab:wght@200&family=Rubik:ital@1&display=swap");
+@import "../../../../assets/color-palette.scss";
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+#User_q {
+  cursor: pointer;
+  margin-right: 121px;
+  margin-top: -6px;
+  position: relative;
+}
+.Barry_Armstrong {
+  color: $primary-dark;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.14285714149475098px;
+  padding-left: 13px;
+  padding-top: 12px;
+  text-align: left;
+}
+#User_s {
+  height: 40.734px;
+  width: 39.5px;
+}
+.bg {
+  height: 40px;
+  position: relative;
+  width: 40px;
+}
+.bg_border {
+  border-radius: 50%;
+  border: 2px solid $primary;
+}
+#img {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#UserMenu {
+  background-color: $white;
+  border-radius: 4px;
+  box-shadow: 2px 0 16px #999ba8;
+  height: 237px;
+  position: absolute;
+  right: -2px;
+  top: 70px;
+  width: 286px;
+}
+#Fills__White__RoundShadow {
+  height: 236px;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  top: 1px;
+  width: 286px;
+}
+#BarryArmstrong {
+  color: $primary-dark;
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  left: 70px;
+  letter-spacing: 0.4px;
+  overflow: visible;
+  position: absolute;
+  top: 23px;
+  white-space: nowrap;
+  width: 114px;
+}
+#BArmstrongGmailCo {
+  color: $secondary-dark;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  left: 70px;
+  overflow: visible;
+  position: absolute;
+  text-align: left;
+  top: 44px;
+  white-space: nowrap;
+  width: 159px;
+}
+#User_ {
+  height: 36px;
+  left: 20px;
+  overflow: visible;
+  position: absolute;
+  top: 24px;
+  width: 36px;
+}
+#Mask_ {
+  fill: $outline;
+}
+.Mask_ {
+  height: 36px;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  top: 0px;
+  width: 36px;
+}
+#User_ba {
+  height: 36px;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  top: 0px;
+  width: 36px;
+}
+#Duplicate {
+  height: 37px;
+  left: 23px;
+  overflow: visible;
+  position: absolute;
+  top: 98px;
+  width: 103px;
+}
+#Text {
+  color: $secondary-dark;
+  font-family: LineAwesome;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: 13px;
+}
+#Lable {
+  color: $primary-dark;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  left: 27px;
+  overflow: visible;
+  position: absolute;
+  text-align: left;
+  top: 7px;
+  white-space: nowrap;
+  width: 81px;
+}
+#Notification {
+  height: 34px;
+  left: 23px;
+  overflow: visible;
+  position: absolute;
+  top: 144px;
+  width: 90px;
+}
+#Text_bc {
+  color: $secondary-dark;
+  font-family: LineAwesome;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: 13px;
+}
+#Lable_bd {
+  color: $primary-dark;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  left: 23px;
+  margin-left: 5px;
+  overflow: visible;
+  position: absolute;
+  text-align: left;
+  top: 3px;
+  white-space: nowrap;
+  width: 57px;
+}
+#Rename {
+  height: 24px;
+  left: 23px;
+  overflow: visible;
+  position: absolute;
+  top: 189px;
+  width: 77px;
+}
+#Text_bf {
+  color: $secondary-dark;
+  font-family: LineAwesome;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  left: 0px;
+  overflow: visible;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: 13px;
+}
+#Lable_bg {
+  color: $primary-dark;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  left: 27px;
+  overflow: visible;
+  position: absolute;
+  text-align: left;
+  top: 3px;
+  white-space: nowrap;
+  width: 55px;
+}
+.profile {
+  height: 20px;
+  width: 20px;
+}
+.settings {
+  float: left;
+  height: 35px;
+  margin: -9px;
+  padding-top: 3px;
+  width: 35px;
+}
+.logout {
+  float: left;
+  height: 19px;
+  width: 19px;
+}
+#colored_us {
+  background-color: $background-light;
+  border-radius: 4px 4px 0 0;
+  height: 79.75px;
+  width: 286;
+}

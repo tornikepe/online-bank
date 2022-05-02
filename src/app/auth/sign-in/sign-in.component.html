@@ -1,0 +1,45 @@
+<div id="Register-main">
+    <div id="image-left">
+        <img src="../../../assets/images/auth/new_tbc.jpg" />
+    </div>
+    <form class="formGroup" [formGroup]="form" (submit)="onSubmit()">
+        <p class="header-text">
+            <span class="tbc">TBC</span>&nbsp;<span class="banking">Banking</span>
+        </p>
+        <div class="name_of_action">
+            <p class="signin-header">Sign in</p>
+            <p class="signin-text">
+                Please sign in to your personal account if you want to<br /> use all our premium products
+            </p>
+        </div>
+        <div class="user-input-check-1">
+            <!-- ესენი გავაკეთე და არმუშაობს რეალურად ესეუნდა -->
+
+            <app-input-field [formGroup]="form" [width]="'360px'" [inputClass]="input_valid" [label]="'Your email'">
+                <input [type]="'text'" formControlName="email" [name]="'Yout email'" [placeholder]="'Enter your email'"
+                    [disabled]="false" [value]="inputCredintial" />
+            </app-input-field>
+
+        </div>
+        <div class="user-input-check-2">
+            <app-input-field [formGroup]="form" [width]="'360px'" [inputClass]="input_valid_pass" [label]="'password'">
+                <input [type]="'password'" formControlName="password" [name]="'Yout password'"
+                    [placeholder]="'Enter your password'" [disabled]="false" [value]="inputCredintial" />
+            </app-input-field>
+        </div>
+
+        <div class="remember-section">
+            <input formControlName="check" id="checkbox" type="checkbox" />
+            <label for="checkbox" class="remember-text">Remember me</label>
+            <a routerLink="/recover-password" class="recovery-password p-link">Recover password</a>
+        </div>
+
+        <app-button [btnClass]="'primary'" class="button" [btnHeight]="'48px'" [btnWidth]="'360px'" type="submit"
+            [isDisable]="valid_1 || valid_2" [text]="'SIGN IN'"></app-button>
+
+        <footer class="last-part">
+            <span class="signup-text">Don’t have an account?</span>&nbsp;
+            <a routerLink="/sign-up" class="signup p-link">Sign up here</a>
+        </footer>
+    </form>
+</div>

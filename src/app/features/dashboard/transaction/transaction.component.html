@@ -1,0 +1,45 @@
+<div class="container">
+  <div id="Date">
+    <div id="Text">
+      <span
+        ><img src="../../../../assets/img/time.png" alt="Image Not Found"
+      /></span>
+    </div>
+    <div id="ButtonsLable_Link_Copy">
+      <div id="Lable">
+        <span>AUGUST 2018</span>
+      </div>
+    </div>
+    <div id="arrow">
+      <span
+        ><img
+          class="img_data"
+          src="../../../../assets/img/data.png"
+          alt="Image Not Found"
+      /></span>
+    </div>
+  </div>
+
+  <div id="Transactions_n">
+    <span>Transactions</span>
+  </div>
+  <div id="Transaction_description" *ngFor="let names of name">
+    <div id="Date_r">
+      <span>{{ names.dataAndTime }}</span>
+    </div>
+    <div id="Name">
+      <span> {{ names.name }}</span>
+    </div>
+    <div id="Actions_ico">
+      <span
+        ><img
+          src="../../../../assets/img/transaction.png"
+          alt="Image Not Found"
+      /></span>
+    </div>
+
+    <div id="bg">
+      <img id="bg_x" src="{{ names.icon }}" alt="Not Found" />
+    </div>
+  </div>
+</div>

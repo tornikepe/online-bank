@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import "../../../../assets/color-palette.scss";
+div {
+  display: block;
+}
+.container {
+  background-color: $background-light;
+  height: 745px;
+  width: 100%;
+}
+#Transactions_n {
+  bottom: 23px;
+  color: $secondary-dark;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  left: 0px;
+  letter-spacing: 0.125px;
+  overflow: visible;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  width: 95px;
+}
+#Date {
+  bottom: 3px;
+  cursor: pointer;
+  height: 24px;
+  left: 202px;
+  overflow: visible;
+  position: relative;
+  width: 125px;
+}
+#Text {
+  font-family: LineAwesome;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  overflow: visible;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: 13px;
+}
+#ButtonsLable_Link_Copy {
+  height: 16px;
+  left: 23px;
+  overflow: visible;
+  position: absolute;
+  top: 4px;
+  width: 76px;
+}
+#Lable {
+  color: $primary-dark;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: bold;
+  left: 0px;
+  margin-top: 3.5px;
+  overflow: visible;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: 77px;
+}
+#arrow {
+  font-family: LineAwesome;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  overflow: visible;
+  position: relative;
+  right: 7px;
+  text-align: center;
+  top: 1px;
+  white-space: nowrap;
+  width: 11px;
+}
+img {
+  height: 20px;
+  width: 20px;
+}
+.img_data {
+  height: 19px;
+  width: 19px;
+}
+#Transaction_description {
+  background-color: $white;
+  border-radius: 4px;
+  bottom: 1px;
+  height: 70px;
+  left: 0px;
+  margin-bottom: 9.1px;
+  position: relative;
+  width: 330px;
+}
+#Transaction_description:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+#Date_r {
+  color: $secondary-light;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  left: 64px;
+  line-height: 21px;
+  margin-top: -3.5px;
+  position: relative;
+  text-align: left;
+  top: 36px;
+  white-space: nowrap;
+  width: 92px;
+}
+#Name {
+  bottom: 10px;
+  color: $primary-dark;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  left: 64px;
+  letter-spacing: 0.125px;
+  overflow: visible;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  width: 184px;
+}
+#Actions_ico {
+  bottom: 26px;
+  font-family: LineAwesome;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  left: 301px;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: 13px;
+}
+#Ico {
+  height: 40px;
+  left: 12px;
+  overflow: visible;
+  position: relative;
+  top: 14px;
+  width: 40px;
+}
+#bg {
+  bottom: 58px;
+  height: 40px;
+  left: 13px;
+  overflow: visible;
+  position: relative;
+  width: 40px;
+}
+#bg_x {
+  height: 40px;
+  left: 0px;
+  overflow: visible;
+  position: relative;
+  top: 0px;
+  width: 40px;
+}

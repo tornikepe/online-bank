@@ -1,0 +1,20 @@
+<div id="chart">
+    <div class="text">
+        <h1 class="heading-2">${{amount | number:'3.'}}</h1>
+        <h3 class="p-secondary">{{type}}</h3>
+    </div>
+    <div class="graph" *ngIf="chartOptions">
+        <apx-chart #chart
+                [series]="chartOptions?.series"
+                [chart]="chartOptions?.chart"
+                [xaxis]="chartOptions?.xaxis"
+                [yaxis]="chartOptions?.yaxis"
+                [grid]="chartOptions?.grid"
+                [stroke]="chartOptions?.stroke"
+                [tooltip]="chartOptions?.tooltip"
+                [dataLabels]="chartOptions?.dataLabels"
+                [fill]="chartOptions?.fill"
+                [noData]="chartOptions?.noData"
+        ></apx-chart>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<app-empty-transaction *ngIf="emptyTransactions"></app-empty-transaction>
+<div *ngIf="!emptyTransactions" class="page">
+  <div *ngIf="modalOpen" class="page-container">
+    <app-modal *ngIf="modalOpen" [currentElement]="currentElementForModal"
+      (modalClose)="getCloseModal(searchElement, wholeTransactions)"></app-modal>
+  </div>
+  <div #wholeTransactions class="transactions">
+    <div #searchElement class="search-container">
+      <div class="search">
+        <app-search (searchResult)="onFind($event, transactionsContainer)">
+        </app-search>
+      </div>
+
+      <div class="sorters-wraper">
+        <div class="datePicker">
+          <app-sort-by-date (dateSortResult)="onSortDate($event, transactionsContainer)"></app-sort-by-date>
+        </div>
+
+        <app-filter-by-type (sortResults)="onSort($event, transactionsContainer)">
+        </app-filter-by-type>
+      </div>
+    </div>
+
+    <div class="transaction-container" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollThrottle]="throttle" [scrollWindow]="false" #transactionsContainer (scrolled)="onScroll()">
+      <div #transactionsRow (click)="
+            getCurrentElement(
+              transaction,
+              searchElement,
+              wholeTransactions
+            )
+          " class="transaction-row" *ngFor="let transaction of transactionArray">
+        <div class="transaction-row-group">
+          <div>
+            <img style="width:40px; height: 40px;" [src]="transaction.img" alt="ILOVETBC" />
+          </div>
+          <div class="flex">
+            <span>{{ transaction.description }}</span>
+            <span>{{ transaction.type}}</span>
+          </div>
+        </div>
+        <div class="flex flex-end">
+          <span [ngClass]="{'transfer-debit': transaction.amount.substring(0, 1) == '+' }">{{transaction.amount}}</span>
+          <span>{{transaction.date.day}} {{transaction.date.shortMonth}}
+            {{transaction.date.hoursNMinutes}} {{transaction.date.ampm}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="gradient" *ngIf="!modalOpen"></div>
+  </div>
+
+</div>

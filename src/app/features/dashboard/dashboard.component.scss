@@ -1,0 +1,30 @@
+@import "../../../assets/color-palette";
+
+.dashboard {
+  height: 100%;
+  .d-flex {
+    .left-col {
+      width: 68.2%;
+      min-height: calc(100vh - 2 * 82px);
+      padding-right: 0;
+      border-right: 0;
+      @media screen and (min-width: 1400px) {
+        padding-right: 26px;
+        border-right: 1px solid $outline;
+      }
+    }
+    .right-col {
+      width: 31.8%;
+      padding: 0 0 0 28px;
+    }
+    @media screen and (max-width: 1399px) {
+      .left-col,
+      .right-col {
+        width: 100%;
+      }
+      .divider {
+        display: none;
+      }
+    }
+  }
+}

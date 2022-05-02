@@ -1,0 +1,217 @@
+<div class="main-box">
+	<div class="select">
+		<div class="month">
+			<app-dropdown
+				(selectedItem)="changeMontName($event)"
+				[list]="month_names"
+				[invisibleBorder]="true"
+				[selected]="selectedMonth"
+			></app-dropdown>
+		</div>
+		<div class="year">
+			<app-dropdown
+				(selectedItem)="changeyear($event)"
+				[list]="yearsForDropDown"
+				[invisibleBorder]="true"
+				[selected]="selectedyear"
+			></app-dropdown>
+		</div>
+	</div>
+	<div class="invoice_list">
+		<app-tabs-group>
+			<app-tab [TitleText]="'All'">
+				<div class="invoice_container">
+					<div
+						class="single_invoce"
+						*ngFor="let invoice of allinvoices"
+						(click)="getInvoiceForModal(invoice)"
+					>
+						<div>
+							<div class="icon">
+								<div
+									class="main_animation"
+									[ngClass]="{
+										success_background: invoice.status == 'Paid',
+										pending_background: invoice.status == 'Pending',
+										cancel_background: invoice.status == 'Cancelled'
+									}"
+								></div>
+							</div>
+							<div class="title">
+								<h5>IO-BN-{{ invoice.invoiceNumber }}</h5>
+								<p>Invoice</p>
+							</div>
+						</div>
+						<div style="position: relative">
+							<div class="date">
+								<h5>{{ invoice.dueDate | date: 'd MMM y' }}</h5>
+								<p>Due date</p>
+							</div>
+							<div class="amount">
+								<h5>{{ invoice.amount | currency }}</h5>
+								<p>Amount</p>
+							</div>
+							<div class="status">
+								<div
+									class="light"
+									[ngClass]="{
+										light_green: invoice.status == 'Paid',
+										light_orange: invoice.status == 'Pending',
+										light_red: invoice.status == 'Cancelled'
+									}"
+								></div>
+								<p>{{ invoice.status }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</app-tab>
+			<app-tab [TitleText]="'Paid'">
+				<div class="invoice_container">
+					<div
+						class="single_invoce"
+						*ngFor="let invoice of paid"
+						(click)="getInvoiceForModal(invoice)"
+					>
+						<div>
+							<div class="icon">
+								<div class="main_animation success_background"></div>
+							</div>
+							<div class="title">
+								<h5>IO-BN-{{ invoice.invoiceNumber }}</h5>
+								<p>Invoice</p>
+							</div>
+						</div>
+						<div style="position: relative">
+							<div class="date">
+								<h5>{{ invoice.dueDate | date: 'd MMM y' }}</h5>
+								<p>Due date</p>
+							</div>
+							<div class="amount">
+								<h5>{{ invoice.amount | currency }}</h5>
+								<p>Amount</p>
+							</div>
+							<div class="status">
+								<div class="light light_green"></div>
+								<p>{{ invoice.status }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</app-tab>
+			<app-tab [TitleText]="'Pending'">
+				<div class="invoice_container">
+					<div
+						class="single_invoce"
+						*ngFor="let invoice of pendings"
+						(click)="getInvoiceForModal(invoice)"
+					>
+						<div>
+							<div class="icon">
+								<div class="main_animation pending_background"></div>
+							</div>
+							<div class="title">
+								<h5>IO-BN-{{ invoice.invoiceNumber }}</h5>
+								<p>Invoice</p>
+							</div>
+						</div>
+						<div style="position: relative">
+							<div class="date">
+								<h5>{{ invoice.dueDate | date: 'd MMM y' }}</h5>
+								<p>Due date</p>
+							</div>
+							<div class="amount">
+								<h5>{{ invoice.amount | currency }}</h5>
+								<p>Amount</p>
+							</div>
+							<div class="status">
+								<div class="light light_orange"></div>
+								<p>{{ invoice.status }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</app-tab>
+			<app-tab [TitleText]="'Cancelled'">
+				<div class="invoice_container">
+					<div
+						class="single_invoce"
+						*ngFor="let invoice of cancelled"
+						(click)="getInvoiceForModal(invoice)"
+					>
+						<div>
+							<div class="icon">
+								<div class="main_animation cancel_background"></div>
+							</div>
+							<div class="title">
+								<h5>IO-BN-{{ invoice.invoiceNumber }}</h5>
+								<p>Invoice</p>
+							</div>
+						</div>
+						<div style="position: relative">
+							<div class="date">
+								<h5>{{ invoice.dueDate | date: 'd MMM y' }}</h5>
+								<p>Due date</p>
+							</div>
+							<div class="amount">
+								<h5>{{ invoice.amount | currency }}</h5>
+								<p>Amount</p>
+							</div>
+							<div class="status">
+								<div class="light light_red"></div>
+								<p>{{ invoice.status }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</app-tab>
+		</app-tabs-group>
+	</div>
+	<div class="right-sidebar">
+		<div class="new-invoce">
+			<div class="inv_title">
+				<h5>New invoice</h5>
+			</div>
+			<h5 class="select-label">Select template</h5>
+			<div class="drop-down">
+				<app-dropdown
+					[list]="['Webdesign', 'mobileApp']"
+					[selected]="'Webdesign'"
+					(selectedItem)="template_name = $event"
+				></app-dropdown>
+			</div>
+			<p>
+				Recognition can be illustrated by<br />
+				two individuals entering a crowded<br />
+				room at a party. Both walk to the<br />
+				far side of the room
+			</p>
+			<a (click)="onCreateInvoice()">CREATE INVOICE</a>
+		</div>
+		<div class="overview">
+			<div class="inv_title">
+				<h5>Overview</h5>
+			</div>
+			<h3>{{ totalamount | currency }}</h3>
+			<p>Total paid</p>
+			<div class="graph">
+				<!-- chart Here -->
+				<apx-chart
+					[series]="series"
+					[chart]="chartOptions.chart"
+					[xaxis]="xaxis"
+					[colors]="chartOptions.colors"
+					[legend]="chartOptions.legend"
+					[yaxis]="chartOptions.yaxis"
+					[dataLabels]="chartOptions.dataLabels"
+					[grid]="chartOptions.grid"
+				></apx-chart>
+			</div>
+		</div>
+	</div>
+</div>
+<app-invoice-details
+	*ngIf="showtoggle"
+	[singleInvoice]="showtoggle"
+	(cancelTogle)="showtoggle = null"
+></app-invoice-details>

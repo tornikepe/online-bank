@@ -1,0 +1,373 @@
+<form [formGroup]="invoiceForm" class="my-container">
+	<div class="template-container">
+		<h3 class="p-secondary template-container__header">
+			<i
+				class="
+					bi bi-question-square
+					template-container__header--icon
+					fa-lg
+					btn-outline-secondary
+				"
+			></i
+			>PREVIEW
+		</h3>
+		<hr class="details-hr" />
+
+		<div class="template-container__inner">
+			<!-- Line -->
+			<svg
+				class="template-container__inner__details-svg"
+				xmlns="http://www.w3.org/2000/svg"
+				width="714"
+				height="19"
+				viewBox="0 0 714 19"
+			>
+				<g id="Section" transform="translate(0.5 -1)">
+					<text
+						id="Details"
+						transform="translate(356.5 16)"
+						fill="#ffab2b"
+						font-size="14"
+						font-family="Roboto-Regular, Roboto"
+					>
+						<tspan x="-21.4" y="0">Details</tspan>
+					</text>
+					<path
+						id="Line"
+						d="M0,1H294"
+						transform="translate(0 10)"
+						fill="none"
+						stroke="#ffab2b"
+						stroke-linecap="square"
+						stroke-miterlimit="10"
+						stroke-width="1"
+						opacity="0.3"
+					/>
+					<path
+						id="Line_Copy"
+						data-name="Line Copy"
+						d="M0,1H294"
+						transform="translate(419 10)"
+						fill="none"
+						stroke="#ffab2b"
+						stroke-linecap="square"
+						stroke-miterlimit="10"
+						stroke-width="1"
+						opacity="0.3"
+					/>
+				</g>
+			</svg>
+
+			<!-- 1 -->
+			<div class="fix-input-div">
+				<app-input-field
+					[label]="'Template'"
+					class="template-input-field"
+					[inputClass]="
+						(invoiceForm.controls['template'].invalid ||
+							invoiceForm.controls['template'].value === '') &&
+						(invoiceForm.controls['template'].dirty ||
+							invoiceForm.controls['template'].touched)
+							? 'input-warn'
+							: passInputValidClass
+					"
+				>
+					<input
+						type="text"
+						name="template"
+						placeholder="Enter template name"
+						formControlName="template"
+					/>
+				</app-input-field>
+			</div>
+			<!-- 2 -->
+			<div
+				class="
+					template-container__inner__input-container
+					template-container__inner__input-container--1
+				"
+			>
+				<div class="fix-input-div">
+					<app-input-field
+						[label]="'Invoice number'"
+						[inputClass]="
+							(invoiceForm.controls['invoiceNumber'].invalid ||
+								invoiceForm.controls['invoiceNumber'].value === '') &&
+							(invoiceForm.controls['invoiceNumber'].dirty ||
+								invoiceForm.controls['invoiceNumber'].touched)
+								? 'input-warn'
+								: passInputValidClass
+						"
+					>
+						<input
+							type="text"
+							placeholder="Enter number"
+							name="invoice-number"
+							formControlName="invoiceNumber"
+						/>
+					</app-input-field>
+				</div>
+				<div class="fix-input-div">
+					<app-input-field
+						[label]="'Due date'"
+						[inputClass]="
+							(invoiceForm.controls['dueDate'].invalid ||
+								invoiceForm.controls['dueDate'].value === '') &&
+							(invoiceForm.controls['dueDate'].dirty ||
+								invoiceForm.controls['dueDate'].touched)
+								? 'input-warn'
+								: passInputValidClass
+						"
+					>
+						<!-- class="date-input-container" -->
+						<input 
+							placeholder="Select Date" 
+							class="textbox-n" 
+							type="date" 
+							onfocus="this.type='date'" 
+							onblur="this.type='text'" 
+							id="date" 
+							formControlName="dueDate" 
+						/>
+					</app-input-field>
+				</div>
+			</div>
+			<!-- 3 -->
+			<div
+				class="
+					template-container__inner__input-container
+					template-container__inner__input-container--2
+				"
+			>
+				<div class="fix-input-div">
+					<app-input-field
+						[label]="'Company name'"
+						[inputClass]="
+							(invoiceForm.controls['companyName'].invalid ||
+								invoiceForm.controls['companyName'].value === '') &&
+							(invoiceForm.controls['companyName'].dirty ||
+								invoiceForm.controls['companyName'].touched)
+								? 'input-warn'
+								: passInputValidClass
+						"
+					>
+						<input
+							type="text"
+							placeholder="Enter name"
+							name="company-name"
+							formControlName="companyName"
+						/>
+					</app-input-field>
+				</div>
+				<div class="fix-input-div">
+					<app-input-field
+						[label]="'Contact email'"
+						[inputClass]="
+							(invoiceForm.controls['contactEmail'].invalid ||
+								invoiceForm.controls['contactEmail'].value === '') &&
+							(invoiceForm.controls['contactEmail'].dirty ||
+								invoiceForm.controls['contactEmail'].touched)
+								? 'input-warn'
+								: passInputValidClass
+						"
+					>
+						<input
+							type="text"
+							placeholder="Enter email"
+							name="contact-email"
+							formControlName="contactEmail"
+						/>
+					</app-input-field>
+				</div>
+			</div>
+			<!-- 4 -->
+			<div class="fix-input-div">
+				<app-input-field
+					class="address-input-field"
+					[label]="'Address'"
+					[inputClass]="
+						(invoiceForm.controls['address'].invalid ||
+							invoiceForm.controls['address'].value === '') &&
+						(invoiceForm.controls['address'].dirty ||
+							invoiceForm.controls['address'].touched)
+							? 'input-warn'
+							: passInputValidClass
+					"
+				>
+					<input
+						type="text"
+						placeholder="Enter billing address"
+						name="address"
+						formControlName="address"
+					/>
+				</app-input-field>
+			</div>
+			<!-- Line -->
+			<svg
+				class="template-container__inner__products-svg"
+				xmlns="http://www.w3.org/2000/svg"
+				width="714"
+				height="19"
+				viewBox="0 0 714 19"
+			>
+				<g id="Section" transform="translate(0.5 -1)">
+					<text
+						id="Products_list"
+						data-name="Products list"
+						transform="translate(356.5 16)"
+						fill="#ffab2b"
+						font-size="14"
+						font-family="Roboto-Regular, Roboto"
+					>
+						<tspan x="-39.102" y="0">Products list</tspan>
+					</text>
+					<path
+						id="Line"
+						d="M0,1H294"
+						transform="translate(0 10)"
+						fill="none"
+						stroke="#ffab2b"
+						stroke-linecap="square"
+						stroke-miterlimit="10"
+						stroke-width="1"
+						opacity="0.3"
+					/>
+					<path
+						id="Line_Copy"
+						data-name="Line Copy"
+						d="M0,1H294"
+						transform="translate(419 10)"
+						fill="none"
+						stroke="#ffab2b"
+						stroke-linecap="square"
+						stroke-miterlimit="10"
+						stroke-width="1"
+						opacity="0.3"
+					/>
+				</g>
+			</svg>
+
+			<!-- 5 -->
+			<div class="template-container__items-container" formArrayName="itemInputArray">
+				<div
+					class="item-input-container"
+					*ngFor="let inputCtrl of itemInputArray; let i = index"
+					[formGroupName]="i"
+				>
+					<div class="fix-input-div">
+						<app-input-field
+							class="item-input-container--1"
+							[label]="'Item description'"
+							[inputClass]="
+								inputCtrl.invalid && (inputCtrl.dirty || inputCtrl.touched)
+									? 'input-warn'
+									: passInputValidClass
+							"
+						>
+							<input
+								name="billing-address"
+								placeholder="Enter billing address"
+								formControlName="billingAddress"
+							/>
+						</app-input-field>
+					</div>
+					<div class="fix-input-div">
+						<app-input-field
+							class="item-input-container--2"
+							[label]="'Item Qty'"
+							[inputClass]="
+								inputCtrl.invalid && (inputCtrl.dirty || inputCtrl.touched)
+									? 'input-warn'
+									: passInputValidClass
+							"
+						>
+							<input
+								type="number"
+								placeholder="Select amount"
+								name="item-qty"
+								formControlName="itemQty"
+							/>
+						</app-input-field>
+					</div>
+					<div class="fix-input-div">
+						<app-input-field
+							class="item-input-container--3"
+							[label]="'Price'"
+							[inputClass]="
+								inputCtrl.invalid && (inputCtrl.dirty || inputCtrl.touched)
+									? 'input-warn'
+									: passInputValidClass
+							"
+						>
+							<input
+								type="number"
+								placeholder="Enter amount"
+								name="price"
+								formControlName="price"
+							/>
+						</app-input-field>
+					</div>
+				</div>
+			</div>
+			<a class="add-item-button button-label" type="button" (click)="onAddItemInput()">
+				<i
+					class="bi bi-question-square add-item-button--icon fa-lg btn-outline-secondary"
+				></i>
+				ADD NEW ITEM</a
+			>
+		</div>
+	</div>
+	<!-- 2 coll -->
+	<div class="annotation-container">
+		<h3 class="annotation-container__header heading-5">
+			How to fill invoice
+			<i
+				class="
+					bi bi-question-square
+					annotation-container__header--icon
+					fa-md
+					btn-outline-secondary
+				"
+			></i>
+		</h3>
+		<!-- <div class="text-container"> -->
+		<div class="annotation-container__p-first">
+			<h5 class="annotation-container__text-header p-link">Clients and templates</h5>
+			<p class="p-light">
+				Marketers/advertisers usually focus their efforts on the people responsible for
+				making the purchase. In many cases, this is an effective approach but in other
+				cases it can make for a totally useless marketing campaign.
+			</p>
+		</div>
+		<div class="annotation-container__p-second">
+			<h5 class="annotation-container__text-header p-link">Company details</h5>
+			<p class="p-light">
+				A successful marketing plan relies heavily on the pulling-power of advertising
+				copy. Writing result-oriented ad copy is difficult, as it must appeal to, entice,
+				and convince consumers to take action. There is no magic formula to write perfect
+				ad copy; it is based on a number of factors, including ad placement, demographic.
+				<br />
+				<br />
+				Marketers/advertisers usually focus their efforts on the people responsible for
+				making the purchase. In many cases.
+			</p>
+		</div>
+		<!-- </div> -->
+		<div class="annotation-container__buttons">
+			<app-button
+				btnClass="primary"
+				type="submit"
+				class="send-invoice"
+				[text]="'SEND INVOICE'"
+				(click)="onSendInvoice()"
+				[isDisable]="invoiceForm.valid ? false : true"
+			></app-button>
+			<app-button
+				[text]="'CANCEL'"
+				type="button"
+				class="cancel-button"
+				(click)="onCancelButton()"
+			></app-button>
+		</div>
+	</div>
+</form>

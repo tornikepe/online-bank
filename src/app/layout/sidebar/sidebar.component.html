@@ -1,0 +1,58 @@
+<div class="layout" [ngClass]='{collapsed: isCollapsed}'>
+    <div class="layout-title">
+        <p [ngClass]="{disappear: isCollapsed}">TBC</p>
+        <p [ngClass]="{disappear: isCollapsed}"> Banking</p>
+    </div>
+    <div class="layout-icons">
+        <a [routerLink]="['/dashboard']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','tachometer-alt']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">DASHBOARD</p>
+        </a>
+        <a [routerLink]="['/transactions']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','share']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">TRANSACTIONS</p>
+        </a>
+        <a [routerLink]="['/accounts']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','user']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">ACCOUNTS</p>
+        </a>
+        <a [routerLink]="['/payments']" routerLinkActive="active" >
+            <fa-icon [icon]="['fas','credit-card']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">PAYMENTS</p>
+        </a>
+        <a [routerLink]="['/reports']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','chart-bar']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">REPORTS</p>
+        </a>
+        <a [routerLink]="['/currency']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','pound-sign']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">CURRENCY</p>
+        </a>
+        <a [routerLink]="['settings']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','cog']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">SETTINGS</p>
+        </a>
+        <a [routerLink]="['invoices']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','file-invoice']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">INVOICES</p>
+        </a>
+        <a [routerLink]="['/news']" routerLinkActive="active">
+            <fa-icon [icon]="['fas','newspaper']"></fa-icon>
+            <p [ngClass]="{disappear: isCollapsed}">NEWS</p>
+        </a>
+    </div>
+    <div class="layout-cards">
+        <div class="title d-flex justify-content-between">
+            <p class="layout-cards-title" [ngClass]="{disappear: isCollapsed}">Accounts</p>
+            <i class="fas fa-plus layout-cards-title" [routerLink]="'/accounts/create-card'" style="padding-right: 20px; cursor: pointer" [ngClass]="{disappear: isCollapsed}"></i>
+        </div>
+        <div class="card-container" *ngFor="let card of cardsArray">
+            <div [routerLink]="['/accounts/info/card', card.id]" class="d-flex align-items-center" style="cursor: pointer; width: 100%">
+<!--                <div class="card1" [ngClass]="{disappear: isCollapsed}"></div>-->
+                <img *ngIf = 'card.card[0] == 4' width="30px" height="10px" src="../../../assets/img/visa.png" alt="">
+                <img *ngIf='card.card[0] != 4' width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
+                <p [ngClass]="{disappear: isCollapsed}" style="cursor: pointer">{{card.card | creditcard}}</p>
+            </div>
+        </div>
+    </div>
+</div>

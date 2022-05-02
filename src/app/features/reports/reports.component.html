@@ -1,0 +1,89 @@
+<div *ngIf="empty" class="reports-empty">
+    <img src="../../../assets/img/reports.svg">
+    <p>You don’t hve any active reports. Generate new report
+        to see your account details</p>
+    <app-button 
+    class="btn"
+    btnClass = "primary"
+    btnHeight="46px"
+    btnWidth="174px"
+    [isDisable] = 'false'
+    text="GENERATE REPORT">
+    </app-button>
+</div>
+
+<div *ngIf="!empty" class="reports-primary">
+    <div class="chart1">
+        <div class="chart1-header">
+            <p>Your income and expenses</p>
+            <div class="chart1-header-links">
+                <p (click)="changeLink('overall')">Overall</p>
+                <p (click)="changeLink('card')">Cards</p>
+                <p (click)="changeLink('deposits')">Deposits</p>
+            </div>
+        </div>
+        <div class="chart1-content">
+            <div style="text-align:center">
+                <apx-chart *ngIf="canRenderChart1"
+                  [series]="chartOptions1.series"
+                  [chart]="chartOptions1.chart"
+                  [xaxis]="chartOptions1.xaxis"
+                  [colors]="chartOptions1.colors"
+                  [legend]="chartOptions1.legend"
+                  [yaxis]="chartOptions1.yaxis"
+                  [dataLabels]="chartOptions1.dataLabels"
+                  [fill]="chartOptions1.fill"
+                ></apx-chart>
+            </div>
+        </div>
+    </div>
+    <div class="charts-container">
+        <div class="chart2">
+            <div class="chart2-header d-flex justify-content-between">
+                <p>Your accounts spendings</p>
+                <fa-icon class="icon" [icon]="['fas','ellipsis-h']"></fa-icon>
+            </div>
+            <div class="chart2-content">
+                <div class="chart2-content-titles d-flex justify-content-between">
+                    <p>Debit Cards</p>
+                    <p>{{data[0]}} USD</p>
+                </div>
+                <app-progressbar [percent]="width1"></app-progressbar>
+                <div class="chart2-content-titles d-flex justify-content-between">
+                    <p>Credit Cards</p>
+                    <p>{{data[1]}} USD</p>
+                </div>
+                <app-progressbar [percent]="width2"[color]="'green'"></app-progressbar>
+                <div class="chart2-content-titles d-flex justify-content-between">
+                    <p>Cash</p>
+                    <p>{{data[2]}} USD</p>
+                </div>
+                <app-progressbar [percent]="width3" [color]="'blue'"></app-progressbar>
+                <hr>
+                <div class="chart2-list d-flex justify-content-between">
+                    <p>0</p>
+                    <p *ngFor="let number of numbersArr">{{number}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="chart3">
+            <div class="chart3-header d-flex justify-content-between">
+                <p>Expense categories</p>
+                <fa-icon class="icon" [icon]="['fas','ellipsis-h']"></fa-icon>
+            </div>
+            <div class="chart3-content">
+                <div *ngIf="chartOptions3">
+                    <apx-chart
+                    [series]="chartOptions3.series"
+                    [chart]="chartOptions3.chart"
+                    [labels]="chartOptions3.labels"
+                    [responsive]="chartOptions3.responsive"
+                    [legend]="chartOptions3.legend"
+                    [colors]="chartOptions3.colors"
+                    [plotOptions]="chartOptions3.plotOptions"
+                    ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

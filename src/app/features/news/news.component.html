@@ -1,0 +1,66 @@
+<div class="main">
+    <div class="column-1">
+        <div class="nav">
+            <h1 [class.underline]='latest' (click)='tabClicked("Latest News")'>Latest News</h1>
+            <h1 [class.underline]='trending' (click)='tabClicked("Trending News")'>Trending News</h1>
+            <h1 [class.underline]='popular' (click)='tabClicked("Most Popular")'>Most Popular</h1>
+        </div>
+        <div class="div-1">
+            <div *ngIf='latest' class="search-results" infinite-scroll (scrolled)="loadRecentNews()"
+                [infiniteScrollContainer]="'.div-1'" [infiniteScrollDistance]="1" [fromRoot]="true">
+                <div>
+                    <a *ngFor="let i of recentNewsArray" (click)='singleArticle(i)'>
+                        <img src="{{i.media}}">
+                        <div class="content">
+                            <h3>{{i.title}}</h3>
+                            <h6>{{i.published_date}}</h6>
+                            <p>{{i.summary}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf='trending' class="search-results" infinite-scroll (scrolled)="loadTrendingNews()"
+                [infiniteScrollContainer]="'.div-1'" [infiniteScrollDistance]="1" [fromRoot]="true">
+
+                <div>
+                    <a *ngFor="let i of trendingNewsArray" (click)='singleArticle(i)'>
+                        <img src="{{i.media}}">
+                        <div class="content">
+                            <h3>{{i.title}}</h3>
+                            <h6>{{i.published_date}}</h6>
+                            <p>{{i.summary}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+            <div *ngIf='popular' class="search-results" infinite-scroll (scrolled)="loadPopularNews()"
+                [infiniteScrollContainer]="'.div-1'" [infiniteScrollDistance]="1" [fromRoot]="true">
+
+                <div>
+                    <a *ngFor="let i of popularNewsArray" (click)='singleArticle(i)'>
+                        <img src="{{i.media}}">
+                        <div class="content">
+                            <h3>{{i.title}}</h3>
+                            <h6>{{i.published_date}}</h6>
+                            <p>{{i.summary}}</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="column-2">
+        <img src="{{singleArticleObj?.media}}">
+        <div class="content">
+            <h3>{{singleArticleObj?.title}}</h3>
+            <h6>{{singleArticleObj?.published_date}}</h6>
+            <hr class="hr"/>
+            <p>{{singleArticleObj?.summary}}</p>
+        </div>
+    </div>
+</div>

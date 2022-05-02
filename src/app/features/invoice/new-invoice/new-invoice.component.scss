@@ -1,0 +1,134 @@
+@import '../../../../assets/color-palette.scss';
+@import '../../../../assets/typography.scss';
+
+.my-container {
+	background-color: $background-middle;
+	display: flex;
+	flex: 1;
+	width: 73rem;
+	grid-gap: 3%;
+	gap: 3%;
+}
+
+.template-container {
+	background-color: $white;
+	width: 65.7%;
+	padding-top: 2.4%;
+
+	&__header {
+		font-size: 0.8125rem;
+		margin-left: 1.625rem;
+		margin-top: 3px;
+
+		&--icon {
+			margin-right: 8px;
+		}
+	}
+
+	&__inner {
+		padding: 0 3.67%;
+
+		&__details-svg {
+			margin-bottom: 1.4375rem;
+		}
+
+		&__input-container {
+			display: flex;
+			justify-content: space-between;
+
+			&--1 {
+				margin: 16px -2px;
+			}
+
+			&--2 {
+				margin: 20px -2px;
+			}
+
+			& > * {
+				width: 48.5%;
+			}
+		}
+
+		&__products-svg {
+			margin-top: 1.375rem;
+		}
+	}
+
+	&__items-container {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.item-input-container {
+	margin: 1rem 0 1.1875rem 0;
+	display: flex;
+	justify-content: space-between;
+
+	&--2,
+	&--3 {
+		width: 22.9%;
+	}
+
+	&--1 {
+		width: 48.3%;
+	}
+}
+
+.add-item-button {
+	text-decoration: none;
+	color: $secondary-dark;
+
+	&--icon {
+		margin-right: 4px;
+	}
+}
+
+.annotation-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 26.3%;
+	padding-top: 2.4%;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+
+		&--icon {
+			margin-top: 3px;
+		}
+	}
+
+	&__text-header {
+		margin-bottom: 15px;
+	}
+
+	&__p-first {
+		margin-top: 14px;
+	}
+
+	&__p-second {
+		margin-bottom: -12px;
+	}
+
+	&__buttons {
+		margin-bottom: 7px;
+		margin-left: -2px;
+		display: flex;
+		justify-content: space-between;
+
+		& > * {
+			width: 48.5%;
+		}
+	}
+}
+
+//To Fix button class height bag
+.fix-input-div {
+	height: 83px;
+	input {
+		border-radius: 3px;
+		font-family: $font-primary;
+	}
+}

@@ -1,0 +1,184 @@
+<div class="main-box">
+	<div class="title">
+		<h5>Payment limits</h5>
+	</div>
+
+	<div class="box-content form" [formGroup]="limitForm">
+		<div class="content_child">
+			<div class="content-title">
+				<p>Cash withdrawals</p>
+			</div>
+			<div class="content-spent">
+				<div class="content_spent_first_child">
+					<h6 style="margin: 0px">Current limit</h6>
+
+					<app-input-field
+						[inputClass]="limitForm.get('cashWithdrawals')?.invalid ? 'input-warn' : ''"
+					>
+						<input type="text" formControlName="cashWithdrawals" />
+					</app-input-field>
+
+					<span
+						*ngIf="
+							limitForm.get('cashWithdrawals')?.invalid &&
+							limitForm.get('cashWithdrawals')?.value.length > 0 &&
+							limitForm.get('cashWithdrawals')?.value[0] !== '0'
+						"
+						>Current Limit should should contain only digits</span
+					>
+					<span *ngIf="limitForm.get('cashWithdrawals')?.value === ''"
+						>Current Limit Can Not Be Empty</span
+					>
+					<span
+						*ngIf="
+							limitForm.get('cashWithdrawals')?.value < usersSpendings.cashWithdrawals &&
+							limitForm.get('cashWithdrawals')?.value != '' &&
+							limitForm.get('cashWithdrawals')?.valid
+						"
+						>Limit should be greater than Spending</span
+					>
+					<span
+						*ngIf="
+							limitForm.get('cashWithdrawals')?.value.length > 1 &&
+							limitForm.get('cashWithdrawals')?.value[0] == 0
+						"
+						>Number Can't be start with 0</span
+					>
+				</div>
+
+				<div class="content_spent_second_child">
+					<div class="second_child_title">
+						<h6>Spendings</h6>
+						<h5>{{ usersSpendings.cashWithdrawals }} USD</h5>
+					</div>
+					<div class="progresbar">
+						<div style="width: 86%; border-radius: 50%">
+							<app-progressbar
+								[color]="persents.cashWithdrawals >= 100 ? 'pink' : 'primary'"
+								[percent]="persents.cashWithdrawals"
+							></app-progressbar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="content_child content_child_middle">
+			<div class="content-title">
+				<p>Bank transactions</p>
+			</div>
+			<div class="content-spent">
+				<div class="content_spent_first_child">
+					<h6 style="margin: 0px">Current limit</h6>
+
+					<app-input-field
+						[inputClass]="limitForm.get('bankTransactions')?.invalid ? 'input-warn' : ''"
+					>
+						<input type="text" formControlName="bankTransactions" />
+					</app-input-field>
+
+					<span
+						*ngIf="
+							limitForm.get('bankTransactions')?.invalid &&
+							limitForm.get('bankTransactions')?.value.length > 0 &&
+							limitForm.get('bankTransactions')?.value[0] !== '0'
+						"
+						>Current Limit should should contain only digits</span
+					>
+					<span *ngIf="limitForm.get('bankTransactions')?.value === ''"
+						>Current Limit Can Not Be Empty</span
+					>
+					<span
+						*ngIf="
+							limitForm.get('bankTransactions')?.value <
+								usersSpendings.bankTransactions &&
+							limitForm.get('bankTransactions')?.value != '' &&
+							limitForm.get('bankTransactions')?.valid
+						"
+						>Limit should be greater than Spending</span
+					>
+					<span
+						*ngIf="
+							limitForm.get('bankTransactions')?.value.length > 1 &&
+							limitForm.get('bankTransactions')?.value[0] == 0
+						"
+						>Number Can't be start with 0</span
+					>
+				</div>
+				<div class="content_spent_second_child">
+					<div class="second_child_title">
+						<h6>Spendings</h6>
+						<h5>{{ usersSpendings.bankTransactions }} USD</h5>
+					</div>
+					<div class="progresbar">
+						<div style="width: 86%; border-radius: 50%">
+							<app-progressbar
+								[color]="persents.bankTransactions >= 100 ? 'pink' : 'primary'"
+								[percent]="persents.bankTransactions"
+							></app-progressbar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="content_child content_child_last">
+			<div class="content-title">
+				<p>Online payments</p>
+			</div>
+			<div class="content-spent">
+				<div class="content_spent_first_child">
+					<h6 style="margin: 0px">Current limit</h6>
+
+					<app-input-field
+						[inputClass]="limitForm.get('onlinePayments')?.invalid ? 'input-warn' : ''"
+					>
+						<input type="text" formControlName="onlinePayments" />
+					</app-input-field>
+
+					<span
+						*ngIf="
+							limitForm.get('onlinePayments')?.invalid &&
+							limitForm.get('onlinePayments')?.value.length > 0 &&
+							limitForm.get('onlinePayments')?.value[0] !== '0'
+						"
+						>Current Limit should should contain only digits</span
+					>
+					<span *ngIf="limitForm.get('onlinePayments')?.value === ''"
+						>Current Limit Can Not Be Empty</span
+					>
+					<span
+						*ngIf="
+							limitForm.get('onlinePayments')?.value < usersSpendings.onlinePayments &&
+							limitForm.get('onlinePayments')?.value != '' &&
+							limitForm.get('onlinePayments')?.valid
+						"
+						>Limit should be greater than Spending</span
+					>
+
+					<span
+						*ngIf="
+							limitForm.get('onlinePayments')?.value.length > 1 &&
+							limitForm.get('onlinePayments')?.value[0] == 0
+						"
+						>Number Can't be start with 0</span
+					>
+				</div>
+				<div class="content_spent_second_child">
+					<div class="second_child_title">
+						<h6>Spendings</h6>
+						<h5>{{ usersSpendings.onlinePayments }} USD</h5>
+					</div>
+					<div class="progresbar">
+						<div style="width: 86%; border-radius: 50%">
+							<app-progressbar
+								[percent]="persents.onlinePayments"
+								[color]="persents.onlinePayments >= 100 ? 'pink' : 'primary'"
+							></app-progressbar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

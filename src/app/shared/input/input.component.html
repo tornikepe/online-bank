@@ -1,0 +1,17 @@
+<div class="input-div" [ngClass]="inputClass" [ngStyle]="{ width: width }">
+  <label>{{ label }}</label>
+
+  <input
+    class="input-field"
+    type="{{ type }}"
+    name="{{ name }}"
+    placeholder="{{ placeholder }}"
+    [disabled]="disabled"
+    #inputText
+    value="{{ value }}"
+    (keyup)="sendParentData(inputText)"
+  />
+
+  <i *ngIf="inputClass == 'input-warn'" class="bi bi-x-circle"></i>
+  <i *ngIf="inputClass == 'input-success'" class="bi bi-check2"></i>
+</div>

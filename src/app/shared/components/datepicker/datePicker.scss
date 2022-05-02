@@ -1,0 +1,122 @@
+@import '../../../../assets/color-palette';
+@import '../../../../assets/typography.scss';
+
+
+input {
+    width: 358px;
+    height: 52px;
+    border: 1px solid $outline;
+    border-radius: 3px;
+    margin-top: 12px;
+    padding-left: 15px;
+    font-family: $font-primary;
+
+    &:disabled {
+        color: $secondary-light;
+    }
+
+    &:focus {
+        outline-color: $secondary-light;
+    }
+
+    &::placeholder {
+        color: $secondary-light;
+        font-family: $font-primary;
+    }
+}
+
+ngb-datepicker-navigation {
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+
+.input-group {
+    width: 358px;
+}
+
+.dropdown-menu.show {
+    width: 361px;
+    box-shadow: 0px 2px 16px rgb(153 155 168 / 12%);
+    border: none;
+}
+
+.custom-select {
+    border: none;
+    background: transparent;
+}
+
+.ngb-dp-week {
+    gap: 14px;
+}
+
+.ngb-dp-weekdays {
+    border: none !important;
+}
+
+.ngb-dp-header {
+    background-color: $background-light !important;
+}
+
+.bg-primary {
+    background-color: $primary !important;
+    border-radius: 0.15rem !important;
+}
+
+.btn-link {
+    color: $secondary-dark !important;
+}
+
+.ngb-dp-navigation-select {
+    flex: 1 !important;
+}
+
+.ngb-dp-weekday {
+    color: $secondary-dark !important;
+}
+
+ngb-datepicker-navigation-select>.custom-select {
+    flex: 1 !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+}
+
+[ngbDatepickerDayView] {
+    font-size: 14px;
+}
+
+.ngb-dp-month {
+    padding: 21px;
+    display: block !important;
+}
+
+.calendar-button {
+    height: 100%;
+    position: absolute;
+    left: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        border: 0;
+        padding: 0;
+        background: transparent;
+    }
+}
+
+
+//ranged
+.range {
+    background-color: $primary !important;
+    color: white;
+
+    &:hover {
+        background-color: $primary !important;
+    }
+}
+
+.faded {
+    background-color: rgba(255, 171, 43, 0.1) !important;
+    color: $primary !important;
+}

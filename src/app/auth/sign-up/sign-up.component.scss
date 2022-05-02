@@ -1,0 +1,332 @@
+@import "../../../assets/color-palette.scss";
+@import "../../../assets/typography.scss";
+input:not(#checkbox) {
+    border-radius: 5px;
+    border: $outline solid 1px;
+    width: 360px;
+    height: 52px;
+    // margin-bottom: 20px;
+}
+
+input+.register_error {
+    display: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-weight: bold;
+}
+
+.ng-invalid.ng-dirty+.register_error {
+    display: block;
+}
+
+.ng-invalid.ng-touched+.register_error {
+    display: block;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+.tbc {
+    width: 113px;
+    height: 24px;
+    background: transparent;
+    margin-left: 40px;
+}
+
+#LogoColorPrimary {
+    position: absolute;
+    width: 113px;
+    height: 24px;
+    left: 217px;
+    top: 60px;
+    overflow: visible;
+}
+
+#io {
+    left: 44px;
+    top: 2px;
+    position: absolute;
+    overflow: visible;
+    width: 70px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 18px;
+    color: $primary;
+    letter-spacing: 0.27407407760620117px;
+    font-family: "Roboto", sans-serif;
+    color: $primary;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 300;
+}
+
+#finance {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 41px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: $primary;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+#Title_bf {
+    position: absolute;
+    width: 342px;
+    height: 92px;
+    left: 217px;
+    top: 102px;
+    overflow: visible;
+}
+
+#Create_account {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 206px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    color: $primary-dark;
+    letter-spacing: 0.06666666984558106px;
+}
+
+#Please_sign_up_to_yo {
+    left: 0px;
+    top: 50px;
+    position: absolute;
+    overflow: visible;
+    width: 343px;
+    height: 42px;
+    line-height: 21px;
+    margin-top: -1.5px;
+    text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    color: $primary-dark;
+}
+
+#form {
+    position: absolute;
+    width: 360px;
+    height: 410px;
+    left: 217px;
+    top: 212px;
+    display: block;
+    overflow: visible;
+    font-size: 14px;
+}
+
+.fullname,
+.email,
+.password,
+.terms {
+    color: $primary-dark;
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 12px;
+    margin-bottom: 17px;
+    font-weight: 300;
+}
+
+#checkbox {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.terms {
+    margin-left: 30px;
+    margin-top: -20px;
+}
+
+.signup {
+    width: 360px;
+    height: 46px;
+    background-color: $primary;
+    margin-top: 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.ptag {
+    color: $outline;
+    font-size: 13px;
+    font-weight: "medium";
+    margin-top: 3px;
+    margin-right: 8px;
+}
+
+input::placeholder {
+    color: $secondary-light;
+    //padding: 15px;
+    font-size: 14px;
+}
+
+.sign-in-here {
+    position: relative;
+    top: 30px;
+    color: $secondary-light;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: "regular";
+}
+
+#sign-in-here {
+    color: $primary-dark;
+    font-weight: bold;
+    font-family: 14px;
+    font-family: Roboto;
+    position: relative;
+    bottom: 1px;
+    cursor: pointer;
+}
+
+#bg {
+    position: absolute;
+    width: 1763.22px;
+    height: 1050.599px;
+    left: 0px;
+    top: -107.861px;
+    overflow: visible;
+}
+
+#ethan-hoover-422836-unsplash {
+    position: absolute;
+    width: 1550.638px;
+    height: 1050.599px;
+    left: 212.583px;
+    top: 0px;
+    overflow: visible;
+}
+
+#Fills__White__RoundFlat {
+    position: absolute;
+    width: 705px;
+    height: 900px;
+    left: 0px;
+    top: 107.861px;
+    overflow: visible;
+}
+
+#Rectangle_Copy {
+    fill: $outline;
+}
+
+.Rectangle_Copy {
+    position: absolute;
+    overflow: visible;
+    width: 705px;
+    height: 900px;
+    left: 0px;
+    top: 0px;
+}
+
+.user-input-auth {
+    // input {
+    //     outline: none;
+    // }
+    // .ng-invalid {
+    //     border: 1px solid red !important;
+    //     outline: none !important;
+    // }
+    // .ng-valid {
+    //     border: 1px solid $secondary-green !important;
+    //     outline: none !important;
+    // }
+    // .ng-untouched {
+    //     border: 1px solid $outline !important;
+    //     outline: none !important;
+    // }
+}
+
+a {
+    text-decoration: none;
+    color: $primary-dark;
+}
+
+#Register-main {
+    overflow: hidden;
+    #image-left {
+        transform: translate(50%, 0);
+        img {
+            height: 100vh;
+            object-fit: scale-down;
+        }
+    }
+}
+
+#email {
+    width: 360px;
+    height: 52px;
+    margin-top: 14px;
+    border-radius: 4px;
+    border: 1px solid $outline;
+    outline: none;
+    padding-left: 10px;
+    &::placeholder {
+        font-size: 14px;
+        line-height: 17px;
+        word-spacing: 1;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        padding-left: 15px;
+    }
+}
+
+@media only screen and(max-width: 1180px) and (min-width: 980px) {
+    #form {
+        position: absolute !important;
+        transform: translate(-100px, 60px) !important;
+    }
+    #Title_bf {
+        position: absolute !important;
+        transform: translate(-100px, 60px) !important;
+    }
+    #LogoColorPrimary {
+        position: absolute !important;
+        transform: translate(-100px, 60px) !important;
+    }
+}
+
+@media only screen and(max-width: 980px) {
+    #form {
+        position: absolute !important;
+        transform: translate(-200px, 60px) !important;
+    }
+    #Title_bf {
+        position: absolute !important;
+        transform: translate(-200px, 60px) !important;
+    }
+    #LogoColorPrimary {
+        position: absolute !important;
+        transform: translate(-200px, 60px) !important;
+    }
+}

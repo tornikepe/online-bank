@@ -1,0 +1,224 @@
+@import "../../../assets/color-palette.scss";
+@import "../../../assets/typography.scss";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    /* Firefox */
+}
+
+#body {
+    overflow: hidden;
+    #image-left {
+        transform: translate(50%, 0);
+        img {
+            height: 100vh;
+            object-fit: scale-down;
+        }
+    }
+    .form {
+        position: absolute;
+        transform: translate(217px, 60px);
+        top: -1px;
+        left: 1px;
+        .header {
+            p {
+                font-family: "Roboto", sans-serif;
+                color: $primary;
+                font-size: 18px;
+                line-height: 24px;
+                span {
+                    line-height: 27px;
+                    font-size: 20px;
+                    color: $primary;
+                }
+            }
+        }
+        .name_of_action {
+            margin-top: 115px;
+            .h3 {
+                font-size: 30px;
+                line-height: 37px;
+                word-spacing: 1px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+            }
+            .notification_of_action {
+                font-size: 14px;
+                line-height: 21px;
+                word-spacing: 0;
+                font-family: "Roboto", sans-serif;
+                font-weight: 300;
+                margin-top: 11px;
+            }
+        }
+        .user-input {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            label {
+                font-size: 14px;
+                line-height: 17px;
+                word-spacing: 1;
+                font-family: "Roboto", sans-serif;
+                font-weight: 300;
+            }
+            #email {
+                width: 360px;
+                height: 52px;
+                margin-top: 14px;
+                border-radius: 4px;
+                border: 1px solid $outline;
+                outline: none;
+                padding-left: 10px;
+                &::placeholder {
+                    font-size: 14px;
+                    line-height: 17px;
+                    word-spacing: 1;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 400;
+                    padding-left: 15px;
+                }
+            }
+        }
+        .user-submit {
+            margin-top: 25px;
+            #submit {
+                width: 360px;
+                height: 46px;
+                border-radius: 7px;
+                border: none;
+                background: $primary;
+                color: $background-light;
+                font-size: 14px;
+                line-height: 17px;
+            }
+        }
+        .footer {
+            margin-top: 83px;
+            footer {
+                p {
+                    font-size: 14px;
+                    line-height: 21px;
+                    word-spacing: 1;
+                    color: $secondary-light;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 400;
+                    span {
+                        margin-left: 3px;
+                        color: $primary-dark;
+                        a {
+                            text-decoration: none;
+                            color: $primary-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#modal {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    background-color: black;
+    z-index: 10000;
+    border-radius: 4px;
+    transition: 1ms;
+    .modal-header {
+        .btn-close {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 10px 0 0 370px;
+            color: red;
+        }
+    }
+    .modal-body {
+        // margin: 4rem 0 0 .5rem;
+        font-size: 1.2rem;
+        color: $secondary-pink;
+        &:focus {
+            outline: none;
+        }
+        .modal-body-correct-email {
+            .modal-password {
+                margin-top: 50px;
+                margin-left: 20px;
+                input {
+                    width: 360px;
+                    height: 52px;
+                    margin-top: 14px;
+                    border-radius: 4px;
+                    border: 1px solid $outline;
+                    outline: none;
+                    padding-left: 10px;
+                    &::placeholder {
+                        font-size: 14px;
+                        line-height: 17px;
+                        word-spacing: 1;
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 400;
+                        padding-left: 15px;
+                    }
+                }
+                .ng-invalid {
+                    border: 2px solid red;
+                    outline: none;
+                }
+                .ng-valid {
+                    border: 2px solid green;
+                    outline: none;
+                }
+                .ng-untouched {
+                    border: 1px solid $outline;
+                    outline: none;
+                }
+            }
+        }
+        .modal-body-incorrect-email {
+            &:focus {
+                outline: none;
+            }
+            .incorectEmail {
+                margin: 6rem 0 0 2.5rem;
+                font-size: 1.2rem;
+                color: $secondary-pink;
+            }
+        }
+    }
+    .modal-footer {
+        margin: 80px 23px 0 0;
+        button {
+            width: 70px;
+            height: 40px;
+            margin-left: 10px;
+        }
+    }
+    .btn-close {
+        margin: 10px 0 0 370px;
+    }
+}
+
+@media only screen and(max-width: 1180px) {
+    #body {
+        .form {
+            transform: translate(117px, 60px);
+        }
+    }
+}
+
+@media only screen and(max-width: 980px) {
+    #body {
+        .form {
+            transform: translate(10px, 60px);
+        }
+    }
+}

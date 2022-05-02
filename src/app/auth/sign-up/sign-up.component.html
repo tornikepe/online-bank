@@ -1,0 +1,143 @@
+<div id="Register-main">
+  <div id="image-left">
+    <img src="../../../assets/images/auth/new_tbc.jpg" />
+  </div>
+  <div id="LogoColorPrimary">
+    <div id="UILogo">
+      <div id="UILogo_bk" class="UI_Logo">
+        <div id="Group_1">
+          <div id="io">
+            <span>Banking</span>
+          </div>
+          <div id="finance">
+            <span>Tbc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Title_bf">
+    <div id="Create_account">
+      <span>Create account</span>
+    </div>
+    <div id="Please_sign_up_to_yo">
+      <span
+        >Please sign up to your personal account if you want to use all our
+        premium products</span
+      >
+    </div>
+  </div>
+
+  <form [formGroup]="forms" id="form" (submit)="onSubmit()">
+    <div class="user-input-auth">
+      <!-- <p class="fullname p-ligh">Full name</p> -->
+
+      <app-input-field
+        [width]="'360px'"
+        [formGroup]="forms"
+        [inputClass]="input_valid_1"
+        [label]="'Full name'"
+      >
+        <input
+          type="text"
+          formControlName="full_name"
+          [placeholder]="'Enter your name'"
+          [disabled]="false"
+          [name]="'Full name'"
+        />
+      </app-input-field>
+    </div>
+    <div class="user-input-auth">
+      <!-- <p class="email p-ligh">Your email</p> -->
+
+      <app-input-field
+        [width]="'360px'"
+        [formGroup]="forms"
+        [inputClass]="input_valid_2"
+        [label]="'Email'"
+      >
+        <input
+          id="email"
+          type="email"
+          formControlName="Email"
+          [placeholder]="'Your email'"
+          [disabled]="false"
+          [name]="'Email'"
+        />
+      </app-input-field>
+
+      <!--       
+      <input
+        style="display: none"
+        type="text"
+        formControlName="Email"
+        placeholder="Your email"
+      />
+      <app-input
+        [width]="'360px'"
+        (inputValue)="parentComponentMethod_2($event)"
+        [type]="'email'"
+        [label]="'Email'"
+        [name]="'Email'"
+        [placeholder]="'Your email'"
+        [disabled]="false"
+        [inputClass]="input_valid_2"
+      ></app-input> -->
+    </div>
+    <div class="user-input-auth">
+      <!-- <p class="password p-ligh">Password</p> -->
+
+      <app-input-field
+        [width]="'360px'"
+        [formGroup]="forms"
+        [inputClass]="input_valid_3"
+        [label]="'Password'"
+      >
+        <input
+          type="password"
+          formControlName="Password"
+          [placeholder]="'Enter your password'"
+          [disabled]="false"
+          [name]="'Password'"
+        />
+      </app-input-field>
+
+      <!-- <input
+        style="display: none"
+        type="password"
+        formControlName="Password"
+        placeholder="Enter your password"
+      />
+      <app-input
+        [width]="'360px'"
+        (inputValue)="parentComponentMethod_3($event)"
+        [type]="'password'"
+        [label]="'password'"
+        [name]="'password'"
+        [placeholder]="'Enter your password'"
+        [disabled]="false"
+        [inputClass]="input_valid_3"
+      ></app-input> -->
+    </div>
+    <div>
+      <input type="checkbox" id="checkbox" formControlName="agree_terms" />
+
+      <p class="terms">I agree with terms & conditions</p>
+    </div>
+    <!-- <button [disabled]="boolValid" type="submit" class="signup button-label"><p class="ptag">SIGN UP</p> </button> -->
+    <app-button
+      [btnClass]="'primary'"
+      class="signup button-label"
+      [btnWidth]="'360px'"
+      type="submit"
+      [isDisable]="boolValid"
+      [text]="'SIGN UP'"
+    ></app-button>
+    <p class="sign-in-here p-light">
+      Already have an account?
+      <span id="sign-in-here"
+        ><a class="p-link" routerLink="/sign-in">Sign in here</a></span
+      >
+    </p>
+  </form>
+</div>

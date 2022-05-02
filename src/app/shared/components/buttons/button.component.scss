@@ -1,0 +1,101 @@
+@import "/src/assets/color-palette.scss";
+
+.button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: $secondary-dark;
+  width: 100%;
+  height: 46px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    color: $secondary-dark;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  i {
+    position: relative;
+    right: 25%;
+  }
+}
+
+/* Primary buttons */
+.primary {
+  background-color: $primary;
+  color: #ffffff;
+
+  &:hover {
+    color: $white;
+    background-color: $primary-v2;
+  }
+
+  &:disabled {
+    background-color: $background-dark;
+
+    &:hover {
+      background-color: $background-dark;
+    }
+  }
+}
+
+/* Outline buttons */
+.outline {
+  color: $primary-dark;
+  background-color: transparent;
+  border: 1px solid $primary;
+
+  &:hover {
+    color: $primary;
+    background-color: transparent;
+    border: 1px solid $primary;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    border: 1px solid $background-dark;
+
+    &:hover {
+      background-color: transparent;
+      border: 1px solid $background-dark;
+    }
+  }
+}
+/* Custom button-colors */
+
+.button-green {
+  background-color: $secondary-green;
+
+  &:hover {
+    background-color: #69c930;
+  }
+}
+
+.button-pink {
+  background-color: $secondary-pink;
+
+  &:hover {
+    background-color: #f34b91;
+  }
+}
+
+.button-blue {
+  background-color: $secondary-blue;
+
+  &:hover {
+    background-color: #4b78f3;
+  }
+}
+
+.button-light-blue {
+  background-color: $secondary-light-blue;
+
+  &:hover {
+    background-color: #2cdbec;
+  }
+}

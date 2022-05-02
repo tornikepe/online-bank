@@ -1,0 +1,66 @@
+@import '../../../assets/color-palette.scss';
+
+
+.radioButtonComponent{
+    display:flex;
+    .radio-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        div{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+    }
+    .radio-button.defaultcheckedradio{
+        background-color: $secondary-light;
+        div{
+            background-color: #FFFFFF;
+        }
+    }
+    
+    .radio-button.defaultuncheckedradio{
+        background-color: $outline;
+    }
+    
+    .radio-button.diseibled{
+        opacity: 0.9;
+        div{
+            opacity: 0.9;
+        }
+    }
+    
+    .radio-button.uncheckederror{
+        background-color: $secondary-pink;
+        opacity: 0.3;
+    }
+    .radio-button.checkedsuccess{
+        background-color: $secondary-green;
+        opacity: 0.3;
+        div{
+            background-color:green;
+        }
+    }
+    p{
+        font-size:14px;
+        margin-left:10px;
+        margin-bottom:3px;
+    }
+    p.defaultcheckedradio{
+        color:$primary-dark
+    }
+    p.defaultuncheckedradio{
+        color:$secondary-dark
+    }
+    p.uncheckederror{
+        color:$secondary-pink
+    }
+    p.checkedsuccess{
+        color:$secondary-green
+    }
+}
+

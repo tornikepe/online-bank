@@ -1,0 +1,12 @@
+@import '../../../assets/color-palette.scss';
+
+.footer{
+    height: 64px;
+    width: 100%;
+    padding-top: 25px;
+    padding-left: 28px;
+    p{
+        font-size: 14px;
+        color: $secondary-dark;
+    }
+}

@@ -1,0 +1,1088 @@
+{
+  "items": [],
+  "users": [
+    {
+      "email": "dimamezvrishvili776@gmail.com",
+      "password": "$2a$10$XbFAY9e1fFJ6q0KVWzS.CO.Ey9vkwcBheRZRrMHXlF5D.A3z9sctW",
+      "Full_Name": "dima mezvrishvili",
+      "Agree_Term": true,
+      "id": 1
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$e0X/nn6vxtv/iUTbaGbDVOAbjLV0E1r6plwZcocevN9VuoctSlwLC",
+      "Full_Name": "dimadima",
+      "Agree_Term": true,
+      "id": 2
+    },
+    {
+      "email": "peitrishvilitornike@gmail.com",
+      "password": "$2a$10$jboeGdFXTFmJCD5F1/02C.K2t27gFh9VAVqaAz2Iy2Siv63mmf4MO",
+      "Full_Name": "Tornike",
+      "Agree_Term": true,
+      "id": 3
+    },
+    {
+      "email": "qweqwe@gmail.com",
+      "password": "$2a$10$e/jkMSrf6FzIWGgFuiZzXelAmHZYxz5cjdNtNRUbsO4cogJnjJ3.C",
+      "Full_Name": "qweqwe",
+      "Agree_Term": true,
+      "id": 4
+    },
+    {
+      "email": "qqq@gmail.com",
+      "password": "$2a$10$sxck1p/.wtDJwz9Ee6bQL.9eEYLf6q9t5boxc0S6DzLvf/m6Z6ZI.",
+      "Full_Name": "qqq",
+      "Agree_Term": true,
+      "id": 5
+    },
+    {
+      "email": "qweqweqwe@gmail.com",
+      "password": "$2a$10$WME4i4QWVGsXFa4TXh36e.3lyj2QMyX9cMjqTBrQl1amorwpw.0Mm",
+      "Full_Name": "qweqweqwe",
+      "Agree_Term": true,
+      "id": 6
+    },
+    {
+      "email": "asd@yaho.com",
+      "password": "$2a$10$bD2/vZAc6qIy6xKvYmyjO.G9g69NFR5BoD5UKQEhKPPl2bHYxe07i",
+      "Full_Name": "a",
+      "Agree_Term": true,
+      "id": 7
+    },
+    {
+      "email": "dimamezvrishvili@gmail.com",
+      "password": "$2a$10$Fb4pgQGxAY5MHsz26PFJVOqClRIfFf0kiYvD7O.SUUYz.kECIhPfC",
+      "Full_Name": "dima mezvrishvili",
+      "Agree_Term": true,
+      "id": 8
+    },
+    {
+      "email": "asd@gmail.com",
+      "password": "$2a$10$Z6dksncOq3W5RJavQmhbTuNxGSW8roFaCDKMxbeDlUAKmI6JTNY86",
+      "Full_Name": "dima mezvrishvili",
+      "Agree_Term": true,
+      "id": 9
+    },
+    {
+      "Agree_Term": true,
+      "email": "test@test.com",
+      "Full_Name": "test Lastt",
+      "password": "$2a$10$Hy.se84RBvjK1DZ45xvDX.ePNbSBOitKd1ggvPp4us/7AsWl60bj2",
+      "phone": "123456789",
+      "sex": "Female",
+      "id": 10
+    },
+    {
+      "Agree_Term": true,
+      "email": "datomagaria@shemishvi.com",
+      "Full_Name": "David Khvedelidze",
+      "password": "$2a$10$IXMNvynd1BH16WHRVLkoje57IuJkTvumK5fZp14knHAw/xOPWeLMq",
+      "phone": "555140042",
+      "language": "English",
+      "sex": "Male",
+      "id": 11
+    },
+    {
+      "Agree_Term": true,
+      "email": "animetki@gmail.com",
+      "Full_Name": "Ani Metki",
+      "password": "$2a$10$pgr53lH2kLC2ChVjBoDR6ePhJ8lo4ukHkAHK84MWiYeHn8yS8rC66",
+      "sex": "Female",
+      "id": 12
+    },
+    {
+      "Agree_Term": true,
+      "email": "beqa@gmail.com",
+      "Full_Name": "beqa khadilashvili",
+      "password": "$2a$10$a5jf5z.js9PFA6W/wa8F0OyBEcwJdRW3NR/t.iUTAZjAdxs2zlBQe",
+      "phone": "558129336",
+      "language": "Georgian",
+      "sex": "Male",
+      "id": 13
+    },
+    {
+      "email": "mainuser@gmail.com",
+      "password": "$2a$10$fDWrLTzVv2WpC3y6equhxe4uxPqzOl44Teg7Oe9q819UYVWyOHd4S",
+      "Full_Name": "main user",
+      "Agree_Term": true,
+      "id": 14
+    },
+    {
+      "email": "asdfjklh@gmail.com",
+      "password": "$2a$10$Ks4Zo5oME5kY0UIndfCwju.8GNAFTEkV/rzbr9zPZO9b5lEchyWam",
+      "Full_Name": "Tornike",
+      "Agree_Term": true,
+      "id": 15
+    },
+    {
+      "email": "fdgjh@gmail.com",
+      "password": "$2a$10$9tr01KbvH1vndcV16ypGWOaWd.0W0XNu4xIbTKD7WCI/uaO9DkPvK",
+      "Full_Name": "qweqwe",
+      "Agree_Term": true,
+      "id": 16
+    },
+    {
+      "email": "qweqwes@gmail.com",
+      "password": "$2a$10$QFjAVmf9dk12dYqVRnSp2O9pzimu8YX0OVnUVJWPKUjFfa0HtpiN.",
+      "Full_Name": "qweqwe",
+      "Agree_Term": true,
+      "id": 17
+    },
+    {
+      "email": "vaxtang@gmail.com",
+      "password": "$2a$10$R6MFBO0MVyj2LIzNVWU7W.pqc2BDj2OmsH/ws0ewi6e/KDisJmwJG",
+      "Full_Name": "Tornike",
+      "Agree_Term": true,
+      "id": 18
+    }
+  ],
+  "limits": [
+    {
+      "cashWithdrawals": 50000,
+      "bankTransactions": 50000,
+      "onlinePayments": 2000,
+      "userId": 3,
+      "id": 1
+    },
+    {
+      "cashWithdrawals": 1000,
+      "bankTransactions": 5000,
+      "onlinePayments": 1000,
+      "userId": 7,
+      "id": 2
+    },
+    {
+      "cashWithdrawals": 5000,
+      "bankTransactions": 1500,
+      "onlinePayments": 245452,
+      "userId": null,
+      "id": 3
+    },
+    {
+      "cashWithdrawals": 1500,
+      "bankTransactions": 1000,
+      "onlinePayments": 2000,
+      "userId": 10,
+      "id": 4
+    }
+  ],
+  "spendings": [
+    {
+      "cashWithdrawals": 1000,
+      "bankTransactions": 1000,
+      "onlinePayments": 1000,
+      "userId": 3,
+      "id": 1
+    }
+  ],
+  "notifications": [
+    {
+      "userId": 7,
+      "productupdate": true,
+      "offerupdates": true,
+      "comments": false,
+      "notifications": true,
+      "id": 1
+    },
+    {
+      "userId": null,
+      "productupdate": true,
+      "offerupdates": true,
+      "comments": false,
+      "notifications": true,
+      "id": 2
+    },
+    {
+      "userId": 10,
+      "productupdate": true,
+      "offerupdates": false,
+      "comments": false,
+      "notifications": true,
+      "id": 3
+    }
+  ],
+  "questions": [],
+  "answers": [],
+  "cards": [
+    {
+      "name": "TBC CONCEPT",
+      "account": "GE32TBC3219837918",
+      "card": "1563148254921044",
+      "cardholder": "DAVID KHVEDELIDZE",
+      "date": "10/25",
+      "amount": "156300",
+      "security": true,
+      "userId": 11,
+      "id": 1
+    },
+    {
+      "name": "123",
+      "account": "123",
+      "card": "123",
+      "cardholder": "213",
+      "date": "123",
+      "amount": "123",
+      "security": true,
+      "userId": null,
+      "id": 2
+    },
+    {
+      "name": "adasda",
+      "account": "DS12DS1234567891234567",
+      "card": "1234123412341234",
+      "cardholder": "asdasdasd",
+      "date": "12/12/12",
+      "amount": "51231111",
+      "security": true,
+      "userId": "11",
+      "id": 3
+    },
+    {
+      "name": "test card",
+      "account": "GE33TB3333333333333333",
+      "card": "3333333333333333",
+      "cardholder": "MAIN USER",
+      "date": "02/2025",
+      "amount": 99978,
+      "security": true,
+      "userId": "14",
+      "id": 4
+    }
+  ],
+  "paymentTypes": [
+    {
+      "name": "Electronic Payments",
+      "providers": [
+        {
+          "name": "paypal"
+        },
+        {
+          "name": "skrill"
+        },
+        {
+          "name": "payoneer"
+        }
+      ],
+      "icon": "las la-credit-card",
+      "formPath": "electronic-payment"
+    },
+    {
+      "name": "Bank Transfer",
+      "providers": [
+        {
+          "name": "any bank"
+        }
+      ],
+      "icon": "las la-university",
+      "formPath": "bank-transfer"
+    },
+    {
+      "name": "Transfer to my account",
+      "providers": [
+        {
+          "name": "visa"
+        },
+        {
+          "name": "mastercard"
+        }
+      ],
+      "icon": "las la-exchange-alt",
+      "formPath": "internal-transfer"
+    }
+  ],
+  "income": [
+    {
+      "userId": "12",
+      "type": "card",
+      "data": [
+        23454,
+        56775,
+        43455,
+        34566,
+        35544
+      ]
+    },
+    {
+      "userId": "12",
+      "type": "deposits",
+      "data": [
+        54674,
+        45675,
+        34786,
+        97356,
+        23954
+      ]
+    },
+    {
+      "interval": "monthly",
+      "to": "cards",
+      "userId": 12,
+      "data": [
+        2330,
+        6240,
+        6170,
+        246,
+        995,
+        1020,
+        2450,
+        6657,
+        4670,
+        3240,
+        990,
+        1000
+      ]
+    },
+    {
+      "interval": "monthly",
+      "to": "accounts",
+      "userId": 12,
+      "data": [
+        2030,
+        6740,
+        6070,
+        2246,
+        1995,
+        6028,
+        2250,
+        6055,
+        4025,
+        3045,
+        958,
+        1058
+      ]
+    },
+    {
+      "interval": "weekly",
+      "userId": 12,
+      "data": [
+        1748,
+        3676,
+        2952,
+        1521
+      ]
+    },
+    {
+      "interval": "daily",
+      "userId": 12,
+      "data": [
+        543,
+        314,
+        867,
+        604,
+        132,
+        256,
+        300
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "userId": "12",
+      "type": "card",
+      "data": [
+        12343,
+        34456,
+        65576,
+        67678,
+        43435
+      ]
+    },
+    {
+      "userId": "12",
+      "type": "deposits",
+      "data": [
+        12343,
+        34456,
+        65576,
+        67678,
+        43435
+      ]
+    },
+    {
+      "interval": "monthly",
+      "from": "cards",
+      "userId": 12,
+      "data": [
+        2424,
+        1267,
+        2100,
+        399,
+        1024,
+        2423,
+        1099,
+        567,
+        2224,
+        3023,
+        100,
+        64
+      ]
+    },
+    {
+      "interval": "monthly",
+      "from": "accounts",
+      "userId": 12,
+      "data": [
+        2824,
+        2267,
+        2870,
+        509,
+        1524,
+        2723,
+        1289,
+        807,
+        2824,
+        3523,
+        782,
+        640
+      ]
+    },
+    {
+      "interval": "weekly",
+      "userId": 12,
+      "data": [
+        827,
+        234,
+        364,
+        453
+      ]
+    },
+    {
+      "interval": "daily",
+      "userId": 12,
+      "data": [
+        34,
+        87,
+        53,
+        300,
+        256,
+        64,
+        132
+      ]
+    }
+  ],
+  "deposits": [
+    {
+      "name": "Cuumulative deposit",
+      "account": "UK64CT00000000000010034567",
+      "rate": "3",
+      "dateStart": "11/23",
+      "dateExp": "11/24",
+      "balance": "142800",
+      "accured": "1.640",
+      "id": 1
+    },
+    {
+      "name": "Cuumulative deposit",
+      "account": "UK64CT00000000000010034567",
+      "rate": "6",
+      "dateStart": "11/23",
+      "dateExp": "11/24",
+      "balance": "142800",
+      "accured": "1.520",
+      "id": 2
+    }
+  ],
+  "loans": [
+    {
+      "name": "Mortage loan",
+      "account": "UK64CT00000000000010034567",
+      "rate": 14,
+      "dateStart": "11/23",
+      "dateExp": "11/24",
+      "startingAmount": 142800,
+      "paidAmount": 24800,
+      "id": 1
+    },
+    {
+      "name": "Mortage loan",
+      "account": "UK64CT00000000000010034567",
+      "rate": 16,
+      "dateStart": "11/23",
+      "dateExp": "11/24",
+      "startingAmount": 114500,
+      "paidAmount": 115000,
+      "id": 2
+    }
+  ],
+  "charts": [
+    {
+      "id": 1,
+      "name": "Cards balance",
+      "data": [
+        78000,
+        91000,
+        78000,
+        52000,
+        72800,
+        104000,
+        124800
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Deposit (3% Rate)",
+      "data": [
+        35250,
+        38070,
+        39480,
+        40890,
+        38070,
+        49350,
+        56400
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Pending credit",
+      "data": [
+        41300,
+        28910,
+        16520,
+        28910,
+        24800,
+        30300,
+        41345
+      ]
+    }
+  ],
+  "cardCharts": [],
+  "depositCharts": [],
+  "loanCharts": [],
+  "invoices": [
+    {
+      "userId": 10,
+      "template": "Webdesign",
+      "invoiceNumber": "Number123",
+      "dateOfCreation": "2021-12-25T16:58:56.363Z",
+      "dueDate": "2022-01-06",
+      "companyName": "CompanyNAme",
+      "contactName": "test@test.com",
+      "address": "Address Address Address Address",
+      "items": [
+        {
+          "billingAddress": "tv",
+          "itemQty": 15,
+          "price": 1500
+        }
+      ],
+      "status": "Paid",
+      "id": 1
+    },
+    {
+      "userId": 10,
+      "template": "mobileApp",
+      "invoiceNumber": "Number2312",
+      "dateOfCreation": "2021-12-25T17:06:49.846Z",
+      "dueDate": "2022-02-02",
+      "companyName": "CompanyNAme",
+      "contactName": "test@test.com",
+      "address": "Address Address Address Address",
+      "items": [
+        {
+          "billingAddress": "address",
+          "itemQty": 14,
+          "price": 1600
+        }
+      ],
+      "status": "Paid",
+      "id": 2
+    },
+    {
+      "userId": 10,
+      "template": "Marketing materials",
+      "invoiceNumber": "-124",
+      "dateOfCreation": "2021-12-25T17:21:05.687Z",
+      "dueDate": "2022-02-16",
+      "companyName": "Vodafone LLC",
+      "contactName": "marketing@vdfn.com",
+      "address": "Department 98 44-46 Morningside Road Edinburgh Scotland EH10 4BF ",
+      "items": [
+        {
+          "billingAddress": "Marketing materials",
+          "itemQty": 50,
+          "price": 150
+        }
+      ],
+      "status": "Pending",
+      "id": 3
+    },
+    {
+      "userId": 10,
+      "template": "Webdesign",
+      "invoiceNumber": "Number123",
+      "dateOfCreation": "2021-12-25T17:27:33.741Z",
+      "dueDate": "2022-01-05",
+      "companyName": "CompanyNAme",
+      "contactName": "test@test.com",
+      "address": "Address Address Address Address",
+      "items": [
+        {
+          "billingAddress": "something",
+          "itemQty": 3,
+          "price": 2.24
+        }
+      ],
+      "status": "Pending",
+      "id": 4
+    },
+    {
+      "userId": 10,
+      "template": "Webdesign",
+      "invoiceNumber": "Number123",
+      "dateOfCreation": "2021-12-25T18:00:34.932Z",
+      "dueDate": "2022-01-06",
+      "companyName": "CompanyNAme",
+      "contactName": "test@test.com",
+      "address": "Address Address Address Address",
+      "items": [
+        {
+          "billingAddress": "address",
+          "itemQty": 12,
+          "price": 14000
+        },
+        {
+          "billingAddress": "address",
+          "itemQty": 14,
+          "price": 1000
+        },
+        {
+          "billingAddress": "address",
+          "itemQty": 5,
+          "price": 4000
+        }
+      ],
+      "status": "Pending",
+      "id": 5
+    },
+    {
+      "userId": 10,
+      "template": "mobileApp",
+      "invoiceNumber": "Number123",
+      "dateOfCreation": "2021-12-25T18:44:46.308Z",
+      "dueDate": "2022-01-05",
+      "companyName": "CompanyNAme",
+      "contactName": "test@test.com",
+      "address": "Address Address Address Address",
+      "items": [
+        {
+          "billingAddress": "address",
+          "itemQty": 123,
+          "price": 123
+        }
+      ],
+      "status": "Pending",
+      "id": 6
+    },
+    {
+      "userId": 13,
+      "template": "sdfgfs",
+      "invoiceNumber": "34",
+      "dateOfCreation": "2021-12-25T21:05:09.339Z",
+      "dueDate": "1111-11-11",
+      "companyName": "gggg",
+      "contactName": "uhb@hjb",
+      "address": "6666",
+      "items": [
+        {
+          "billingAddress": "6666xrdcgfv",
+          "itemQty": 12,
+          "price": 12
+        }
+      ],
+      "status": "Pending",
+      "id": 7
+    },
+    {
+      "userId": 13,
+      "template": "Webdesign",
+      "invoiceNumber": "34",
+      "dateOfCreation": "2021-12-25T21:07:41.853Z",
+      "dueDate": "2000-01-11",
+      "companyName": "gggg",
+      "contactName": "uhb@hjb",
+      "address": "6666",
+      "items": [
+        {
+          "billingAddress": "6666xrdcgfv",
+          "itemQty": 12,
+          "price": 22
+        }
+      ],
+      "status": "Pending",
+      "id": 8
+    },
+    {
+      "userId": 13,
+      "template": "test",
+      "invoiceNumber": "34",
+      "dateOfCreation": "2021-12-25T21:47:43.761Z",
+      "dueDate": "1990-11-11",
+      "companyName": "gggg",
+      "contactName": "uhb@hjb",
+      "address": "6666",
+      "items": [
+        {
+          "billingAddress": "6666xrdcgfv",
+          "itemQty": 12,
+          "price": 99
+        }
+      ],
+      "status": "Pending",
+      "id": 9
+    },
+    {
+      "userId": 13,
+      "template": "mobileApp",
+      "invoiceNumber": "123",
+      "dateOfCreation": "2021-12-25T22:14:07.695Z",
+      "dueDate": "2021-12-31",
+      "companyName": "Apple INC",
+      "contactName": "apple@gmail.com",
+      "address": "USA, California",
+      "items": [
+        {
+          "billingAddress": "Iphone",
+          "itemQty": 1,
+          "price": 900
+        }
+      ],
+      "status": "Pending",
+      "id": 10
+    },
+    {
+      "userId": 12,
+      "template": "mobileApp",
+      "invoiceNumber": "4444",
+      "dateOfCreation": "2021-12-25T23:52:46.388Z",
+      "dueDate": "2022-02-11",
+      "companyName": "test",
+      "contactName": "test@gmail.com",
+      "address": "some address ",
+      "items": [
+        {
+          "billingAddress": "item1dsa",
+          "itemQty": 1,
+          "price": 110
+        }
+      ],
+      "status": "Pending",
+      "id": 11
+    },
+    {
+      "userId": 14,
+      "template": "Webdesign",
+      "invoiceNumber": "558483",
+      "dateOfCreation": "2021-12-26T00:21:16.983Z",
+      "dueDate": "2022-02-20",
+      "companyName": "test company",
+      "contactName": "mainuser@gmail.com",
+      "address": "space",
+      "items": [
+        {
+          "billingAddress": "some item",
+          "itemQty": 1,
+          "price": 100
+        }
+      ],
+      "status": "Pending",
+      "id": 12
+    }
+  ],
+  "transactions": [
+    {
+      "account": "1",
+      "transferedTo": "1234**4321",
+      "date": {
+        "year": 2022,
+        "longMonth": "December",
+        "shortMonth": "Dec",
+        "day": 25,
+        "hoursNMinutes": "4:47",
+        "ampm": "PM"
+      },
+      "amount": 12,
+      "currency": "USD",
+      "type": "Personal transfer",
+      "transferFromUserId": 1,
+      "currTransferFromUser": "test",
+      "transferToUserId": 2,
+      "currTransferToUser": "dimadima",
+      "img": "../../../favicon.ico",
+      "id": 1
+    },
+    {
+      "account": "1",
+      "transferedTo": "1234**4321",
+      "date": {
+        "year": 2022,
+        "longMonth": "December",
+        "shortMonth": "Dec",
+        "day": 25,
+        "hoursNMinutes": "4:47",
+        "ampm": "PM"
+      },
+      "amount": 504,
+      "currency": "USD",
+      "type": "Personal transfer",
+      "transferFromUserId": 11,
+      "currTransferFromUser": "test",
+      "transferToUserId": 2,
+      "currTransferToUser": "vashli",
+      "img": "../../../favicon.ico",
+      "id": 1
+    },
+    {
+      "account": "GE33TB3333333333333333",
+      "transferedTo": "DS12DS1234567891234567",
+      "date": {
+        "year": 2021,
+        "longMonth": "December",
+        "shortMonth": "Dec",
+        "day": 26,
+        "hoursNMinutes": "4:31",
+        "ampm": "AM"
+      },
+      "amount": "11",
+      "currency": "USD",
+      "type": "Personal transfer",
+      "transferFromUserId": 14,
+      "currTransferFromUser": "main user",
+      "transferToUserId": "11",
+      "currTransferToUser": "David Khvedelidze",
+      "img": "../../../favicon.ico",
+      "id": 2
+    },
+    {
+      "account": "GE33TB3333333333333333",
+      "transferedTo": "DS12DS1234567891234567",
+      "date": {
+        "year": 2021,
+        "longMonth": "December",
+        "shortMonth": "Dec",
+        "day": 26,
+        "hoursNMinutes": "4:32",
+        "ampm": "AM"
+      },
+      "amount": "11",
+      "currency": "USD",
+      "type": "Personal transfer",
+      "transferFromUserId": 14,
+      "currTransferFromUser": "main user",
+      "transferToUserId": "11",
+      "currTransferToUser": "David Khvedelidze",
+      "img": "../../../favicon.ico",
+      "id": 3
+    }
+  ],
+  "cardTypes": [
+    {
+      "id": 1,
+      "value": 88215,
+      "type": "debitCard"
+    },
+    {
+      "id": 2,
+      "value": 57568,
+      "type": "creditCard"
+    },
+    {
+      "id": 3,
+      "value": 23002,
+      "type": "cash"
+    },
+    {
+      "id": 4,
+      "value": 88.215,
+      "type": "debitCard"
+    }
+  ],
+  "userNotifications": [
+    {
+      "name": "VOLasdasdKI",
+      "age": 199423493,
+      "salary": 101231234234232300000,
+      "id": 4
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 5
+    },
+    {
+      "userId": "11",
+      "title": "deposit deleted",
+      "value": "deposit has been successfully deleted from your account and cannot be restored",
+      "link": "accounts",
+      "id": 6
+    },
+    {
+      "userId": "11",
+      "title": "deposit deleted",
+      "value": "deposit has been successfully deleted from your account and cannot be restored",
+      "link": "accounts",
+      "id": 7
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 8
+    },
+    {
+      "userId": "11",
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 9
+    },
+    {
+      "userId": "11",
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 10
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 11
+    },
+    {
+      "userId": "11",
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 12
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 13
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 14
+    },
+    {
+      "userId": "11",
+      "title": "card deleted",
+      "value": "card has been deleted from your account and it cannot be restored",
+      "link": "accounts",
+      "id": 15
+    },
+    {
+      "userId": "11",
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 16
+    },
+    {
+      "userId": "14",
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 17
+    }
+  ],
+  "moneytransfer": [
+    {
+      "id": "1",
+      "name": "Vodafone account top up",
+      "dataAndTime": "4 Aug 1:00 PM",
+      "icon": "assets/images/logo1.png"
+    },
+    {
+      "id": "2",
+      "name": "Money transfer to John Doe",
+      "dataAndTime": "1 Jul 3:34 PM",
+      "icon": "assets/images/logo2.png"
+    },
+    {
+      "id": "3",
+      "name": "ATM Cash withdrawal",
+      "dataAndTime": "24 Aug 4:23 AM",
+      "icon": "assets/images/logo3.png"
+    },
+    {
+      "id": "4",
+      "name": "Purchase on Amazon.com",
+      "dataAndTime": "2 Jan 2:22 PM",
+      "icon": "assets/images/logo4.png"
+    },
+    {
+      "id": "5",
+      "name": "Income payment",
+      "dataAndTime": "13 May 6:31 AM",
+      "icon": "assets/images/logo5.png"
+    },
+    {
+      "id": "6",
+      "name": "Monthly home rent ",
+      "dataAndTime": "3 Sep 1:13 PM",
+      "icon": "assets/images/logo6.png"
+    },
+    {
+      "id": "7",
+      "name": "Purchase at Ebay.com",
+      "dataAndTime": "25 Dec 11:59 PM",
+      "icon": "assets/images/logo7.png"
+    },
+    {
+      "id": "8",
+      "name": "IOfinance UI kit purchase",
+      "dataAndTime": "17 Jun 4:20 PM",
+      "icon": "assets/images/logo8.png"
+    }
+  ],
+  "spending": [
+    {
+      "type": "debitCard",
+      "userId": "12",
+      "value": 344533
+    },
+    {
+      "type": "creditCard",
+      "userId": "12",
+      "value": 584834
+    },
+    {
+      "type": "cash",
+      "userId": "12",
+      "value": 849392
+    }
+  ],
+  "expenseCategories": [
+    {
+      "type": "grocery",
+      "value": 23,
+      "userId": "12"
+    },
+    {
+      "type": "Health and weliness",
+      "value": 34,
+      "userId": "12"
+    },
+    {
+      "type": "home rent",
+      "value": 12,
+      "userId": "12"
+    },
+    {
+      "type": "transportation",
+      "value": 36,
+      "userId": "12"
+    }
+  ]
+}

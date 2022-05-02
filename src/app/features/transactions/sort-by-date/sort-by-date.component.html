@@ -1,0 +1,14 @@
+<div class="dummy-date">
+  <div class="label">
+    <i class="far fa-calendar-alt"></i>
+    <span>DATE:</span>
+  </div>
+  <div class="date-dropdown">
+    <app-dropdown
+      [list]="dateList"
+      (selectedItem)="sortByDate($event)"
+      [invisibleBorder]="true"
+    ></app-dropdown>
+  <div>
+  </div>
+</div>

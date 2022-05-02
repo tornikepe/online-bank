@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="image">
+    <img src="../../../../assets/images/undraw_analysis_4jis.png" alt="empty" />
+  </div>
+  <div class="content-info">
+    <p class="p-secondary">
+      You don’t hve any active transactions. Create new payment to see your
+      account details
+    </p>
+  </div>
+  <div class="buttons" (click)="onRouteToPayments()">
+    <a (click)="onChangePage()">
+      <app-button [isDisable]="false" [text]="'MAKE PAYMENT'" [btnClass]="'primary'"></app-button>
+    </a>
+  </div>
+</div>

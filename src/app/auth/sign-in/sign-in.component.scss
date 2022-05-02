@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import '../../../assets/color-palette.scss';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    /* Firefox */
+}
+
+#Register-main {
+    overflow: hidden;
+    #image-left {
+        transform: translate(50%, 0);
+        img {
+            height: 100vh;
+            object-fit: scale-down;
+        }
+    }
+    .formGroup {
+        position: absolute;
+        transform: translate(217px, 60px);
+        width: 370px;
+        top: -1px;
+        left: 0;
+        .header-text {
+            font-family: "Roboto", sans-serif;
+            color: $primary;
+            font-size: 18px;
+            line-height: 24px;
+            span {
+                line-height: 27px;
+                font-size: 20px;
+                color: $primary;
+            }
+        }
+        .name_of_action {
+            margin-top: 44px;
+            .signin-header {
+                font-size: 30px;
+                line-height: 37px;
+                word-spacing: 1px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+            }
+            .signin-text {
+                font-size: 14px;
+                line-height: 21px;
+                word-spacing: 0;
+                font-family: "Roboto", sans-serif;
+                font-weight: 300;
+                margin-top: 11px;
+            }
+        }
+        .user-input-check-1 {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-input-check-2 {
+            margin-top: 9px;
+            display: flex;
+            flex-direction: column;
+        }
+        .remember-section {
+            margin-top: 11px;
+            padding-top: 12px;
+            #checkbox {
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                vertical-align: top;
+                margin-right: 10px;
+            }
+            label {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-weight: 300;
+                color: $secondary-dark;
+            }
+            .recovery-password {
+                margin-left: 115px;
+                text-decoration: none;
+                color: $primary-dark;
+            }
+        }
+        .button {
+            margin-top: 27px;
+        }
+        .last-part {
+            margin-top: 50px;
+            .signup-text {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-weight: 300;
+                color: $secondary-light;
+            }
+            .signup {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                text-decoration: none;
+                color: $primary-dark;
+            }
+        }
+    }
+}
+
+@media only screen and(max-width: 1180px) {
+    #Register-main {
+        .formGroup {
+            transform: translate(117px, 60px);
+        }
+    }
+}
+
+@media only screen and(max-width: 980px) {
+    #Register-main {
+        .formGroup {
+            transform: translate(10px, 60px);
+        }
+    }
+}

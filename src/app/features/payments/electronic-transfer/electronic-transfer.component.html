@@ -1,0 +1,131 @@
+<div class="instant-container">
+  <div class="instant-header heading-3">Online Payments</div>
+  <form [formGroup]="eTransferForm" (ngSubmit)="onSubmit()">
+    <div class="account">
+      <label>Select Account</label>
+      <div class="card-details">
+        <app-dropdown
+          (selectedItem)="getCurrentCard($event)"
+          [listWithIcons]="cardList"
+        >
+        </app-dropdown>
+      </div>
+    </div>
+    <div class="payment-system">
+      <label>Select Payment System</label>
+      <div class="payment-system-dropdown">
+        <app-dropdown
+          [listWithIcons]="[
+            { iconClass: 'fab fa-cc-paypal', value: 'Paypal' },
+            { iconClass: 'fas fa-money-check', value: 'Skrill' },
+            { iconClass: 'fas fa-money-check', value: 'Payoneer' }
+          ]"
+        >
+        </app-dropdown>
+      </div>
+    </div>
+
+    <div class="transfer-input">
+      <app-input-field [label]="'Transfer To'">
+        <input
+          placeholder="Enter account number"
+          type="text"
+          formControlName="paypal"
+          name="account"
+          maxlength="22"
+        />
+      </app-input-field>
+
+      <ng-container *ngIf="account['paypal'].touched">
+        <span
+          class="help-block err-msg"
+          *ngIf="account['paypal'].errors?.['required']"
+        >
+          <em>*Field is required</em>
+        </span>
+
+        <span
+          class="help-block err-msg"
+          *ngIf="account['paypal'].errors?.['pattern']"
+        >
+          <em>*Length should be 16</em>
+        </span>
+      </ng-container>
+
+      <span
+        class="help-block"
+        *ngIf="account['paypal'].errors?.['invalidAccount']"
+      >
+        <em>*Please enter a valid account!</em>
+      </span>
+    </div>
+
+    <div class="transfer-detail">
+      <div class="amount">
+        <app-input-field [label]="'Amount'">
+          <input
+            [placeholder]="'Enter amount'"
+            formControlName="amount"
+            (change)="displayAmount()"
+          />
+        </app-input-field>
+
+        <ng-container *ngIf="account['amount'].touched">
+          <span
+            class="help-block err-msg"
+            *ngIf="account['amount'].errors?.['required']"
+          >
+            <em>*Field is required</em>
+          </span>
+        </ng-container>
+
+        <span
+          class="help-block"
+          *ngIf="account['amount'].errors?.['invalidAmount']"
+        >
+          <em>*Invalid Amount!</em>
+        </span>
+      </div>
+      <div class="currency">
+        <div class="currency-label">Currency</div>
+        <div class="currency-dropdown">
+          <app-dropdown [list]="['USD']"></app-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="payment-info">
+      <div class="label">
+        <span>Amount</span>
+        <span>Fee</span>
+        <span>Proccesing</span>
+      </div>
+      <div class="information">
+        <span>{{ amountValue }} USD </span>
+        <span>{{ fee }} USD</span>
+        <span>5-7 Day</span>
+      </div>
+    </div>
+
+    <div class="pay">
+      <div class="button-pay">
+        <button class="btn-container" type="submit" (click)="onSubmit()">
+          <app-button
+            [btnWidth]="'126px'"
+            [btnHeight]="'46px'"
+            [text]="'PAY NOW'"
+            [btnClass]="'primary'"
+          ></app-button>
+        </button>
+      </div>
+      <div class="button-cancel">
+        <app-button
+          (click)="closeTransfer($event)"
+          [btnWidth]="'126px'"
+          [btnHeight]="'46px'"
+          [text]="'CANCEL'"
+          [btnClass]="'secondary'"
+        ></app-button>
+      </div>
+    </div>
+  </form>
+</div>

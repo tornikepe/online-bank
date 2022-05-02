@@ -1,0 +1,6 @@
+<div class="radioButtonComponent">
+    <div [ngClass]="{defaultcheckedradio:!notdefaulte && checked, defaultuncheckedradio:!notdefaulte && !checked, uncheckederror:notdefaulte && !checked, checkedsuccess:notdefaulte && checked, disabled:disabled}" class="radio-button" (click)="radiobutton()">
+        <div></div>
+    </div>
+    <p [ngClass]="{defaultcheckedradio:!notdefaulte && checked, defaultuncheckedradio:!notdefaulte && !checked, uncheckederror:notdefaulte && !checked, checkedsuccess:notdefaulte && checked, disabled:disabled}" >{{text}}</p>
+</div>

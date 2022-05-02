@@ -1,0 +1,18 @@
+
+
+<div style="display: flex;">
+
+    <div class="news-box">
+        <ul class="tabs">
+
+            <li [class.active_li] = "tab.isActiveTab" *ngFor="let tab of alltabs" (click)="showactive(tab)">
+                <a [ngStyle]="{'color' : tab.isActiveTab? '#252631' : '#778CA2'}">{{tab.TitleText}}</a>
+            </li>
+
+        </ul>
+
+        <div class="content">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

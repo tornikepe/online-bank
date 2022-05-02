@@ -1,0 +1,21 @@
+@import "../../../../assets/color-palette.scss";
+@import "../../../../assets/typography.scss";
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-around;
+
+  .content-info {
+    width: 30%;
+    // height: 30%;
+    text-align: center;
+    p {
+      color: #778ca2;
+    }
+  }
+}

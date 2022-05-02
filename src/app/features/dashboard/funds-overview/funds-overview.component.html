@@ -1,0 +1,69 @@
+<div class="d-flex headers justify-content-between" [ngClass]="{collapsedHeaders: !isSidebarCollapsed}">
+    <p>Funds overview</p>
+    <a routerLink="/reports">All reports</a>
+</div>
+<div *ngIf="noData" class="no-data">
+    <img src="../../../../assets/img/empty-chart.svg" alt="No Data">
+    <p>Your statistics will appear here</p>
+</div>
+<div *ngIf="!noData" class="charts" [ngClass]="{uncollapsedSidebar: !isSidebarCollapsed}">
+    <div class="left">
+        <div class="options d-flex justify-content-between">
+            <ul class="list">
+                <li [ngClass]="{active: interval === 'monthly'}" (click)="onIntervalChange('monthly')">Monthly</li>
+                <li [ngClass]="{active: interval === 'weekly'}" (click)="onIntervalChange('weekly')">Weekly</li>
+                <li [ngClass]="{active: interval === 'daily'}" (click)="onIntervalChange('daily')">Daily</li>
+            </ul>
+            <fa-icon class="icon" [icon]="['fas','ellipsis-h']"></fa-icon>
+        </div>
+        <div *ngIf="canRenderLeftChart" class="chart-container">
+            <div class="d-flex info justify-content-between">
+                <div class="total">
+                    <p>{{ total[shownTotal] | currency}}</p>
+                    <p>Total {{ shownTotal }}</p>
+                </div>
+                <div class="legend">
+                    <p class="{{ shownTotal }}" (click)="onTotalChange()">{{ shownTotal }}</p>
+                </div>
+            </div>
+            <apx-chart #leftChart [series]="leftChartOptions.series"
+                [chart]="leftChartOptions.chart" [xaxis]="leftChartOptions.xaxis" [yaxis]="leftChartOptions.yaxis"
+                [dataLabels]="leftChartOptions.dataLabels" [tooltip]="leftChartOptions.tooltip"
+                [legend]="leftChartOptions.legend" [colors]="leftChartOptions.colors"
+                [markers]="leftChartOptions.markers" [grid]="leftChartOptions.grid"></apx-chart>
+        </div>
+    </div>
+    <div class="right">
+        <div class="options d-flex justify-content-between">
+            <ul class="list">
+                <li [ngClass]="{active: avgIncomeVersion === 'cards'}" (click)="onAvgIncomeVersionChange('cards')">Cards</li>
+                <li [ngClass]="{active: avgIncomeVersion === 'accounts'}" (click)="onAvgIncomeVersionChange('accounts')">Accounts</li>
+            </ul>
+            <fa-icon class="icon" [icon]="['fas','ellipsis-h']"></fa-icon>
+        </div>
+        <div *ngIf="canRenderRightChart" class="chart-container">
+            <div class="d-flex info justify-content-between">
+                <div class="avg">
+                    <p>{{ avgIncome | currency}}
+                        <span>
+                            <fa-icon *ngIf="didAvgIncrease" class="arrow-up" [icon]="['fas','long-arrow-alt-up']">
+                            </fa-icon>
+                            <fa-icon *ngIf="!didAvgIncrease" class="arrow-down" [icon]="['fas','long-arrow-alt-down']">
+                            </fa-icon>
+                        </span>
+                    </p>
+                    <p>Avg. income</p>
+                </div>
+                <div class="change">
+                    <p [ngClass]="{increase: didAvgIncrease, decrease: !didAvgIncrease}">{{ didAvgIncrease ? '+' : ''}}{{avgIncomePercentage.toFixed(2)}}%</p>
+                </div>
+            </div>
+            <apx-chart #rightChart [series]="rightChartOptions.series"
+                [chart]="rightChartOptions.chart" [dataLabels]="rightChartOptions.dataLabels"
+                [plotOptions]="rightChartOptions.plotOptions" [yaxis]="rightChartOptions.yaxis"
+                [fill]="rightChartOptions.fill" [stroke]="rightChartOptions.stroke"
+                [tooltip]="rightChartOptions.tooltip" [xaxis]="rightChartOptions.xaxis" [grid]="rightChartOptions.grid">
+            </apx-chart>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@import '../info-page.component';
+
+.card  {
+  box-shadow: 0 32px 60px rgba(77, 124, 254, 0.16);
+  transition: all 150ms cubic-bezier(.77,.17,.72,.38);
+  background: $primary;
+  filter: drop-shadow(0 0 0.25rem $primary);
+
+  &:hover {
+    filter: drop-shadow(0 0 0.75rem $primary);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,138 @@
+<div class="bank-container">
+  <form [formGroup]="bankTransferForm" (ngSubmit)="onSubmitBankTransForm()">
+    <div class="bank-header heading-3">Bank transfer</div>
+    <div class="account">
+      <label>Select Account</label>
+      <div class="card-details">
+        <app-dropdown
+          (selectedItem)="getCurrentCard($event)"
+          [listWithIcons]="cardList"
+        >
+        </app-dropdown>
+      </div>
+    </div>
+    <div class="transfer-input">
+      <app-input-field [label]="'Transfer To'">
+        <input
+          type="text"
+          name="account"
+          placeholder="Enter account number"
+          maxlength="16"
+          formControlName="account"
+        />
+
+        <ng-container *ngIf="formControl['account'].touched">
+          <span
+            class="help-block err-msg"
+            *ngIf="formControl['account'].errors?.['required']"
+          >
+            <em>*Field is required</em>
+          </span>
+        </ng-container>
+
+        <span
+          class="help-block"
+          *ngIf="formControl['account'].errors?.['invalidAccount']"
+        >
+          <em>*Please enter a valid account!</em>
+        </span>
+
+        <span
+          class="help-block err-msg"
+          *ngIf="formControl['account'].errors?.['pattern']"
+        >
+          <em>*The length must be 16</em>
+        </span>
+      </app-input-field>
+    </div>
+    <div class="beneficiary">
+      <app-input-field [label]="'Beneficiary'">
+        <input
+          type="text"
+          name="benName"
+          placeholder="Enter beneficiary name"
+          formControlName="benName"
+        />
+
+        <ng-container *ngIf="formControl['benName'].touched">
+          <span
+            class="help-block err-msg"
+            *ngIf="formControl['benName'].errors?.['required']"
+          >
+            <em>*Field is required</em>
+          </span>
+        </ng-container>
+
+        <span
+          class="help-block err-msg"
+          *ngIf="formControl['benName'].errors?.['sameUser']"
+        >
+          <em>{{ errorMessage }}</em>
+        </span>
+      </app-input-field>
+    </div>
+    <div class="transfer-detail">
+      <div class="amount">
+        <app-input-field [label]="'Amount'">
+          <input
+            type="number"
+            name="amount"
+            placeholder="Enter amount"
+            formControlName="amount"
+          />
+
+          <ng-container *ngIf="formControl['amount'].touched">
+            <span
+              class="help-block err-msg"
+              *ngIf="formControl['amount'].errors?.['required']"
+            >
+              <em>*Field is required</em>
+            </span>
+          </ng-container>
+
+          <span
+            class="help-block"
+            *ngIf="formControl['amount'].errors?.['invalidAmount']"
+          >
+            <em>*Invalid Amount!</em>
+          </span>
+        </app-input-field>
+      </div>
+      <div class="dropdown-currency">
+        <div class="dropdown-label">Currency</div>
+        <app-dropdown
+          (selectedItem)="getCurrencyType($event)"
+          [list]="['USD', 'EUR', 'GEL']"
+        ></app-dropdown>
+      </div>
+    </div>
+    <div class="dropdown-type">
+      <div class="dropdown-label">Transfer Type</div>
+      <app-dropdown
+        (selectedItem)="getTransferType($event)"
+        [list]="['Phone payment', 'Bank transfer', 'Online payment']"
+      ></app-dropdown>
+    </div>
+
+    <div class="pay">
+      <div class="button-pay">
+        <button
+          class="btn-container"
+          type="submit"
+          (click)="onSubmitBankTransForm()"
+        >
+          <app-button
+            [btnWidth]="'100%'"
+            [btnHeight]="'46px'"
+            [text]="'PAY NOW'"
+            [btnClass]="'primary'"
+          >
+          </app-button>
+        </button>
+      </div>
+      <div class="fee">
+        <p class="p-secondary">2% Bank fee applied</p>
+      </div>
+    </div>
+  </form>
+</div>

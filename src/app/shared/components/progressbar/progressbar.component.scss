@@ -1,0 +1,13 @@
+@import "../../../../assets/color-palette";
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: $background-dark;
+  border-radius: 5px;
+  .animation{
+    width: 100%;
+    animation-duration: 1s;
+    animation-name: identifier;
+  }
+}

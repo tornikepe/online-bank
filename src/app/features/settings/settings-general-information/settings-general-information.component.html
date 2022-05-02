@@ -1,0 +1,115 @@
+<div class="containerC">
+  	<div class="titleC heading-5">General information</div>
+	<div class="user-pic-container">
+		<div class="user-pic-circle"> </div>
+		<div class="userName">
+			<h4 class="heading-4">{{ nameDisplay | lowercase }}</h4>
+		</div>
+	</div>
+	<div class="main-container">
+		<div class="column-1">
+			<div class="input-div">
+				<app-input-field
+					[inputClass]="validStyle1"
+					[label]="'First name'"
+					(keyup)="onInputValue1($event)">
+					<input type="text" [(ngModel)]="user_username" />
+				</app-input-field>
+				<small *ngIf="valid1" class="text-danger noMargin">Use Letters Only</small>
+			</div>
+			<br/>
+			<div class="input-div">
+				<app-input-field [inputClass]="validStyle2" [label]="'Email'">
+					<input
+						type="email"
+						placeholder="Enter your email"
+						class="input-2"
+						[(ngModel)]="user_email"
+						(keyup)="onInputValue2($event)"/>
+				</app-input-field> 
+				<small *ngIf="valid2" class="text-danger noMargin"> Invalid Email Format </small> 
+			</div> 
+			<br/> 
+			<div class="dropdown-container"> 
+				<label class="label-text caption">Language</label> 
+				<app-dropdown 
+					class="dropDownC"
+					[list]="['English', 'Georgian']"
+					[selected]="user_language"
+					(selectedItem)="selectLanguage($event)">
+				</app-dropdown> 
+			</div>
+		</div>
+		<div class="column-2">
+			<div class="input-div"> 
+				<app-input-field [inputClass]="validStyle3" [label]="'Last name'">
+					<input 
+						type="text"
+						class="input-1" 
+						[(ngModel)]="user_lastname" 
+						(keyup)="onInputValue3($event)" />
+				</app-input-field> 
+				<small *ngIf="valid3" class="text-danger noMargin"> Use Letters Only </small> 
+			</div> 
+			<br/>
+			<div class="input-div">
+				<app-input-field [inputClass]="validStyle4" [label]="'Phone'">
+					<input
+						type="tel"
+						placeholder="Enter phone number"  
+						class="input-2" 
+						[(ngModel)]="user_phone" 
+						(keyup)="onInputValue4($event)" />
+				</app-input-field> 
+				<small *ngIf="valid4" class="text-danger noMargin"> 
+					Phone Number must contain 9 digits 
+				</small> 
+			</div> 
+			<br/>
+			<div class="dropdown-container"> 
+				<label class="label-text caption">Sex</label> 
+				<app-dropdown 
+					class="dropdownC" 
+					[list]="['Male', 'Female']" 
+					[selected]="user_sex" 
+					(selectedItem)="selectSex($event)">
+					[(ngModel)]="user_sex" 
+				</app-dropdown> 
+			</div> 
+		</div> 
+	</div> 
+</div> 
+<!-- Modal --> 
+<div class="css-selector-modal" id="modal" *ngIf="modalTriger"> 
+	<div class="modal-header"> 
+		<button (click)="close()" type="button" class="btn-close" aria-label="Close"> 
+			<i class="fas fa-times"></i> 
+		</button> 
+	</div> 
+	<div class="modal-body"> 
+		<div *ngIf="triger1" class="modal-body-correct-email"> 
+			<form class="modal-password" [formGroup]="form_2"> 
+				<label for="password">Enter the Password</label> 
+				<input 
+					formControlName="password" 
+					type="password" 
+					id="password" 
+					name="password" 
+					placeholder="password" />
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button id="dismiss" type="button" class="btn btn-secondary" (click)="reset()">
+			Close
+		</button>
+		<button
+			*ngIf="triger1"
+			(click)="Update()"
+			id="agree"
+			type="button"
+			class="btn btn-primary">
+			Update
+		</button>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<div class="close-modal modal-container" (click)="closeModal($event.target)">
+  <div class="modal">
+    <div class="modal-start">
+      <i (click)="closeModal($event.target)" class="close-modal far fa-circle modal-cancel"></i>
+      <span (click)="closeModal($event.target)" class="close-modal">x</span>
+    </div>
+    <div class="modal-image-container">
+      <img class="modal-image" [src]="currentElement.img" />
+    </div>
+    <div class="modal-appointment">
+      <h3 class="heading-5--center">{{ currentElement.description }}</h3>
+    </div>
+    <div class="modal-button">Paid</div>
+
+    <div class="modal-detail">
+      <div class="modal-detail-row1">
+        <div class="card-numbers">{{ currentElement.account.slice(8) }}</div>
+        <div class="payment-account">{{ currentElement.type }}</div>
+      </div>
+      <div class="modal-detail-row2">
+        <div class="amount">{{ currentElement.amount }}</div>
+        <div class="date">
+          <span>{{ currentElement.date.day }} {{ currentElement.date.shortMonth }}
+            {{currentElement.date.hoursNMinutes}}
+            {{ currentElement.date.ampm }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-end">
+      <i class="far fa-envelope"></i>
+      <div>SEND RECEIP</div>
+    </div>
+  </div>
+</div>

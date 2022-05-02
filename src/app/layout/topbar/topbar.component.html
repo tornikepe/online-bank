@@ -1,0 +1,10 @@
+<div class="topbar justify-content-between">
+  <div class="nav-container">
+    <fa-icon [icon]="['fas', 'bars']" (click)="onClick()"></fa-icon>
+    <p class="d-inline">{{ title }}</p>
+  </div>
+  <div class="right-side">
+    <app-notifications-topbar></app-notifications-topbar>
+    <app-profile class="profile"></app-profile>
+  </div>
+</div>
