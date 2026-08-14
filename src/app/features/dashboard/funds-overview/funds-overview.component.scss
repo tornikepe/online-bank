@@ -1,4 +1,4 @@
-@import "../../../../assets/color-palette";
+@use "../../../../assets/color-palette";
 
 ::-webkit-scrollbar {
   height: 0;
@@ -7,14 +7,14 @@
 p {
   margin: 0;
   padding: 0;
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
 }
 
 .headers {
   a {
     margin-top: 4px;
     margin-right: 5px;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 12px;
@@ -63,30 +63,30 @@ p {
     .options {
       padding: 0 21px;
       overflow-x: scroll;
-      border-bottom: 1px solid $outline;
+      border-bottom: 1px solid color-palette.$outline;
       .list {
         display: flex;
         margin: 0;
         padding: 0;
         list-style: none;
         font-size: 14px;
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
         li {
           margin-right: 32px;
           padding: 19px 0 13px 0;
           cursor: pointer;
           &:hover {
-            color: $primary-dark;
+            color: color-palette.$primary-dark;
           }
           &.active {
-            color: $primary-dark;
-            border-bottom: 2px solid $primary-dark;
+            color: color-palette.$primary-dark;
+            border-bottom: 2px solid color-palette.$primary-dark;
           }
         }
       }
       .icon {
         padding: 12px 0;
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
         font-size: 20px;
       }
     }
@@ -105,7 +105,7 @@ p {
             margin-top: 16px;
             &:first-child {
               font-size: 26px;
-              color: $primary-dark;
+              color: color-palette.$primary-dark;
             }
             &:last-child {
               margin-top: -2px;
@@ -119,8 +119,8 @@ p {
           .income,
           .expenses {
             padding: 5px 15px;
-            background-color: $background-light;
-            color: $primary-dark;
+            background-color: color-palette.$background-light;
+            color: color-palette.$primary-dark;
             border-radius: 18px;
             cursor: pointer;
           }
@@ -134,10 +134,10 @@ p {
             border-radius: 50%;
           }
           .income::before {
-            background-color: $income;
+            background-color: color-palette.$income;
           }
           .expenses::before {
-            background-color: $expenses;
+            background-color: color-palette.$expenses;
           }
         }
         @media screen and (max-width: 419px) {
@@ -160,22 +160,22 @@ p {
         padding-left: 7px;
         .arrow-up {
           font-size: 14px;
-          color: $secondary-green;
+          color: color-palette.$secondary-green;
           vertical-align: text-top;
         }
         .arrow-down {
           font-size: 14px;
-          color: $secondary-pink;
+          color: color-palette.$secondary-pink;
           vertical-align: text-bottom;
         }
       }
       .change {
         margin-top: 27px;
         .increase {
-          color: $secondary-green;
+          color: color-palette.$secondary-green;
         }
         .decrease {
-          color: $secondary-pink;
+          color: color-palette.$secondary-pink;
         }
         @media screen and (max-width: 419px) {
           margin-top: 5px;

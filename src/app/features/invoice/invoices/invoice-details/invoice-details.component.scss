@@ -1,5 +1,5 @@
-@import '../../../../../assets/color-palette.scss'; 
-@import '../../../../../assets/typography.scss'; 
+@use '../../../../../assets/color-palette.scss'; 
+@use '../../../../../assets/typography.scss'; 
  
 #backdrop { 
 	opacity: 0.5; 
@@ -134,7 +134,7 @@
 					// position: relative; 
 					height: 32px; 
 					tr { 
-						border-bottom: 1px solid $secondary-dark; 
+						border-bottom: 1px solid color-palette.$secondary-dark; 
 						th { 
 							&:not(:first-child) { 
 								position: relative; 
@@ -160,7 +160,7 @@
 					position: relative; 
 					tr { 
 						height: 53px; 
-						border-bottom: 1px dashed $secondary-dark; 
+						border-bottom: 1px dashed color-palette.$secondary-dark; 
 						td { 
 							&:not(:first-child) { 
 								position: relative; 

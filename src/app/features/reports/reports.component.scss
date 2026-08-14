@@ -1,4 +1,4 @@
-@import "../../../assets/color-palette.scss";
+@use "../../../assets/color-palette.scss";
 
 .reports-empty{
     width: 100%;
@@ -12,7 +12,7 @@
     }
     p{
         font-size: 16px;
-        color:$secondary-dark;
+        color:color-palette.$secondary-dark;
         margin-top: 15px;
         width: 400px;
         text-align: center;
@@ -29,14 +29,14 @@
     // border:1px solid $outline;
     .chart1{
         width: 100%;
-        border:1px solid $outline;
+        border:1px solid color-palette.$outline;
         // height: 368px;
         background-color: white;
         // overflow-x: scroll;
         padding-right: 20px;
         .chart1-header{
             height: 56.25px;
-            border-bottom: 1px solid $outline;
+            border-bottom: 1px solid color-palette.$outline;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,7 +44,7 @@
             overflow: auto;
             p{
                 font-size: 16px;
-                color:$secondary-dark;
+                color:color-palette.$secondary-dark;
                 margin: 0;
                 cursor: pointer;
             }
@@ -55,9 +55,9 @@
                 p{
                     font-size: 14px;
                     margin-left: 33px;
-                    color:$secondary-dark;
+                    color:color-palette.$secondary-dark;
                     &:hover{
-                        color: $primary-dark;
+                        color: color-palette.$primary-dark;
                         cursor: pointer;
                     }
                 }
@@ -74,21 +74,21 @@
             flex-wrap: wrap;
         }
         .chart2{
-            border:1px solid $outline;
+            border:1px solid color-palette.$outline;
             height: 324px;
             width: 50%;
             background-color: white;
             .chart2-header{
                 height: 56.25px;
-                border-bottom: 1px solid $outline;
+                border-bottom: 1px solid color-palette.$outline;
                 padding: 17px 26px;
                 p{
                     font-size: 16px;
-                    color:$secondary-dark;
+                    color:color-palette.$secondary-dark;
                     cursor: pointer;
                 }
                 fa-icon{
-                    color: $secondary-dark;
+                    color: color-palette.$secondary-dark;
                     font-size: 22px;
                 }
             }
@@ -99,7 +99,7 @@
                     margin-bottom: 10px;
                     p{
                         margin:0;
-                        color: $secondary-dark;
+                        color: color-palette.$secondary-dark;
                         font-size: 14px;
                         cursor: pointer;
                     }
@@ -109,14 +109,14 @@
                 }
                 hr{
                     margin: 20px 0;
-                    color:$secondary-dark;
+                    color:color-palette.$secondary-dark;
                 }
                 .chart2-list{
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     p{
-                        color: $secondary-dark;
+                        color: color-palette.$secondary-dark;
                     }
                 }
             }
@@ -125,7 +125,7 @@
             }
         }
         .chart3{
-            border:1px solid $outline;
+            border:1px solid color-palette.$outline;
             width: 50%;
             height: 324px;
             margin-left:25px;
@@ -133,14 +133,14 @@
             .chart3-header{
                 padding: 17px 26px;
                 height: 56.25px;
-                border-bottom: 1px solid $outline;
+                border-bottom: 1px solid color-palette.$outline;
                 p{
                     font-size: 16px;
-                    color:$secondary-dark;
+                    color:color-palette.$secondary-dark;
                     cursor: pointer;
                 }
                 fa-icon{
-                    color: $secondary-dark;
+                    color: color-palette.$secondary-dark;
                     font-size: 22px;
                 }
             }
@@ -161,7 +161,7 @@
 ::ng-deep{
     .apexcharts-legend-series {
       padding: 7px 0;
-      background-color: $background-light;
+      background-color: color-palette.$background-light;
       border-radius: 18px;
       .apexcharts-legend-marker {
         margin-left: 15px;

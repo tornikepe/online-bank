@@ -1,19 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,300;0,400;1,200;1,300;1,400&family=Mulish:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,300;0,400;1,200;1,300;1,400&family=Mulish:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Roboto:wght@500&display=swap");
-@import "../../../../assets/color-palette.scss";
+@use "../../../../assets/color-palette.scss";
 
 ::-webkit-scrollbar{
     display: none;
 }
 p{
-    color:$secondary-dark;
+    color:color-palette.$secondary-dark;
 }
 .cardscontainer{
     width: 100%;
     overflow-x: scroll;
 }
 .firstDiv {
-  background-color: $white;
+  background-color: color-palette.$white;
   padding-top: 7px;
   padding-left: 18.2px;
   padding-right: 23px;
@@ -26,7 +24,7 @@ p{
   width: 100%;
   height: 16.2rem;
   margin-top: 1.0625rem;
-  background-color: $background-light;
+  background-color: color-palette.$background-light;
 }
 .ph6 {
   display: flex;
@@ -34,11 +32,11 @@ p{
   align-items: center;
 }
 .YC {
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-family: "Roboto", sans-serif;
 }
 .All {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-size: 0.75rem;
   font-family: "Roboto", sans-serif;
   text-decoration: none;
@@ -47,7 +45,7 @@ p{
 .card {
   border: none;
   border-radius: 0 !important;
-  border-bottom: 1px solid $outline;
+  border-bottom: 1px solid color-palette.$outline;
   &:last-child {
     border: none;
     .card-body{
@@ -98,7 +96,7 @@ h6 {
 .seven p,
 .eight p,
 .nine p {
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
   font-size: 0.875rem;
   font-family: "Roboto", sans-serif;
 }

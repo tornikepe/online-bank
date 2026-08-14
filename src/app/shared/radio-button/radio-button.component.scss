@@ -1,4 +1,4 @@
-@import '../../../assets/color-palette.scss';
+@use '../../../assets/color-palette.scss';
 
 
 .radioButtonComponent{
@@ -17,14 +17,14 @@
         }
     }
     .radio-button.defaultcheckedradio{
-        background-color: $secondary-light;
+        background-color: color-palette.$secondary-light;
         div{
             background-color: #FFFFFF;
         }
     }
     
     .radio-button.defaultuncheckedradio{
-        background-color: $outline;
+        background-color: color-palette.$outline;
     }
     
     .radio-button.diseibled{
@@ -35,11 +35,11 @@
     }
     
     .radio-button.uncheckederror{
-        background-color: $secondary-pink;
+        background-color: color-palette.$secondary-pink;
         opacity: 0.3;
     }
     .radio-button.checkedsuccess{
-        background-color: $secondary-green;
+        background-color: color-palette.$secondary-green;
         opacity: 0.3;
         div{
             background-color:green;
@@ -51,16 +51,16 @@
         margin-bottom:3px;
     }
     p.defaultcheckedradio{
-        color:$primary-dark
+        color:color-palette.$primary-dark
     }
     p.defaultuncheckedradio{
-        color:$secondary-dark
+        color:color-palette.$secondary-dark
     }
     p.uncheckederror{
-        color:$secondary-pink
+        color:color-palette.$secondary-pink
     }
     p.checkedsuccess{
-        color:$secondary-green
+        color:color-palette.$secondary-green
     }
 }
 

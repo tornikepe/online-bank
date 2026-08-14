@@ -1,4 +1,4 @@
-@import 'src/assets/color-palette';
+@use "../../../../assets/color-palette";
 
 .notf {
   cursor: pointer;
@@ -15,8 +15,8 @@
   overflow: scroll;
   background-color: white;
   border-radius: 4px;
-  filter: drop-shadow(0 0 0.75rem $outline);
-  border: 1px solid $outline;
+  filter: drop-shadow(0 0 0.75rem color-palette.$outline);
+  border: 1px solid color-palette.$outline;
   padding: 15px;
   display: flex;
   gap: .4rem;
@@ -51,6 +51,6 @@
   align-items: center;
 
   &:hover {
-    background-color: $outline;
+    background-color: color-palette.$outline;
   }
 }

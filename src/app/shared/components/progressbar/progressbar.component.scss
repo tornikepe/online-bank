@@ -1,9 +1,9 @@
-@import "../../../../assets/color-palette";
+@use "../../../../assets/color-palette";
 
 .progress-bar {
   width: 100%;
   height: 6px;
-  background-color: $background-dark;
+  background-color: color-palette.$background-dark;
   border-radius: 5px;
   .animation{
     width: 100%;

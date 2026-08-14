@@ -1,4 +1,4 @@
-@import '../../../../../assets/color-palette';
+@use '../../../../../assets/color-palette';
 
 .calendar-slider {
   width: 361.26px;
@@ -13,7 +13,7 @@
 
   p {
     margin-top: 16px;
-    color: $secondary-light;
+    color: color-palette.$secondary-light;
   }
 }
 
@@ -21,8 +21,8 @@
   width: 100%;
   height: 46px;
   border: 0;
-  color: $secondary-dark;
-  background-color: $background-light;
+  color: color-palette.$secondary-dark;
+  background-color: color-palette.$background-light;
 }
 
 .sliders {
@@ -36,7 +36,7 @@
   height: 52px;
   border-radius: 4px;
   background: #fff;
-  border: 1px solid $outline;
+  border: 1px solid color-palette.$outline;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,10 +49,10 @@
   }
 
   .left {
-    border-right: 1px solid $outline;
+    border-right: 1px solid color-palette.$outline;
   }
 
   .right {
-    border-left: 1px solid $outline;
+    border-left: 1px solid color-palette.$outline;
   }
 }

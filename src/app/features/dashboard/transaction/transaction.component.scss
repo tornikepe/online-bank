@@ -1,17 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
-@import "../../../../assets/color-palette.scss";
+@use "../../../../assets/color-palette.scss";
 div {
   display: block;
 }
 .container {
-  background-color: $background-light;
+  background-color: color-palette.$background-light;
   height: 745px;
   width: 100%;
 }
 #Transactions_n {
   bottom: 23px;
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   cursor: pointer;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -56,7 +54,7 @@ div {
   width: 76px;
 }
 #Lable {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-style: normal;
@@ -91,7 +89,7 @@ img {
   width: 19px;
 }
 #Transaction_description {
-  background-color: $white;
+  background-color: color-palette.$white;
   border-radius: 4px;
   bottom: 1px;
   height: 70px;
@@ -106,7 +104,7 @@ img {
   transition: 0.2s;
 }
 #Date_r {
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -122,7 +120,7 @@ img {
 }
 #Name {
   bottom: 10px;
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: Roboto;
   font-size: 16px;
   font-style: normal;

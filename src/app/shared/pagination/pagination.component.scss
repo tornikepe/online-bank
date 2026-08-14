@@ -1,4 +1,4 @@
-@import "../../../assets/color-palette";
+@use "../../../assets/color-palette";
 
 .pagination-container {
   margin: auto;
@@ -28,22 +28,22 @@
       }
       &:hover,
       &.active {
-        background-color: $primary;
+        background-color: color-palette.$primary;
         color: #fff !important;
       }
       &.left-arrow,
       &.right-arrow {
         padding: 8px 15px;
         width: max-content;
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
         &.filled {
           width: 40px;
           height: 40px;
-          background-color: $background-dark;
-          color: $secondary-dark;
+          background-color: color-palette.$background-dark;
+          color: color-palette.$secondary-dark;
           &:hover,
           &.active {
-            color: $primary !important;
+            color: color-palette.$primary !important;
           }
         }
       }
@@ -55,12 +55,12 @@
       }
       &.border {
         background: none;
-        color: $secondary-dark;
-        border-color: $outline !important;
+        color: color-palette.$secondary-dark;
+        border-color: color-palette.$outline !important;
         &:hover,
         &.active {
           background: none;
-          color: $primary !important;
+          color: color-palette.$primary !important;
         }
       }
     }

@@ -1,25 +1,23 @@
-@import '../../../assets/color-palette.scss';
-@import '../../../assets/typography.scss';
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css');
-
+@use '../../../assets/color-palette.scss';
+@use '../../../assets/typography.scss';
 :host ::ng-deep input {
 	height: 52px;
 	width: 100%;
-	border: 1px solid $outline;
+	border: 1px solid color-palette.$outline;
 	border-radius: 3px;
 	margin-top: 12px;
 	padding-left: 15px;
-	font-family: $font-primary;
+	font-family: typography.$font-primary;
 
 	&:disabled {
-		color: $secondary-light;
+		color: color-palette.$secondary-light;
 	}
 	&:focus {
-		outline-color: $secondary-light;
+		outline-color: color-palette.$secondary-light;
 	}
 	&::placeholder {
-		color: $secondary-light;
-		font-family: $font-primary;
+		color: color-palette.$secondary-light;
+		font-family: typography.$font-primary;
 	}
 }
 .input-div {
@@ -28,14 +26,14 @@
 
 	label {
 		display: block;
-		color: $primary-dark;
-		font-family: $font-primary;
+		color: color-palette.$primary-dark;
+		font-family: typography.$font-primary;
 	}
 }
 
 .input-warn {
 	::ng-deep input {
-		border: 1px solid $secondary-pink;
+		border: 1px solid color-palette.$secondary-pink;
 	}
 	i {
 		display: inline-block;
@@ -44,13 +42,13 @@
 		top: -38px;
 		left: 90%;
 		font-size: 16px;
-		color: $primary-dark;
+		color: color-palette.$primary-dark;
 	}
 }
 
 .input-success {
 	::ng-deep input {
-		border: 1px solid $secondary-green;
+		border: 1px solid color-palette.$secondary-green;
 	}
 	i {
 		display: inline-block;
@@ -59,7 +57,7 @@
 		top: -40px;
 		left: 90%;
 		font-size: 20px;
-		color: $primary-dark;
+		color: color-palette.$primary-dark;
 	}
 }
 

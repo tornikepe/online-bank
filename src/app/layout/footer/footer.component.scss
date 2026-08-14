@@ -1,4 +1,4 @@
-@import '../../../assets/color-palette.scss';
+@use '../../../assets/color-palette.scss';
 
 .footer{
     height: 64px;
@@ -7,6 +7,6 @@
     padding-left: 28px;
     p{
         font-size: 14px;
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
     }
 }

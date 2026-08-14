@@ -1,21 +1,21 @@
-@import "../../../../assets/typography.scss";
-@import "../../../../assets/color-palette.scss";
+@use "../../../../assets/typography.scss";
+@use "../../../../assets/color-palette.scss";
 
 .providers-container {
   width: 100%;
   min-height: 600px;
   height: 100%;
-  background-color: $white;
+  background-color: color-palette.$white;
   display: flex;
   flex-direction: column;
   .providers-container-header {
-    border-bottom: 1px solid $outline;
+    border-bottom: 1px solid color-palette.$outline;
     width: 100%;
     height: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     padding: 20px;
     margin-bottom: 15px;
   }
@@ -30,7 +30,7 @@
     .content-cards {
       // background-color: rgba($color: #ffab2b, $alpha: 0.1);
       background-color: white;
-      border-bottom: 1px solid $outline;
+      border-bottom: 1px solid color-palette.$outline;
       height: 75px;
       width: 100%;
       display: flex;
@@ -49,7 +49,7 @@
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          color: $primary;
+          color: color-palette.$primary;
           // opacity: 1;
         }
       }
