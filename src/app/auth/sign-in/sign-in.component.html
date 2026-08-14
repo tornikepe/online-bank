@@ -34,6 +34,8 @@
             <a routerLink="/recover-password" class="recovery-password p-link">Recover password</a>
         </div>
 
+        <p class="sign-in-error" role="alert" *ngIf="errorMessage">{{ errorMessage }}</p>
+
         <app-button [btnClass]="'primary'" class="button" [btnHeight]="'48px'" [btnWidth]="'360px'" type="submit"
             [isDisable]="valid_1 || valid_2" [text]="'SIGN IN'"></app-button>
 
