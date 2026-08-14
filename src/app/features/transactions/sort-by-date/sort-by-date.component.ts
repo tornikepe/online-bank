@@ -4,27 +4,31 @@ import {
   OnDestroy,
   OnInit,
   Output,
-} from "@angular/core";
+  ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 import { Subscription } from "rxjs";
 import { TransactionsService } from "../transactions.service";
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
+  standalone: false,
   selector: "app-sort-by-date",
   templateUrl: "./sort-by-date.component.html",
   styleUrls: ["./sort-by-date.component.scss"],
 })
 export class SortByDateComponent implements OnInit, OnDestroy {
+  private readonly destroyRef = inject(DestroyRef);
+
   @Output() dateSortResult = new EventEmitter();
   public dateList: any = ["All Time"];
 
   private subscribtion: Subscription;
 
-  constructor(private transactionService: TransactionsService) { }
+  constructor(private transactionService: TransactionsService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // this.transactionService.getData().subscribe((data: any) => {
 
-    this.subscribtion = this.transactionService.filteredTransactions$.subscribe(
+    this.subscribtion = this.transactionService.filteredTransactions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
       (res: any) => {
         let dates = res.map(
           (tr: any) => `${tr.date.longMonth} ${tr.date.year}`
@@ -33,6 +37,7 @@ export class SortByDateComponent implements OnInit, OnDestroy {
         let unique = [...new Set(dates)].reverse();
 
         this.dateList.push(...unique);
+              this.cdr.markForCheck();
       }
     );
 

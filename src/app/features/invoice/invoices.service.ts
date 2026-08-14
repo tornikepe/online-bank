@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Invoice } from './invoice.model';
 
+import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
 export class InvoicesService {
 	protected templateValue: string;
@@ -11,7 +12,7 @@ export class InvoicesService {
 
 	sendNewInvoice(invoice: Invoice) {
 		//send Http request to server
-		return this.http.post<any>(`http://localhost:3000/invoices`, { ...invoice });
+		return this.http.post<any>(`${environment.BaseUrl}invoices`, { ...invoice });
 	}
 
 	set setSelectedTemplate(value: string) {
@@ -23,7 +24,7 @@ export class InvoicesService {
 	}
 
 	public getAllInvoices() {
-		return this.http.get<Invoice[]>(`http://localhost:3000/invoices`).pipe(
+		return this.http.get<Invoice[]>(`${environment.BaseUrl}invoices`).pipe(
 			map(data => {
 				return data.sort((a: any, b: any) => {
 					var dateA = new Date(a.date).getTime();

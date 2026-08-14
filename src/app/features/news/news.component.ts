@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from "@angular/core";
 import { NewsAPIService } from "./news-api.service";
 @Component({
+  standalone: false,
   selector: "app-news",
   templateUrl: "./news.component.html",
   styleUrls: ["./news.component.scss"],
 })
 export class NewsComponent implements OnInit, OnDestroy {
-  constructor(private newsAPI: NewsAPIService) { }
+  constructor(private newsAPI: NewsAPIService, private cdr: ChangeDetectorRef) { }
 
   dateString: any;
   singleArticleObj: any;
@@ -45,6 +46,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       this.news.articles.forEach((element: any) => {
         this.popularNewsArray.push(element);
       });
+          this.cdr.markForCheck();
     });
     this.newsAPI.currentPagePopular++;
   }
@@ -55,6 +57,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       this.news.articles.forEach((element: any) => {
         this.recentNewsArray.push(element);
       });
+          this.cdr.markForCheck();
     });
     this.newsAPI.currentPageRecent++;
   }
@@ -64,6 +67,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       this.news.articles.forEach((element: any) => {
         this.trendingNewsArray.push(element);
       });
+          this.cdr.markForCheck();
     });
     this.newsAPI.currentPageTrending++;
   }

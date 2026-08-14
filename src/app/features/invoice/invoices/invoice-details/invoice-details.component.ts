@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'; 
 import { Invoice } from '../../invoice.model'; 
 @Component({ 
+	standalone: false,
 	selector: 'app-invoice-details', 
 	templateUrl: './invoice-details.component.html', 
 	styleUrls: ['./invoice-details.component.scss'], 
@@ -13,7 +14,6 @@ export class InvoiceDetailsComponent implements OnInit {
 	// public toggleModal:boolean = true 
 	constructor() {} 
 	ngOnInit(): void { 
-		console.log(this.singleInvoice); 
 	} 
 	cancelModal() { 
 		this.cancelTogle.emit(null); 

@@ -4,10 +4,10 @@ import {
 import {
   Component,
   OnInit,
-  Input
-} from '@angular/core';
+  Input, ChangeDetectorRef} from '@angular/core';
 
 @Component({
+	standalone: false,
 	selector: 'app-notifications',
 	templateUrl: './notifications.component.html',
 	styleUrls: ['./notifications.component.scss'],
@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
   text: any;
   notifClass: any;
 
-  constructor(notificationsService: NotificationsService, private loading: NotificationsService) {}
+  constructor(notificationsService: NotificationsService, private loading: NotificationsService, private cdr: ChangeDetectorRef) {}
 
   isDisplay: boolean = false;
 
@@ -32,6 +32,7 @@ export class NotificationsComponent implements OnInit {
           this.isDisplay = false
         }, 3000);
       } 
+          this.cdr.markForCheck();
     })
   }
 

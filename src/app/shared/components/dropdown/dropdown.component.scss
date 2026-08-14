@@ -1,4 +1,4 @@
-@import "/src/assets/color-palette.scss";
+@use "../../../../assets/color-palette";
 
 .container {
     position: relative;
@@ -14,7 +14,7 @@
         flex-direction: column;
 
         .selected {
-            border: 2px solid $outline;
+            border: 2px solid color-palette.$outline;
             border-radius: 5px;
             margin-bottom: 8px;
             position: relative;
@@ -36,14 +36,14 @@
             padding-right: 21px;
             font-size: 25px;
             transform: translateY(20%);
-            color: $secondary-blue;
+            color: color-palette.$secondary-blue;
         }
 
         .selected > span,
         .option-with-icon > span {
             transform: translateY(40%);
             padding-right: 39px;
-            color: $secondary-dark;
+            color: color-palette.$secondary-dark;
         }
 
         .option-with-icon {
@@ -76,7 +76,7 @@
         }
 
         .option:hover {
-            color: $primary;
+            color: color-palette.$primary;
         }
 
         label {
@@ -127,11 +127,11 @@
     }
 
     .placeholder {
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
     }
 
     .picked {
-        color: $primary;
+        color: color-palette.$primary;
     }
 
     .far {

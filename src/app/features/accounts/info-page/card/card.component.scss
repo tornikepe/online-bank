@@ -1,4 +1,5 @@
-@import '../info-page.component';
+@use '../info-page.component';
+@use "../../../../../assets/color-palette";
 
 .card {
   width: 327.59px;
@@ -6,11 +7,11 @@
   border-radius: 10px;
   box-shadow: 0 32px 60px rgba(77, 124, 254, 0.16);
   transition: all 150ms cubic-bezier(.77, .17, .72, .38);
-  background: $secondary-blue;
-  filter: drop-shadow(0 0 0.25rem $secondary-blue);
+  background: color-palette.$secondary-blue;
+  filter: drop-shadow(0 0 0.25rem color-palette.$secondary-blue);
 
   &:hover {
-    filter: drop-shadow(0 0 0.75rem $secondary-blue);
+    filter: drop-shadow(0 0 0.75rem color-palette.$secondary-blue);
     transform: scale(1.05);
     cursor: pointer;
   }

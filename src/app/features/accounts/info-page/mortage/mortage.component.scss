@@ -1,11 +1,12 @@
-@import '../info-page.component';
+@use '../info-page.component';
+@use "../../../../../assets/color-palette";
 
 .card {
-  background: $secondary-green;
-  filter: drop-shadow(0 0 0.25rem $secondary-green);
+  background: color-palette.$secondary-green;
+  filter: drop-shadow(0 0 0.25rem color-palette.$secondary-green);
 
   &:hover {
-    filter: drop-shadow(0 0 0.75rem $secondary-green);
+    filter: drop-shadow(0 0 0.75rem color-palette.$secondary-green);
     transform: scale(1.05);
     cursor: pointer;
   }
@@ -24,7 +25,7 @@
       display: flex;
       align-items: center;
       padding-left: 23px;
-      border-bottom: 1px solid $outline;
+      border-bottom: 1px solid color-palette.$outline;
     }
 
     .chart {
@@ -52,7 +53,7 @@
 ::ng-deep {
   .apexcharts-legend-series {
     padding: 7px 0;
-    background-color: $background-light;
+    background-color: color-palette.$background-light;
     border-radius: 18px;
 
     .apexcharts-legend-marker {

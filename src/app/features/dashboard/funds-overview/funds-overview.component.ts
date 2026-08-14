@@ -1,14 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 import { LayoutService } from "src/app/layout/services/layout.service";
 import { leftChartOptions, LeftChartService } from "./leftChart.service";
 import { rightChartOptions, RightChartService } from "./rightChart.service";
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
+  standalone: false,
   selector: "app-funds-overview",
   templateUrl: "./funds-overview.component.html",
   styleUrls: ["./funds-overview.component.scss"],
 })
 export class FundsOverviewComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
   isSidebarCollapsed: boolean;
   noData = false;
   shownTotal: "income" | "expenses" = "income";
@@ -33,19 +37,19 @@ export class FundsOverviewComponent implements OnInit {
   constructor(
     private layoutService: LayoutService,
     private leftChartService: LeftChartService,
-    private rightChartService: RightChartService
-  ) {}
+    private rightChartService: RightChartService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getLeftChartDataAndRender();
     this.getRightChartDataAndRender();
 
-    this.layoutService.sidebarStatus$.subscribe((value: boolean) => {
+    this.layoutService.sidebarStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: boolean) => {
       this.isSidebarCollapsed = value;
       setTimeout(() => {
         this.renderLeftChart();
         this.renderRightChart();
       }, 1000);
+          this.cdr.markForCheck();
     });
   }
 
@@ -89,6 +93,7 @@ export class FundsOverviewComponent implements OnInit {
 
       this.canRenderLeftChart = true;
       this.renderLeftChart();
+          this.cdr.markForCheck();
     });
   }
 
@@ -102,6 +107,7 @@ export class FundsOverviewComponent implements OnInit {
         this.didAvgIncrease = rightChartData.didAvgIncrease;
         this.canRenderRightChart = true;
         this.renderRightChart();
+              this.cdr.markForCheck();
       });
   }
 

@@ -1,5 +1,5 @@
-@import '../../../assets/color-palette.scss';
-@import '../../../assets/typography.scss';
+@use '../../../assets/color-palette.scss';
+@use '../../../assets/typography.scss';
 
 .main-container {
 	width: 71.1875rem;
@@ -55,16 +55,16 @@
 
 	&:hover {
 		cursor: pointer;
-		color: $primary-dark;
+		color: color-palette.$primary-dark;
 	}
 }
 
 .p-link {
 	padding: 0 0 0 7.9%;
 	border-left: 3px solid;
-	border-left: 2px solid $primary-dark;
+	border-left: 2px solid color-palette.$primary-dark;
 	margin-left: -2px;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 }
 
 .settings-buttons-container {

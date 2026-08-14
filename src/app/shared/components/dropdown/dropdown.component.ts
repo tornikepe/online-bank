@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ListWithIcons } from "./list-with-icons.model";
 
 @Component({
+  standalone: false,
   selector: "app-dropdown",
   templateUrl: "./dropdown.component.html",
   styleUrls: ["./dropdown.component.scss"],
@@ -32,11 +33,12 @@ export class DropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    /* Both lists are optional inputs, so neither may be present. */
     this.firstItem =
       this.list && !this.listWithIcons
         ? this.list[0]
-        : this.listWithIcons[0].value;
-    if (!this.list && !this.selected && this.listWithIcons) {
+        : this.listWithIcons?.[0]?.value;
+    if (!this.list && !this.selected && this.listWithIcons?.length) {
       this.iconClass = this.listWithIcons[0].iconClass;
       this.secondValue = this.listWithIcons[0]?.secondValue;
     }

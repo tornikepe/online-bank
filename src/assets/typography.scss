@@ -1,4 +1,4 @@
-@import './color-palette.scss';
+@use 'color-palette.scss';
 
 $font-primary: 'Roboto', sans-serif;
 
@@ -32,7 +32,7 @@ body {
 	font-size: 1.625rem;
 	line-height: 2.125rem;
 	letter-spacing: 0.00769em;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 	&--left {
 		text-align: left;
 	}
@@ -49,7 +49,7 @@ body {
 	font-size: 1.25rem;
 	line-height: 1.625rem;
 	letter-spacing: 0.01em;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 	&--left {
 		text-align: left;
 	}
@@ -60,7 +60,7 @@ body {
 		text-align: right;
 	}
 	&--colored {
-		color: $income;
+		color: color-palette.$income;
 	}
 }
 
@@ -69,7 +69,7 @@ body {
 	font-size: 1.125rem;
 	line-height: 1.5rem;
 	letter-spacing: 0.01111em;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 	&--left {
 		text-align: left;
 	}
@@ -80,10 +80,10 @@ body {
 		text-align: right;
 	}
 	&--colored {
-		color: $income;
+		color: color-palette.$income;
 	}
 	&--secondary {
-		color: $secondary-dark;
+		color: color-palette.$secondary-dark;
 	}
 }
 
@@ -92,7 +92,7 @@ body {
 	font-size: 1rem;
 	line-height: 1.3125rem;
 	letter-spacing: 0.0125em;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 	&--left {
 		text-align: left;
 	}
@@ -103,10 +103,10 @@ body {
 		text-align: right;
 	}
 	&--colored {
-		color: $income;
+		color: color-palette.$income;
 	}
 	&--secondary {
-		color: $secondary-dark;
+		color: color-palette.$secondary-dark;
 	}
 }
 
@@ -121,14 +121,14 @@ body {
 	font-weight: 500;
 	font-size: 0.75rem;
 	line-height: 1rem;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 }
 
 %text {
 	font-family: $font-primary;
 	font-size: 0.875rem;
 	line-height: 1.3125rem;
-	color: $primary-dark;
+	color: color-palette.$primary-dark;
 }
 
 // Regular text and p-light is same
@@ -140,7 +140,7 @@ body {
 .p-secondary {
 	@extend %text;
 	font-weight: 400;
-	color: $secondary-light;
+	color: color-palette.$secondary-light;
 }
 
 .p-link {

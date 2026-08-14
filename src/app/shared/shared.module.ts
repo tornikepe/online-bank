@@ -11,9 +11,7 @@ import { SingleTab } from './tabs-group/tab.component';
 import { InputComponent } from './input/input.component';
 import { ProgressbarComponent } from './components/progressbar/progressbar.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { NgxEmojiPickerModule } from 'ngx-emoji-picker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { TextAreaComponent } from './components/text-area/text-area.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
@@ -43,12 +41,10 @@ import {
 		CommonModule,
 		ReactiveFormsModule,
 		FormsModule,
-		NgxEmojiPickerModule,
 		FontAwesomeModule,
 	],
 	declarations: [
 		ClickOutsideDirective,
-		TextAreaComponent,
 		ToggleComponent,
 		TabsGroupComponent,
 		SingleTab,
@@ -66,7 +62,6 @@ import {
 	exports: [
 		ProfileComponent,
 		ClickOutsideDirective,
-		TextAreaComponent,
 		TabsGroupComponent,
 		SingleTab,
 		ToggleComponent,

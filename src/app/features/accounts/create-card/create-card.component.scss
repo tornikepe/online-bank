@@ -1,9 +1,8 @@
-@import "../../../../assets/color-palette";
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@use "../../../../assets/color-palette";
 .content-bg {
   width: 100%;
   height: 774px;
-  background: $background-light;
+  background: color-palette.$background-light;
   display: flex;
   //padding: 28px;
   gap: 30px;
@@ -51,14 +50,14 @@
   column-gap: 16px;
   .visa-txt {
     font-size: 14px;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     font-weight: 500;
   }
 }
 
 .carrency {
   font-size: 14px;
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
   font-weight: 400;
   .carrency-txt {
     margin-top: 7px;
@@ -86,12 +85,12 @@
     }
     .txt-md {
       font-size: 18px;
-      color: $primary-dark;
+      color: color-palette.$primary-dark;
       font-weight: 500;
     }
     .txt-rg {
       font-size: 13px;
-      color: $secondary-dark;
+      color: color-palette.$secondary-dark;
       font-weight: 400;
     }
     .plus-txt {
@@ -109,7 +108,7 @@
   padding: 0 24px 0 24px;
   height: 254px;
   font-size: 14px;
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
   font-weight: 400;
   display: flex;
   flex-direction: column;
@@ -128,7 +127,7 @@
   width: 227px;
   outline: none;
   border: none;
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   margin: 0;
   height: 25px;
 }
@@ -142,7 +141,7 @@
 }
 
 .input-st::placeholder {
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
 }
 
 .btn-input-add {
@@ -164,7 +163,7 @@
   border: none;
   width: 207px;
   height: 46px;
-  background: $primary;
+  background: color-palette.$primary;
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
@@ -192,7 +191,7 @@
   margin-left: 11px;
   margin-top: 5px;
   font-size: 16px;
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-weight: 400;
 }
 
@@ -201,11 +200,11 @@
   flex-direction: row;
   gap: 8px;
   font-size: 12px;
-  color: $secondary-light;
+  color: color-palette.$secondary-light;
 }
 
 .date-value {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
 }
 
 .illustration {
@@ -225,7 +224,7 @@
 
 .tr-txt {
   font-size: 16px;
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-weight: 400;
   letter-spacing: 0.2px;
 }
@@ -238,7 +237,7 @@
 }
 
 .ng-valid:not(form) {
-  border-right: 1px solid $primary;
+  border-right: 1px solid color-palette.$primary;
   border-radius: 0;
   height: 30px;
   animation: validation 150ms ease-in-out;

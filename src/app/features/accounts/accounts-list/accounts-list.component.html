@@ -1,11 +1,10 @@
-<app-notifications></app-notifications>
 
 <div id="main" >
     <!-- //////////////// C H A R T S /////////////////////// -->
     <div class="charts" style="display: flex; gap: 30px" *ngIf="cardsArray.length">
-        <app-charts [color]="'#6DD230'" [type]="charts[0][0]?.name" [amount]="124800" [chartValues]="charts[0][0]?.data"></app-charts>
-        <app-charts [color]="'#FFAB2B'" [type]="charts[0][1]?.name" [amount]="56400" [chartValues]="this.charts[0][1]?.data"></app-charts>
-        <app-charts [color]="'#FE4D97'" [type]="charts[0][2]?.name" [amount]="24800" [chartValues]="this.charts[0][2]?.data"></app-charts>
+        <app-charts [color]="'#6DD230'" [type]="charts[0][0]?.name" [amount]="cardsBalance" [chartValues]="charts[0][0]?.data"></app-charts>
+        <app-charts [color]="'#FFAB2B'" [type]="charts[0][1]?.name" [amount]="depositsBalance" [chartValues]="this.charts[0][1]?.data"></app-charts>
+        <app-charts [color]="'#FE4D97'" [type]="charts[0][2]?.name" [amount]="outstandingCredit" [chartValues]="this.charts[0][2]?.data"></app-charts>
     </div>
     <!-- //////////////// E M P T Y  P A G E  P H O T O /////////////////////// -->
     <div class="image" *ngIf="!cardsArray.length">
@@ -56,7 +55,7 @@
                 </div>
                 <div class="information">
                     <div class="item-1">
-                        <p class="p1">${{card.amount}}</p>
+                        <p class="p1">{{ card.amount | currency:'USD':'symbol':'1.0-2' }}</p>
                         <p class="p2">Balance</p>
                     </div>
                     <div class="item-2">
@@ -119,11 +118,11 @@
                 </div>
                 <div class="information">
                     <div class="item-1">
-                        <p class="p1">${{deposit.balance}}</p>
+                        <p class="p1">{{ deposit.balance | currency:'USD':'symbol':'1.0-2' }}</p>
                         <p class="p2">Balance</p>
                     </div>
                     <div class="item-2">
-                        <p class="p1">${{deposit.accured}}</p>
+                        <p class="p1">{{ deposit.accured | currency:'USD':'symbol':'1.0-2' }}</p>
                         <p class="p2">Accured</p>
                     </div>
                     <div class="item-3">
@@ -131,7 +130,7 @@
                         <p class="p2">Rate</p>
                     </div>
                     <div class="item-4">
-                        <p class="p1">{{deposit.date}}</p>
+                        <p class="p1">{{deposit.dateExp}}</p>
                         <p class="p2">End date</p>
                     </div>
                 </div>
@@ -143,7 +142,7 @@
     <!-- <h4 class="card-title" *ngIf="creditsArray.length">Your Credits</h4> -->
     <div class="heading-button" *ngIf="loansArray.length">
         <h4 class="card-title">Your Credits</h4>
-        <h4 class="title-button" (click)='openDeposit()'><i class="bi bi-plus-lg"></i> NEW DEPOSIT </h4>
+        <h4 class="title-button" (click)='openDeposit()'><i class="bi bi-plus-lg"></i> NEW CREDIT </h4>
     </div>
     <div id="main-group" class="non-empty">
         <div *ngFor='let loan of loansArray; last as last'>
@@ -157,11 +156,11 @@
                 </div>
                 <div class="information">
                     <div class="item-1">
-                        <p class="p1">${{loan.startingAmount}}</p>
+                        <p class="p1">{{ loan.startingAmount | currency:'USD':'symbol':'1.0-2' }}</p>
                         <p class="p2">Amount</p>
                     </div>
                     <div class="item-2">
-                        <p class="p1">${{loan.paidAmount}}</p>
+                        <p class="p1">{{ loan.paidAmount | currency:'USD':'symbol':'1.0-2' }}</p>
                         <p class="p2">Paid amount</p>
                     </div>
                     <div class="item-3">

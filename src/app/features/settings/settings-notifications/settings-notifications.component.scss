@@ -1,6 +1,6 @@
-@import '../../../../assets/color-palette.scss'; 
-@import '../../../../assets/typography.scss'; 
-@import '../../../shared/input/input.component.scss'; 
+@use '../../../../assets/color-palette.scss'; 
+@use '../../../../assets/typography.scss'; 
+@use '../../../shared/input/input.component.scss'; 
  
 .my-main-container { 
 	display: flex; 

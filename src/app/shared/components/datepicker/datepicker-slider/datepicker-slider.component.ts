@@ -8,6 +8,7 @@ interface Date {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-datepicker-slider',
   templateUrl: './datepicker-slider.component.html',
   styleUrls: ['./datepicker-slider.component.scss']

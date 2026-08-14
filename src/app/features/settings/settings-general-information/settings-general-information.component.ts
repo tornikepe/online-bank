@@ -1,16 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'; 
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, DestroyRef, inject} from '@angular/core'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
-import { User } from 'src/app/auth/user.model'; 
+import { User } from 'src/app/models/banking.model'; 
 import { Subscription, sample } from 'rxjs'; 
 import { ApiService } from 'src/app/services/api.service'; 
 import { UserService } from 'src/app/services/user.service'; 
 import { SettingsService } from '../settings.service'; 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 @Component({ 
+	standalone: false,
 	selector: 'app-settings-general-information', 
 	templateUrl: './settings-general-information.component.html', 
 	styleUrls: ['./settings-general-information.component.scss'], 
 }) 
-export class SettingsGeneralInformationComponent implements OnInit, OnDestroy { 
+export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
+  private readonly destroyRef = inject(DestroyRef);
+ 
 	//creating variables for checking forms validations here 
 	public valid1: boolean = false; 
 	public valid2: boolean = false; 
@@ -48,15 +53,14 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 	public modalTriger: boolean = false; 
 	public triger1: boolean = true; 
 	public triger2: boolean = false; 
-	private userObject: User = null!; 
+	private userObject: Partial<User> = {}; 
  
 	constructor( 
 		private _api: ApiService, 
 		private formBuilder: FormBuilder, 
 		private settingsService: SettingsService, 
 		private userService: UserService, 
-		private apiService: ApiService 
-	) {} 
+		private apiService: ApiService, private cdr: ChangeDetectorRef, private notification: NotificationsService) {} 
 	ngOnInit(): void { 
 		//Get User ID 
 		const userId = Number(localStorage.getItem('userId')); 
@@ -81,6 +85,7 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.user_lastname_temp = this.user_lastname; 
 				this.user_phone_temp = this.user_phone; 
 				this.nameDisplay = this.user.Full_Name; 
+						  this.cdr.markForCheck();
 			}); 
 		//Form declaration 
 		this.exform = this.formBuilder.group({ 
@@ -90,7 +95,7 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 			phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]], 
 		}); 
 		//FIRSTNAME 
-		this.exform.get('firstname')?.valueChanges.subscribe(res => { 
+		this.exform.get('firstname')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => { 
 			if (this.exform.get('firstname')?.status == 'VALID') { 
 				this.valid1 = false; 
 				this.validStyle1 = 'input-success'; 
@@ -102,9 +107,10 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.settingsService.toggleCancelButton(true); 
 				this.settingsService.disabledUpdateButton(true); 
 			} 
+				  this.cdr.markForCheck();
 		}); 
 		//EMAIL 
-		this.exform.get('email')?.valueChanges.subscribe(res => { 
+		this.exform.get('email')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => { 
 			if (this.exform.get('email')?.status == 'VALID') { 
 				this.valid2 = false; 
 				this.validStyle2 = 'input-success'; 
@@ -116,9 +122,10 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.settingsService.toggleCancelButton(true); 
 				this.settingsService.disabledUpdateButton(true); 
 			} 
+				  this.cdr.markForCheck();
 		}); 
 		//LASTNAME 
-		this.exform.get('lastname')?.valueChanges.subscribe(res => { 
+		this.exform.get('lastname')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => { 
 			if (this.exform.get('lastname')?.status == 'VALID') { 
 				this.valid3 = false; 
 				this.validStyle3 = 'input-success'; 
@@ -130,9 +137,10 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.settingsService.toggleCancelButton(true); 
 				this.settingsService.disabledUpdateButton(true); 
 			} 
+				  this.cdr.markForCheck();
 		}); 
 		//PHONE 
-		this.exform.get('phone')?.valueChanges.subscribe(res => { 
+		this.exform.get('phone')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => { 
 			if (this.exform.get('phone')?.status == 'VALID') { 
 				this.valid4 = false; 
 				this.validStyle4 = 'input-success'; 
@@ -144,15 +152,18 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.settingsService.toggleCancelButton(true); 
 				this.settingsService.disabledUpdateButton(true); 
 			} 
+				  this.cdr.markForCheck();
 		}); 
 		// Listen to cancel button click 
 		this.SubCancel = this.settingsService.cancelSettingsButtonClicked.subscribe(() => { 
 			this.onCancelSettingsClick(); 
+				  this.cdr.markForCheck();
 		}); 
 		///////// Listen to Update button Click 
 		this.SubUpdateButton = this.settingsService.updateSettingsButtonClicked.subscribe( 
 			() => { 
 				this.openModal(); 
+						  this.cdr.markForCheck();
 			} 
 		); 
 		// Create Form Group for Modal 
@@ -267,7 +278,11 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.user_sex_temp = this.user_sex; 
 				this.nameDisplay = this.user_username + ' ' + this.user_lastname; 
  
-				alert('User Updated!'); 
+				this.notification.open({
+          class: 'secondary-green',
+          text: 'User Updated!',
+        }); 
+						  this.cdr.markForCheck();
 			}); 
 		//clear form 
 		this.form_2.controls['password'].reset(); 

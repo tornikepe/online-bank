@@ -1,8 +1,8 @@
-@import "../../../../../assets/color-palette";
+@use "../../../../../assets/color-palette";
 #chart {
   .text {
     .heading-2 {
-      color: $primary-dark;
+      color: color-palette.$primary-dark;
       font-size: 20px;
       margin-bottom: 0;
       margin-left: 0;

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 import { PaymentsService } from '../payments.service';
 
 @Component({
+  standalone: false,
   selector: "app-bank-transfer",
   templateUrl: "./bank-transfer.component.html",
   styleUrls: ["./bank-transfer.component.scss"],
@@ -14,18 +15,26 @@ export class BankTransferComponent implements OnInit {
     private fb: FormBuilder,
     private paymentService: PaymentsService,
     private http: HttpClient,
-    private notification: NotificationsService
-  ) { }
+    private notification: NotificationsService, private cdr: ChangeDetectorRef) {
+    this.activeCard = this.paymentService.currentCards[0];
+    this.cards = this.paymentService.cards;
+    this.users = this.paymentService.users;
+    this.bankTransferForm = this.fb.group({
+      account: ["", [Validators.required, Validators.pattern("^.{22}$")]],
+      benName: ["", [Validators.required]],
+      amount: ["", [Validators.required]],
+    });
+  }
   amountValue: number;
-  activeCard: any = this.paymentService.currentCards[0];
+  activeCard: any;
   transferType: string = "Personal transfer";
   currencyType: string = "USD";
 
   cardList: any = [];
 
   // data: any;
-  cards: any = this.paymentService.cards;
-  users: any = this.paymentService.users;
+  cards: any;
+  users: any;
   accountsArray: any = [];
 
   currentCards: any;
@@ -37,11 +46,7 @@ export class BankTransferComponent implements OnInit {
   errorMessage: any;
   // Validator variables
 
-  public bankTransferForm = this.fb.group({
-    account: ["", [Validators.required, Validators.pattern("^.{22}$")]],
-    benName: ["", [Validators.required]],
-    amount: ["", [Validators.required]],
-  });
+  public bankTransferForm: FormGroup;
 
   getCardList() {
     this.paymentService.currentCards.forEach((card: any) => {
@@ -160,12 +165,14 @@ export class BankTransferComponent implements OnInit {
               class: "secondary-green",
               text: "Transaction sent successfully",
             });
+                      this.cdr.markForCheck();
           },
           error => {
             this.notification.open({
               class: "income",
               text: "Something wrong",
             });
+                      this.cdr.markForCheck();
           }
         );
     }

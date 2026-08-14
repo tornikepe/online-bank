@@ -3,6 +3,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 
+import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
@@ -20,7 +21,7 @@ export class PaymentsService {
     private http: HttpClient,
   ) { }
 
-  private url = "http://localhost:3000/";
+  private url = `${environment.BaseUrl}`;
   private urlPaymentTypes = "paymentTypes";
   private urlUsers = "users";
   private urlCards = "cards";
@@ -67,8 +68,11 @@ export class PaymentsService {
     let currentCard = this.getCard(currAccount);
     let beneficiaryCard = this.getCard(currTransferedTo);
 
-    let creditMoney = currentCard.amount - Number(currAmount);
-    let debitMoney = beneficiaryCard.amount + Number(currAmount);
+    /* Card balances are stored as strings in some records, so `+` concatenated
+       instead of adding — crediting 100 to a balance of "156300" produced
+       "156300100". Coerce both sides to numbers before doing arithmetic. */
+    const creditMoney = Number(currentCard.amount) - Number(currAmount);
+    const debitMoney = Number(beneficiaryCard.amount) + Number(currAmount);
 
     this.http
       .patch(this.url + `cards/${currentCard.id}`, { amount: creditMoney })
@@ -135,8 +139,12 @@ export class PaymentsService {
       if (card.account == account)
         return "You are trying to transfer money to your card";
     }
+    /* Compare both sides case-insensitively: the stored names are mixed case,
+       so lowercasing only the typed name never matched. */
+    const typedName = Beneficiary.trim().toLocaleLowerCase();
     for (let user of this.users) {
-      if (user.Full_Name == Beneficiary.toLocaleLowerCase()) userId = user.id;
+      if ((user.Full_Name ?? "").trim().toLocaleLowerCase() === typedName)
+        userId = user.id;
     }
     for (let card of this.cards) {
       if (card.userId == Number(userId) && card.account == account) return true;
@@ -151,26 +159,21 @@ export class PaymentsService {
     return i >= 0 ? this.cards[i] : false;
   }
 
+  /* The old version sliced fixed offsets out of toLocaleString(), so a
+     single-digit month or day shifted the window and swallowed the leading hour
+     digit — 10:51 was recorded as "0:51". Read the parts directly instead. */
   getCurrentDate() {
     const now = new Date();
-    const year = now.getFullYear(); // GET CURRENT YEAR;
-    let longMonth = now.toLocaleString("en-us", {
-      month: "long",
-    }); // GET MONTH NAME IN LONG FORMAT
-    let shortMonth = now.toLocaleString("en-us", { month: "short" }); // GET MONTH NAME IN SHORT FORMAT
-    const day = now.getDate(); //GET NUMBER OF DAY-WEEK;
-    let hoursNMinutes = now.toLocaleString("en-US").slice(12, -6); // Get Both
-    // const hours = now.getHours(); //GET CURRENT HOUR;
-    // const minutes = now.getMinutes(); //GET CURRENT MINUTE;
-    const ampm = now.toLocaleString("en-US").slice(-2); // TRANSFER TO AM / PM;
+    const hours24 = now.getHours();
+    const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12;
 
     return {
-      year,
-      longMonth,
-      shortMonth,
-      day,
-      hoursNMinutes,
-      ampm,
+      year: now.getFullYear(),
+      longMonth: now.toLocaleString("en-US", { month: "long" }),
+      shortMonth: now.toLocaleString("en-US", { month: "short" }),
+      day: now.getDate(),
+      hoursNMinutes: `${hours12}:${String(now.getMinutes()).padStart(2, "0")}`,
+      ampm: hours24 < 12 ? "AM" : "PM",
     };
   }
 

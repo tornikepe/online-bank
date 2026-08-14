@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
 import {
   FormBuilder,
   FormControl,
@@ -12,6 +12,7 @@ import {GetnotfsService} from "../../../services/getnotfs.service";
 import {NotificationsService} from "../../../shared/notifications/notifications.service";
 
 @Component({
+  standalone: false,
   selector: "app-create-card",
   templateUrl: "./create-card.component.html",
   styleUrls: ["./create-card.component.scss"],
@@ -26,8 +27,7 @@ export class CreateCardComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private getnotfsService: GetnotfsService,
-    private notification: NotificationsService
-  ) {}
+    private notification: NotificationsService, private cdr: ChangeDetectorRef) {}
 
   form!: FormGroup;
 
@@ -87,6 +87,7 @@ export class CreateCardComponent implements OnInit {
         }, 2000);
       }
       this.router.navigate(["accounts"]);
+          this.cdr.markForCheck();
     });
 
     this.getnotfsService.addNotf({

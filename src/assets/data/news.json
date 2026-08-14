@@ -1,0 +1,54 @@
+{
+  "status": "ok",
+  "note": "Bundled sample feed. Used whenever environment.news is left unconfigured, so the News page works without a third-party API key.",
+  "articles": [
+    {
+      "title": "Central banks hold rates steady as inflation cools",
+      "published_date": "2026-08-12 09:15:00",
+      "summary": "Policymakers left benchmark rates unchanged for a third consecutive meeting, pointing to slowing price growth and a labour market that is loosening without a sharp rise in unemployment.",
+      "media": "assets/images/logo1.png"
+    },
+    {
+      "title": "Instant payments cross a billion transactions a month",
+      "published_date": "2026-08-11 14:40:00",
+      "summary": "Account-to-account transfers settled in seconds have overtaken card payments for peer-to-peer transfers, with retail adoption climbing fastest among users under thirty-five.",
+      "media": "assets/images/logo2.png"
+    },
+    {
+      "title": "Retail deposits shift toward higher-yield savings",
+      "published_date": "2026-08-11 08:05:00",
+      "summary": "Households continue to move balances out of current accounts and into term deposits, tightening funding costs for banks that were slow to raise their own savings rates.",
+      "media": "assets/images/logo3.png"
+    },
+    {
+      "title": "Card networks tighten rules on subscription billing",
+      "published_date": "2026-08-10 16:20:00",
+      "summary": "New requirements oblige merchants to send a reminder before each renewal and to offer cancellation through the same channel used to subscribe.",
+      "media": "assets/images/logo4.png"
+    },
+    {
+      "title": "Mortgage applications rebound on cheaper fixed terms",
+      "published_date": "2026-08-10 11:00:00",
+      "summary": "Lenders reported the strongest week of applications this year after several cut their five-year fixed offers, though approval rates remain below pre-tightening levels.",
+      "media": "assets/images/logo5.png"
+    },
+    {
+      "title": "Open banking data sharing becomes the default",
+      "published_date": "2026-08-09 13:30:00",
+      "summary": "Account aggregation now covers savings, loans and pensions in addition to current accounts, giving budgeting tools a fuller picture of household finances.",
+      "media": "assets/images/logo6.png"
+    },
+    {
+      "title": "Fraud losses fall as confirmation-of-payee expands",
+      "published_date": "2026-08-08 10:10:00",
+      "summary": "Checking the payee name against the account before a transfer completes has cut misdirected-payment fraud sharply, with the biggest gains in first-time transfers.",
+      "media": "assets/images/logo7.png"
+    },
+    {
+      "title": "Small businesses lean on embedded lending",
+      "published_date": "2026-08-07 15:45:00",
+      "summary": "Credit offered inside accounting and payments software is growing faster than traditional overdrafts, particularly for firms with seasonal cash-flow gaps.",
+      "media": "assets/images/logo8.png"
+    }
+  ]
+}

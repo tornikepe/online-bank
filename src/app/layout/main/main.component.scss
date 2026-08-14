@@ -1,4 +1,4 @@
-@import '../../../assets/color-palette.scss';
+@use '../../../assets/color-palette.scss';
 main{
     display: flex;
     .main-container{
@@ -18,13 +18,13 @@ main{
 
         .content{
             position: relative;
-            background-color:$background-light;
+            background-color:color-palette.$background-light;
             width: 100%;
             flex-grow: 1;
             //margin-top: 64px;
             min-height: calc(100vh - 64px);
             padding: 18px 28px 82px;
-            border-left: 1px solid $outline;
+            border-left: 1px solid color-palette.$outline;
             //overflow-y: auto;
 
             .footer {

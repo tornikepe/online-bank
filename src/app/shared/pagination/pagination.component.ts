@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, HostListener } from "@angular/core";
 
 @Component({
+  standalone: false,
   selector: "app-pagination",
   templateUrl: "./pagination.component.html",
   styleUrls: ["./pagination.component.scss"],
@@ -30,7 +31,7 @@ export class PaginationComponent implements OnInit {
     this.displayPages();
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener("window:resize")
   onWindowResize() {
     this.screenWidth = window.innerWidth;
     this.displayPages();

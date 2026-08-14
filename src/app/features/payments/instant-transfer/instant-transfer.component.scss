@@ -1,12 +1,12 @@
-@import "../../../../assets/typography.scss";
-@import "../../../../assets/color-palette.scss";
+@use "../../../../assets/typography.scss";
+@use "../../../../assets/color-palette.scss";
 
 .instant-container {
   width: 100%;
   max-width: 100%;
   min-height: 30%;
-  background: $white;
-  color: $primary-dark;
+  background: color-palette.$white;
+  color: color-palette.$primary-dark;
   font-weight: 300;
   .instant-header {
     width: 100%;
