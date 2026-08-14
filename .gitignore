@@ -47,3 +47,9 @@ junit.xml
 # System Files
 .DS_Store
 Thumbs.db
+
+# Angular build cache
+/.angular
+
+# Local editor/agent config
+/.claude
