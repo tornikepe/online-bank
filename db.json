@@ -2,63 +2,63 @@
   "users": [
     {
       "email": "nino.beridze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Nino Beridze",
       "Agree_Term": true,
       "id": 1
     },
     {
       "email": "admin@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Demo Admin",
       "Agree_Term": true,
       "id": 2
     },
     {
       "email": "luka.kapanadze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Luka Kapanadze",
       "Agree_Term": true,
       "id": 3
     },
     {
       "email": "salome.dvali@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Salome Dvali",
       "Agree_Term": true,
       "id": 4
     },
     {
       "email": "irakli.nozadze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Irakli Nozadze",
       "Agree_Term": true,
       "id": 5
     },
     {
       "email": "tamar.chkheidze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Tamar Chkheidze",
       "Agree_Term": true,
       "id": 6
     },
     {
       "email": "zurab.kiknadze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Zurab Kiknadze",
       "Agree_Term": true,
       "id": 7
     },
     {
       "email": "elene.sanikidze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Elene Sanikidze",
       "Agree_Term": true,
       "id": 8
     },
     {
       "email": "vakhtang.toradze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Vakhtang Toradze",
       "Agree_Term": true,
       "id": 9
@@ -67,16 +67,16 @@
       "Agree_Term": true,
       "email": "mariam.tsiklauri@example.com",
       "Full_Name": "Mariam Tsiklauri",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "phone": "123456789",
       "sex": "Female",
       "id": 10
     },
     {
       "Agree_Term": true,
-      "email": "david.khvedelidze@example.com",
-      "Full_Name": "David Khvedelidze",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "email": "tornike.peitrishvili@example.com",
+      "Full_Name": "Tornike Peitrishvili",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "phone": "555140042",
       "language": "English",
       "sex": "Male",
@@ -86,7 +86,7 @@
       "Agree_Term": true,
       "email": "ana.gelashvili@example.com",
       "Full_Name": "Ana Gelashvili",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "sex": "Female",
       "id": 12
     },
@@ -94,7 +94,7 @@
       "Agree_Term": true,
       "email": "giorgi.lomidze@example.com",
       "Full_Name": "Giorgi Lomidze",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "phone": "558129336",
       "language": "Georgian",
       "sex": "Male",
@@ -102,35 +102,35 @@
     },
     {
       "email": "main.user@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Main User",
       "Agree_Term": true,
       "id": 14
     },
     {
       "email": "nika.abashidze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Nika Abashidze",
       "Agree_Term": true,
       "id": 15
     },
     {
       "email": "keti.maisuradze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Keti Maisuradze",
       "Agree_Term": true,
       "id": 16
     },
     {
       "email": "sandro.bakradze@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Sandro Bakradze",
       "Agree_Term": true,
       "id": 17
     },
     {
       "email": "lasha.gogichaishvili@example.com",
-      "password": "$2a$10$cJakPfTyd91x.RZU9CREoutvwTWi0SspRUXIJRYJLma57rAcgD5xa",
+      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
       "Full_Name": "Lasha Gogichaishvili",
       "Agree_Term": true,
       "id": 18
@@ -169,7 +169,7 @@
       "name": "TBC CONCEPT",
       "account": "GE32TBC3219837918",
       "card": "1563148254921044",
-      "cardholder": "DAVID KHVEDELIDZE",
+      "cardholder": "TORNIKE PEITRISHVILI",
       "date": "10/25",
       "amount": 156300,
       "security": true,
@@ -180,7 +180,7 @@
       "name": "TBC PLUS",
       "account": "GE18TB7654321098765432",
       "card": "1234123412341234",
-      "cardholder": "DAVID KHVEDELIDZE",
+      "cardholder": "TORNIKE PEITRISHVILI",
       "date": "08/29",
       "amount": 12450,
       "security": true,
@@ -776,7 +776,7 @@
       "currency": "USD",
       "type": "Personal transfer",
       "transferFromUserId": 11,
-      "currTransferFromUser": "David Khvedelidze",
+      "currTransferFromUser": "Tornike Peitrishvili",
       "transferToUserId": 2,
       "currTransferToUser": "Demo Admin",
       "img": "../../../favicon.ico",
@@ -799,7 +799,7 @@
       "transferFromUserId": 14,
       "currTransferFromUser": "Main User",
       "transferToUserId": 11,
-      "currTransferToUser": "David Khvedelidze",
+      "currTransferToUser": "Tornike Peitrishvili",
       "img": "../../../favicon.ico",
       "id": 2
     },
@@ -820,7 +820,7 @@
       "transferFromUserId": 14,
       "currTransferFromUser": "Main User",
       "transferToUserId": 11,
-      "currTransferToUser": "David Khvedelidze",
+      "currTransferToUser": "Tornike Peitrishvili",
       "img": "../../../favicon.ico",
       "id": 3
     }

@@ -54,7 +54,7 @@ Every account in the demo data uses the same password: **`Demo1234!`**
 
 | Email | What it shows |
 | --- | --- |
-| `david.khvedelidze@example.com` | The fullest account — cards, deposits, loans, transfers |
+| `tornike.peitrishvili@example.com` | The fullest account — cards, deposits, loans, transfers |
 | `main.user@example.com` | The counterparty used by the transfer flows |
 | `mariam.tsiklauri@example.com` | The account that owns the sample invoices |
 
@@ -163,7 +163,7 @@ production.
 
 ## About the author
 
-**Tornike Petriashvili** — [github.com/tornikepe](https://github.com/tornikepe)
+**Tornike Peitrishvili** — [github.com/tornikepe](https://github.com/tornikepe)
 
 I build web applications and automation, and I like taking a project apart to
 understand why it behaves the way it does. This repository is a good example: the
