@@ -1,5 +1,5 @@
-@import "../../../assets/color-palette.scss";
-@import "../../../assets/typography.scss";
+@use "../../../assets/color-palette.scss";
+@use "../../../assets/typography.scss";
 * {
     margin: 0;
     padding: 0;
@@ -25,13 +25,13 @@
         .header {
             p {
                 font-family: "Roboto", sans-serif;
-                color: $primary;
+                color: color-palette.$primary;
                 font-size: 18px;
                 line-height: 24px;
                 span {
                     line-height: 27px;
                     font-size: 20px;
-                    color: $primary;
+                    color: color-palette.$primary;
                 }
             }
         }
@@ -69,7 +69,7 @@
                 height: 52px;
                 margin-top: 14px;
                 border-radius: 4px;
-                border: 1px solid $outline;
+                border: 1px solid color-palette.$outline;
                 outline: none;
                 padding-left: 10px;
                 &::placeholder {
@@ -89,8 +89,8 @@
                 height: 46px;
                 border-radius: 7px;
                 border: none;
-                background: $primary;
-                color: $background-light;
+                background: color-palette.$primary;
+                color: color-palette.$background-light;
                 font-size: 14px;
                 line-height: 17px;
             }
@@ -102,15 +102,15 @@
                     font-size: 14px;
                     line-height: 21px;
                     word-spacing: 1;
-                    color: $secondary-light;
+                    color: color-palette.$secondary-light;
                     font-family: "Roboto", sans-serif;
                     font-weight: 400;
                     span {
                         margin-left: 3px;
-                        color: $primary-dark;
+                        color: color-palette.$primary-dark;
                         a {
                             text-decoration: none;
-                            color: $primary-dark;
+                            color: color-palette.$primary-dark;
                         }
                     }
                 }
@@ -144,7 +144,7 @@
     .modal-body {
         // margin: 4rem 0 0 .5rem;
         font-size: 1.2rem;
-        color: $secondary-pink;
+        color: color-palette.$secondary-pink;
         &:focus {
             outline: none;
         }
@@ -157,7 +157,7 @@
                     height: 52px;
                     margin-top: 14px;
                     border-radius: 4px;
-                    border: 1px solid $outline;
+                    border: 1px solid color-palette.$outline;
                     outline: none;
                     padding-left: 10px;
                     &::placeholder {
@@ -178,7 +178,7 @@
                     outline: none;
                 }
                 .ng-untouched {
-                    border: 1px solid $outline;
+                    border: 1px solid color-palette.$outline;
                     outline: none;
                 }
             }
@@ -190,7 +190,7 @@
             .incorectEmail {
                 margin: 6rem 0 0 2.5rem;
                 font-size: 1.2rem;
-                color: $secondary-pink;
+                color: color-palette.$secondary-pink;
             }
         }
     }
@@ -207,7 +207,7 @@
     }
 }
 
-@media only screen and(max-width: 1180px) {
+@media only screen and (max-width: 1180px) {
     #body {
         .form {
             transform: translate(117px, 60px);
@@ -215,7 +215,7 @@
     }
 }
 
-@media only screen and(max-width: 980px) {
+@media only screen and (max-width: 980px) {
     #body {
         .form {
             transform: translate(10px, 60px);

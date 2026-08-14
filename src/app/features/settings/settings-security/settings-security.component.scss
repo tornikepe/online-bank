@@ -1,5 +1,5 @@
-@import '../../../../assets/typography.scss';
-@import '../../../../assets/color-palette.scss';
+@use '../../../../assets/typography.scss';
+@use '../../../../assets/color-palette.scss';
 
 .my-main-container {
 	display: flex;
@@ -13,7 +13,7 @@
 
 .form-title-hr {
 	margin: 3px 0 21px 0;
-	color: $secondary-light;
+	color: color-palette.$secondary-light;
 }
 
 .p-light {

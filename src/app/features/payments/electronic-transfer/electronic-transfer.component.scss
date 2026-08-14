@@ -1,5 +1,5 @@
-@import "../../../../assets/typography.scss";
-@import "../../../../assets/color-palette.scss";
+@use "../../../../assets/typography.scss";
+@use "../../../../assets/color-palette.scss";
 
 body {
   box-sizing: border-box;
@@ -8,12 +8,12 @@ body {
   width: 100%;
 
   height: 100%;
-  background: $white;
+  background: color-palette.$white;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   font-weight: 300;
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
 
   .instant-header {
     width: 100%;
@@ -92,7 +92,7 @@ body {
     display: flex;
     width: 93%;
     height: 20%;
-    border: 1px dashed $outline;
+    border: 1px dashed color-palette.$outline;
     align-items: center;
     padding: 10px;
     margin-bottom: 15px;

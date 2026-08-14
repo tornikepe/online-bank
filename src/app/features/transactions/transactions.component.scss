@@ -1,4 +1,4 @@
-@import "/src/assets/color-palette.scss";
+@use "../../../assets/color-palette";
 
 // .datePicker {
 //   bottom: 15px;
@@ -36,7 +36,7 @@
   justify-content: space-between;
   width: 100%;
 
-  border-bottom: 1px solid $border-light;
+  border-bottom: 1px solid color-palette.$border-light;
 
   .sorters-wraper {
     width: 400px;
@@ -79,7 +79,7 @@
     justify-content: space-between;
     margin-top: 8px;
     padding-bottom: 7px;
-    border-bottom: 1px solid $border-light;
+    border-bottom: 1px solid color-palette.$border-light;
 
     &:last-child {
       margin-bottom: 40px;
@@ -106,7 +106,7 @@
 
 span {
   &:nth-child(2) {
-    color: $secondary-light;
+    color: color-palette.$secondary-light;
   }
 }
 
@@ -130,5 +130,5 @@ span {
 }
 
 .transfer-debit {
-  color: $secondary-green;
+  color: color-palette.$secondary-green;
 }

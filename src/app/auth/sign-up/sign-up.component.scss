@@ -1,8 +1,8 @@
-@import "../../../assets/color-palette.scss";
-@import "../../../assets/typography.scss";
+@use "../../../assets/color-palette.scss";
+@use "../../../assets/typography.scss";
 input:not(#checkbox) {
     border-radius: 5px;
-    border: $outline solid 1px;
+    border: color-palette.$outline solid 1px;
     width: 360px;
     height: 52px;
     // margin-bottom: 20px;
@@ -60,10 +60,10 @@ input+.register_error {
     font-style: normal;
     font-weight: lighter;
     font-size: 18px;
-    color: $primary;
+    color: color-palette.$primary;
     letter-spacing: 0.27407407760620117px;
     font-family: "Roboto", sans-serif;
-    color: $primary;
+    color: color-palette.$primary;
     font-size: 18px;
     line-height: 24px;
     font-weight: 300;
@@ -81,7 +81,7 @@ input+.register_error {
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
-    color: $primary;
+    color: color-palette.$primary;
     letter-spacing: 0.1px;
     text-transform: uppercase;
     font-family: "Roboto", sans-serif;
@@ -111,7 +111,7 @@ input+.register_error {
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     letter-spacing: 0.06666666984558106px;
 }
 
@@ -129,7 +129,7 @@ input+.register_error {
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
 }
 
 #form {
@@ -147,7 +147,7 @@ input+.register_error {
 .email,
 .password,
 .terms {
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     font-family: "Roboto";
     font-size: 14px;
     line-height: 12px;
@@ -170,14 +170,14 @@ input+.register_error {
 .signup {
     width: 360px;
     height: 46px;
-    background-color: $primary;
+    background-color: color-palette.$primary;
     margin-top: 15px;
     border-radius: 7px;
     cursor: pointer;
 }
 
 .ptag {
-    color: $outline;
+    color: color-palette.$outline;
     font-size: 13px;
     font-weight: "medium";
     margin-top: 3px;
@@ -185,7 +185,7 @@ input+.register_error {
 }
 
 input::placeholder {
-    color: $secondary-light;
+    color: color-palette.$secondary-light;
     //padding: 15px;
     font-size: 14px;
 }
@@ -193,14 +193,14 @@ input::placeholder {
 .sign-in-here {
     position: relative;
     top: 30px;
-    color: $secondary-light;
+    color: color-palette.$secondary-light;
     font-family: Roboto;
     font-size: 14px;
     font-weight: "regular";
 }
 
 #sign-in-here {
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
     font-weight: bold;
     font-family: 14px;
     font-family: Roboto;
@@ -237,7 +237,7 @@ input::placeholder {
 }
 
 #Rectangle_Copy {
-    fill: $outline;
+    fill: color-palette.$outline;
 }
 
 .Rectangle_Copy {
@@ -269,7 +269,7 @@ input::placeholder {
 
 a {
     text-decoration: none;
-    color: $primary-dark;
+    color: color-palette.$primary-dark;
 }
 
 #Register-main {
@@ -288,7 +288,7 @@ a {
     height: 52px;
     margin-top: 14px;
     border-radius: 4px;
-    border: 1px solid $outline;
+    border: 1px solid color-palette.$outline;
     outline: none;
     padding-left: 10px;
     &::placeholder {
@@ -301,7 +301,7 @@ a {
     }
 }
 
-@media only screen and(max-width: 1180px) and (min-width: 980px) {
+@media only screen and (max-width: 1180px) and (min-width: 980px) {
     #form {
         position: absolute !important;
         transform: translate(-100px, 60px) !important;
@@ -316,7 +316,7 @@ a {
     }
 }
 
-@media only screen and(max-width: 980px) {
+@media only screen and (max-width: 980px) {
     #form {
         position: absolute !important;
         transform: translate(-200px, 60px) !important;

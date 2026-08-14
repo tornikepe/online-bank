@@ -1,4 +1,4 @@
-@import "../../../assets/color-palette.scss";
+@use "../../../assets/color-palette.scss";
 
 $border: #707070;
 
@@ -46,63 +46,63 @@ p{
 }
 
 .blue{
-    background-color: $secondary-blue;
-    color: $background-light;
+    background-color: color-palette.$secondary-blue;
+    color: color-palette.$background-light;
 }
 
 .primary-dark{
-    background-color: $primary-dark;
-    color: $background-light;
+    background-color: color-palette.$primary-dark;
+    color: color-palette.$background-light;
 }
 
 .secondary-dark{
-    background-color: $secondary-dark;
-    color: $background-light;
+    background-color: color-palette.$secondary-dark;
+    color: color-palette.$background-light;
 }
 
 .secondary-light{
-    background-color: $secondary-light;
-    color: $background-light;
+    background-color: color-palette.$secondary-light;
+    color: color-palette.$background-light;
 }
 
 .primary{
-    background-color: $primary;
-    color: $background-light;
+    background-color: color-palette.$primary;
+    color: color-palette.$background-light;
 }
 
 .secondary-green{
-    background-color: $secondary-green;
-    color: $background-light;
+    background-color: color-palette.$secondary-green;
+    color: color-palette.$background-light;
 }
 
 .secondary-pink{
-    background-color: $secondary-pink;
-    color: $background-light;
+    background-color: color-palette.$secondary-pink;
+    color: color-palette.$background-light;
 }
 
 .secondary-light-blue{
-    background-color: $secondary-light-blue;
-    color: $background-light;
+    background-color: color-palette.$secondary-light-blue;
+    color: color-palette.$background-light;
 }
 
 .outline{
-    background-color: $outline;
-    color: $secondary-light;
+    background-color: color-palette.$outline;
+    color: color-palette.$secondary-light;
 }
 
 .background-dark{
-    background-color: $background-dark;
-    color: $secondary-light;
+    background-color: color-palette.$background-dark;
+    color: color-palette.$secondary-light;
 }
 
 .background-light{
-    background-color: $background-light;
-    color: $secondary-light;
+    background-color: color-palette.$background-light;
+    color: color-palette.$secondary-light;
 }
 
 .border{
     border: 2px solid $border;
-    color: $secondary-light;
+    color: color-palette.$secondary-light;
 }
 
 .icon-bell-1{

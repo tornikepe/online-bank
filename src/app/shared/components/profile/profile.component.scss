@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Roboto&family=Roboto+Slab:wght@200&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Roboto&family=Roboto+Slab:wght@200&family=Rubik:ital@1&display=swap");
-@import "../../../../assets/color-palette.scss";
-@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@use "../../../../assets/color-palette.scss";
 #User_q {
   cursor: pointer;
   margin-right: 121px;
@@ -9,7 +6,7 @@
   position: relative;
 }
 .Barry_Armstrong {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   font-style: normal;
@@ -30,7 +27,7 @@
 }
 .bg_border {
   border-radius: 50%;
-  border: 2px solid $primary;
+  border: 2px solid color-palette.$primary;
 }
 #img {
   left: 50%;
@@ -39,7 +36,7 @@
   transform: translate(-50%, -50%);
 }
 #UserMenu {
-  background-color: $white;
+  background-color: color-palette.$white;
   border-radius: 4px;
   box-shadow: 2px 0 16px #999ba8;
   height: 237px;
@@ -57,7 +54,7 @@
   width: 286px;
 }
 #BarryArmstrong {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: "Rubik", sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -71,7 +68,7 @@
   width: 114px;
 }
 #BArmstrongGmailCo {
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -93,7 +90,7 @@
   width: 36px;
 }
 #Mask_ {
-  fill: $outline;
+  fill: color-palette.$outline;
 }
 .Mask_ {
   height: 36px;
@@ -120,7 +117,7 @@
   width: 103px;
 }
 #Text {
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-family: LineAwesome;
   font-size: 18px;
   font-style: normal;
@@ -134,7 +131,7 @@
   width: 13px;
 }
 #Lable {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-style: normal;
@@ -156,7 +153,7 @@
   width: 90px;
 }
 #Text_bc {
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-family: LineAwesome;
   font-size: 18px;
   font-style: normal;
@@ -170,7 +167,7 @@
   width: 13px;
 }
 #Lable_bd {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-style: normal;
@@ -193,7 +190,7 @@
   width: 77px;
 }
 #Text_bf {
-  color: $secondary-dark;
+  color: color-palette.$secondary-dark;
   font-family: LineAwesome;
   font-size: 18px;
   font-style: normal;
@@ -207,7 +204,7 @@
   width: 13px;
 }
 #Lable_bg {
-  color: $primary-dark;
+  color: color-palette.$primary-dark;
   font-family: Roboto;
   font-size: 12px;
   font-style: normal;
@@ -237,7 +234,7 @@
   width: 19px;
 }
 #colored_us {
-  background-color: $background-light;
+  background-color: color-palette.$background-light;
   border-radius: 4px 4px 0 0;
   height: 79.75px;
   width: 286;

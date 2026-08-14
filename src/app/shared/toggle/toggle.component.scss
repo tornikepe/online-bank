@@ -1,4 +1,4 @@
-@import '../../../assets/color-palette.scss';
+@use '../../../assets/color-palette.scss';
 
 .toggleComponent{
     display: flex;
@@ -6,7 +6,7 @@
         height: 22px;
         width: 40px;
         border-radius: 34px;
-        background-color: $primary;
+        background-color: color-palette.$primary;
         padding: 3px 4px;
         transition: all 0.3s ease;
         div{
@@ -18,26 +18,26 @@
         }
     }
     .toggle.toggleOff{
-        background-color: $background-dark;
+        background-color: color-palette.$background-dark;
         div{
-            background-color: $secondary-light;
+            background-color: color-palette.$secondary-light;
         }
     }
     .toggle.toggleOn{
-        background-color: $primary;
+        background-color: color-palette.$primary;
         padding-left: 20px;
         div{
             background-color: #FFFFFF;
         }
     }
     .toggle.errorToggleOff{
-        background-color: $secondary-pink;
+        background-color: color-palette.$secondary-pink;
         div{
             background-color: #FFFFFF;
         }
     }
     .toggle.successToggleOn{
-        background-color: $secondary-green;
+        background-color: color-palette.$secondary-green;
         padding-left: 20px;
         div{
             background-color: #FFFFFF;
@@ -56,16 +56,16 @@
         margin-top: 2px;
     }
     p.toggleOff{
-        color: $secondary-dark;
+        color: color-palette.$secondary-dark;
     }
     p.toggleOn{
-        color: $primary-dark;
+        color: color-palette.$primary-dark;
     }
     p.errorToggleOff{
-        color: $secondary-pink;
+        color: color-palette.$secondary-pink;
     }
     p.successToggleOn{
-        color: $secondary-green;
+        color: color-palette.$secondary-green;
     }
     p.disabled{
         opacity: 0.7;

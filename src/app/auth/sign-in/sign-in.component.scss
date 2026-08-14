@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import '../../../assets/color-palette.scss';
+@use '../../../assets/color-palette.scss';
 * {
     margin: 0;
     padding: 0;
@@ -25,13 +24,13 @@
         left: 0;
         .header-text {
             font-family: "Roboto", sans-serif;
-            color: $primary;
+            color: color-palette.$primary;
             font-size: 18px;
             line-height: 24px;
             span {
                 line-height: 27px;
                 font-size: 20px;
-                color: $primary;
+                color: color-palette.$primary;
             }
         }
         .name_of_action {
@@ -76,12 +75,12 @@
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: 300;
-                color: $secondary-dark;
+                color: color-palette.$secondary-dark;
             }
             .recovery-password {
                 margin-left: 115px;
                 text-decoration: none;
-                color: $primary-dark;
+                color: color-palette.$primary-dark;
             }
         }
         .button {
@@ -93,20 +92,20 @@
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: 300;
-                color: $secondary-light;
+                color: color-palette.$secondary-light;
             }
             .signup {
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: bold;
                 text-decoration: none;
-                color: $primary-dark;
+                color: color-palette.$primary-dark;
             }
         }
     }
 }
 
-@media only screen and(max-width: 1180px) {
+@media only screen and (max-width: 1180px) {
     #Register-main {
         .formGroup {
             transform: translate(117px, 60px);
@@ -114,10 +113,15 @@
     }
 }
 
-@media only screen and(max-width: 980px) {
+@media only screen and (max-width: 980px) {
     #Register-main {
         .formGroup {
             transform: translate(10px, 60px);
         }
     }
+}
+.sign-in-error {
+  margin: 0 0 12px;
+  color: #e2564d;
+  font-size: 14px;
 }
