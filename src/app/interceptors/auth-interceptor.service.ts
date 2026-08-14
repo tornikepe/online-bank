@@ -1,35 +1,39 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthInterceptorService implements HttpInterceptor {
-  authService: any;
-
-  constructor() { }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.authService?.getToken();
-
-    if (token) {
-      // If we have a token, we set it to the header
-      req = req.clone({
-         setHeaders: {Authorization: `Authorization token ${token}`}
-      });
-   }
-   
-   return next.handle(req).pipe(
-     catchError((err) => {
-       if (err instanceof HttpErrorResponse) {
-           if (err.status === 401) {
-           // redirect user to the logout page
-           //this.router.navigate("/recovery-passw");
-        }
-     }
-     return throwError(err);
-   })
-    )
-   }
+/** Our own API — third-party hosts and local assets must never see the token. */
+function isOwnApi(url: string): boolean {
+  return url.startsWith(environment.BaseUrl);
 }
+
+/**
+ * Attaches the bearer token to requests aimed at our API and signs the user out
+ * when that API rejects it.
+ */
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (!isOwnApi(req.url)) {
+    return next(req);
+  }
+
+  const token = auth.getToken();
+  const request = token
+    ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+    : req;
+
+  return next(request).pipe(
+    catchError((err) => {
+      if (err instanceof HttpErrorResponse && err.status === 401) {
+        auth.clear();
+        router.navigate(['/sign-in']);
+      }
+      return throwError(() => err);
+    })
+  );
+};
