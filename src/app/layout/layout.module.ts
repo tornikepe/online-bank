@@ -5,16 +5,17 @@ import { RouterModule, Routes } from "@angular/router";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { TopbarComponent } from "./topbar/topbar.component";
 import { MainComponent } from "./main/main.component";
-import { LayoutService } from "./services/layout.service";
 import { FooterComponent } from "./footer/footer.component";
 import { NewsComponent } from "../features/news/news.component";
 import { NotificationsComponent } from "./topbar/notifications/notifications.component";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { authGuard } from "../guard/auth.guard";
 
 const routes: Routes = [
   {
     path: "",
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       {
@@ -83,6 +84,5 @@ const modules = [CommonModule, SharedModule, InfiniteScrollModule, RouterModule.
 	declarations: [...components, FooterComponent, NotificationsComponent],
 	imports: [...modules],
 	exports: [RouterModule, ...components],
-	providers: [LayoutService],
 })
 export class LayoutModule { }

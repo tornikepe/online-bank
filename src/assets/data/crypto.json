@@ -1,0 +1,158 @@
+{
+  "status": { "error_code": 0, "error_message": null },
+  "note": "Bundled sample listing. Used whenever environment.crypto is left unconfigured, so the Crypto tab works without a third-party API key.",
+  "data": [
+    {
+      "id": 1,
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "icon": "assets/images/auth/Bitcoin-PNG-Background.png",
+      "quote": {
+        "USD": {
+          "price": 96482.31,
+          "volume_24h": 41250000000,
+          "market_cap": 1912000000000,
+          "percent_change_1h": 0.12,
+          "percent_change_24h": 1.84,
+          "percent_change_7d": -2.31
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "icon": "assets/images/auth/ethan-hoover-422836-unsplash.png",
+      "quote": {
+        "USD": {
+          "price": 3184.77,
+          "volume_24h": 18940000000,
+          "market_cap": 383500000000,
+          "percent_change_1h": -0.08,
+          "percent_change_24h": 2.41,
+          "percent_change_7d": 4.02
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Tether",
+      "symbol": "USDT",
+      "quote": {
+        "USD": {
+          "price": 1.0,
+          "volume_24h": 62310000000,
+          "market_cap": 141800000000,
+          "percent_change_1h": 0.0,
+          "percent_change_24h": -0.01,
+          "percent_change_7d": 0.02
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "BNB",
+      "symbol": "BNB",
+      "quote": {
+        "USD": {
+          "price": 612.45,
+          "volume_24h": 1840000000,
+          "market_cap": 89200000000,
+          "percent_change_1h": 0.31,
+          "percent_change_24h": -1.12,
+          "percent_change_7d": 3.48
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Solana",
+      "symbol": "SOL",
+      "quote": {
+        "USD": {
+          "price": 178.92,
+          "volume_24h": 3420000000,
+          "market_cap": 84600000000,
+          "percent_change_1h": 0.44,
+          "percent_change_24h": 5.17,
+          "percent_change_7d": 9.63
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "XRP",
+      "symbol": "XRP",
+      "quote": {
+        "USD": {
+          "price": 2.31,
+          "volume_24h": 2980000000,
+          "market_cap": 132400000000,
+          "percent_change_1h": -0.19,
+          "percent_change_24h": 0.87,
+          "percent_change_7d": -4.15
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Cardano",
+      "symbol": "ADA",
+      "quote": {
+        "USD": {
+          "price": 0.9142,
+          "volume_24h": 891000000,
+          "market_cap": 32700000000,
+          "percent_change_1h": 0.05,
+          "percent_change_24h": -2.04,
+          "percent_change_7d": 1.29
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "Dogecoin",
+      "symbol": "DOGE",
+      "quote": {
+        "USD": {
+          "price": 0.3218,
+          "volume_24h": 1470000000,
+          "market_cap": 47300000000,
+          "percent_change_1h": 0.62,
+          "percent_change_24h": 3.95,
+          "percent_change_7d": -6.71
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "Polkadot",
+      "symbol": "DOT",
+      "quote": {
+        "USD": {
+          "price": 7.84,
+          "volume_24h": 412000000,
+          "market_cap": 11900000000,
+          "percent_change_1h": -0.27,
+          "percent_change_24h": 1.06,
+          "percent_change_7d": 2.88
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "Chainlink",
+      "symbol": "LINK",
+      "quote": {
+        "USD": {
+          "price": 22.16,
+          "volume_24h": 638000000,
+          "market_cap": 14100000000,
+          "percent_change_1h": 0.18,
+          "percent_change_24h": -0.94,
+          "percent_change_7d": 5.32
+        }
+      }
+    }
+  ]
+}

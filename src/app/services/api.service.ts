@@ -1,9 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { User } from "../auth/user.model";
+import { User } from "../models/banking.model";
 
+import { environment } from "src/environments/environment";
 interface UsersDataType {
   agree_terms?: boolean;
   Email: string;
@@ -22,7 +24,7 @@ export class ApiService {
 
   SignUp(userData: UsersDataType) {
     return this._http
-      .post<any>("http://localhost:3000/register", {
+      .post<any>(`${environment.BaseUrl}register`, {
         email: userData.Email,
         password: userData.Password,
         Full_Name: userData.full_name,
@@ -37,7 +39,7 @@ export class ApiService {
 
   LogIn(email: string, password: string) {
     return this._http
-      .post<any>("http://localhost:3000/login", {
+      .post<any>(`${environment.BaseUrl}login`, {
         email: email,
         password: password,
       })
@@ -48,16 +50,16 @@ export class ApiService {
       );
   }
 
-  Get_User_Id_With_Email() {
-    return this._http.get<any>("http://localhost:3000/users").pipe(
+  Get_User_Id_With_Email(): Observable<User[]> {
+    return this._http.get<User[]>(`${environment.BaseUrl}users`).pipe(
       map((response) => {
         return response;
       })
     );
   }
-  update_user_to_server_with_id(user: User, id: number) {
+  update_user_to_server_with_id(user: Partial<User>, id: number): Observable<User> {
     return this._http
-      .put<any>(`http://localhost:3000/users/${id}`, { ...user })
+      .put<User>(`${environment.BaseUrl}users/${id}`, { ...user })
       .pipe(
         map((response) => {
           return response;
@@ -66,11 +68,11 @@ export class ApiService {
     /*  თუ დაგჭირდებათ იუზერის სხვა მონაცემების გადაწოდება ამ მეთდისთვის მაშინ   UsersDataType- ინტერფეისში  დაამატეთ თქვენი პარამეტრი ოფშენალად. UsersDataType არის ამავე სერვისში აღწერილი ზემოთ, იუზერის მონაცემები შეგიძლიათ მოიპოვოთ user.service.ts ში get-ერის საშუალებით საიდანაც ამოიღებთ წარმატებით დალოგინებული მომხმარებლის ინფორმაციას. :) წარმატებები*/
   }
 
-  getUserData(id: number) {
-    return this._http.get<any>(`http://localhost:3000/users/${id}`);
+  getUserData(id: number): Observable<User> {
+    return this._http.get<User>(`${environment.BaseUrl}users/${id}`);
   }
 
   DeleteUser(id: number) {
-    return this._http.delete<any>(`http://localhost:3000/users/${id}`);
+    return this._http.delete<any>(`${environment.BaseUrl}users/${id}`);
   }
 }

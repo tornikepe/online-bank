@@ -7,7 +7,7 @@ import { NewInvoiceComponent } from './new-invoice/new-invoice.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoiceDetailsComponent } from './invoices/invoice-details/invoice-details.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/guard/auth.guard';
+import { authGuard } from 'src/app/guard/auth.guard';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 
@@ -15,12 +15,12 @@ const routes: Routes = [
 	{
 		path: '',
 		component: InvoicesComponent,
-		canActivate: [AuthGuard],
+		canActivate: [authGuard],
 	},
 	{
 		path: 'newInvoice',
 		component: NewInvoiceComponent,
-		canActivate: [AuthGuard],
+		canActivate: [authGuard],
 	},
 ];
 

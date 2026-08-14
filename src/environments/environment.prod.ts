@@ -1,8 +1,21 @@
+/*
+ * No secrets belong in this file — it is committed to the repository. Supply real
+ * values through your deployment's build step; a feature whose key is blank falls
+ * back to bundled demo data instead of calling the third-party service.
+ */
 export const environment = {
   production: true,
   BaseUrl: 'http://localhost:3000/',
-  NewsApi: {
-    Url: 'https://newsapi.org/v2/',
-    apiKey: 'e7a4c5bc722148b5a0a58dc50475d19b'
+
+  /* Financial news feed. */
+  news: {
+    url: '',
+    apiKey: '',
+  },
+
+  /* Cryptocurrency listings shown on the Currency page. */
+  crypto: {
+    url: '',
+    apiKey: '',
   },
 };

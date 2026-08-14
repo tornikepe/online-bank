@@ -1,5 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+
+/**
+ * Financial news feed.
+ *
+ * The service the original build used (RapidAPI's "free-news") has been retired
+ * and its key is no longer valid, so no credentials live in this repository. When
+ * `environment.news` is left blank the page falls back to the bundled sample feed
+ * in `assets/data/news.json`; fill the environment in to point it at a live API.
+ */
 @Injectable({
   providedIn: "root",
 })
@@ -8,67 +19,41 @@ export class NewsAPIService {
   currentPageRecent = 1;
   currentPageTrending = 1;
 
+  private readonly fallbackUrl = "assets/data/news.json";
+
   constructor(private http: HttpClient) {}
 
-  key = "610abc89b3mshde5fec56c575a2bp175b43jsn8b7796f9751b";
-  url = "https://free-news.p.rapidapi.com/v1/search";
-  recentOptions = {
-    method: "GET",
-    url: "https://free-news.p.rapidapi.com/v1/search",
-    topic: "tech",
-    params: {
-      q: "latest",
-      lang: "en",
-      page: `${this.currentPageRecent}`,
-      page_size: "20",
-    },
-
-    headers: {
-      "x-rapidapi-key": this.key,
-      "x-rapidapi-host": "free-news.p.rapidapi.com",
-    },
-  };
-  trendingOptions = {
-    method: "GET",
-    url: "https://free-news.p.rapidapi.com/v1/search",
-    topic: "tech",
-    params: {
-      q: "trending",
-      lang: "en",
-      page: `${this.currentPageTrending}`,
-      page_size: "20",
-    },
-
-    headers: {
-      "x-rapidapi-key": this.key,
-      "x-rapidapi-host": "free-news.p.rapidapi.com",
-    },
-  };
-  popularOptions = {
-    method: "GET",
-    url: "https://free-news.p.rapidapi.com/v1/search",
-    topic: "tech",
-    params: {
-      q: "popular",
-      lang: "en",
-      page: `${this.currentPagePopular}`,
-      page_size: "20",
-    },
-
-    headers: {
-      "x-rapidapi-key": this.key,
-      "x-rapidapi-host": "free-news.p.rapidapi.com",
-    },
-  };
-
-  getPopularNews(date: string) {
-    return this.http.get(this.url, this.popularOptions);
+  private get isConfigured(): boolean {
+    return !!environment.news.url && !!environment.news.apiKey;
   }
 
-  getRecentNews(date: string) {
-    return this.http.get(this.url, this.recentOptions);
+  private request(topic: string, page: number): Observable<any> {
+    if (!this.isConfigured) {
+      return this.http.get<any>(this.fallbackUrl);
+    }
+
+    return this.http.get<any>(environment.news.url, {
+      params: {
+        q: topic,
+        lang: "en",
+        page: String(page),
+        page_size: "20",
+      },
+      headers: {
+        "x-api-key": environment.news.apiKey,
+      },
+    });
   }
-  getTrendingNews(date: string) {
-    return this.http.get(this.url, this.trendingOptions);
+
+  getPopularNews(_date?: string): Observable<any> {
+    return this.request("popular", this.currentPagePopular);
+  }
+
+  getRecentNews(_date?: string): Observable<any> {
+    return this.request("latest", this.currentPageRecent);
+  }
+
+  getTrendingNews(_date?: string): Observable<any> {
+    return this.request("trending", this.currentPageTrending);
   }
 }
