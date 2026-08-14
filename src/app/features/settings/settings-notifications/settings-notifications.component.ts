@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { SettingsService } from '../settings.service';
 
+import { environment } from "src/environments/environment";
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 export interface notificationType {
 	id?: number;
 	userId?: number;
@@ -15,6 +17,7 @@ export interface notificationType {
 }
 
 @Component({
+	standalone: false,
 	selector: 'app-settings-notifications',
 	templateUrl: './settings-notifications.component.html',
 	styleUrls: ['./settings-notifications.component.scss'],
@@ -34,8 +37,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 	constructor( 
 		private _http: HttpClient, 
 		private settingService: SettingsService, 
-		private fb: FormBuilder 
-	) {} 
+		private fb: FormBuilder, private cdr: ChangeDetectorRef, private notification: NotificationsService) {} 
  
 	ngOnInit(): void { 
 		this.userId = Number(localStorage.getItem('userId')); 
@@ -50,11 +52,13 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
  
 		this.subCancel = this.settingService.cancelSettingsButtonClicked.subscribe(() => { 
 			this.reset(); 
+				  this.cdr.markForCheck();
 		}); 
  
 		this.updatebuttonSub = this.settingService.updateSettingsButtonClicked.subscribe( 
 			() => { 
 				this.createnotification(); 
+						  this.cdr.markForCheck();
 			}  
 		); 
  
@@ -66,7 +70,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 		}); 
  
 		this.getnotification = this._http 
-			.get<notificationType[]>('http://localhost:3000/notifications') 
+			.get<notificationType[]>(`${environment.BaseUrl}notifications`) 
 			.subscribe((allnotifications: notificationType[]) => { 
 				const notification = allnotifications.find((element: notificationType) => { 
 					return element.userId == this.userId; 
@@ -81,6 +85,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 						notifications: notification.notifications, 
 					}); 
 				} 
+						  this.cdr.markForCheck();
 			}); 
 	} 
 	setForm(value: boolean, whichtogle: string) { 
@@ -111,7 +116,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 		if (this.isnotificationInDB) { 
 			this.updatenotification = this._http 
 				.put( 
-					`http://localhost:3000/notifications/${this.notifications.id}`, 
+					`${environment.BaseUrl}notifications/${this.notifications.id}`, 
 					notificationforsend 
 				) 
 				.subscribe(data => { 
@@ -119,17 +124,25 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 					this.settingService.toggleCancelButton(false); 
 					this.notifications = data; 
  
-					alert('Notification Updated!'); 
+					this.notification.open({
+          class: 'secondary-green',
+          text: 'Notification Updated!',
+        }); 
+								  this.cdr.markForCheck();
 				}); 
 		} else { 
 			this.Subcreatenotification = this._http 
-				.post(`http://localhost:3000/notifications/`, notificationforsend) 
+				.post(`${environment.BaseUrl}notifications/`, notificationforsend) 
 				.subscribe(data => { 
 					this.settingService.disabledUpdateButton(true); 
 					this.settingService.toggleCancelButton(false); 
 					this.isnotificationInDB = true; 
 					this.notifications = data; 
-					alert('Notification Updated!'); 
+					this.notification.open({
+          class: 'secondary-green',
+          text: 'Notification Updated!',
+        }); 
+								  this.cdr.markForCheck();
 				}); 
 		} 
 	} 

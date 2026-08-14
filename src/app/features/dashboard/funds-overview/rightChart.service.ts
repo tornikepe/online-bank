@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs";
+import { environment } from "src/environments/environment";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -53,7 +54,7 @@ export class RightChartService {
   getRightChartData(avgIncomeVersion: string) {
     return this.http
       .get<number[]>(
-        `http://localhost:3000/income?interval=monthly&to=${avgIncomeVersion}&userId=${this.loggedUser}`
+        `${environment.BaseUrl}income?interval=monthly&to=${avgIncomeVersion}&userId=${this.loggedUser}`
       )
       .pipe(
         map((avgIncomeData: number[]) => {

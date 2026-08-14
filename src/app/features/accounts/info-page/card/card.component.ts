@@ -1,14 +1,24 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import { CardService } from "../../card.service";
 import {GetnotfsService} from "../../../../services/getnotfs.service";
 import {NotificationsService} from "../../../../shared/notifications/notifications.service";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
+  standalone: false,
   selector: "app-card",
   templateUrl: "./card.component.html",
   styleUrls: ["./card.component.scss"],
 })
 export class CardComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
+  /* Header label for the transaction list — was hardcoded to "AUGUST 2018". */
+  readonly currentPeriod = new Date().toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  }).toUpperCase();
+
   public id: number;
   public cardInfo: any;
   public transactions: any;
@@ -18,14 +28,14 @@ export class CardComponent implements OnInit {
               private CardService: CardService,
               private router: Router,
               private getnotfsService: GetnotfsService,
-              private notification: NotificationsService
-  ) {
+              private notification: NotificationsService, private cdr: ChangeDetectorRef) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       this.id = params["id"];
+          this.cdr.markForCheck();
     });
     this.showConfig();
     this.showTransactions()
@@ -46,6 +56,7 @@ export class CardComponent implements OnInit {
   delete() {
     this.CardService.delete(this.id).subscribe(() => {
       this.router.navigate(['accounts'])
+          this.cdr.markForCheck();
     });
     this.getnotfsService.addNotf({
       userId: localStorage.getItem('userId'),

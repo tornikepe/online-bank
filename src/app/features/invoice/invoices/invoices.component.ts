@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Invoice } from '../invoice.model';
 import { InvoicesService } from '../invoices.service';
@@ -28,6 +28,7 @@ export interface ChartOptionsType {
 	grid: ApexGrid;
 }
 @Component({
+	standalone: false,
 	selector: 'app-invoices',
 	templateUrl: './invoices.component.html',
 	styleUrls: ['./invoices.component.scss'],
@@ -54,8 +55,7 @@ export class InvoicesComponent implements OnDestroy {
 	constructor(
 		private invoiceService: InvoicesService,
 		private route: ActivatedRoute,
-		private router: Router
-	) {}
+		private router: Router, private cdr: ChangeDetectorRef) {}
 	ngOnInit(): void {
 		this.template_name = 'Webdesign';
 		this.userId = Number(localStorage.getItem('userId'));
@@ -187,6 +187,7 @@ export class InvoicesComponent implements OnDestroy {
 				},
 				categories: categories,
 			};
+				  this.cdr.markForCheck();
 		});
 	}
 

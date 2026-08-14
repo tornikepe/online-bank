@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { SettingsService } from './settings.service';
 
 @Component({
+	standalone: false,
 	selector: 'app-settings',
 	templateUrl: './settings.component.html',
 	styleUrls: ['./settings.component.scss'],
@@ -21,8 +22,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 		private settingsService: SettingsService,
 		private userService: UserService,
 		private apiService: ApiService,
-		private router: Router
-	) {}
+		private router: Router, private cdr: ChangeDetectorRef) {}
 
 	ngOnInit(): void {
 		this.Sub = this.settingsService.showCancelButton.subscribe(
@@ -52,10 +52,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
 				resData => {
 					//Server - ი აერორებს 500 მაგრამ მაინც შლის Users
 					this.router.navigate(['/']);
+								  this.cdr.markForCheck();
 				},
 				error => {
 					//Server - ი აერორებს 500 , მაგრამ მაინც შლის Users
 					this.router.navigate(['/']);
+								  this.cdr.markForCheck();
 				}
 			);
 		}

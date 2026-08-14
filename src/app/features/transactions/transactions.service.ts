@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { Transaction } from "src/app/models/banking.model";
 import { UserService } from "src/app/services/user.service";
 
+import { environment } from "src/environments/environment";
 let months = {
   January: 1,
   February: 2,
@@ -22,31 +24,31 @@ let months = {
   providedIn: "root",
 })
 export class TransactionsService {
-  filteredTransactions$ = new Subject();
+  filteredTransactions$ = new Subject<Transaction[]>();
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
   currentUserId = 11;
 
-  // private url = 'http://localhost:3000/posts';
-  private url = "http://localhost:3000/transactions";
+  // private url = `${environment.BaseUrl}posts`;
+  private url = `${environment.BaseUrl}transactions`;
 
-  getData(): Observable<any> {
-    return this.http.get<any>(this.url);
+  getData(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url);
   }
 
   universalFilter(
-    data: any[],
+    data: Transaction[],
     searchValue: string,
     typeValue: string,
     dateValue: string
   ) {
-    data = data.filter((transaction: any) => {
-      return transaction.description.toLowerCase().includes(searchValue);
+    data = data.filter((transaction) => {
+      return (transaction.description ?? "").toLowerCase().includes(searchValue);
     });
 
     if (typeValue != "All") {
-      data = data.filter((transaction: any) => {
+      data = data.filter((transaction) => {
         return transaction.type === typeValue;
       });
     }

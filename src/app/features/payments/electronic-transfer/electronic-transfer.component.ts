@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef} from "@angular/core";
 // import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
   FormBuilder,
@@ -10,6 +10,7 @@ import { NotificationsService } from 'src/app/shared/notifications/notifications
 import { PaymentsService } from '../payments.service';
 
 @Component({
+  standalone: false,
   selector: "app-electronic-transfer",
   templateUrl: "./electronic-transfer.component.html",
   styleUrls: ["./electronic-transfer.component.scss"],
@@ -19,7 +20,7 @@ export class ElectronicTransferComponent implements OnInit {
 
   amountValue: number;
   fee: number;
-  activeCard: any = this.paymentsService.currentCards[0];
+  activeCard: any;
   transferType: string = "Personal transfer";
   currencyType: string = "USD";
 
@@ -30,8 +31,8 @@ export class ElectronicTransferComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private paymentsService: PaymentsService,
-    private notification: NotificationsService
-  ) {
+    private notification: NotificationsService, private cdr: ChangeDetectorRef) {
+    this.activeCard = this.paymentsService.currentCards[0];
     this.eTransferForm = fb.group({
       paypal: ["", [Validators.required, Validators.pattern("^.{22}$")]],
       amount: ["", [Validators.required]],
@@ -115,12 +116,14 @@ export class ElectronicTransferComponent implements OnInit {
               class: "secondary-green",
               text: "Transaction sent successfully",
             });
+                      this.cdr.markForCheck();
           },
           error => {
             this.notification.open({
               class: "income",
               text: "Something wrong",
             });
+                      this.cdr.markForCheck();
           }
         );
     }

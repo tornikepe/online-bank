@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { forkJoin, map } from "rxjs";
+import { environment } from "src/environments/environment";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -87,10 +88,10 @@ export class LeftChartService {
 
   getLeftChartData(interval: string) {
     let incomeRequest = this.http.get(
-      `http://localhost:3000/income?interval=${interval}&userId=${this.loggedUser}`
+      `${environment.BaseUrl}income?interval=${interval}&userId=${this.loggedUser}`
     );
     let expensesRequest = this.http.get(
-      `http://localhost:3000/expenses?interval=${interval}&userId=${this.loggedUser}`
+      `${environment.BaseUrl}expenses?interval=${interval}&userId=${this.loggedUser}`
     );
 
     return forkJoin([incomeRequest, expensesRequest]).pipe(

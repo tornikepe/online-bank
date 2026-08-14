@@ -27,6 +27,7 @@ export type ChartOptions = {
 };
 
 @Component({
+  standalone: false,
   selector: "app-charts",
   templateUrl: "./charts.component.html",
   styleUrls: ["./charts.component.scss"],

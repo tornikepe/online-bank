@@ -1,16 +1,21 @@
-import { Subscription } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ApiService } from "../../services/api.service";
 import { Router } from "@angular/router";
 
+import { environment } from "src/environments/environment";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 @Component({
+  standalone: false,
   selector: "app-recover-pass",
   templateUrl: "./recover-pass.component.html",
   styleUrls: ["./recover-pass.component.scss"],
 })
-export class RecoverPassComponent implements OnInit, OnDestroy {
+export class RecoverPassComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
   private destr: any;
   public form: FormGroup = new FormGroup({});
   public form_2: FormGroup = new FormGroup({});
@@ -35,8 +40,7 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _api: ApiService,
     private _http: HttpClient,
-    private router: Router
-  ) {
+    private router: Router, private cdr: ChangeDetectorRef, private notification: NotificationsService) {
     this.form_2 = this._fb.group({
       password: ["", [Validators.required]],
     });
@@ -46,7 +50,7 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
     this.form = this._fb.group({
       email: ["", [Validators.required, Validators.email]],
     });
-    this.destr = this.form.get("email")?.valueChanges.subscribe((res) => {
+    this.form.get("email")?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((res) => {
       if (this.form.get("email")?.status == "VALID") {
         this.valid = false;
         this.input_class = "input-success";
@@ -54,6 +58,7 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
         this.valid = true;
         this.input_class = "input-warn";
       }
+          this.cdr.markForCheck();
     });
   }
 
@@ -78,16 +83,21 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
         }
         // this.form.reset()
         this.ValueForInput = "";
+              this.cdr.markForCheck();
       },
       (error) => {
-        alert(error.error);
+        this.notification.open({
+          class: 'secondary-pink',
+          text: String(error.error),
+        });
+              this.cdr.markForCheck();
       }
     );
   }
 
   Update() {
     this._http
-      .put<any>(`http://localhost:3000/users/${this.Recover_Id}`, {
+      .put<any>(`${environment.BaseUrl}users/${this.Recover_Id}`, {
         // ...obj
         email: this.currntEmail,
         password: this.form_2.get("password")?.value,
@@ -100,10 +110,15 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
           this.modalTriger = false;
           this.valid = false;
           this.router.navigate(["/sign-in"]);
+                  this.cdr.markForCheck();
         },
         (error) => {
           this.valid = false;
-          alert(error.error);
+          this.notification.open({
+          class: 'secondary-pink',
+          text: String(error.error),
+        });
+                  this.cdr.markForCheck();
         }
       );
   }
@@ -114,8 +129,5 @@ export class RecoverPassComponent implements OnInit, OnDestroy {
   }
   close() {
     this.modalTriger = false;
-  }
-  ngOnDestroy(): void {
-    (this.destr as Subscription).unsubscribe();
   }
 }

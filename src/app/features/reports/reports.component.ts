@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectorRef, DestroyRef, inject} from '@angular/core';
 import * as ApexCharts from 'apexcharts';
 
 import {
   ChartComponent,
   ApexAxisChartSeries,
+  ApexNonAxisChartSeries,
   ApexChart,
   ApexXAxis,
   ApexDataLabels,
@@ -19,6 +20,8 @@ import {
 } from 'ng-apexcharts';
 import { LayoutService } from 'src/app/layout/services/layout.service';
 
+import { environment } from "src/environments/environment";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export type ChartOptions1 = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -43,11 +46,14 @@ export type ChartOptions3 = {
 };
 
 @Component({
+  standalone: false,
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
   @ViewChild('chart') charts: ChartComponent;
   @Input() chart: ApexChart;
   @Input() labels: string[];
@@ -78,17 +84,18 @@ export class ReportsComponent implements OnInit {
   cash: any;
 
   getSpendings() {
-    this.http.get('http://localhost:3000/spending').subscribe(data => {
+    this.http.get(`${environment.BaseUrl}spending`).subscribe(data => {
       this.spendings = data;
       this.debitCard = this.spendings[0].value;
       this.creditCard = this.spendings[1].value;
       this.cash = this.spendings[2].value;
       this.data = [this.debitCard, this.creditCard, this.cash];
       this.chart2();
+          this.cdr.markForCheck();
     });
   }
 
-  constructor(private ls: LayoutService, private http: HttpClient) {}
+  constructor(private ls: LayoutService, private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   chart2() {
     this.max = Math.max(...this.data);
@@ -133,18 +140,19 @@ export class ReportsComponent implements OnInit {
   }
   link(value: string) {
     if (this.overall === 'overall') {
-      return `http://localhost:3000/${value}`;
+      return `${environment.BaseUrl}${value}`;
     } else {
-      return `http://localhost:3000/${value}?type=${this.overall}`;
+      return `${environment.BaseUrl}${value}?type=${this.overall}`;
     }
   }
 
   ngOnInit(): void {
-    this.ls.sidebarStatus$.subscribe(() => {
+    this.ls.sidebarStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       setTimeout(() => {
         this.renderChart1();
         this.renderChart3();
       }, 1000);
+          this.cdr.markForCheck();
     });
     this.getIncome();
     this.getExpenses();
@@ -152,38 +160,49 @@ export class ReportsComponent implements OnInit {
     this.expenseCategories();
   }
 
-  getIncome() {
-    let linkIncome = this.link('income');
-    this.http.get(linkIncome).subscribe(data => {
-      this.incomes = data;
-      this.incomesCards = this.incomes[0].data;
-      this.incomeDeposits = this.incomes[0].data;
-      this.concatIncomeArrays = [];
-      for (let i = 0; i < this.incomesCards.length; i++) {
-        this.concatIncomeArrays.push(
-          this.incomesCards[i] + this.incomeDeposits[i]
-        );
-      }
-      this.canRenderChart1 = true;
-      this.renderChart1();
+  /* "Overall" totals the cards series and the deposits series. Both were read
+     from records[0], so the chart plotted the card figures twice and the deposit
+     line never appeared. */
+  /** Short month names for the last `count` months, oldest first. */
+  private recentMonths(count: number): string[] {
+    const now = new Date();
+    return Array.from({ length: count }, (_, i) => {
+      const month = new Date(now.getFullYear(), now.getMonth() - (count - 1 - i), 1);
+      return month.toLocaleString('en-US', { month: 'short' });
     });
-    this.buildSeries();
+  }
+
+  private combine(records: any[]): number[] {
+    const first: number[] = records?.[0]?.data ?? [];
+    const second: number[] = records?.[1]?.data ?? [];
+    return first.map((value, i) => value + (second[i] ?? 0));
+  }
+
+  getIncome() {
+    this.http.get<any[]>(this.link('income')).subscribe(data => {
+      this.incomes = data;
+      this.incomesCards = data?.[0]?.data ?? [];
+      this.incomeDeposits = data?.[1]?.data ?? [];
+      this.concatIncomeArrays = this.combine(data);
+      this.canRenderChart1 = true;
+      /* Rebuild the series before handing it to the chart — rendering first left
+         `chartOptions1.series` pointing at the array from the previous load. */
+      this.buildSeries();
+      this.renderChart1();
+      this.cdr.markForCheck();
+    });
   }
 
   getExpenses() {
-    let linkExpenses = this.link('expenses');
-    this.http.get(linkExpenses).subscribe(data => {
+    this.http.get<any[]>(this.link('expenses')).subscribe(data => {
       this.expenses = data;
-      this.expensesCards = this.expenses[0].data;
-      this.expensesDeposits = this.expenses[0].data;
-      this.concatExpensesArrays = [];
-      for (let i = 0; i < this.expensesCards.length; i++) {
-        this.concatExpensesArrays.push(
-          this.expensesCards[i] + this.expensesDeposits[i]
-        );
-      }
+      this.expensesCards = data?.[0]?.data ?? [];
+      this.expensesDeposits = data?.[1]?.data ?? [];
+      this.concatExpensesArrays = this.combine(data);
       this.canRenderChart1 = true;
       this.buildSeries();
+      this.renderChart1();
+      this.cdr.markForCheck();
     });
   }
 
@@ -232,13 +251,14 @@ export class ReportsComponent implements OnInit {
   transportation: any;
 
   expenseCategories() {
-    this.http.get('http://localhost:3000/expenseCategories').subscribe(data => {
+    this.http.get(`${environment.BaseUrl}expenseCategories`).subscribe(data => {
       this.categories = data;
       this.grocery = this.categories[0].value;
       this.health = this.categories[1].value;
       this.rent = this.categories[2].value;
       this.transportation = this.categories[3].value;
       this.renderChart3();
+          this.cdr.markForCheck();
     });
   }
 
@@ -281,16 +301,13 @@ export class ReportsComponent implements OnInit {
       },
       xaxis: {
         labels: {
-          show: false,
+          show: true,
         },
-        type: 'datetime',
-        categories: [
-          '2018-09-19T00:00:00.000Z',
-          '2018-09-19T01:30:00.000Z',
-          '2018-09-19T02:30:00.000Z',
-          '2018-09-19T03:30:00.000Z',
-          '2018-09-19T04:30:00.000Z',
-        ],
+        /* One label per month, ending with the current one. The old config used a
+           datetime axis pinned to five fixed 2018 timestamps, which squashed the
+           whole series into the far left of the plot. */
+        type: 'category',
+        categories: this.recentMonths(5),
       },
       yaxis: {
         tickAmount: 5,

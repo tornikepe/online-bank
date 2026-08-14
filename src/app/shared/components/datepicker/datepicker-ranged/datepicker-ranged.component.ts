@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+  standalone: false,
   selector: 'app-datepicker-ranged',
   templateUrl: './datepicker-ranged.component.html',
   styleUrls: ['./datepicker-ranged.component.scss']

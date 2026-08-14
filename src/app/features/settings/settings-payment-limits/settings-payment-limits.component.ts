@@ -1,21 +1,26 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, DestroyRef, inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { SettingsService } from '../settings.service';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 @Component({
+	standalone: false,
 	selector: 'app-settings-payment-limits',
 	templateUrl: './settings-payment-limits.component.html',
 	styleUrls: ['./settings-payment-limits.component.scss'],
 })
 export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
+  private readonly destroyRef = inject(DestroyRef);
+
 	public existUserLimitInDB: boolean = false;
 	public userId: number;
 	public usersLimits: any;
 
 	private SubCancel: Subscription;
-	constructor(private settingService: SettingsService, private fb: FormBuilder) {}
+	constructor(private settingService: SettingsService, private fb: FormBuilder, private cdr: ChangeDetectorRef, private notification: NotificationsService) {}
 
 	usersSpendings: any;
 
@@ -49,6 +54,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 		this.updatebuttonSub = this.settingService.updateSettingsButtonClicked.subscribe(
 			() => {
 				this.createlimit();
+						  this.cdr.markForCheck();
 			}
 		);
 
@@ -81,7 +87,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 			});
 		}
 
-		this.valuechangeSub = this.limitForm.valueChanges.subscribe(formvalue => {
+		this.valuechangeSub = this.limitForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(formvalue => {
 			this.cancalButton();
 			var showupdate: any = false;
 			for (let i in formvalue) {
@@ -93,6 +99,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 				showupdate = true;
 			}
 			this.settingService.disabledUpdateButton(showupdate);
+				  this.cdr.markForCheck();
 		});
 
 		this.initialUserSpending();
@@ -105,6 +112,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 				onlinePayments: this.usersLimits.onlinePayments,
 			});
 			this.settingService.disabledUpdateButton(true);
+				  this.cdr.markForCheck();
 		});
 	}
 
@@ -125,6 +133,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 					});
 				}
 				this.getPercent();
+						  this.cdr.markForCheck();
 			});
 	}
 
@@ -139,6 +148,7 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 					this.usersSpendings = user_spendings;
 				}
 				this.getPercent();
+						  this.cdr.markForCheck();
 			});
 	}
 
@@ -191,7 +201,11 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 						this.settingService.toggleCancelButton(false);
 						this.settingService.disabledUpdateButton(true);
 
-						alert('Notification Updated');
+						this.notification.open({
+          class: 'secondary-green',
+          text: 'Notification Updated',
+        });
+										  this.cdr.markForCheck();
 					});
 			} else {
 				this.createLimitSub = this.settingService
@@ -201,7 +215,11 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 						this.initialUserLimits();
 						this.settingService.toggleCancelButton(false);
 						this.settingService.disabledUpdateButton(true);
-						alert('Notification Updated');
+						this.notification.open({
+          class: 'secondary-green',
+          text: 'Notification Updated',
+        });
+										  this.cdr.markForCheck();
 					});
 			}
 		}

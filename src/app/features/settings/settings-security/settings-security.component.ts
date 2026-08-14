@@ -1,12 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged, Subscription, tap } from 'rxjs';
-import { User } from 'src/app/auth/user.model';
+import { User } from 'src/app/models/banking.model';
 import { ApiService } from 'src/app/services/api.service';
 import { UserService } from 'src/app/services/user.service';
 import { SettingsService } from '../settings.service';
 
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 @Component({
+	standalone: false,
 	selector: 'app-settings-security',
 	templateUrl: './settings-security.component.html',
 	styleUrls: ['./settings-security.component.scss'],
@@ -25,8 +27,7 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 		private fb: FormBuilder,
 		private settingsService: SettingsService,
 		private userService: UserService,
-		private apiService: ApiService
-	) {}
+		private apiService: ApiService, private cdr: ChangeDetectorRef, private notification: NotificationsService) {}
 
 	ngOnInit(): void {
 		//Create Virtual ReactiveForm
@@ -39,10 +40,12 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 		//Listen to Update Button Click
 		this.SubUpdate = this.settingsService.updateSettingsButtonClicked.subscribe(() => {
 			this.onUpdateSettingsClick();
+				  this.cdr.markForCheck();
 		});
 		//Listen to Cancel Button Click
 		this.SubCancel = this.settingsService.cancelSettingsButtonClicked.subscribe(() => {
 			this.onCancelSettingsClick();
+				  this.cdr.markForCheck();
 		});
 
 		//Listen To Input valueChange
@@ -102,11 +105,19 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 								//clear Form Value
 								this.form.reset();
 								this.passInputValidClass = '';
-								alert('Password updated successfully!');
+								this.notification.open({
+          class: 'secondary-green',
+          text: 'Password updated successfully!',
+        });
+														  this.cdr.markForCheck();
 							},
 							//Alert Error
 							error => {
-								alert(error.error);
+								this.notification.open({
+          class: 'secondary-pink',
+          text: String(error.error),
+        });
+														  this.cdr.markForCheck();
 							}
 						);
 					}
@@ -116,11 +127,17 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 					//clear Form Value
 					this.form.reset();
 					this.passInputValidClass = '';
-					alert('Incorrect Password!');
+					this.notification.open({
+          class: 'secondary-pink',
+          text: 'Incorrect Password!',
+        });
 				}
 			);
 		} else {
-			alert('You Must Complete Forms!');
+			this.notification.open({
+          class: 'secondary-pink',
+          text: 'You Must Complete Forms!',
+        });
 		}
 	}
 
