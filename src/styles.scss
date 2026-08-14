@@ -1,11 +1,15 @@
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+/* Fonts are self-hosted so the app has no runtime dependency on Google Fonts. */
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+@import "@fontsource/rubik/400.css";
+
+/* Bootstrap and Font Awesome stylesheets are loaded via angular.json "styles". */
 @import "app/shared/components/datepicker/datePicker";
 @import "./assets/color-palette";
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/typography";
-//Importing C3js styles for charts
-@import "~c3/c3.min.css";
 
 body {
   overflow: overlay;
