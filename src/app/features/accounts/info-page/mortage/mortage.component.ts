@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit, ViewChild, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
   ApexChart,
-  ChartComponent, ApexDataLabels, ApexLegend
+  ChartComponent, ApexDataLabels, ApexLegend, ApexNoData
 } from "ng-apexcharts";
 import {CardService} from "../../card.service";
 import {GetnotfsService} from "../../../../services/getnotfs.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NotificationsService} from "../../../../shared/notifications/notifications.service";
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export type ChartOptions = {
   series: ApexNonAxisChartSeries | any;
   chart: ApexChart | any;
@@ -22,11 +23,20 @@ export type ChartOptions = {
 };
 
 @Component({
+  standalone: false,
   selector: "app-mortage",
   templateUrl: "./mortage.component.html",
   styleUrls: ["./mortage.component.scss"],
 })
 export class MortgageComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
+  /* Header label for the transaction list — was hardcoded to "AUGUST 2018". */
+  readonly currentPeriod = new Date().toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  }).toUpperCase();
+
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -40,8 +50,7 @@ export class MortgageComponent implements OnInit {
       private getnotfsService: GetnotfsService,
       private router: Router,
       private route: ActivatedRoute,
-      private notification: NotificationsService
-  ) {
+      private notification: NotificationsService, private cdr: ChangeDetectorRef) {
     this.chartOptions = {
       series: [70, 10, 20],
       chart: {
@@ -121,9 +130,7 @@ export class MortgageComponent implements OnInit {
     this.cardService.getLoansSingle(this.id)
         .subscribe((data: any) => {
           this.loadData = [data]
-          setTimeout(() => {
-            console.log(this.loadData)
-          },1000)
+                  this.cdr.markForCheck();
         })
   }
 
@@ -144,8 +151,9 @@ export class MortgageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       this.id = params['id'];
+          this.cdr.markForCheck();
     })
     this.getData()
     setTimeout(() => {

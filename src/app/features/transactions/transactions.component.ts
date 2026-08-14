@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { TransactionsService } from './transactions.service';
 
 @Component({
+  standalone: false,
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
-  constructor(private transactionService: TransactionsService, private userService: UserService) { }
+  constructor(private transactionService: TransactionsService, private userService: UserService, private cdr: ChangeDetectorRef) { }
 
   currentElementForModal: elementType;
   modalOpen = false;
@@ -38,16 +39,19 @@ export class TransactionsComponent implements OnInit {
   emptyTransactions = false;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.transactionService.currentUserId = this.userService.activeUser.id;
-      let id = this.transactionService.currentUserId;
-      this.transactionService.getData().subscribe((data) => {
+    /* The user id comes from localStorage, so it is available synchronously —
+       no setTimeout needed to wait for the profile request to land. The data
+       stores it inconsistently as both a number and a string, hence the
+       loose comparison. */
+    this.transactionService.currentUserId = this.userService.activeUserId;
+    const id = this.transactionService.currentUserId;
+    this.transactionService.getData().subscribe((data) => {
         this.data = data
           .filter(
-            (t: any) => t.transferFromUserId === id || t.transferToUserId === id
+            (t: any) => t.transferFromUserId == id || t.transferToUserId == id
           )
           .map((t: any) => {
-            if (t.transferFromUserId === id) {
+            if (t.transferFromUserId == id) {
               t.description = t.type + ' to ' + t.currTransferToUser;
               t.amount = '-$' + t.amount;
               return t;
@@ -66,8 +70,8 @@ export class TransactionsComponent implements OnInit {
         if (this.data.length == 0) this.emptyTransactions = true;
 
         this.transactionArray = this.data.slice(0, 13);
-      });
-    }, 0);
+        this.cdr.markForCheck();
+    });
     //retrieve transactions data
   }
 

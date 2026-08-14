@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, HostBinding } from "@angular/core";
 import { GetnotfsService } from "../../../services/getnotfs.service";
 
 @Component({
+  standalone: false,
   host: {
     "(document:click)": "onClick($event)",
   },

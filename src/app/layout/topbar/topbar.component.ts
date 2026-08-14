@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs";
 import { LayoutService } from "../services/layout.service";
 
 @Component({
+  standalone: false,
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
@@ -11,7 +12,7 @@ import { LayoutService } from "../services/layout.service";
 export class TopbarComponent implements OnInit {
   title: any;
   isCollapsed: boolean = false;
-  constructor(private ls: LayoutService, private router: Router) {
+  constructor(private ls: LayoutService, private router: Router, private cdr: ChangeDetectorRef) {
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe(event => {
@@ -20,6 +21,7 @@ export class TopbarComponent implements OnInit {
         } else {
           this.title = event.url.split('/')[1];
         }
+              this.cdr.markForCheck();
       });
   }
 

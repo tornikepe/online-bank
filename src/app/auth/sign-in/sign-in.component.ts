@@ -1,20 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../interceptors/auth.service';
 import { ApiService } from '../../services/api.service';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
+	standalone: false,
 	selector: 'app-sign-in',
 	templateUrl: './sign-in.component.html',
 	styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit, OnDestroy {
+export class SignInComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
 	public form: FormGroup = new FormGroup({});
 	private Email_Value: string = '';
-	private forDestr: any;
-	private forDestr_1: any;
 	public input_valid: string = '';
 	public input_valid_pass: string = '';
 
@@ -22,14 +24,15 @@ export class SignInComponent implements OnInit, OnDestroy {
 	public valid_2: boolean = true;
 
   public inputCredintial: string = "";
-  // public Password_Value:string="";
+  public errorMessage: string = "";
 
   constructor(
     private fb: FormBuilder,
     public _api: ApiService,
     private router: Router,
-    private userService: UserService
-  ) {
+    private route: ActivatedRoute,
+    private auth: AuthService,
+    private userService: UserService, private cdr: ChangeDetectorRef) {
     if (localStorage.getItem("Credentials")) {
       const email = JSON.parse(localStorage.getItem("Credentials") as string);
       this.inputCredintial = email.email;
@@ -44,7 +47,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.forDestr = this.form.get("email")?.valueChanges.subscribe((res) => {
+    this.form.get("email")?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((res) => {
       if (this.form.get("email")?.status == "VALID") {
         this.input_valid = "input-success";
         this.valid_1 = false;
@@ -52,11 +55,12 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.input_valid = "input-warn";
         this.valid_1 = true;
       }
+          this.cdr.markForCheck();
     });
 
-    this.forDestr_1 = this.form
+    this.form
       .get("password")
-      ?.valueChanges.subscribe((res) => {
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((res) => {
         if (this.form.get("password")?.status == "VALID") {
           this.input_valid_pass = "input-success";
           this.valid_2 = false;
@@ -64,6 +68,7 @@ export class SignInComponent implements OnInit, OnDestroy {
           this.input_valid_pass = "input-warn";
           this.valid_2 = true;
         }
+              this.cdr.markForCheck();
       });
   }
 
@@ -82,25 +87,28 @@ export class SignInComponent implements OnInit, OnDestroy {
     }
     this._api
       .LogIn(this.form.get("email")?.value, this.form.get("password")?.value)
-      .subscribe(
-        (res) => {
-          localStorage.setItem("auth_token", JSON.stringify(res.accessToken));
-
+      .subscribe({
+        next: (res) => {
+          /* Store the raw token — wrapping it in quotes made every
+             Authorization header malformed. */
+          this.auth.setToken(res.accessToken);
           this.userService.setActiveUser(res.user);
 
-          /* ამოკლედ თუ გინდათ წამატების შემთხვევაში დალოგინება dashboard-ის მაგივრად დაწერეთ როუტი რომელიც გადაიყვანს იუზერს ავტორიზაციის გვერდიდან მომხმარებლის დეფოლტ გვერდამდე/dashboard/what ever-მდე */
-          // მაგალითად ასე
-          this.router.navigate(["/dashboard"]);
-          //console.log("success");
+          /* Send the user back where the guard interrupted them, or to the
+             dashboard when they came to sign in directly. */
+          const returnUrl =
+            this.route.snapshot.queryParamMap.get("returnUrl") || "/dashboard";
+          this.router.navigateByUrl(returnUrl);
+          this.cdr.markForCheck();
         },
-        (error) => {
-          alert(error.error);
-        }
-      );
+        error: (error) => {
+          this.errorMessage =
+            typeof error.error === "string"
+              ? error.error
+              : "Sign in failed. Check your email and password.";
+          this.cdr.markForCheck();
+        },
+      });
   }
 
-  ngOnDestroy(): void {
-    (this.forDestr as Subscription).unsubscribe();
-    (this.forDestr_1 as Subscription).unsubscribe();
-  }
 }

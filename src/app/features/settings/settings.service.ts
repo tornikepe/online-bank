@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
+import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
 	constructor(private _http: HttpClient) {}
@@ -28,18 +29,18 @@ export class SettingsService {
 	}
 
 	getAllLimits() {
-		return this._http.get('http://localhost:3000/limits');
+		return this._http.get(`${environment.BaseUrl}limits`);
 	}
 
 	updateLimit(id: number, newUserLimit: any) {
-		return this._http.put(`http://localhost:3000/limits/${id}`, newUserLimit);
+		return this._http.put(`${environment.BaseUrl}limits/${id}`, newUserLimit);
 	}
 
 	createLimit(newUserLimit: any) {
-		return this._http.post(`http://localhost:3000/limits`, newUserLimit);
+		return this._http.post(`${environment.BaseUrl}limits`, newUserLimit);
 	}
 
 	getAllSpendings() {
-		return this._http.get('http://localhost:3000/spendings');
+		return this._http.get(`${environment.BaseUrl}spendings`);
 	}
 }

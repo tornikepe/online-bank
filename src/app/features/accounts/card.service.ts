@@ -4,28 +4,26 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { UserService } from "../../services/user.service";
 
-interface Card {
-  name: string;
-  account: string;
-  card: string;
-  cardholder: string;
-  date: string;
-  amount: string;
-  security: boolean;
-  userId: string;
-}
+import { environment } from "src/environments/environment";
+import { Card, Deposit, Loan } from "src/app/models/banking.model";
+
+/** Fields the create-card form supplies; the API assigns the id. */
+export type NewCard = Omit<Card, "id">;
 
 @Injectable({
   providedIn: "root",
 })
 export class CardService implements OnInit {
-  _url = "http://localhost:3000";
-  id = this.userservice.activeUser.id;
-  constructor(private http: HttpClient, private userservice: UserService) {}
+  _url = environment.BaseUrl.replace(/\/$/, "");
+  id: any;
+
+  constructor(private http: HttpClient, private userservice: UserService) {
+    this.id = this.userservice.activeUser.id;
+  }
 
   ngOnInit(): void {}
-  create(card: Card): Observable<any> {
-    return this.http.post(`http://localhost:3000/cards`, {
+  create(card: NewCard): Observable<Card> {
+    return this.http.post<Card>(`${environment.BaseUrl}cards`, {
       name: card.name,
       account: card.account,
       card: card.card,
@@ -36,59 +34,40 @@ export class CardService implements OnInit {
       userId: card.userId,
     });
   }
-  get(id: any): Observable<any> {
-    return this.http.get(`http://localhost:3000/cards/${id}`);
+  get(id: number): Observable<Card> {
+    return this.http.get<Card>(`${environment.BaseUrl}cards/${id}`);
   }
-  getCards() {
-    // console.log(this.userservice.activeUser.id)
-    return this.http.get<any[]>(`${this._url}/cards`).pipe(
-      map((spots) => {
-        const cards: any = [];
-        spots.forEach((spot: any) => {
-          if (spot.userId == this.userservice.activeUser.id) {
-            cards.push(spot);
-          }
-        });
-        return cards;
-      })
+  /* Every one of these endpoints returns the whole table, so the caller has to
+     narrow it to the signed-in user — otherwise one customer sees another's
+     cards, deposits and loans. */
+  private onlyMine<T extends { userId: number }>() {
+    return map((rows: T[]) =>
+      (rows ?? []).filter(
+        (row) => Number(row.userId) === this.userservice.activeUserId
+      )
     );
   }
-  getLoans() {
-    return this.http.get<any[]>(`${this._url}/loans`)
-        // .pipe(
-    //   map((spots) => {
-    //     const loans: any = [];
-    //     spots.forEach((spot: any) => {
-    //       if (spot.userId == this.userservice.activeUser.id) {
-    //         loans.push(spot);
-    //       }
-    //     });
-    //
-    //     return loans;
-    //   })
-    // );
-  }
-  getDeposits() {
-    return this.http.get<any[]>(`${this._url}/deposits`)
-    //     .pipe(
-    //   map((spots) => {
-    //     const cards: any = [];
-    //     spots.forEach((spot: any) => {
-    //       if (spot.userId == this.userservice.activeUser.id) {
-    //         cards.push(spot);
-    //       }
-    //     });
-    //     return cards;
-    //   })
-    // );
+
+  getCards(): Observable<Card[]> {
+    return this.http.get<Card[]>(`${this._url}/cards`).pipe(this.onlyMine<Card>());
   }
 
-  getDepositsSingle(id: number) {
-    return this.http.get<any[]>(`${this._url}/deposits/${id}`)
+  getLoans(): Observable<Loan[]> {
+    return this.http.get<Loan[]>(`${this._url}/loans`).pipe(this.onlyMine<Loan>());
   }
 
-  getLoansSingle(id: number) {
-    return this.http.get<any[]>(`${this._url}/loans/${id}`)
+  getDeposits(): Observable<Deposit[]> {
+    return this.http
+      .get<Deposit[]>(`${this._url}/deposits`)
+      .pipe(this.onlyMine<Deposit>());
+  }
+
+  getDepositsSingle(id: number): Observable<Deposit> {
+    return this.http.get<Deposit>(`${this._url}/deposits/${id}`)
+  }
+
+  getLoansSingle(id: number): Observable<Loan> {
+    return this.http.get<Loan>(`${this._url}/loans/${id}`)
   }
 
   delete(id: number) {

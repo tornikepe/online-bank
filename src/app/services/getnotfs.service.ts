@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import {catchError, Observable} from "rxjs";
 
+import { environment } from "src/environments/environment";
 export interface Notf {
   userId: any,
   title: string,
@@ -14,7 +15,7 @@ export interface Notf {
   providedIn: 'root'
 })
 export class GetnotfsService {
-  private link: string = 'http://localhost:3000'
+  private link: string = environment.BaseUrl.replace(/\/$/, "")
   constructor(private http: HttpClient) { }
 
   getNotfs() {

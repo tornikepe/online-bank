@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 
 import { PaymentsService } from "../payments.service";
 
 @Component({
+  standalone: false,
   selector: "app-instant-transfer",
   templateUrl: "./instant-transfer.component.html",
   styleUrls: ["./instant-transfer.component.scss"],
@@ -13,18 +14,20 @@ export class InstantTransferComponent implements OnInit {
   transferType: string = "Personal transfer";
   //dropdown list array
   cardList: any = [];
-  activeCard: any = this.paymentService.currentCards[0];
+  activeCard: any;
 
   constructor(
     private fb: FormBuilder,
     private paymentService: PaymentsService,
-    private notification: NotificationsService
-  ) { }
+    private notification: NotificationsService, private cdr: ChangeDetectorRef) {
+    this.activeCard = this.paymentService.currentCards[0];
+    this.instantTransferForm = this.fb.group({
+      account: ["", [Validators.required, Validators.pattern("^.{16}$")]],
+      amount: ["", [Validators.required]],
+    });
+  }
 
-  public instantTransferForm = this.fb.group({
-    account: ["", [Validators.required, Validators.pattern("^.{16}$")]],
-    amount: ["", [Validators.required]],
-  });
+  public instantTransferForm: FormGroup;
 
   // Validator variables
   amountIsInvalid: boolean;
@@ -132,12 +135,14 @@ export class InstantTransferComponent implements OnInit {
               class: "secondary-green",
               text: "Transaction sent successfully",
             });
+                      this.cdr.markForCheck();
           },
           error => {
             this.notification.open({
               class: "income",
               text: "Something wrong",
             });
+                      this.cdr.markForCheck();
           }
         );
     }

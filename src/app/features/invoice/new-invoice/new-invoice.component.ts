@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import {
 	AbstractControl,
 	FormArray,
@@ -13,7 +13,9 @@ import { UserService } from 'src/app/services/user.service';
 import { Invoice, item } from '../invoice.model';
 import { InvoicesService } from '../invoices.service';
 
+import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 @Component({
+	standalone: false,
 	selector: 'app-new-invoice',
 	templateUrl: './new-invoice.component.html',
 	styleUrls: ['./new-invoice.component.scss'],
@@ -28,8 +30,7 @@ export class NewInvoiceComponent implements OnInit, OnDestroy {
 	constructor(
 		private fb: FormBuilder,
 		private invoicesService: InvoicesService,
-		private router: Router
-	) {}
+		private router: Router, private cdr: ChangeDetectorRef, private notification: NotificationsService) {}
 
 	ngOnInit(): void {
 		//Declaration of Invoice Form
@@ -87,7 +88,6 @@ export class NewInvoiceComponent implements OnInit, OnDestroy {
 	onSendInvoice() {
 		//If Form is invalid Cancel Function
 		if (this.invoiceForm.invalid) {
-			console.log('cancel');
 			return;
 		}
 
@@ -124,7 +124,6 @@ export class NewInvoiceComponent implements OnInit, OnDestroy {
 			status
 		);
 
-		console.log(invoice);
 
 		//set Post Request To Server
 		this.invoicesService.sendNewInvoice(invoice).subscribe(
@@ -139,9 +138,14 @@ export class NewInvoiceComponent implements OnInit, OnDestroy {
 					//redirect to invoices page
 					this.router.navigate(['invoices']);
 				}
+						  this.cdr.markForCheck();
 			},
 			error => {
-				alert(error.message);
+				this.notification.open({
+          class: 'secondary-pink',
+          text: String(error.message),
+        });
+						  this.cdr.markForCheck();
 			}
 		);
 	}

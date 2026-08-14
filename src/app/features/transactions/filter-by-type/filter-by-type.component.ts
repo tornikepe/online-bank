@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
+  standalone: false,
   selector: "app-filter-by-type",
   templateUrl: "./filter-by-type.component.html",
   styleUrls: ["./filter-by-type.component.scss"],

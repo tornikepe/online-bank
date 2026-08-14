@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { PaymentsService } from "./payments.service";
 
 @Component({
+  standalone: false,
   selector: "app-payments",
   templateUrl: "./payments.component.html",
   styleUrls: ["./payments.component.scss"],
@@ -14,42 +15,38 @@ export class PaymentsComponent implements OnInit {
 
   constructor(
     private paymentsService: PaymentsService,
-    private userService: UserService,
-  ) { }
+    private userService: UserService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.paymentsService.userId = this.userService.activeUser.id;
-    }, 0);
+    /* Read straight from localStorage rather than waiting a tick for the
+       profile request — the id is there from sign-in onwards. */
+    this.paymentsService.userId = this.userService.activeUserId;
 
     this.paymentsService.getData().subscribe((data) => {
       this.paymentsService.getUppercaseData(data);
+          this.cdr.markForCheck();
     });
     this.paymentsService.getUsers().subscribe((data) => {
       this.paymentsService.getCurrentUser(data);
       this.paymentsService.users = data;
+          this.cdr.markForCheck();
     });
     this.paymentsService.getCards().subscribe((data) => {
       this.paymentsService.getCurrentCards(data);
       this.paymentsService.cards = data;
+          this.cdr.markForCheck();
     });
     // this.paymentsService.postTransactions("1111*2222", "2222*3333", "120", "USD", "Bank transfer", 1, 2).subscribe()
   }
 
+  /* Match on the provider's `formPath` rather than its display name: the third
+     provider is called "Transfer to my account" in the data but the old code
+     compared against "Instant transfer", so its form could never open. */
   getTransferWindow(event: any) {
-    if (event.name === "Bank Transfer") {
-      this.onlineTransferOpen = false;
-      this.instantTransferOpen = false;
-      this.bankTransferOpen = true;
-    } else if (event.name === "Electronic Payments") {
-      this.onlineTransferOpen = true;
-      this.instantTransferOpen = false;
-      this.bankTransferOpen = false;
-    } else if (event.name === "Instant transfer") {
-      this.onlineTransferOpen = false;
-      this.instantTransferOpen = true;
-      this.bankTransferOpen = false;
-    }
+    const form = event?.formPath;
+    this.bankTransferOpen = form === "bank-transfer";
+    this.onlineTransferOpen = form === "electronic-payment";
+    this.instantTransferOpen = form === "internal-transfer";
   }
 
   closeETransfer() {

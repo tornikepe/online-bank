@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class LayoutService {
   private $sidebarStatus: Subject<boolean> = new Subject();
   public sidebarStatus$ = this.$sidebarStatus.asObservable();

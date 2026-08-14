@@ -7,6 +7,7 @@ interface tabtype {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-tabs-group',
   templateUrl: './tabs-group.component.html',
   styleUrls: ['./tabs-group.component.scss'],
@@ -22,14 +23,9 @@ export class TabsGroupComponent implements OnInit, AfterContentInit {
   @ContentChildren(SingleTab) alltabs !: QueryList<SingleTab>
 
   ngAfterContentInit(): void {
-    var anyActiveTab : boolean = false
-    for (let i of this.alltabs) {
-      if (i.isActiveTab) {
-        anyActiveTab = true
-      }
-    }
-    if (!anyActiveTab) {
-      this.showactive(this.alltabs['_results'][0])
+    const tabs = this.alltabs?.toArray() ?? [];
+    if (tabs.length && !tabs.some(tab => tab.isActiveTab)) {
+      this.showactive(tabs[0]);
     }
   }
 
