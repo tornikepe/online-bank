@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { InvoicesModule } from '../invoice.module';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { TestingSupportModule } from '../../../testing/testing-support.module';
 import { InvoicesComponent } from './invoices.component';
 
 describe('InvoicesComponent', () => {
@@ -8,7 +13,12 @@ describe('InvoicesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InvoicesComponent ]
+      imports: [InvoicesModule, TestingSupportModule],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+      ],
     })
     .compileComponents();
   });

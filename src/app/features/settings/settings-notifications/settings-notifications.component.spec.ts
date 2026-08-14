@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SettingsModule } from '../settings.module';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { TestingSupportModule } from '../../../testing/testing-support.module';
 import { SettingsNotificationsComponent } from './settings-notifications.component';
 
 describe('SettingsNotificationsComponent', () => {
@@ -8,8 +13,13 @@ describe('SettingsNotificationsComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [SettingsNotificationsComponent],
-		}).compileComponents();
+      imports: [SettingsModule, TestingSupportModule],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+      ],
+    }).compileComponents();
 	});
 
 	beforeEach(() => {

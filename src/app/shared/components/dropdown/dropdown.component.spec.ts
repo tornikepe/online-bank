@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '../../shared.module';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { TestingSupportModule } from '../../../testing/testing-support.module';
 import { DropdownComponent } from './dropdown.component';
 
 describe('DropdownComponent', () => {
@@ -8,7 +13,12 @@ describe('DropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DropdownComponent ]
+      imports: [SharedModule, TestingSupportModule],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+      ],
     })
     .compileComponents();
   });
