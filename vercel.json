@@ -2,11 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/online-bank/browser",
-  "functions": {
-    "api/index.js": {
-      "runtime": "@vercel/node@5.3.28"
-    }
-  },
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api" },
     { "source": "/:path*", "destination": "/index.html" }
