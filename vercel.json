@@ -3,6 +3,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/online-bank/browser",
   "rewrites": [
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/api", "destination": "/api?__p=" },
+    { "source": "/api/(.*)", "destination": "/api?__p=$1" },
+    { "source": "/((?!api).*)", "destination": "/index.html" }
   ]
 }

@@ -52,7 +52,7 @@ function safeParse(raw) {
 function matches(record, filters) {
   return Object.entries(filters).every(([key, value]) => {
     /* json-server's paging params, and the segment Vercel adds when routing. */
-    if (['_limit', '_page', '_sort', '_order', 'path'].includes(key)) return true;
+    if (['_limit', '_page', '_sort', '_order', '__p'].includes(key)) return true;
     const actual = record[key];
     if (actual === undefined) return false;
     return String(actual) === String(value);
@@ -76,7 +76,12 @@ function issueToken(user) {
 
 module.exports = async function handler(req, res) {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const segments = url.pathname.replace(/^\/api\/?/, '').split('/').filter(Boolean);
+  /* The host rewrites /api/<rest> to this handler and passes <rest> as `__p`,
+     so routing never depends on how the platform reshapes the path. Falls back
+     to the URL when running directly, as the local preview does. */
+  const routed = url.searchParams.get('__p');
+  const raw = routed !== null ? routed : url.pathname.replace(/^\/api\/?/, '');
+  const segments = raw.split('/').filter(Boolean);
   const data = database();
 
   if (req.method === 'OPTIONS') {
