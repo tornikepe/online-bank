@@ -103,3 +103,27 @@ h6 {
 .icon{
   margin-top: 11px !important;
 }
+/* The card row keeps number, balance and status side by side; below this width
+   they need to stack or the row is clipped. */
+@media (max-width: 900px) {
+  .firstDiv,
+  .card,
+  .card-body {
+    min-width: 0;
+  }
+
+  .card-body.first {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .imgdiv {
+    width: 100%;
+  }
+
+  .two,
+  .three {
+    margin-left: 0;
+    min-width: 45%;
+  }
+}

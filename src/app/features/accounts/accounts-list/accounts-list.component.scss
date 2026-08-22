@@ -352,3 +352,56 @@
     }
   }
 }
+
+/* Account rows: label block on its own line, figures wrapping underneath. */
+@media (max-width: 900px) {
+  /* Every rule on this page is nested under `#main`, so the phone overrides have
+     to be too — otherwise the originals win on specificity. The rows are grids
+     with fixed tracks, so they need a new template rather than permission to
+     wrap: label on top, figures in pairs underneath. */
+  #main {
+    .non-empty {
+      padding: 0 14px;
+
+      #div-group {
+        grid-template-columns: 1fr;
+        row-gap: 12px;
+        /* The desktop row is a fixed 76px tall; once the figures wrap onto their
+           own line the row has to grow with them or it overlaps the next one. */
+        height: auto;
+        padding: 16px 0;
+
+        .img-text {
+          grid-template-columns: 60px auto;
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .information {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px 12px;
+          width: 100%;
+
+          > div {
+            min-width: 0;
+          }
+        }
+      }
+    }
+
+    .charts {
+      display: grid !important;
+      grid-template-columns: 1fr;
+      gap: 12px !important;
+
+      app-charts {
+        width: 100%;
+      }
+    }
+
+    .heading-button {
+      flex-wrap: wrap;
+      row-gap: 8px;
+    }
+  }
+}

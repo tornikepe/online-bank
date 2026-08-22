@@ -46,3 +46,36 @@
       padding-right: 60px;
   }
 }
+
+@media (max-width: 900px) {
+  .topbar {
+    border-left: 0;
+    gap: 4px;
+
+    fa-icon {
+      margin-left: 14px;
+    }
+  }
+
+  p {
+    font-size: 17px;
+    margin-left: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .right-side {
+    margin-left: auto;
+    padding-right: 14px;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  p {
+    font-size: 15px;
+    margin-left: 10px;
+  }
+}

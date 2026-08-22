@@ -81,3 +81,33 @@
 	margin-left: 12px;
 	width: 9.3125rem;
 }
+
+/* The panel was pinned to a fixed 71rem and split into two columns, so on a
+   narrow screen most of it sat outside the viewport. */
+@media (max-width: 1200px) {
+	.main-container {
+		width: 100%;
+		height: auto;
+	}
+
+	.content-col {
+		padding-right: 4%;
+	}
+}
+
+@media (max-width: 900px) {
+	.my-row {
+		grid-template-columns: 1fr;
+		row-gap: 1px;
+	}
+
+	/* Tabs above the panel they switch. */
+	.tab-col {
+		order: -1;
+		padding: 12px 0;
+	}
+
+	.content-col {
+		padding: 18px 14px 32px;
+	}
+}

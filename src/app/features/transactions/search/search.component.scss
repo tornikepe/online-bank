@@ -35,3 +35,30 @@
         }
     }
 }
+
+/* The label and the input sat on one line with a fixed left margin, so on a
+   narrow screen the label wrapped and the input slid under the filters beside
+   it. Stack them and let the form take the full width instead. */
+@media (max-width: 900px) {
+  .form {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .search-bar {
+      width: 100%;
+      max-width: none;
+    }
+
+    input {
+      margin-left: 0;
+    }
+
+    .search-label {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

@@ -239,3 +239,10 @@
   height: 79.75px;
   width: 286;
 }
+
+/* The name is the widest thing in the topbar; the avatar is enough on a phone. */
+@media (max-width: 560px) {
+  .Barry_Armstrong {
+    display: none;
+  }
+}

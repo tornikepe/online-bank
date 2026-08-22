@@ -104,3 +104,15 @@
         }
     }
 }
+/* The rate table has more columns than a phone can show. Let it scroll inside
+   the page container rather than clipping the right-hand ones. */
+@media (max-width: 900px) {
+  .page {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .page table {
+    min-width: 660px;
+  }
+}

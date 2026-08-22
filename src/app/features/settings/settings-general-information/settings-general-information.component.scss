@@ -192,3 +192,30 @@
 		margin: 10px 0 0 370px;
 	}
 }
+
+/* Form fields were pinned to 400px and laid out two-up; below this width they
+   have to fill the panel and stack. */
+@media (max-width: 900px) {
+	.main-container,
+	.input-div,
+	.user-pic-container {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.input-div {
+		flex-wrap: wrap;
+		row-gap: 14px;
+
+		> * {
+			width: 100%;
+			max-width: 100%;
+		}
+	}
+
+	app-input-field,
+	app-dropdown {
+		width: 100%;
+		max-width: 100%;
+	}
+}

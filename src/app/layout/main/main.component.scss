@@ -35,3 +35,27 @@ main{
         }
     }
 }
+
+@media (max-width: 1200px) {
+  main .main-container .content {
+    padding: 16px 18px 82px;
+  }
+}
+
+/* The sidebar is out of the flow at this width, so the column takes it all. */
+@media (max-width: 900px) {
+  main .main-container {
+    width: 100%;
+  }
+
+  main .main-container .content {
+    padding: 14px 14px 82px;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  main .main-container .content {
+    padding: 12px 10px 82px;
+  }
+}

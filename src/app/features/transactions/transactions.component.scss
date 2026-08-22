@@ -132,3 +132,24 @@ span {
 .transfer-debit {
   color: color-palette.$secondary-green;
 }
+
+/* The search box and the two sorters shared one row with fixed widths, which
+   left no room below 900px — the sorters overflowed the card. */
+@media (max-width: 900px) {
+  .search-container {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 10px 12px;
+
+    .search {
+      width: 100%;
+    }
+
+    .sorters-wraper {
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: flex-start;
+    }
+  }
+}

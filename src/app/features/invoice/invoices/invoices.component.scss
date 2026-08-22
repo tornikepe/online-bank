@@ -301,3 +301,31 @@
 		}
 	}
 }
+
+/* The status tabs and the month/year pickers shared one row, and the list and
+   the "new invoice" panel sat side by side — neither fits a phone. */
+@media (max-width: 900px) {
+	.main-box {
+		flex-direction: column;
+		max-width: 100%;
+
+		.invoice_list,
+		.new_invoice,
+		app-tabs-group {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.select,
+		.year,
+		.month {
+			max-width: 100%;
+			box-sizing: border-box;
+		}
+
+		.select {
+			flex-wrap: wrap;
+			row-gap: 8px;
+		}
+	}
+}

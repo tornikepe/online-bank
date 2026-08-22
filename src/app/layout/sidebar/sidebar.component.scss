@@ -126,3 +126,26 @@
 ::-webkit-scrollbar{
     width: 0;
 }
+
+/* Below this width there is no room for a permanent sidebar, so it leaves the
+   flow and slides over the content. `.collapsed` — which the component sets
+   automatically at this width — is the closed state. */
+@media (max-width: 900px) {
+  .layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 242px;
+    z-index: 40;
+    background: #fff;
+    box-shadow: 0 0 28px rgb(37 38 94 / 14%);
+    transition: transform 0.3s ease;
+
+    &.collapsed {
+      width: 242px;
+      transform: translateX(-100%);
+      box-shadow: none;
+    }
+  }
+}

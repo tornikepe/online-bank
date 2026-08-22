@@ -1,0 +1,66 @@
+/*
+ * Cross-cutting responsive rules.
+ *
+ * The app was laid out for a wide desktop only, so below roughly 900px rows of
+ * filters and figures ran past the right edge and the page scrolled sideways.
+ * Shell-specific rules (sidebar, topbar, content padding) live with their own
+ * components, because component styles are scoped and would otherwise win.
+ */
+
+$bp-tablet: 900px;
+$bp-phone: 560px;
+
+/* The page itself never scrolls sideways. Screens that genuinely need more
+   width than a phone has — the exchange-rate table, for one — scroll inside the
+   content column instead, so nothing is clipped out of reach. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 900px) {
+  main .main-container .content {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  /* Filter and heading rows stack instead of overflowing. */
+  .sorters-wraper,
+  .heading-button,
+  .providers-container-header,
+  .ph6 {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .sorters-wraper {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Wide panels scroll inside themselves rather than widening the page. */
+  .charts,
+  .cardscontainer,
+  .container,
+  #main-group,
+  #main-deposits-group {
+    max-width: 100%;
+  }
+
+  /* Toasts stay inside the viewport. */
+  .notif {
+    max-width: calc(100vw - 28px);
+  }
+}
+
+@media (max-width: $bp-phone) {
+  /* Account and transaction rows put their figures under the label. */
+  .information,
+  .transaction,
+  .content-cards {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+}

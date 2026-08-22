@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
           this.cdr.markForCheck();
     });
     this.screenSize = window.innerWidth;
-    if (this.screenSize < 576) {
+    if (this.screenSize < 900) {
       this.ls.updateStatus(true);
     }
   }
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
   @HostListener('window:resize')
   onWindowResize() {
     this.screenSize = window.innerWidth;
-    if (this.screenSize < 576) {
+    if (this.screenSize < 900) {
       if (!this.isCollapsed) {
         this.ls.updateStatus(true);
       }
