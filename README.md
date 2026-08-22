@@ -9,7 +9,8 @@ no keys and no database.
 Angular 22 · TypeScript · RxJS · SCSS · ApexCharts · Vitest
 ```
 
-<!-- Live demo: add the deployment URL here once it is published. -->
+**[Try the live demo →](https://online-bank-theta.vercel.app)**  
+Sign in with `tornike.peitrishvili@example.com` / `Demo1234!`
 
 ---
 
@@ -214,8 +215,10 @@ than a stub.
 
 ## Deployment
 
-The repository is ready for Vercel as it stands — `vercel.json` sets the build
-command, the output directory and a single-page-app fallback:
+Live at **<https://online-bank-theta.vercel.app>**, deployed from `master`.
+
+`vercel.json` sets the build command, the output directory, the single-page-app
+fallback and the route that carries `/api/*` to the demo function:
 
 ```bash
 npx vercel --prod
