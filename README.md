@@ -182,8 +182,8 @@ Collections: `users`, `cards`, `deposits`, `loans`, `transactions`, `invoices`,
 `expenseCategories`, `limits`, `notifications`, `userNotifications`,
 `moneytransfer`, `charts`, `cardTypes`.
 
-The deployed build uses the small serverless equivalent in `api/`, which offers
-the same surface from an in-memory copy of `db.json` — see
+In the deployed build the same surface is served from the visitor's own
+browser, seeded from `db.json`; only sign-in goes to the network — see
 [Deployment](#deployment).
 
 ## Configuration
@@ -226,14 +226,29 @@ npx vercel --prod
 
 Any static host works for the front end. The one thing to know is the API: a
 serverless platform has no writable filesystem and no long-lived process, so
-json-server cannot run there. `api/[[...path]].js` provides the same REST
-surface from an in-memory copy of `db.json`. Reads always work and writes last
-as long as the instance stays warm, which is what you want for a public demo —
-visitors can move money around without permanently changing what the next
-visitor sees.
+json-server cannot run there.
+
+The deployed build therefore serves the data API from the visitor's own
+browser. `src/app/interceptors/demo-data.interceptor.ts` seeds a copy of
+`db.json` into `localStorage` on first load and answers every subsequent read
+and write from it. Each visitor gets their own bank: transfers, new cards and
+new deposits persist across reloads and never touch anyone else's session. The
+interceptor is inert outside the production build, where json-server handles
+the same calls.
+
+Sign-in is the exception. It compares a bcrypt hash, so it goes to
+`api/index.js`, a small read-only function that answers `POST /api/login` and
+`POST /api/register` from the same seed data.
+
+An earlier version routed everything through that function and kept the data in
+memory. It worked until the platform spread requests across instances — a
+transfer could land on one instance and the next read on another, so a balance
+updated a moment ago appeared to snap back. Holding the mutable copy in the
+browser removes the problem.
 
 To point the app at a real backend instead, set `BaseUrl` in
-`src/environments/environment.prod.ts` and delete `api/`.
+`src/environments/environment.prod.ts`, delete `api/`, and drop
+`demoDataInterceptor` from `src/app/app.config.ts`.
 
 ## Design notes
 
