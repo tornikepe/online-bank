@@ -1,42 +1,109 @@
 # Online Bank
 
-A banking dashboard built with Angular — accounts and cards, money transfers,
-invoicing, spending reports, live currency rates and account settings. It runs
-entirely on your machine against a local mock API, so there is nothing to sign up
-for and no keys to configure.
-
-Originally written in 2021 on Angular 13, and rebuilt in 2026 on Angular 22.
-The [modernisation](#modernisation-2021--2026) section below is the interesting part.
+A complete online banking application — accounts and cards, money transfers,
+invoicing, spending reports, live exchange rates and account settings. Nine
+screens, all of them working, running against a demo API that needs no signup,
+no keys and no database.
 
 ```
-Angular 22 · TypeScript 6 · RxJS 7 · SCSS · Vitest · json-server
+Angular 22 · TypeScript · RxJS · SCSS · ApexCharts · Vitest
 ```
+
+<!-- Live demo: add the deployment URL here once it is published. -->
 
 ---
 
-## What it does
+## Contents
 
-| Screen | |
+- [What is in it](#what-is-in-it)
+- [Try it in five minutes](#try-it-in-five-minutes)
+- [Signing in](#signing-in)
+- [How it is built](#how-it-is-built)
+- [The API](#the-api)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Design notes](#design-notes)
+- [About the author](#about-the-author)
+
+---
+
+## What is in it
+
+### Dashboard
+The landing screen after sign-in. An income and expenses trend you can switch
+between monthly, weekly and daily; average income per month broken down by cards
+or accounts; your cards with live balances; and a recent activity feed.
+
+### Transactions
+Every transaction on the account, with free-text search across descriptions and
+filters by type and by month. Tapping a row opens the full detail. The list
+pages in as you scroll.
+
+### Accounts
+Everything you hold, in three sections. **Cards** with balance, blocked amount,
+expiry and status. **Deposits** with balance, accrued interest, rate and end
+date. **Credits** with the original amount, how much is repaid and the rate.
+Three summary tiles at the top total the cards, deposits and outstanding credit.
+You can open a new card from here, and each row leads to a detail page with its
+own chart.
+
+### Payments
+Three transfer flows, each with its own form:
+
+| | |
 | --- | --- |
-| **Dashboard** | Income and expense trends, average income per month, card summary and a recent activity feed |
-| **Transactions** | Full history with free-text search and filters by type and month |
-| **Accounts** | Cards, deposits and loans with balances, rates and end dates; open a new card |
-| **Payments** | Three transfer flows — bank transfer, electronic payment and transfer between your own accounts — with balance and beneficiary validation |
-| **Reports** | Income against expenses, spending split by account type, and expenses by category |
-| **Currency** | Live exchange rates from the National Bank of Georgia, plus a cryptocurrency listing |
-| **Invoices** | Issue invoices from templates, filter by status and period, track what has been paid |
-| **Settings** | Profile, password and security questions, payment limits, notification preferences |
-| **News** | A financial news feed |
+| **Bank transfer** | To any account, with a beneficiary name and a currency choice |
+| **Electronic payment** | To PayPal, Skrill or Payoneer, with the fee shown before you send |
+| **Transfer to my account** | Between your own cards |
 
-## Running it
+Every transfer validates that the source account holds enough, that the
+destination exists, and that the beneficiary name matches the account before it
+moves any money. Both balances update and the transaction appears in the history.
+
+### Reports
+Income against expenses over recent months, switchable between an overall view
+and cards or deposits alone; spending split across debit cards, credit cards and
+cash; and expenses by category as a donut.
+
+### Currency
+Live exchange rates from the National Bank of Georgia, refreshed on load, with
+each currency's daily change. A second tab lists cryptocurrencies with price,
+market cap, volume and 24-hour and 7-day movement, and a search box to filter
+them.
+
+### Invoices
+Issue an invoice from a template, then track it. Filter by status — all, paid,
+pending, cancelled — and by month and year. A running total of what has been
+paid sits alongside.
+
+### Settings
+Four sections: **general information** (name, email, phone, language),
+**security** (change password, security questions), **payment limits** (cash
+withdrawals, bank transactions, online payments, each against current spend) and
+**notifications**.
+
+### News
+A financial news feed with latest, trending and most popular tabs.
+
+### Everywhere
+Sign-in, sign-up and password recovery; a notification centre in the top bar;
+route guards that keep the signed-in area private and return you to the page you
+asked for; and a layout that works from a phone up.
+
+---
+
+## Try it in five minutes
 
 You need **Node.js 22.22+, 24.15+ or 26+**.
 
 ```bash
+git clone https://github.com/tornikepe/online-bank.git
+cd online-bank
 npm install
 ```
 
-Start the mock API and the app in two terminals:
+Then start the API and the app in two terminals:
 
 ```bash
 npm run api
@@ -46,30 +113,28 @@ npm run api
 npm start
 ```
 
-The app is served at <http://localhost:4200> and the API at <http://localhost:3000>.
+Open <http://localhost:4200> and sign in with the details below.
 
-### Signing in
+## Signing in
 
-Every account in the demo data uses the same password: **`Demo1234!`**
+Every demo account uses the same password: **`Demo1234!`**
 
 | Email | What it shows |
 | --- | --- |
-| `tornike.peitrishvili@example.com` | The fullest account — cards, deposits, loans, transfers |
-| `main.user@example.com` | The counterparty used by the transfer flows |
-| `mariam.tsiklauri@example.com` | The account that owns the sample invoices |
+| `tornike.peitrishvili@example.com` | The fullest account — cards, deposits, loans, transfers, invoices |
+| `main.user@example.com` | The counterparty the transfer flows pay into |
+| `mariam.tsiklauri@example.com` | A quieter account, useful for comparing |
+
+You can also register a new account from the sign-up screen; it starts empty.
 
 The data is fictional and lives in `db.json`, which the app writes to as you use
-it. `git checkout db.json` puts the demo back to its starting state.
+it. To reset the demo:
 
-## Other commands
+```bash
+git checkout db.json
+```
 
-| | |
-| --- | --- |
-| `npm run build` | Production build into `dist/` |
-| `npm test` | Unit tests (Vitest) |
-| `npm run watch` | Rebuild on change |
-
-## How it is put together
+## How it is built
 
 ```
 src/app
@@ -78,34 +143,55 @@ src/app
 │                  currency, news, settings, dashboard
 ├── guard/         route guards
 ├── interceptors/  bearer-token interceptor and token storage
-├── layout/        sidebar, topbar, main shell
-├── models/        API record types
+├── layout/        sidebar, topbar, main shell, footer
+├── models/        the shapes the API returns
 ├── services/      API and current-user services
-├── shared/        buttons, inputs, tabs, pagination, datepickers, pipes
+├── shared/        buttons, inputs, dropdowns, tabs, pagination, datepickers,
+│                  toasts, pipes
 └── testing/       shared test setup
+
+api/               serverless demo API used by the deployed build
+src/assets/data/   bundled sample feeds for news and crypto
+db.json            the demo database
 ```
 
-A few decisions worth calling out:
+Feature areas are lazy-loaded, so the initial download stays small — around
+86 kB transferred — and each screen arrives when you first visit it.
 
-- **Routes are guarded, not just hidden.** `authGuard` protects the whole
-  signed-in shell and remembers where you were headed, so signing in returns you
-  there. `guestGuard` keeps a signed-in user off the sign-in screen.
-- **One interceptor owns the token.** It attaches the bearer token to requests
-  aimed at our own API and nothing else — sending it to third-party hosts meant
-  their 401s were signing the user out.
-- **The user id is read synchronously.** It is written at sign-in and survives a
-  reload, so services filtering data by user never race the profile request.
-- **No secrets in the repository.** `src/environments/` holds an API base URL and
-  optional feed keys, all blank by default. A feature whose key is blank serves
-  the bundled sample data in `src/assets/data/` instead of calling out, so the
-  app is fully usable with no third-party account.
+## The API
+
+Locally the app talks to [json-server](https://github.com/typicode/json-server)
+with [json-server-auth](https://github.com/jeremyben/json-server-auth) on top,
+started by `npm run api`. It serves `db.json` at `http://localhost:3000` and
+writes changes back to the file.
+
+| Method | Path | |
+| --- | --- | --- |
+| `POST` | `/login` | Returns an access token and the user |
+| `POST` | `/register` | Creates an account |
+| `GET` | `/{collection}` | Lists records; supports `?field=value` filters |
+| `GET` | `/{collection}/{id}` | One record |
+| `POST` | `/{collection}` | Creates a record |
+| `PUT` `PATCH` | `/{collection}/{id}` | Replaces or updates a record |
+| `DELETE` | `/{collection}/{id}` | Removes a record |
+
+Collections: `users`, `cards`, `deposits`, `loans`, `transactions`, `invoices`,
+`paymentTypes`, `income`, `expenses`, `spending`, `spendings`,
+`expenseCategories`, `limits`, `notifications`, `userNotifications`,
+`moneytransfer`, `charts`, `cardTypes`.
+
+The deployed build uses the small serverless equivalent in `api/`, which offers
+the same surface from an in-memory copy of `db.json` — see
+[Deployment](#deployment).
 
 ## Configuration
 
-`src/environments/environment.ts` is committed, so **nothing secret belongs in
-it**. To point the app at a deployed API, change `BaseUrl`. To use live news or
-crypto feeds, fill in their `url` and `apiKey`; leave them blank to keep the
-bundled data.
+`src/environments/environment.ts` holds the API base URL and optional keys for
+the news and crypto feeds. **It is committed, so nothing secret belongs in it.**
+
+Both feeds ship with sample data in `src/assets/data/`, and each falls back to
+that data whenever its key is blank — so every screen works without a
+third-party account. Fill in a `url` and `apiKey` to switch a feed to live data.
 
 `API/app.js` is an optional proxy for live CoinMarketCap listings. It reads its
 key from the environment and refuses to start without one:
@@ -114,68 +200,70 @@ key from the environment and refuses to start without one:
 CMC_API_KEY=your-key node API/app.js
 ```
 
-## Modernisation (2021 → 2026)
+## Testing
 
-The project sat untouched for four years. Bringing it back was less about new
-features than about the things that quietly rot: an unsupported framework, dead
-third-party services, credentials in source control, and data that no longer
-matched the code reading it.
+```bash
+npm test
+```
 
-| | Before | After |
-| --- | --- | --- |
-| Angular | 13.1 (support ended 2023) | 22.1 |
-| Build | webpack | esbuild (`@angular/build:application`) |
-| Bundle, transferred | 265 kB | 86 kB |
-| Tests running | 0 of 32 | 33 of 33 |
-| npm vulnerabilities, runtime deps | 144 (7 critical) | 0 |
-| Hardcoded API keys | 5 | 0 |
-| CDN references for fonts, icons and styles | 22 | 0 |
+33 tests across 31 files, run with Vitest through Angular's own test builder.
+Each spec mounts its component inside the module that declares it, with the HTTP
+and router test doubles wired up, so the tests exercise the real template rather
+than a stub.
 
-**Framework.** Rather than nine sequential `ng update` hops — the first five of
-which will not even run on a current Node — the build and configuration layer
-was replaced with Angular 22's and the source ported in place. Two Angular 22
-behaviours did most of the damage: `ApplicationRef.tick()` no longer checks every
-component, so state assigned inside a `subscribe()` callback needs an explicit
-`markForCheck()`; and `provideHttpClient()` now defaults to a fetch backend that
-runs outside the Angular zone, so responses never woke change detection at all.
+## Deployment
 
-**Security.** The route guard existed but was not attached to the signed-in
-shell, and the HTTP interceptor never sent a token because the service it
-depended on was declared and never assigned. Five API keys sat in source. The
-committed database held eighteen real email addresses and their password hashes.
+The repository is ready for Vercel as it stands — `vercel.json` sets the build
+command, the output directory and a single-page-app fallback:
 
-**Correctness.** Transfers concatenated balances instead of adding them —
-crediting 100 to a balance of `"156300"` produced `"156300100"` — because some
-balances were stored as strings. User ids were numbers in some records and
-strings in others, so strict comparisons silently dropped rows. Timestamps were
-built by slicing fixed offsets out of a locale string, which swallowed the
-leading hour digit whenever the month or day was a single character.
+```bash
+npx vercel --prod
+```
 
-**Dead weight.** Three of the four external data sources had shut down or
-revoked their keys; the news and crypto screens now fall back to bundled sample
-data. Seven unused dependencies, a duplicate NgModule, an unreferenced component
-and two committed zip archives were removed. Fonts and icon sets are bundled
-rather than pulled from a CDN at runtime.
+Any static host works for the front end. The one thing to know is the API: a
+serverless platform has no writable filesystem and no long-lived process, so
+json-server cannot run there. `api/[[...path]].js` provides the same REST
+surface from an in-memory copy of `db.json`. Reads always work and writes last
+as long as the instance stays warm, which is what you want for a public demo —
+visitors can move money around without permanently changing what the next
+visitor sees.
 
-The two remaining `npm audit` findings are both in `json-server-auth`, the local
-mock backend, and have no published fix. Nothing it depends on ships to
-production.
+To point the app at a real backend instead, set `BaseUrl` in
+`src/environments/environment.prod.ts` and delete `api/`.
+
+## Design notes
+
+A few decisions that are worth knowing if you read the code:
+
+- **Routes are guarded, not just hidden.** `authGuard` protects the whole
+  signed-in shell and remembers where you were headed, so signing in returns you
+  there. `guestGuard` keeps a signed-in user off the auth screens.
+- **One interceptor owns the token.** It attaches the bearer token to requests
+  aimed at our own API and nothing else — sending it to third-party hosts means
+  their 401s sign the user out.
+- **The user id is read synchronously.** It is written at sign-in and survives a
+  reload, so services filtering data by user never race the profile request.
+- **Change detection is explicit.** Angular 22 does not repaint a view just
+  because a field changed, so anything assigned from an async callback marks its
+  own view. The same rule applies to a parent writing to a child's input.
+- **Money is coerced before arithmetic.** Balances arrive as both numbers and
+  numeric strings, and `+` on a string concatenates.
+- **The layout has a mobile path.** Below 900px the sidebar becomes a drawer,
+  dense rows restack, and screens that genuinely need the width — the exchange
+  rate table — scroll inside their own panel rather than the page.
 
 ## About the author
 
 **Tornike Peitrishvili** — [github.com/tornikepe](https://github.com/tornikepe)
 
-I build web applications and automation, and I like taking a project apart to
-understand why it behaves the way it does. This repository is a good example: the
-interesting work was not writing new screens, it was tracing a blank panel back
-through a change-detection default, a fetch backend and four-year-old data to
-find out which of the three was actually at fault.
+I build web applications and enjoy the part of the work where you take something
+apart to find out why it really behaves the way it does, rather than guessing.
 
-Currently focused on front-end development with Angular, and on test automation
-with Playwright and TypeScript.
+Currently working with Angular and TypeScript on the front end, and with
+Playwright for test automation.
 
-<!-- Replace this paragraph with your own summary — what you are looking for,
-     what you have shipped, and how to reach you. -->
+<!-- Add your own summary here: what you are looking for, what you have shipped,
+     and the best way to reach you. -->
 
 ## Licence
 
