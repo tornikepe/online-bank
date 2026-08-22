@@ -51,7 +51,8 @@ function safeParse(raw) {
 /** json-server compares loosely and coerces numeric strings; match that. */
 function matches(record, filters) {
   return Object.entries(filters).every(([key, value]) => {
-    if (['_limit', '_page', '_sort', '_order'].includes(key)) return true;
+    /* json-server's paging params, and the segment Vercel adds when routing. */
+    if (['_limit', '_page', '_sort', '_order', 'path'].includes(key)) return true;
     const actual = record[key];
     if (actual === undefined) return false;
     return String(actual) === String(value);
