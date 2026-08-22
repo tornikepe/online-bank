@@ -151,6 +151,7 @@ src/app
 └── testing/       shared test setup
 
 api/               serverless demo API used by the deployed build
+tools/             optional CoinMarketCap proxy
 src/assets/data/   bundled sample feeds for news and crypto
 db.json            the demo database
 ```
@@ -193,11 +194,11 @@ Both feeds ship with sample data in `src/assets/data/`, and each falls back to
 that data whenever its key is blank — so every screen works without a
 third-party account. Fill in a `url` and `apiKey` to switch a feed to live data.
 
-`API/app.js` is an optional proxy for live CoinMarketCap listings. It reads its
+`tools/currency-proxy/app.js` is an optional proxy for live CoinMarketCap listings. It reads its
 key from the environment and refuses to start without one:
 
 ```bash
-CMC_API_KEY=your-key node API/app.js
+CMC_API_KEY=your-key node tools/currency-proxy/app.js
 ```
 
 ## Testing
