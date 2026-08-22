@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, HostBinding } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  OnInit,
+} from "@angular/core";
 import { GetnotfsService } from "../../../services/getnotfs.service";
 
 @Component({
@@ -16,7 +22,8 @@ export class NotificationsComponent implements OnInit {
 
   constructor(
     private _eref: ElementRef,
-    private getnotfsService: GetnotfsService
+    private getnotfsService: GetnotfsService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   toggleShow() {
@@ -32,10 +39,10 @@ export class NotificationsComponent implements OnInit {
   }
 
   notificationsData() {
-    let old = this.notificationData;
-    this.getnotfsService
-      .getNotfs()
-      .subscribe((data: any) => (this.notificationData = data));
+    this.getnotfsService.getNotfs().subscribe((data: any) => {
+      this.notificationData = data;
+      this.cdr.markForCheck();
+    });
   }
 
   deletenotf(id: number) {

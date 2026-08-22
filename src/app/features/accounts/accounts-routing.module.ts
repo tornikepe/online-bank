@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AccountsListComponent } from "./accounts-list/accounts-list.component";
 import { CreateCardComponent } from "./create-card/create-card.component";
+import { OpenProductComponent } from "./open-product/open-product.component";
 
 //info components
 import { InfoPageComponent } from "./info-page/info-page.component";
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: "create-card",
     component: CreateCardComponent,
+  },
+  {
+    // type is "deposit" or "credit"
+    path: "open/:type",
+    component: OpenProductComponent,
   },
   // {
   //   path: "info",

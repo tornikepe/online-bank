@@ -36,6 +36,11 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     this.rouer.navigate(["/accounts/create-card"]);
   }
   openDeposit() {
+    this.rouer.navigate(["/accounts/open/deposit"]);
+  }
+
+  openCredit() {
+    this.rouer.navigate(["/accounts/open/credit"]);
   }
   navigteCardPage(e: any) {
     this.rouer.navigate(["/accounts/info/card/", e]);

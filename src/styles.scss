@@ -1,16 +1,10 @@
-/* Fonts are self-hosted so the app has no runtime dependency on Google Fonts. */
-@import "@fontsource/roboto/300.css";
-@import "@fontsource/roboto/400.css";
-@import "@fontsource/roboto/500.css";
-@import "@fontsource/roboto/700.css";
-@import "@fontsource/rubik/400.css";
-
-/* Bootstrap and Font Awesome stylesheets are loaded via angular.json "styles". */
-@import "app/shared/components/datepicker/datePicker";
-@import "./assets/color-palette";
-/* You can add global styles to this file, and also import other style files */
-@import "./assets/typography";
-@import "./assets/responsive";
+/* Fonts, Bootstrap and Font Awesome are loaded through angular.json "styles" —
+   plain CSS files cannot sit here, because Sass requires @use before any other
+   rule while CSS requires @import first. */
+@use "app/shared/components/datepicker/datePicker";
+@use "./assets/color-palette" as *;
+@use "./assets/typography" as *;
+@use "./assets/responsive";
 
 body {
   overflow: overlay;

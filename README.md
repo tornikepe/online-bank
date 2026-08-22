@@ -123,7 +123,7 @@ Every demo account uses the same password: **`Demo1234!`**
 | Email | What it shows |
 | --- | --- |
 | `tornike.peitrishvili@example.com` | The fullest account — cards, deposits, loans, transfers, invoices |
-| `main.user@example.com` | The counterparty the transfer flows pay into |
+| `levan.chkhaidze@example.com` | The counterparty the transfer flows pay into |
 | `mariam.tsiklauri@example.com` | A quieter account, useful for comparing |
 
 You can also register a new account from the sign-up screen; it starts empty.

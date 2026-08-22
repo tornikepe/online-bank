@@ -34,6 +34,14 @@ export class CardService implements OnInit {
       userId: card.userId,
     });
   }
+  createDeposit(deposit: Omit<Deposit, "id">): Observable<Deposit> {
+    return this.http.post<Deposit>(`${environment.BaseUrl}deposits`, deposit);
+  }
+
+  createLoan(loan: Omit<Loan, "id">): Observable<Loan> {
+    return this.http.post<Loan>(`${environment.BaseUrl}loans`, loan);
+  }
+
   get(id: number): Observable<Card> {
     return this.http.get<Card>(`${environment.BaseUrl}cards/${id}`);
   }

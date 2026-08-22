@@ -110,7 +110,7 @@
         <div *ngFor='let deposit of depositsArray; last as last'>
             <div id="div-group" *ngIf="depositsArray.length" [class.underline]="!last" [routerLink]="['/accounts/info/cumulative', deposit.id]">
                 <div class="img-text">
-                    <div class="img-background"></div>
+                    <div class="img-background"><i class="bi bi-piggy-bank"></i></div>
                     <div class="text">
                         <p class="p1">{{deposit.name}}</p>
                         <p class="p2">Name</p>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="item-2">
                         <p class="p1">{{ deposit.accured | currency:'USD':'symbol':'1.0-2' }}</p>
-                        <p class="p2">Accured</p>
+                        <p class="p2">Accrued</p>
                     </div>
                     <div class="item-3">
                         <p class="p1">{{deposit.rate}}%</p>
@@ -139,16 +139,37 @@
     </div>
 
     <!-- ////////////////////  L O A N S ////////////////////// -->
-    <!-- <h4 class="card-title" *ngIf="creditsArray.length">Your Credits</h4> -->
-    <div class="heading-button" *ngIf="loansArray.length">
+    <div class="heading-button">
         <h4 class="card-title">Your Credits</h4>
-        <h4 class="title-button" (click)='openDeposit()'><i class="bi bi-plus-lg"></i> NEW CREDIT </h4>
+        <h4 class="title-button" *ngIf='loansArray.length' (click)='openCredit()'><i class="bi bi-plus-lg"></i> NEW CREDIT </h4>
+    </div>
+    <div class="div-deposit" *ngIf="!loansArray.length" (click)='openCredit()'>
+        <div class="img-text">
+            <div class="img-background"><i class="bi bi-plus-lg"></i></div>
+            <div class="text">
+                <p class="p1">Open new credit</p>
+                <p class="p2">Credit details</p>
+            </div>
+        </div>
+        <div class="div-text">
+            <div class="inner-div-1">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+            <div class="inner-div-2">
+                <div class="text-div-1"></div>
+                <div class="text-div-2"></div>
+            </div>
+        </div>
+        <div class="deposit-icon">
+            <i class="bi bi-app"></i>
+        </div>
     </div>
     <div id="main-group" class="non-empty">
         <div *ngFor='let loan of loansArray; last as last'>
             <div id="div-group" *ngIf="loansArray.length" [class.underline]="!last" [routerLink]="['/accounts/info/mortage', loan.id]">
                 <div class="img-text">
-                    <div class="img-background"></div>
+                    <div class="img-background"><i class="bi bi-cash-coin"></i></div>
                     <div class="text">
                         <p class="p1">{{loan.name}}</p>
                         <p class="p2">Name</p>

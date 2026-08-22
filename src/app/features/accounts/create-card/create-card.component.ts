@@ -33,33 +33,24 @@ export class CreateCardComponent implements OnInit {
 
   // id: any = this.userservice.activeUser.id;
 
+  /* These patterns must not carry the `g` flag. A global RegExp keeps `lastIndex`
+     between calls, so the repeated `.test()` Angular runs while validating
+     alternates between true and false — four of the six fields reported
+     themselves invalid while holding a perfectly good value, and the submit
+     button could never enable. */
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: ["", [Validators.required]
+      name: ["", [Validators.required]],
+      account: [
+        "",
+        [Validators.required, Validators.pattern(/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{16}$/)],
       ],
-      account: ["", [
-        Validators.required,
-        Validators.pattern(/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{16}/gm)
-      ]
-      ],
-      card: ["", [
-          Validators.required,
-          Validators.pattern(/^[0-9]{16}/gm)
-        ]
-      ],
+      card: ["", [Validators.required, Validators.pattern(/^[0-9]{16}$/)]],
       cardholder: ["", [Validators.required]],
-      date: ["", [
-          Validators.required,
-          Validators.pattern(/^[0-9]{1,2}[/][0-9]{2}/g)
-      ]
-      ],
-      amount: ["", [
-          Validators.required,
-          Validators.pattern(/[0-9]+/gm)
-        ]
-      ],
-      security: [false, [Validators.required]],
-      userId: [localStorage.getItem('userId')],
+      date: ["", [Validators.required, Validators.pattern(/^[0-9]{1,2}\/[0-9]{2}$/)]],
+      amount: ["", [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      security: [false],
+      userId: [Number(localStorage.getItem("userId"))],
     });
   }
   get type(){
@@ -80,7 +71,16 @@ export class CreateCardComponent implements OnInit {
   }
 
   submit() {
-    this.cardService.create(this.form.value).subscribe((res) => {
+    /* Store the balance as a number. Cards created here used to save it as the
+       raw string from the input, and a string balance makes `+` concatenate
+       when money is transferred into the card. */
+    const card = {
+      ...this.form.value,
+      amount: Number(this.form.value.amount),
+      userId: Number(this.form.value.userId),
+    };
+
+    this.cardService.create(card).subscribe((res) => {
       if (this.add) {
         setTimeout(() => {
           this.add = false;
@@ -91,7 +91,7 @@ export class CreateCardComponent implements OnInit {
     });
 
     this.getnotfsService.addNotf({
-      userId: localStorage.getItem('userId'),
+      userId: Number(localStorage.getItem('userId')),
       title: 'card created',
       value: 'card has been created in your account and it can be accessed in accounts',
       link: 'accounts'

@@ -17,7 +17,7 @@
           type="text"
           name="account"
           placeholder="Enter account number"
-          maxlength="16"
+          maxlength="22"
           formControlName="account"
         />
 
@@ -41,7 +41,7 @@
           class="help-block err-msg"
           *ngIf="formControl['account'].errors?.['pattern']"
         >
-          <em>*The length must be 16</em>
+          <em>*The length must be 22</em>
         </span>
       </app-input-field>
     </div>
@@ -119,7 +119,6 @@
         <button
           class="btn-container"
           type="submit"
-          (click)="onSubmitBankTransForm()"
         >
           <app-button
             [btnWidth]="'100%'"

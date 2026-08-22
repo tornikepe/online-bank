@@ -40,7 +40,7 @@ export class MortgageComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  public loadData: any[];
+  public loadData: any[] = [];
   private id: number;
 
   chartValues: any[];
@@ -167,7 +167,7 @@ export class MortgageComponent implements OnInit {
   /* Placeholder activity for the account detail panel until per-account history
      is wired up. Previously this was the same row repeated thirty-five times. */
   public transactions: any = [
-    { name: 'bank transfer', title: 'Transfer to Main User', amount: 480 },
+    { name: 'bank transfer', title: 'Transfer to Levan Chkhaidze', amount: 480 },
     { name: 'card payment', title: 'Grocery — Carrefour', amount: 76 },
     { name: 'direct debit', title: 'Monthly home rent', amount: 1200 },
     { name: 'bank transfer', title: 'Transfer from Nino Beridze', amount: 950 },

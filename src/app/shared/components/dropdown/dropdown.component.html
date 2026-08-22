@@ -1,15 +1,15 @@
 <div class="container" [ngStyle]="{'font-size': fontSize}">
     <div class="select-box">
         <div class="options-container" [ngClass]="{active: itemSelection}">
-            <div class="option" *ngFor="let item of list" (click)="onSelectItem(item)">
-                <input type="radio" class="radio" [id]="item" name="category" />
-                <label [for]="item" [ngClass]="displaySelected(item)"><i class="far fa-heart" *ngIf="includeIcons"></i>
+            <div class="option" *ngFor="let item of list; let i = index" (click)="onSelectItem(item)">
+                <input type="radio" class="radio" [id]="optionId(i)" [name]="groupName" />
+                <label [for]="optionId(i)" [ngClass]="displaySelected(item)"><i class="far fa-heart" *ngIf="includeIcons"></i>
                     {{item}}</label>
             </div>
             <div *ngIf="listWithIcons">
-                <div class="option" *ngFor="let item of listWithIcons" (click)="onSelectItem(item)">
-                    <input type="radio" class="radio" [id]="item.value" name="category" />
-                    <label class="option-with-icon" [for]="item.value" [ngClass]="displaySelected(item.value)">
+                <div class="option" *ngFor="let item of listWithIcons; let i = index" (click)="onSelectItem(item)">
+                    <input type="radio" class="radio" [id]="optionId(i)" [name]="groupName" />
+                    <label class="option-with-icon" [for]="optionId(i)" [ngClass]="displaySelected(item.value)">
                         <div>
                             <i [class]="item.iconClass"></i>
                             <span>{{item.value}}</span>

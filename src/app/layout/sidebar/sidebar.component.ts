@@ -24,7 +24,12 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.ls.sidebarStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => (this.isCollapsed = value));
+    this.ls.sidebarStatus$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
+        this.isCollapsed = value;
+        this.cdr.markForCheck();
+      });
 
     this.CardService.getCards().subscribe(data => {
       this.cardsArray = data;

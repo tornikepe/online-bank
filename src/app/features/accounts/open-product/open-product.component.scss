@@ -1,0 +1,56 @@
+/* Shares the shape of the "add new card" screen so the two flows feel the same. */
+@use "../create-card/create-card.component.scss";
+
+.visa-bg i {
+  font-size: 20px;
+  color: #4eabe9;
+}
+
+.btn-input-add {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-cancel {
+  border: none;
+  background: none;
+  color: #778ca2;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+
+  &:hover {
+    color: #252631;
+  }
+}
+
+.explainer {
+  padding: 24px;
+  color: #778ca2;
+  font-size: 14px;
+  line-height: 1.7;
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  strong {
+    color: #252631;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 900px) {
+  .content-bg {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .card-a,
+  .card-b {
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -85,10 +85,17 @@
     height: 4px;
     color: #98a9bc;
   }
+  /* Article art is whatever the feed supplies, and the bundled fallback
+     articles carry small square publisher logos. Cropping those to fill a
+     300px band upscaled them into a blur, so contain the image inside a
+     shorter band instead of cropping it. */
   img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f6f8fa;
+    padding: 20px;
+    border-radius: 6px;
     margin-bottom: 30px;
   }
   .content {

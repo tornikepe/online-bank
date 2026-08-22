@@ -42,15 +42,17 @@ export class CardComponent implements OnInit {
   }
 
   showConfig() {
-    this.CardService.get(this.id).subscribe(
-      (data: any) => (this.cardInfo = [data])
-    );
+    this.CardService.get(this.id).subscribe((data: any) => {
+      this.cardInfo = [data];
+      this.cdr.markForCheck();
+    });
   }
 
   showTransactions() {
-    this.CardService.getTransactions().subscribe(
-        (data: any) => (this.transactions = [data])
-    )
+    this.CardService.getTransactions().subscribe((data: any) => {
+      this.transactions = [data];
+      this.cdr.markForCheck();
+    });
   }
 
   delete() {

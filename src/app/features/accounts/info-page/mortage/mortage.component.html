@@ -34,13 +34,13 @@
                     </div>
 
                     <div class="text-1">
-                        <h1>14% Mortage loan</h1>
+                        <h1>{{ loadData[0]?.rate }}% {{ loadData[0]?.name }}</h1>
                         <h3>Type</h3>
                     </div>
 
                     <div class="text-2">
                         <div class="card-exp">
-                            <h2>06 / 32</h2>
+                            <h2>{{ loadData[0]?.dateExp }}</h2>
                             <h3>Valid</h3>
                         </div>
                     </div>
@@ -131,13 +131,13 @@
             <div class="chart" id="chart">
                 <apx-chart
                         #chart
-                        [series]="chartOptions?.series"
-                        [chart]="chartOptions?.chart"
-                        [labels]="chartOptions?.labels"
-                        [responsive]="chartOptions?.responsive"
-                        [dataLabels]="chartOptions?.dataLabels"
-                        [legend]="chartOptions?.legend"
-                        [noData]="chartOptions?.noData"
+                        [series]="chartOptions.series"
+                        [chart]="chartOptions.chart"
+                        [labels]="chartOptions.labels"
+                        [responsive]="chartOptions.responsive"
+                        [dataLabels]="chartOptions.dataLabels"
+                        [legend]="chartOptions.legend"
+                        [noData]="chartOptions.noData"
                 ></apx-chart>
             </div>
         </div>

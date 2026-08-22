@@ -4,6 +4,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { AccountsListComponent } from './accounts-list/accounts-list.component';
+import { OpenProductComponent } from './open-product/open-product.component';
 import { CreateCardComponent } from './create-card/create-card.component';
 import { CardComponent } from './info-page/card/card.component';
 import { CumulativeComponent } from './info-page/cumulative/cumulative.component';
@@ -18,7 +19,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     CardComponent,
     CumulativeComponent,
     MortgageComponent,
-    ChartsComponent
+    ChartsComponent,
+    OpenProductComponent
   ],
   imports: [
     CommonModule,

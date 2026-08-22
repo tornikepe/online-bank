@@ -22,7 +22,7 @@ export class CumulativeComponent implements OnInit {
 
 
   public id: number;
-  public loadData: any;
+  public loadData: any[] = [];
 
   constructor(private route: ActivatedRoute,
               private cardService: CardService,
@@ -65,7 +65,7 @@ export class CumulativeComponent implements OnInit {
   /* Placeholder activity for the account detail panel until per-account history
      is wired up. Previously this was the same row repeated thirty-five times. */
   public transactions: any = [
-    { name: 'bank transfer', title: 'Transfer to Main User', amount: 480 },
+    { name: 'bank transfer', title: 'Transfer to Levan Chkhaidze', amount: 480 },
     { name: 'card payment', title: 'Grocery — Carrefour', amount: 76 },
     { name: 'direct debit', title: 'Monthly home rent', amount: 1200 },
     { name: 'bank transfer', title: 'Transfer from Nino Beridze', amount: 950 },

@@ -25,12 +25,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
 		private router: Router, private cdr: ChangeDetectorRef) {}
 
 	ngOnInit(): void {
-		this.Sub = this.settingsService.showCancelButton.subscribe(
-			value => (this.showCancelButton = value)
-		);
-		this.subscribed = this.settingsService.disableUpdateButton.subscribe(
-			value => (this.disableUpdateButton = value)
-		);
+		this.Sub = this.settingsService.showCancelButton.subscribe(value => {
+			this.showCancelButton = value;
+			this.cdr.markForCheck();
+		});
+		this.subscribed = this.settingsService.disableUpdateButton.subscribe(value => {
+			this.disableUpdateButton = value;
+			this.cdr.markForCheck();
+		});
 	}
 
 	onUpdateButton() {

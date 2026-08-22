@@ -9,10 +9,10 @@
                         <text id="_" transform="translate(14 5)" fill="#4EABE9" font-size="16" font-family="Roboto, '\.LastResort'"><tspan x="-5.68" y="13">C</tspan></text>
                     </svg>
 
-                    <p>Cumulative deposit</p>
+                    <p>{{ loadData[0]?.name || 'Deposit' }}</p>
                 </div>
                 <div>
-                    <p class="p-secondary">$56.400.00</p>
+                    <p class="p-secondary">{{ loadData[0]?.balance | currency:'USD':'symbol':'1.2-2' }}</p>
                 </div>
             </div>
             <div class="card-display">
@@ -34,13 +34,13 @@
                     </div>
 
                     <div class="text-1">
-                        <h1>5% Cumulative deposit</h1>
+                        <h1>{{ loadData[0]?.rate }}% {{ loadData[0]?.name }}</h1>
                         <h3>Type</h3>
                     </div>
 
                     <div class="text-2">
                         <div class="card-exp">
-                            <h2>06 / 22</h2>
+                            <h2>{{ loadData[0]?.dateExp }}</h2>
                             <h3>Valid</h3>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
             </div>
 
             <div class="info-line">
-                <h2 class="p-secondary">Accured interest</h2>
+                <h2 class="p-secondary">Accrued interest</h2>
                 <h2 class="p-light">{{data.accured}}USD</h2>
             </div>
         </div>

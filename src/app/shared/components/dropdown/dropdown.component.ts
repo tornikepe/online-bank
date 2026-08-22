@@ -24,6 +24,19 @@ export class DropdownComponent implements OnInit {
     secondValue?: string;
   }[];
 
+  /* Every dropdown used to hardcode name="category" on its radios and derive
+     each radio's id from the item text. Two dropdowns on the same page therefore
+     shared one radio group — picking a currency cleared the selected account —
+     and repeated item text produced duplicate ids, so a <label for> could point
+     at another dropdown's input. Both are now scoped per instance. */
+  private static nextGroupId = 0;
+  public readonly groupName = `dropdown-${DropdownComponent.nextGroupId++}`;
+
+  /** Stable, unique, selector-safe id for one item's radio input. */
+  public optionId(index: number): string {
+    return `${this.groupName}-option-${index}`;
+  }
+
   public itemSelection: boolean = false;
   private touched: boolean = false;
   public firstItem: string | ListWithIcons = this.selected;
@@ -83,9 +96,13 @@ export class DropdownComponent implements OnInit {
     };
   }
 
+  /* This used to read `this.selected && !this.touched`, which greyed the text
+     out precisely when a real value was present but the user had not picked it
+     by hand — a saved setting looked unset until you re-chose it. Only an
+     absent selection is a placeholder. */
   public displayPlaceholder() {
     return {
-      placeholder: this.selected && !this.touched,
+      placeholder: !this.selected,
       disabled: this.disabled,
     };
   }

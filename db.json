@@ -8,9 +8,9 @@
       "id": 1
     },
     {
-      "email": "admin@example.com",
+      "email": "davit.kobakhidze@example.com",
       "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
-      "Full_Name": "Demo Admin",
+      "Full_Name": "Davit Kobakhidze",
       "Agree_Term": true,
       "id": 2
     },
@@ -76,7 +76,7 @@
       "Agree_Term": true,
       "email": "tornike.peitrishvili@example.com",
       "Full_Name": "Tornike Peitrishvili",
-      "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
+      "password": "$2a$10$elGFT4YbNdnVEoq3mTfzLOpY.qbzZSjHicGB1r9cTtWrOaVWAQgN2",
       "phone": "555140042",
       "language": "English",
       "sex": "Male",
@@ -101,9 +101,9 @@
       "id": 13
     },
     {
-      "email": "main.user@example.com",
+      "email": "levan.chkhaidze@example.com",
       "password": "$2a$10$Cnc6X4LF3Vqyfzr0P0JcD.QQiqAmdy3FT0EFvzwRbwtQN89.Ih1xK",
-      "Full_Name": "Main User",
+      "Full_Name": "Levan Chkhaidze",
       "Agree_Term": true,
       "id": 14
     },
@@ -213,7 +213,7 @@
           "name": "payoneer"
         }
       ],
-      "icon": "las la-credit-card",
+      "icon": "fas fa-credit-card",
       "formPath": "electronic-payment"
     },
     {
@@ -223,7 +223,7 @@
           "name": "any bank"
         }
       ],
-      "icon": "las la-university",
+      "icon": "fas fa-university",
       "formPath": "bank-transfer"
     },
     {
@@ -236,7 +236,7 @@
           "name": "mastercard"
         }
       ],
-      "icon": "las la-exchange-alt",
+      "icon": "fas fa-exchange-alt",
       "formPath": "internal-transfer"
     }
   ],
@@ -412,9 +412,9 @@
   ],
   "deposits": [
     {
-      "name": "Cuumulative deposit",
+      "name": "Cumulative deposit",
       "account": "UK64CT00000000000010034567",
-      "rate": 3.0,
+      "rate": 3,
       "dateStart": "11/25",
       "dateExp": "11/27",
       "balance": 142800,
@@ -423,9 +423,9 @@
       "userId": 11
     },
     {
-      "name": "Cuumulative deposit",
+      "name": "Cumulative deposit",
       "account": "UK64CT00000000000010034567",
-      "rate": 6.0,
+      "rate": 6,
       "dateStart": "11/25",
       "dateExp": "11/27",
       "balance": 142800,
@@ -436,9 +436,9 @@
   ],
   "loans": [
     {
-      "name": "Mortage loan",
+      "name": "Mortgage loan",
       "account": "UK64CT00000000000010034567",
-      "rate": 14.0,
+      "rate": 14,
       "dateStart": "06/25",
       "dateExp": "06/30",
       "startingAmount": 142800,
@@ -447,9 +447,9 @@
       "userId": 11
     },
     {
-      "name": "Mortage loan",
+      "name": "Mortgage loan",
       "account": "UK64CT00000000000010034567",
-      "rate": 16.0,
+      "rate": 16,
       "dateStart": "06/25",
       "dateExp": "06/30",
       "startingAmount": 114500,
@@ -474,7 +474,7 @@
     },
     {
       "id": 2,
-      "name": "Deposit (3% Rate)",
+      "name": "Deposits balance",
       "data": [
         35250,
         38070,
@@ -487,7 +487,7 @@
     },
     {
       "id": 3,
-      "name": "Pending credit",
+      "name": "Outstanding credit",
       "data": [
         41300,
         28910,
@@ -726,7 +726,7 @@
       "dateOfCreation": "2026-03-03T00:00:00.000Z",
       "dueDate": "2026-04-02",
       "companyName": "Contoso Ltd",
-      "contactName": "main.user@example.com",
+      "contactName": "levan.chkhaidze@example.com",
       "address": "space",
       "items": [
         {
@@ -757,7 +757,7 @@
       "transferFromUserId": 1,
       "currTransferFromUser": "Nino Beridze",
       "transferToUserId": 2,
-      "currTransferToUser": "Demo Admin",
+      "currTransferToUser": "Davit Kobakhidze",
       "img": "../../../favicon.ico",
       "id": 1
     },
@@ -778,7 +778,7 @@
       "transferFromUserId": 11,
       "currTransferFromUser": "Tornike Peitrishvili",
       "transferToUserId": 2,
-      "currTransferToUser": "Demo Admin",
+      "currTransferToUser": "Davit Kobakhidze",
       "img": "../../../favicon.ico",
       "id": 1
     },
@@ -797,7 +797,7 @@
       "currency": "USD",
       "type": "Personal transfer",
       "transferFromUserId": 14,
-      "currTransferFromUser": "Main User",
+      "currTransferFromUser": "Levan Chkhaidze",
       "transferToUserId": 11,
       "currTransferToUser": "Tornike Peitrishvili",
       "img": "../../../favicon.ico",
@@ -818,7 +818,7 @@
       "currency": "USD",
       "type": "Personal transfer",
       "transferFromUserId": 14,
-      "currTransferFromUser": "Main User",
+      "currTransferFromUser": "Levan Chkhaidze",
       "transferToUserId": 11,
       "currTransferToUser": "Tornike Peitrishvili",
       "img": "../../../favicon.ico",
@@ -938,6 +938,27 @@
       "value": "card has been created in your account and it can be accessed in accounts",
       "link": "accounts",
       "id": 17
+    },
+    {
+      "userId": 11,
+      "title": "card created",
+      "value": "card has been created in your account and it can be accessed in accounts",
+      "link": "accounts",
+      "id": 18
+    },
+    {
+      "userId": 11,
+      "title": "deposit opened",
+      "value": "Savings deposit has been opened and is now listed under your accounts",
+      "link": "accounts",
+      "id": 19
+    },
+    {
+      "userId": 11,
+      "title": "credit opened",
+      "value": "Car loan has been opened and is now listed under your accounts",
+      "link": "accounts",
+      "id": 20
     }
   ],
   "moneytransfer": [
@@ -949,7 +970,7 @@
     },
     {
       "id": 2,
-      "name": "Money transfer to John Doe",
+      "name": "Money transfer to Levan Chkhaidze",
       "dataAndTime": "1 Jul 3:34 PM",
       "icon": "assets/images/logo2.png"
     },

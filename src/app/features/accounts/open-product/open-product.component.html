@@ -1,0 +1,123 @@
+<div class="content-bg">
+  <div class="card-a">
+    <div class="header border-bottom">
+      <div class="visa">
+        <div class="visa-bg">
+          <i class="bi" [class.bi-piggy-bank]="isDeposit" [class.bi-cash-coin]="!isDeposit"></i>
+        </div>
+        <div class="visa-txt">{{ title }}</div>
+      </div>
+      <div class="carrency">
+        <div class="carrency-txt">
+          {{ (form.get('amount')?.value || 0) | currency : 'USD' : 'symbol' : '1.0-0' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="add-a">
+      <div class="bg-plus">
+        <div class="plus"></div>
+        <div class="plus-txt">
+          <div class="txt-md">{{ title }}</div>
+          <div class="txt-rg">Start process</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="card-input" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="card-value border-bottom">
+        <div class="card-name">Name</div>
+        <div class="card-input-v">
+          <input
+            type="text"
+            formControlName="name"
+            class="input-st"
+            [placeholder]="isDeposit ? 'For example, Savings deposit' : 'For example, Car loan'"
+          />
+        </div>
+      </div>
+
+      <div class="card-value border-bottom">
+        <div class="card-name">Account number</div>
+        <div class="card-input-v">
+          <input
+            type="text"
+            formControlName="account"
+            class="input-st"
+            placeholder="Please add your IBAN"
+          />
+        </div>
+      </div>
+
+      <div class="card-value border-bottom">
+        <div class="card-name">{{ amountLabel }}</div>
+        <div class="card-input-v">
+          <input
+            type="text"
+            formControlName="amount"
+            class="input-st"
+            placeholder="Amount in USD, digits only"
+          />
+        </div>
+      </div>
+
+      <div class="card-value border-bottom">
+        <div class="card-name">Annual rate</div>
+        <div class="card-input-v">
+          <input
+            type="text"
+            formControlName="rate"
+            class="input-st"
+            placeholder="Percent, for example 3 or 6.5"
+          />
+        </div>
+      </div>
+
+      <div class="card-value border-bottom">
+        <div class="card-name">Term</div>
+        <div class="card-input-v">
+          <input
+            type="text"
+            formControlName="term"
+            class="input-st"
+            placeholder="Length in months, for example 24"
+          />
+        </div>
+      </div>
+
+      <div class="btn-input-add">
+        <button
+          type="submit"
+          [class.btn-disabled]="!form.valid"
+          [class.btn-input]="form.valid"
+          [disabled]="!form.valid"
+        >
+          {{ submitLabel }}
+        </button>
+        <button type="button" class="btn-cancel" (click)="cancel()">CANCEL</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-b">
+    <div class="header border-bottom">
+      <div class="transaction">What happens next</div>
+    </div>
+    <div class="explainer">
+      <p *ngIf="isDeposit">
+        The deposit is opened immediately and appears under <strong>Open Deposit</strong>
+        on your accounts page, where you can follow the balance and the interest it
+        accrues until the end date.
+      </p>
+      <p *ngIf="!isDeposit">
+        The credit is opened immediately and appears under <strong>Your Credits</strong>
+        on your accounts page, where you can follow how much of it you have repaid
+        against the original amount.
+      </p>
+      <p>
+        The term you choose sets the end date. Nothing is charged in this demo — the
+        figures are yours to experiment with.
+      </p>
+    </div>
+  </div>
+</div>
