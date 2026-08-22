@@ -5,7 +5,8 @@
  */
 export const environment = {
   production: true,
-  BaseUrl: 'http://localhost:3000/',
+  /* Served by the bundled serverless demo API — see api/. */
+  BaseUrl: '/api/',
 
   /* Financial news feed. */
   news: {
