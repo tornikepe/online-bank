@@ -35,7 +35,8 @@ export interface ChartOptionsType {
 })
 export class InvoicesComponent implements OnDestroy {
 	public template_name: string;
-	public showtoggle: any;
+	/** The invoice open in the detail modal, or null when it is closed. */
+	public showtoggle: Invoice | null = null;
 	public chartOptions: ChartOptionsType;
 	public series: ApexAxisChartSeries;
 	public xaxis: ApexXAxis;
@@ -195,12 +196,12 @@ export class InvoicesComponent implements OnDestroy {
 		this.showtoggle = invoice;
 	}
 
-	changeMontName(event: any) {
+	changeMontName(event: string) {
 		this.selectedMonth = event;
 		this.comparedates();
 	}
 
-	changeyear(event: any) {
+	changeyear(event: string) {
 		this.selectedyear = event;
 		this.comparedates();
 	}

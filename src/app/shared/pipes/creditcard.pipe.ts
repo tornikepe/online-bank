@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CreditcardPipe implements PipeTransform {
 
-  transform(value: any) {
+  /** Groups a card number into blocks of four. */
+  transform(value: string): string {
     return value.replace(/\s+/g, '').replace(/(\d{4})/g, '$1 ').trim();
   }
 

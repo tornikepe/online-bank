@@ -12,7 +12,8 @@ export class DatepickerComponent implements OnInit {
 
   @Output() datepickerValue = new EventEmitter();
 
-  eventEmit(e: any) {
+  /* The template passes the input element; the value comes from ngModel. */
+  eventEmit() {
     this.datepickerValue.emit(this.model)
   }
 

@@ -16,7 +16,7 @@ export class DropdownComponent implements OnInit {
   @Input() public invisibleBorder: boolean = false;
   @Input() public fontSize: string = "14px";
 
-  @Input() public selected: any = "";
+  @Input() public selected: string = "";
 
   @Input() public listWithIcons: {
     iconClass: string;

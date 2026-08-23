@@ -18,7 +18,6 @@ import {NotificationsService} from "../../../shared/notifications/notifications.
   styleUrls: ["./create-card.component.scss"],
 })
 export class CreateCardComponent implements OnInit {
-  card: any[] = [];
   add: boolean = false;
   cardType: "visa" | "mastercard";
 
@@ -31,7 +30,6 @@ export class CreateCardComponent implements OnInit {
 
   form!: FormGroup;
 
-  // id: any = this.userservice.activeUser.id;
 
   /* These patterns must not carry the `g` flag. A global RegExp keeps `lastIndex`
      between calls, so the repeated `.test()` Angular runs while validating
@@ -66,7 +64,7 @@ export class CreateCardComponent implements OnInit {
     return this.form.controls;
   }
 
-  security(e: any) {
+  security(e: boolean) {
     this.form.get("security")?.setValue(e);
   }
 

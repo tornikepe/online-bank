@@ -21,12 +21,12 @@ export class ClickOutsideDirective implements OnInit {
   constructor(private elRef: ElementRef) {}
 
   @HostListener("document:click", ["$event.target"])
-  onClick(target: any) {
+  onClick(target: EventTarget | null) {
     if (!this.captured) {
       return;
     }
 
-    if (!this.elRef.nativeElement.contains(target)) {
+    if (!(target instanceof Node) || !this.elRef.nativeElement.contains(target)) {
       this.clickOutside.emit();
     }
   }

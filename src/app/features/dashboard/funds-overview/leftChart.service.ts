@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { forkJoin, map } from "rxjs";
+import { forkJoin, map, Observable } from "rxjs";
+import { MoneySeries } from "src/app/models/banking.model";
 import { environment } from "src/environments/environment";
 import {
   ApexAxisChartSeries,
@@ -29,6 +30,12 @@ export type leftChartOptions = {
   markers: ApexMarkers;
   grid: ApexGrid;
 };
+
+/** The two series the funds-overview chart plots. */
+export interface LeftChartData {
+  income: number[];
+  expenses: number[];
+}
 
 @Injectable()
 export class LeftChartService {
@@ -86,27 +93,27 @@ export class LeftChartService {
     return weeklyCategories;
   }
 
-  getLeftChartData(interval: string) {
-    let incomeRequest = this.http.get(
+  getLeftChartData(interval: string): Observable<LeftChartData | null> {
+    let incomeRequest = this.http.get<MoneySeries[]>(
       `${environment.BaseUrl}income?interval=${interval}&userId=${this.loggedUser}`
     );
-    let expensesRequest = this.http.get(
+    let expensesRequest = this.http.get<MoneySeries[]>(
       `${environment.BaseUrl}expenses?interval=${interval}&userId=${this.loggedUser}`
     );
 
     return forkJoin([incomeRequest, expensesRequest]).pipe(
-      map((leftChartData: any[]) => {
-        if (leftChartData[0]?.length === 0 && leftChartData[1]?.length === 0) {
+      map(([income, expenses]) => {
+        if (income?.length === 0 && expenses?.length === 0) {
           return null;
         }
 
         const seriesLength = interval === "monthly" ? 12 : interval === "weekly" ? 4 : 7;
-        let activeIncomeSeries = [];
-        let activeExpensesSeries = [];
+        const activeIncomeSeries: number[] = [];
+        const activeExpensesSeries: number[] = [];
 
         for (let i = 0; i < seriesLength; i++) {
           let totalIncome = 0;
-          leftChartData[0].forEach((incomeObject: any) => {
+          income.forEach((incomeObject) => {
             totalIncome += incomeObject.data[i];
           });
           activeIncomeSeries.push(totalIncome);
@@ -114,7 +121,7 @@ export class LeftChartService {
 
         for (let i = 0; i < seriesLength; i++) {
           let totalExpenses = 0;
-          leftChartData[1].forEach((expensesObject: any) => {
+          expenses.forEach((expensesObject) => {
             totalExpenses += expensesObject.data[i];
           });
           activeExpensesSeries.push(totalExpenses);
@@ -159,8 +166,14 @@ export class LeftChartService {
           show: false,
         },
         events: {
-          mouseMove: function (event: any) {
-            event.path[0].style.cursor = "pointer";
+          /* This read `event.path[0]`, a Chrome-only property removed in
+             Chrome 109, so every pointer move over the chart threw a
+             TypeError. `composedPath()` is the standard replacement. */
+          mouseMove: function (event: MouseEvent) {
+            const target = event.composedPath?.()[0] ?? event.target;
+            if (target instanceof HTMLElement || target instanceof SVGElement) {
+              target.style.cursor = "pointer";
+            }
           },
         },
       },

@@ -15,11 +15,8 @@ export type NewCard = Omit<Card, "id">;
 })
 export class CardService implements OnInit {
   _url = environment.BaseUrl.replace(/\/$/, "");
-  id: number;
 
-  constructor(private http: HttpClient, private userservice: UserService) {
-    this.id = this.userservice.activeUser.id;
-  }
+  constructor(private http: HttpClient, private userservice: UserService) {}
 
   ngOnInit(): void {}
   create(card: NewCard): Observable<Card> {
@@ -96,16 +93,5 @@ export class CardService implements OnInit {
 
   getTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this._url}/transactions`)
-    //     .pipe(
-    //   map((spots) => {
-    //     const cards: any = [];
-    //     spots.forEach((spot: any) => {
-    //       if (spot.transferFromUserId == this.userservice.activeUser.id) {
-    //         cards.push(spot);
-    //       }
-    //     });
-    //     return cards;
-    //   })
-    // );
   }
 }

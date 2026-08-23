@@ -9,8 +9,8 @@ import { Component, Input, OnInit } from "@angular/core";
 export class ButtonsComponent implements OnInit {
   @Input() text!: string;
   @Input() btnClass!: string;
-  @Input() btnWidth!: any;
-  @Input() btnHeight!: any;
+  @Input() btnWidth!: string;
+  @Input() btnHeight!: string;
   @Input() isDisable!: boolean;
   @Input() icon!: string;
   constructor() {}

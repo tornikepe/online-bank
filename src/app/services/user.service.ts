@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { User } from "src/app/models/banking.model";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../interceptors/auth.service";
 
@@ -24,7 +25,7 @@ export class UserService {
 
   /* Profile of the signed-in user. Populated at sign-in and re-fetched once after
      a page reload, when only the id survives in localStorage. */
-  private Active_User: any = {};
+  private Active_User: Partial<User> = {};
 
   /* Guards against re-requesting the profile on every change detection cycle
      while the first request is still in flight. */

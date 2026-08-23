@@ -72,7 +72,7 @@ export class FundsOverviewComponent implements OnInit {
   }
 
   getLeftChartDataAndRender() {
-    this.leftChartService.getLeftChartData(this.interval).subscribe((data: any) => {
+    this.leftChartService.getLeftChartData(this.interval).subscribe((data) => {
       if (!data) {
         this.noData = true;
         return;
@@ -100,7 +100,7 @@ export class FundsOverviewComponent implements OnInit {
   getRightChartDataAndRender() {
     this.rightChartService
       .getRightChartData(this.avgIncomeVersion)
-      .subscribe((rightChartData: any) => {
+      .subscribe((rightChartData) => {
         this.activeAvgIncomeSeries = rightChartData.activeAvgIncomeSeries;
         this.avgIncome = rightChartData.avgIncome;
         this.avgIncomePercentage = rightChartData.avgIncomePercentage;

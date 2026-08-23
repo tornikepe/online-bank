@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs";
+import { map, Observable } from "rxjs";
+import { MoneySeries } from "src/app/models/banking.model";
 import { environment } from "src/environments/environment";
 import {
   ApexAxisChartSeries,
@@ -28,6 +29,14 @@ export type rightChartOptions = {
   grid: ApexGrid;
 };
 
+/** Average monthly income, and how it compares with last year. */
+export interface RightChartData {
+  didAvgIncrease: boolean;
+  avgIncome: number;
+  avgIncomePercentage: number;
+  activeAvgIncomeSeries: number[];
+}
+
 @Injectable()
 export class RightChartService {
   loggedUser = localStorage.getItem("userId");
@@ -51,17 +60,17 @@ export class RightChartService {
 
   constructor(private http: HttpClient) {}
 
-  getRightChartData(avgIncomeVersion: string) {
+  getRightChartData(avgIncomeVersion: string): Observable<RightChartData> {
     return this.http
-      .get<number[]>(
+      .get<MoneySeries[]>(
         `${environment.BaseUrl}income?interval=monthly&to=${avgIncomeVersion}&userId=${this.loggedUser}`
       )
       .pipe(
-        map((avgIncomeData: number[]) => {
-          let activeAvgIncomeSeries = [];
+        map((avgIncomeData) => {
+          const activeAvgIncomeSeries: number[] = [];
           for (let i = 0; i < 12; i++) {
             let totalIncomeForMonth = 0;
-            avgIncomeData.forEach((incomeObject: any) => {
+            avgIncomeData.forEach((incomeObject) => {
               totalIncomeForMonth += incomeObject.data[i];
             });
             activeAvgIncomeSeries.push(totalIncomeForMonth);
@@ -103,8 +112,14 @@ export class RightChartService {
           show: false,
         },
         events: {
-          dataPointMouseEnter: function (event: any) {
-            event.path[0].style.cursor = "pointer";
+          /* This read `event.path[0]`, a Chrome-only property removed in
+             Chrome 109, so every pointer move over the chart threw a
+             TypeError. `composedPath()` is the standard replacement. */
+          dataPointMouseEnter: function (event: MouseEvent) {
+            const target = event.composedPath?.()[0] ?? event.target;
+            if (target instanceof HTMLElement || target instanceof SVGElement) {
+              target.style.cursor = "pointer";
+            }
           },
         },
       },

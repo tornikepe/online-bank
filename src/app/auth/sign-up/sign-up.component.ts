@@ -69,15 +69,6 @@ export class SignUpComponent implements OnInit {
           this.cdr.markForCheck();
     });
   }
-  // parentComponentMethod_1(val: any) {
-  //   (this.forms.get("full_name") as FormControl).patchValue(val);
-  // }
-  // parentComponentMethod_2(val: any) {
-  //   (this.forms.get("Email") as FormControl).patchValue(val);
-  // }
-  // parentComponentMethod_3(val: any) {
-  //   (this.forms.get("Password") as FormControl).patchValue(val);
-  // }
   check() {
     (this.forms as FormGroup).statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (

@@ -18,7 +18,8 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 	public passInputValidClass: string = '';
 	public showIcon = true;
 
-	private user: User;
+	/* The profile is empty until it loads, so every read has to allow for that. */
+	private user: Partial<User>;
 	private SubUpdate: Subscription;
 	private SubCancel: Subscription;
 	private SubForm: Subscription;
@@ -82,7 +83,7 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
 			this.user = this.userService.activeUser;
 
 			//Check If Old Pass Is Valid
-			this.apiService.LogIn(this.user.email, oldPassword).subscribe(
+			this.apiService.LogIn(this.user.email ?? '', oldPassword).subscribe(
 				res => {
 					//If Res === Success
 					//delete Old Token

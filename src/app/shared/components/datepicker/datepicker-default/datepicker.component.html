@@ -2,7 +2,7 @@
     <form class="form">
         <div class="form-group">
             <div class="input-group">
-                <input placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="model" (ngModelChange)="eventEmit(value)" #value>
+                <input placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="model" (ngModelChange)="eventEmit()" #value>
                 <div class="input-group-append calendar-button">
                     <button class="calendar" (click)="d.toggle()" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFAB2B" class="bi bi-calendar-day" viewBox="0 0 16 16">

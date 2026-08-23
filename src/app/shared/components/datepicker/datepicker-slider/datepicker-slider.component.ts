@@ -14,7 +14,7 @@ interface Date {
   styleUrls: ['./datepicker-slider.component.scss']
 })
 export class DatepickerSliderComponent implements OnInit {
-  public months: any  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  public months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   public year: number = 2021;
   public month: string = 'December';
   public day: number = 21;

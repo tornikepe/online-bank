@@ -72,14 +72,6 @@ export class SignInComponent implements OnInit {
       });
   }
 
-  // parentComponentMethod(val: any) {
-  //   (this.form.get("email") as FormControl).patchValue(val);
-  // }
-
-  // parentComponentMethod_pass(val: any) {
-  //   (this.form.get("password") as FormControl).patchValue(val);
-  // }
-
   onSubmit() {
     if ((this.form.get("check") as FormControl).value) {
       const Email = (this.form.get("email") as FormControl).value;

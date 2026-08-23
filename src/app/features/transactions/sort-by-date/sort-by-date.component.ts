@@ -26,8 +26,6 @@ export class SortByDateComponent implements OnInit, OnDestroy {
   constructor(private transactionService: TransactionsService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    // this.transactionService.getData().subscribe((data: any) => {
-
     this.subscribtion = this.transactionService.filteredTransactions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
       (res) => {
         let dates = res.map(
@@ -40,13 +38,6 @@ export class SortByDateComponent implements OnInit, OnDestroy {
               this.cdr.markForCheck();
       }
     );
-
-    // data.map((x: any) => {
-    //   this.dateList.push(x.date);
-    // });
-
-    // this.dateList = [...new Set(this.dateList)];
-    // });
   }
 
   ngOnDestroy(): void {

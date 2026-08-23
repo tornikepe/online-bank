@@ -1,6 +1,7 @@
 import { UserService } from "./../../../services/user.service";
 import { Router } from "@angular/router";
 import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
+import { User } from 'src/app/models/banking.model';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   isShown: boolean = false;
-  userOb: any = {};
+  userOb: Partial<User> = {};
 
   constructor(
     private router: Router,

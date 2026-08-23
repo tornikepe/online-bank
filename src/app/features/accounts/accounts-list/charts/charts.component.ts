@@ -33,11 +33,10 @@ export type ChartOptions = {
   styleUrls: ["./charts.component.scss"],
 })
 export class ChartsComponent implements OnInit {
-  @Input() chartValues: any;
+  @Input() chartValues: number[] = [];
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public chartId: number;
-  public charts: any;
 
   @Input() amount: number;
   @Input() type: string;

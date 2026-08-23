@@ -26,11 +26,14 @@ export class InvoicesService {
 	public getAllInvoices() {
 		return this.http.get<Invoice[]>(`${environment.BaseUrl}invoices`).pipe(
 			map(data => {
-				return data.sort((a: any, b: any) => {
-					var dateA = new Date(a.date).getTime();
-					var dateB = new Date(b.date).getTime();
-					return dateA > dateB ? 1 : -1;
-				});
+				/* This sorted on `a.date`, which no invoice has — the model holds
+				   dateOfCreation and dueDate. Both sides came out NaN, so the
+				   comparison was always false and the list never got ordered.
+				   Due date is the one the list shows, so order by that. */
+				return [...data].sort(
+					(a, b) =>
+						new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+				);
 			})
 		);
 	}

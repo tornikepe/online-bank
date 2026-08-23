@@ -5,7 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'numberSuffix'
 })
 export class NumberSuffixPipe implements PipeTransform {
-  transform(input: any, args?: any): any {
+  /** Shortens a large number to 1.2K, 3.4M and so on. */
+  transform(input: number, args?: number): string | number {
     let exp;
     const suffixes = ['K', 'M', 'B', 'T', 'P', 'E'];
     const isNagtiveValues = input < 0;
@@ -30,11 +31,11 @@ export class NumberSuffixPipe implements PipeTransform {
     }
     
   }
-  isNumeric(value: any): boolean {
+  isNumeric(value: number): boolean {
     if (value < 0) value = value * -1;
-    if (/^-{0,1}\d+$/.test(value)) {
+    if (/^-{0,1}\d+$/.test(String(value))) {
       return true;
-    } else if (/^\d+\.\d+$/.test(value)) {
+    } else if (/^\d+\.\d+$/.test(String(value))) {
       return true;
     } else {
       return false;

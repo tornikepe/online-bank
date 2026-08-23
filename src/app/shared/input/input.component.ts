@@ -13,11 +13,11 @@ export class InputComponent {
   @Input() label: string;
   @Input() inputClass: string;
   @Input() disabled: boolean;
-  @Input() value: any;
+  @Input() value: string;
   @Input() width: string;
-  @Output() inputValue = new EventEmitter();
+  @Output() inputValue = new EventEmitter<string>();
 
-	sendParentData(userInput: any) {
+	sendParentData(userInput: HTMLInputElement) {
 		this.inputValue.emit(userInput.value);
 	}
 
