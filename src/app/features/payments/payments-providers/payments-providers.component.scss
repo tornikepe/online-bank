@@ -70,3 +70,15 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .providers-container {
+    min-height: 0;
+  }
+
+  /* Fixed at 75px, which clipped a provider name that needed two lines. */
+  .providers-container .providers-container-content .content-cards {
+    height: auto;
+    min-height: 75px;
+  }
+}

@@ -110,4 +110,23 @@
 	.content-col {
 		padding: 18px 14px 32px;
 	}
+
+	/* Pinned to the bottom of the column, which is taller than the form on a
+	   desktop and shorter than it on a phone — there the buttons landed on top
+	   of the last field. Let them flow after the form instead. */
+	.settings-buttons-container {
+		position: static;
+		/* The dropdowns render a few pixels past their layout box, so the row
+		   needs more clearance than the gap between the fields above it. */
+		margin-top: 40px;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.update-btn,
+	.cancel-btn {
+		width: auto;
+		min-width: 9.3125rem;
+		margin-left: 0;
+	}
 }

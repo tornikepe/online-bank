@@ -327,5 +327,78 @@
 			flex-wrap: wrap;
 			row-gap: 8px;
 		}
+
+		/* The month/year picker is pinned at left:38% over the tab strip, which
+		   only clears the tabs on a wide screen. Let it sit under them. */
+		.select {
+			position: static;
+			left: auto;
+			top: auto;
+			width: 100%;
+			height: auto;
+			order: -1;
+			gap: 12px;
+			justify-content: flex-start;
+		}
+
+		/* An invoice row is two fixed-width halves nudged around with transforms.
+		   Below ~600px the halves met and the number, the due date and the amount
+		   printed on top of one another. Stack them instead. The original rules
+		   are four levels deep, so these have to match that depth to win. */
+		.invoice_list .invoice_container .single_invoce {
+			flex-wrap: wrap;
+			row-gap: 10px;
+			/* Fixed at 53px for a single-line row; the stacked version needs two,
+			   so each row spilled over the one below it. */
+			height: auto;
+			padding-bottom: 10px;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :first-child,
+		.invoice_list .invoice_container .single_invoce > :last-child {
+			width: 100%;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :last-child {
+			gap: 16px;
+			justify-content: space-between;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :last-child .date,
+		.invoice_list .invoice_container .single_invoce > :last-child .amount {
+			width: auto;
+			transform: none;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :last-child .date h5,
+		.invoice_list .invoice_container .single_invoce > :last-child .date p,
+		.invoice_list .invoice_container .single_invoce > :last-child .amount h5,
+		.invoice_list .invoice_container .single_invoce > :last-child .amount p {
+			transform: none;
+		}
+
+		/* The list scrolled sideways inside its own box. */
+		.invoice_list .invoice_container {
+			overflow-x: hidden;
+		}
+		/* The first half spreads its icon and title apart, which reads as one
+		   line only while the half is 15.8% wide. And .title h5 is absolutely
+		   positioned, so the number printed on top of the word "Invoice". */
+		.invoice_list .invoice_container .single_invoce > :first-child {
+			justify-content: flex-start;
+			gap: 16px;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :first-child .title {
+			width: auto;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :first-child .title h5 {
+			position: static;
+		}
+
+		.invoice_list .invoice_container .single_invoce > :first-child .title p {
+			transform: none;
+		}
 	}
 }

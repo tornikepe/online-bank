@@ -120,3 +120,62 @@
   border-bottom: 1px solid #778ca2;
   color: #000000 !important;
 }
+
+/* Two 50% columns, a 570px content block and 75vh scroll panes are a desktop
+   layout. On a phone that left two slivers side by side with the thumbnails
+   overlapping the tab row and the headline clipped mid-word. Stack the reading
+   pane under the list and let both run at the page's own height. */
+@media (max-width: 900px) {
+  .main {
+    flex-wrap: wrap;
+  }
+
+  .main .nav {
+    padding-left: 20px;
+    height: auto;
+    padding-bottom: 10px;
+  }
+
+  .column-1,
+  .column-2 {
+    width: 100%;
+  }
+
+  .column-1 .div-1,
+  .column-2 {
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+    padding: 12px;
+  }
+
+  .column-1 .div-1 a {
+    padding: 14px 4px;
+    gap: 12px;
+  }
+
+  .column-1 .div-1 a img {
+    height: 60px;
+    width: 60px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .column-1 .div-1 .content {
+    margin-left: 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  .column-1 .div-1 .content h3 {
+    font-size: 16px;
+  }
+
+  .column-2 img {
+    height: 150px;
+  }
+
+  .column-2 .content h3 {
+    font-size: 22px;
+  }
+}

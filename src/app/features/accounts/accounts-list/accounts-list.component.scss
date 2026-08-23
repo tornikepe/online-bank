@@ -5,6 +5,16 @@
   .charts {
     width: 80vw;
   }
+
+  /* Three tiles at 25vw each leave slivers of card floating in empty space on a
+     phone. The gap is set inline in the template, so it needs !important. */
+  @media (max-width: 900px) {
+    .charts {
+      width: 100%;
+      flex-direction: column;
+      gap: 12px !important;
+    }
+  }
   // height: 764px;
   //padding: 29px;
   background-color: color-palette.$background-light;

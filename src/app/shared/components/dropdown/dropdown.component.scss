@@ -147,3 +147,24 @@
         font-size: 24px;
     }
 }
+
+/* The account number and its balance sit at opposite ends of one nowrap row.
+   Narrow enough and the two run together with no space between them, so give
+   the row a gap and let the longer half ellipsize instead of colliding. */
+@media (max-width: 900px) {
+  .selected {
+    gap: 10px;
+  }
+
+  .selected > div {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .selected > span,
+  .option-with-icon > span {
+    padding-right: 24px;
+    flex-shrink: 0;
+  }
+}

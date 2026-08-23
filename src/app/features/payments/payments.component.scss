@@ -15,3 +15,22 @@
     width: 40%;
   }
 }
+
+/* Side by side at 40% each is a desktop layout; on a phone the two panels
+   stack and take the full width. */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+  }
+
+  .container .providers-container,
+  .container .transfer-container {
+    width: 100%;
+  }
+
+  .container .providers-container {
+    min-height: 0;
+  }
+}

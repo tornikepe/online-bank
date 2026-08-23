@@ -186,3 +186,24 @@
           width: 100%;
       }
   }
+
+@media (max-width: 900px) {
+    /* Fixed at 56.25px, so a title that needs two lines was clipped at the top. */
+    .chart1-header {
+        height: auto;
+        min-height: 56.25px;
+        flex-wrap: wrap;
+        row-gap: 4px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        overflow: visible;
+    }
+
+    /* The axis ruler runs 0 to 900K across the card. There is no room for ten
+       labels on a phone, and they printed as one unbroken string — every bar
+       already carries its own figure, so drop the ruler rather than crowd it. */
+    .chart2-list {
+        /* Bootstrap's .d-flex on this element is !important. */
+        display: none !important;
+    }
+}

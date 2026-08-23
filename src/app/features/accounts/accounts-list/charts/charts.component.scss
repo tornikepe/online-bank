@@ -22,3 +22,17 @@
 .graph {
   width: 152.26px;
 }
+
+@media (max-width: 900px) {
+  #chart {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  /* Fixed at 152px, which would push the tile back off the screen. */
+  .graph {
+    display: none;
+  }
+}

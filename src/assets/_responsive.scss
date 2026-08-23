@@ -58,8 +58,7 @@ body {
 @media (max-width: $bp-phone) {
   /* Account and transaction rows put their figures under the label. */
   .information,
-  .transaction,
-  .content-cards {
+  .transaction {
     flex-wrap: wrap;
     row-gap: 6px;
   }
