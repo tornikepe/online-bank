@@ -103,8 +103,11 @@ h6 {
 .icon{
   margin-top: 11px !important;
 }
-/* The card row keeps number, balance and status side by side; below this width
-   they need to stack or the row is clipped. */
+/* The card row is four columns sized for a desktop. Below this width it is
+   laid out afresh as a two-column grid — brand mark and number across the top,
+   balance and status underneath — rather than trying to squeeze the desktop
+   widths, which put the card number in an 82px column where it broke after
+   every group of four. */
 @media (max-width: 900px) {
   .firstDiv,
   .card,
@@ -113,17 +116,46 @@ h6 {
   }
 
   .card-body.first {
-    flex-wrap: wrap;
-    row-gap: 10px;
+    /* The element carries Bootstrap's .d-flex, which is !important. */
+    display: grid !important;
+    /* minmax(0, …) — a plain 1fr floors at the content width, and the number is
+       wider than half the row, which starved the balance column. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 14px 12px;
   }
 
-  .imgdiv {
-    width: 100%;
+  /* `.card .imgdiv` and `.card .two` set percentage widths a level deeper, so
+     these have to match that depth to win. */
+  .card .imgdiv {
+    grid-column: 1 / -1;
+    width: auto;
+    min-width: 0;
+    display: flex !important;
+    align-items: center;
+    gap: 14px;
   }
 
-  .two,
-  .three {
+  /* The number and its label take whatever the brand mark leaves. */
+  .card .imgdiv > div:last-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card .imgdiv h6 {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .card .two,
+  .card .three {
     margin-left: 0;
-    min-width: 45%;
+    min-width: 0;
+    width: auto;
+  }
+
+  .card .two h6,
+  .card .three h6 {
+    white-space: nowrap;
   }
 }

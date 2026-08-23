@@ -125,3 +125,91 @@
   color: #e2564d;
   font-size: 14px;
 }
+
+/* Everything on this page is positioned absolutely at hardcoded pixel offsets,
+   and the only "responsive" rule shoved the block sideways with a transform,
+   which slid the form under the photo. Below this width the whole page is laid
+   out again as an ordinary column: the photo goes, every absolutely positioned
+   piece returns to the flow, and the fields fill the width they are given. */
+@media only screen and (max-width: 900px) {
+    #image-left {
+        display: none;
+    }
+
+    #Register-main,
+    #body {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
+        padding: 28px 20px 48px;
+    }
+
+    #Register-main *,
+    #body * {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+    }
+
+    #LogoColorPrimary,
+    #UILogo,
+    #UILogo_bk,
+    #Title_bf,
+    #Create_account,
+    #form,
+    #modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    #UILogo_bk {
+        margin-bottom: 24px !important;
+    }
+
+    #Create_account {
+        margin-bottom: 20px !important;
+    }
+
+    .user-input-auth,
+    #form input:not(#checkbox),
+    #email,
+    #password,
+    .signup,
+    button {
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    /* The checkbox and its label were placed by offset, so the box landed in the
+       middle of the sentence. */
+    #checkbox {
+        width: 18px !important;
+        height: 18px !important;
+        flex: 0 0 auto;
+        margin: 0 10px 0 0 !important;
+        vertical-align: middle;
+    }
+
+    .terms,
+    .sign-in-here {
+        display: inline-block;
+        margin: 6px 0 0 !important;
+    }
+
+    /* The wordmark is two absolutely positioned pieces; once they return to the
+       flow they stack, and "Banking" comes first in the markup. */
+    #Group_1 {
+        display: flex !important;
+        align-items: baseline;
+        gap: 6px;
+    }
+
+    #finance {
+        order: -1;
+    }
+}
