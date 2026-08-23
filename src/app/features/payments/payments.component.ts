@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
+import { PaymentProvider } from "src/app/models/banking.model";
 import { UserService } from "src/app/services/user.service";
 import { PaymentsService } from "./payments.service";
 
@@ -42,7 +43,7 @@ export class PaymentsComponent implements OnInit {
   /* Match on the provider's `formPath` rather than its display name: the third
      provider is called "Transfer to my account" in the data but the old code
      compared against "Instant transfer", so its form could never open. */
-  getTransferWindow(event: any) {
+  getTransferWindow(event: PaymentProvider) {
     const form = event?.formPath;
     this.bankTransferOpen = form === "bank-transfer";
     this.onlineTransferOpen = form === "electronic-payment";

@@ -26,7 +26,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 	public notificationGroup: FormGroup; 
 	public isnotificationInDB = false; 
 	public userId: number; 
-	public notifications: any; 
+	public notifications: notificationType; 
 
 	private updatenotification: Subscription; 
 	private Subcreatenotification: Subscription; 
@@ -96,7 +96,8 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 	} 
 	compareFormAndNotification() { 
 		var isequal: boolean = true; 
-		for (let i in this.notificationGroup.value) { 
+		const toggles = Object.keys(this.notificationGroup.value) as (keyof notificationType)[]; 
+		for (const i of toggles) { 
 			if (this.notificationGroup.value[i] !== this.notifications[i]) { 
 				isequal = false; 
 			} 
@@ -115,7 +116,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 		}; 
 		if (this.isnotificationInDB) { 
 			this.updatenotification = this._http 
-				.put( 
+				.put<notificationType>( 
 					`${environment.BaseUrl}notifications/${this.notifications.id}`, 
 					notificationforsend 
 				) 
@@ -132,7 +133,7 @@ export class SettingsNotificationsComponent implements OnInit, OnDestroy {
 				}); 
 		} else { 
 			this.Subcreatenotification = this._http 
-				.post(`${environment.BaseUrl}notifications/`, notificationforsend) 
+				.post<notificationType>(`${environment.BaseUrl}notifications/`, notificationforsend) 
 				.subscribe(data => { 
 					this.settingService.disabledUpdateButton(true); 
 					this.settingService.toggleCancelButton(false); 

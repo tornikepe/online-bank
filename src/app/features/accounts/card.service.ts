@@ -15,7 +15,7 @@ export type NewCard = Omit<Card, "id">;
 })
 export class CardService implements OnInit {
   _url = environment.BaseUrl.replace(/\/$/, "");
-  id: any;
+  id: number;
 
   constructor(private http: HttpClient, private userservice: UserService) {
     this.id = this.userservice.activeUser.id;

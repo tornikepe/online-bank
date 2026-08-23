@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef} from "@angular/core";
+import { PaymentProvider } from 'src/app/models/banking.model';
 import { PaymentsService } from "../payments.service";
 @Component({
   standalone: false,
@@ -8,7 +9,7 @@ import { PaymentsService } from "../payments.service";
 })
 export class PaymentsProvidersComponent implements OnInit {
   @Output() currentTransferWindow = new EventEmitter();
-  paymentsArray: any;
+  paymentsArray: PaymentProvider[] = [];
 
   constructor(private paymentsService: PaymentsService, private cdr: ChangeDetectorRef) { }
 
@@ -27,7 +28,7 @@ export class PaymentsProvidersComponent implements OnInit {
     payment.id = "activeCard";
   }
 
-  getCurrentTransferName(event: any) {
+  getCurrentTransferName(event: PaymentProvider) {
     this.currentTransferWindow.emit(event);
   }
 }

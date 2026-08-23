@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Card } from 'src/app/models/banking.model';
 import { CardService } from '../../accounts/card.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { CardService } from '../../accounts/card.service';
   styleUrls: ['./yourcards.component.scss'],
 })
 export class YourcardsComponent implements OnInit {
-  cards: any[] = [];
+  cards: Card[] = [];
   loading = true;
 
   constructor(
@@ -31,11 +32,11 @@ export class YourcardsComponent implements OnInit {
   }
 
   /* Visa numbers start with a 4; everything else in the demo data is Mastercard. */
-  isVisa(card: any): boolean {
+  isVisa(card: Card): boolean {
     return String(card?.card ?? '').startsWith('4');
   }
 
-  isBlocked(card: any): boolean {
+  isBlocked(card: Card): boolean {
     return Number(card?.amount) <= 0;
   }
 }

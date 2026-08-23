@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'; 
-import { Invoice } from '../../invoice.model'; 
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Invoice, item } from '../../invoice.model'; 
 @Component({ 
 	standalone: false,
 	selector: 'app-invoice-details', 
@@ -18,15 +18,15 @@ export class InvoiceDetailsComponent implements OnInit {
 	cancelModal() { 
 		this.cancelTogle.emit(null); 
 	} 
-	sumItemPrices(item: any) { 
+	sumItemPrices(item: item) { 
 		let sum = 0; 
 		sum += item.itemQty * item.price; 
 		return sum; 
 	} 
-	getsubtotal(amount: any, tax: number) { 
+	getsubtotal(amount: number = 0, tax: number) { 
 		return amount - (amount / 100) * tax; 
 	} 
-	getTax(amount: any, tax: number) { 
+	getTax(amount: number = 0, tax: number) { 
 		return (amount / 100) * tax; 
 	} 
 } 

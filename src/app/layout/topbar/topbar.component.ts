@@ -10,7 +10,7 @@ import { LayoutService } from "../services/layout.service";
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
-  title: any;
+  title: string;
   isCollapsed: boolean = false;
   constructor(private ls: LayoutService, private router: Router, private cdr: ChangeDetectorRef) {
     this.router.events

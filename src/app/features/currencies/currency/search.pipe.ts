@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(value: any, filterString: string) {
+  transform<T extends { symbol: string }>(value: T[], filterString: string) {
     if(value.length === 0 || filterString === ''){
       return value
     }

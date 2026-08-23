@@ -5,6 +5,7 @@ import {
   HostBinding,
   OnInit,
 } from "@angular/core";
+import { UserNotification } from 'src/app/models/banking.model';
 import { GetnotfsService } from "../../../services/getnotfs.service";
 
 @Component({
@@ -18,7 +19,7 @@ import { GetnotfsService } from "../../../services/getnotfs.service";
 })
 export class NotificationsComponent implements OnInit {
   show: boolean = false;
-  notificationData: any = [];
+  notificationData: UserNotification[] = [];
 
   constructor(
     private _eref: ElementRef,
@@ -31,7 +32,7 @@ export class NotificationsComponent implements OnInit {
     return (this.show = !this.show);
   }
 
-  onClick(event: any) {
+  onClick(event: MouseEvent) {
     // this.notificationsData()
     if (!this._eref.nativeElement.contains(event.target))
       return (this.show = false);
@@ -39,7 +40,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   notificationsData() {
-    this.getnotfsService.getNotfs().subscribe((data: any) => {
+    this.getnotfsService.getNotfs().subscribe((data) => {
       this.notificationData = data;
       this.cdr.markForCheck();
     });

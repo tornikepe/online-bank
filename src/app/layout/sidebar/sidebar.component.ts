@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, DestroyRef, inject} from '@angular/core';
+import { Card } from 'src/app/models/banking.model';
 import { LayoutService } from '../services/layout.service';
 import { CardService } from '../../features/accounts/card.service';
 import { Router } from '@angular/router';
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
   isCollapsed: boolean;
   screenSize: number;
-  cardsArray: any = [];
+  cardsArray: Card[] = [];
   constructor(
     private ls: LayoutService,
     private CardService: CardService,

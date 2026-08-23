@@ -49,8 +49,8 @@
         <div class="card-container" *ngFor="let card of cardsArray">
             <div [routerLink]="['/accounts/info/card', card.id]" class="d-flex align-items-center" style="cursor: pointer; width: 100%">
 <!--                <div class="card1" [ngClass]="{disappear: isCollapsed}"></div>-->
-                <img *ngIf = 'card.card[0] == 4' width="30px" height="10px" src="../../../assets/img/visa.png" alt="">
-                <img *ngIf='card.card[0] != 4' width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
+                <img *ngIf="card.card[0] === '4'" width="30px" height="10px" src="../../../assets/img/visa.png" alt="">
+                <img *ngIf="card.card[0] !== '4'" width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
                 <p [ngClass]="{disappear: isCollapsed}" style="cursor: pointer">{{card.card | creditcard}}</p>
             </div>
         </div>
