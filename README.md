@@ -69,9 +69,9 @@ cash; and expenses by category as a donut.
 
 ### Currency
 Live exchange rates from the National Bank of Georgia, refreshed on load, with
-each currency's daily change. A second tab lists cryptocurrencies with price,
-market cap, volume and 24-hour and 7-day movement, and a search box to filter
-them.
+each currency's daily change. A second tab lists the top cryptocurrencies live
+from CoinGecko — price, market cap, volume, share of total volume and 24-hour
+and 7-day movement — with a search box to filter them.
 
 ### Invoices
 Issue an invoice from a template, then track it. Filter by status — all, paid,
@@ -85,7 +85,8 @@ withdrawals, bank transactions, online payments, each against current spend) and
 **notifications**.
 
 ### News
-A financial news feed with latest, trending and most popular tabs.
+A live financial news feed with latest, trending and most popular tabs, each
+drawing on its own pair of publisher feeds.
 
 ### Everywhere
 Sign-in, sign-up and password recovery; a notification centre in the top bar;
@@ -153,7 +154,7 @@ src/app
 
 api/               serverless demo API used by the deployed build
 tools/             optional CoinMarketCap proxy
-src/assets/data/   bundled sample feeds for news and crypto
+src/assets/data/   offline fallbacks for the news and crypto feeds
 db.json            the demo database
 ```
 
@@ -188,15 +189,25 @@ browser, seeded from `db.json`; only sign-in goes to the network — see
 
 ## Configuration
 
-`src/environments/environment.ts` holds the API base URL and optional keys for
-the news and crypto feeds. **It is committed, so nothing secret belongs in it.**
+`src/environments/environment.ts` holds the API base URL. **It is committed, so
+nothing secret belongs in it** — and nothing secret is needed:
 
-Both feeds ship with sample data in `src/assets/data/`, and each falls back to
-that data whenever its key is blank — so every screen works without a
-third-party account. Fill in a `url` and `apiKey` to switch a feed to live data.
+| Data | Source | Key |
+| --- | --- | --- |
+| Exchange rates | National Bank of Georgia | none |
+| Crypto listings | CoinGecko public API | none |
+| Headlines | Publisher RSS via this app's `GET /api/news` | none |
 
-`tools/currency-proxy/app.js` is an optional proxy for live CoinMarketCap listings. It reads its
-key from the environment and refuses to start without one:
+RSS is keyless but browsers cannot read it — the feeds send no CORS header — so
+the news route fetches and reshapes it server-side, cached ten minutes per
+topic. Each source falls back to a bundled sample in `src/assets/data/` if it is
+unreachable, so no screen is ever empty.
+
+The optional `news` block in the environment points that page at a keyed
+third-party API instead, should you prefer one.
+
+`tools/currency-proxy/app.js` remains as an optional CoinMarketCap proxy. It is
+no longer used — CoinGecko needs no key — and refuses to start without one:
 
 ```bash
 CMC_API_KEY=your-key node tools/currency-proxy/app.js
@@ -236,9 +247,11 @@ new deposits persist across reloads and never touch anyone else's session. The
 interceptor is inert outside the production build, where json-server handles
 the same calls.
 
-Sign-in is the exception. It compares a bcrypt hash, so it goes to
-`api/index.js`, a small read-only function that answers `POST /api/login` and
-`POST /api/register` from the same seed data.
+Two routes are the exception, and both are the server's job rather than demo
+data. Sign-in compares a bcrypt hash, so `POST /api/login` and
+`POST /api/register` go to `api/index.js`. `GET /api/news` lives there too: it
+fetches publisher RSS, which browsers cannot read for want of a CORS header,
+and reshapes it into the feed the page renders.
 
 An earlier version routed everything through that function and kept the data in
 memory. It worked until the platform spread requests across instances — a
