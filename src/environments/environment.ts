@@ -3,25 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 /*
- * No secrets belong in this file — it is committed to the repository. The keys
- * below are intentionally empty; a feature whose key is blank falls back to
- * bundled demo data instead of calling the third-party service.
+ * No secrets belong in this file — it is committed to the repository. Nothing
+ * here is required: exchange rates come from the National Bank of Georgia,
+ * crypto listings from CoinGecko and headlines from publisher RSS through this
+ * app's own /api/news, and none of the three needs a key.
  *
- * To use live data locally, copy this file's shape into a git-ignored
- * `environment.local.ts` or supply the keys through your own build step.
+ * The optional news block points the page at a keyed third-party API instead.
  */
 export const environment = {
   production: false,
   BaseUrl: 'http://localhost:3000/',
 
-  /* Financial news feed. */
+  /* Optional keyed news API. Left blank, the page reads publisher RSS through
+     this app's own `GET /api/news`, which needs no credentials. */
   news: {
-    url: '',
-    apiKey: '',
-  },
-
-  /* Cryptocurrency listings shown on the Currency page. */
-  crypto: {
     url: '',
     apiKey: '',
   },

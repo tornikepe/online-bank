@@ -84,7 +84,9 @@ export const demoDataInterceptor: HttpInterceptorFn = (req, next) => {
   const handledHere =
     environment.production &&
     req.url.startsWith(environment.BaseUrl) &&
-    !/\/(login|register)\/?$/.test(req.url.split('?')[0]);
+    /* Sign-in compares a bcrypt hash and the news route fetches publisher RSS;
+       both are the server's job, and neither is demo data. */
+    !/\/(login|register|news)\/?$/.test(req.url.split('?')[0]);
 
   if (!handledHere) {
     return next(req);

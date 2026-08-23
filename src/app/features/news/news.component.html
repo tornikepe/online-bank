@@ -10,7 +10,7 @@
                 [infiniteScrollContainer]="'.div-1'" [infiniteScrollDistance]="1" [fromRoot]="true">
                 <div>
                     <a *ngFor="let i of recentNewsArray" (click)='singleArticle(i)'>
-                        <img src="{{i.media}}">
+                        <img *ngIf="i.media" [src]="i.media" [alt]="i.title">
                         <div class="content">
                             <h3>{{i.title}}</h3>
                             <h6>{{i.published_date}}</h6>
@@ -25,7 +25,7 @@
 
                 <div>
                     <a *ngFor="let i of trendingNewsArray" (click)='singleArticle(i)'>
-                        <img src="{{i.media}}">
+                        <img *ngIf="i.media" [src]="i.media" [alt]="i.title">
                         <div class="content">
                             <h3>{{i.title}}</h3>
                             <h6>{{i.published_date}}</h6>
@@ -41,7 +41,7 @@
 
                 <div>
                     <a *ngFor="let i of popularNewsArray" (click)='singleArticle(i)'>
-                        <img src="{{i.media}}">
+                        <img *ngIf="i.media" [src]="i.media" [alt]="i.title">
                         <div class="content">
                             <h3>{{i.title}}</h3>
                             <h6>{{i.published_date}}</h6>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="column-2">
-        <img src="{{singleArticleObj?.media}}">
+        <img *ngIf="singleArticleObj?.media" [src]="singleArticleObj?.media" [alt]="singleArticleObj?.title">
         <div class="content">
             <h3>{{singleArticleObj?.title}}</h3>
             <h6>{{singleArticleObj?.published_date}}</h6>

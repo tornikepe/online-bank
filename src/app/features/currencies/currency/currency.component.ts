@@ -2,12 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ChangeDetectorRef} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
-import { environment } from "src/environments/environment";
-
-interface crypto {
-  data: any;
-  status: any;
-}
+import { CryptoListing, CryptoService } from "../crypto.service";
 // interface currency {
 //   timestamp: any;
 //   rates: any;
@@ -38,30 +33,31 @@ export class CurrencyComponent implements OnInit, OnDestroy {
   ///////////////
   public currencyArray: any[] = [];
 
-  constructor(private _http: HttpClient, private fb: FormBuilder,private user: UserService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private _http: HttpClient,
+    private fb: FormBuilder,
+    private user: UserService,
+    private cdr: ChangeDetectorRef,
+    private crypto: CryptoService
+  ) {
     let regex = /^[a-zA-Z]+$/;
     this.form = this.fb.group({
       crypto: ["", [Validators.pattern(regex)]],
     });
   }
   ngOnInit(): void {
-    /* Crypto listings. The original build called CoinMarketCap through a public
-       CORS proxy with the key in the URL; the proxy is gone and no credentials
-       belong in this repository. With `environment.crypto` blank we serve the
-       bundled sample listing instead. */
-    const cryptoUrl = environment.crypto.url || "assets/data/crypto.json";
-    const cryptoOptions = environment.crypto.apiKey
-      ? { headers: { "x-api-key": environment.crypto.apiKey } }
-      : {};
-
-    this._http.get<crypto>(cryptoUrl, cryptoOptions).subscribe((res) => {
-      this.cryptoArray = res.data;
+    /* Live listings from CoinGecko, which needs no key; the service falls back
+       to the bundled snapshot if the call fails. */
+    this.crypto.getListings().subscribe((listings: CryptoListing[]) => {
+      this.cryptoArray = listings;
       this.VolumeSum = 0;
-      for (let i of this.cryptoArray) {
-        this.cryptoSymbol.push(i.symbol);
-        this.VolumeSum += i.quote.USD.volume_24h;
-        if (i.icon) {
-          this.iconMap.set(i.symbol, i.icon);
+      this.cryptoSymbol = [];
+      this.iconMap.clear();
+      for (const coin of listings) {
+        this.cryptoSymbol.push(coin.symbol);
+        this.VolumeSum += coin.quote.USD.volume_24h;
+        if (coin.icon) {
+          this.iconMap.set(coin.symbol, coin.icon);
         }
       }
       this.secondaryArray = this.cryptoArray.slice();
