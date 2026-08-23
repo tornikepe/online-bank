@@ -2,6 +2,8 @@ import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import * as bcrypt from 'bcryptjs';
+
 import { environment } from 'src/environments/environment';
 import seed from '../../../db.json';
 
@@ -17,8 +19,14 @@ import seed from '../../../db.json';
  *
  * Keeping the mutable copy in localStorage removes the problem entirely. Every
  * visitor gets their own bank, seeded from the same data the local json-server
- * uses, and it survives a reload. Sign-in still goes to the server, which is
- * where the password hashes are checked.
+ * uses, and it survives a reload.
+ *
+ * Signing in and registering belong here for the same reason. An account
+ * created against the serverless function lived only in that instance's memory,
+ * so it worked until the instance recycled and then the person could no longer
+ * sign in — while the data they had created, held in this store, stayed. The
+ * account and its data now live together. bcryptjs runs in the browser, so the
+ * seeded users' hashes are still compared rather than trusted.
  */
 
 const STORE_KEY = 'online-bank-demo-db-v1';
@@ -80,13 +88,64 @@ function ok(body: unknown, status = 200): Observable<HttpResponse<unknown>> {
   return of(new HttpResponse({ status, body })).pipe(delay(80));
 }
 
+
+interface Credentials {
+  email?: string;
+  password?: string;
+}
+
+interface Registration extends Credentials {
+  Full_Name?: string;
+  Agree_Term?: boolean;
+}
+
+/** Matches what the serverless function returns, so callers cannot tell them apart. */
+function session(user: Record<string, any>) {
+  const { password, ...withoutPassword } = user;
+  return {
+    accessToken: btoa(`${user['id']}:${Date.now()}`).replace(/=+$/, ''),
+    user: withoutPassword,
+  };
+}
+
+function signIn(db: Database, body: Credentials): Observable<HttpResponse<unknown>> {
+  const user = db['users'].find((row) => row['email'] === body?.email);
+  if (!user) return ok('Cannot find user', 400);
+  if (!bcrypt.compareSync(String(body?.password ?? ''), String(user['password']))) {
+    return ok('Incorrect password', 400);
+  }
+  return ok(session(user));
+}
+
+function signUp(db: Database, body: Registration): Observable<HttpResponse<unknown>> {
+  if (!body?.email || !body?.password) {
+    return ok('Email and password are required', 400);
+  }
+  if (db['users'].some((row) => row['email'] === body.email)) {
+    return ok('Email already exists', 400);
+  }
+
+  const user = {
+    email: body.email,
+    Full_Name: body.Full_Name ?? '',
+    Agree_Term: body.Agree_Term ?? false,
+    /* Hashed even here: the store is the visitor's own, but the seeded users
+       carry hashes and one comparison path is easier to trust than two. */
+    password: bcrypt.hashSync(String(body.password), 10),
+    id: nextId(db['users']),
+  };
+  db['users'].push(user);
+  saveDatabase(db);
+  return ok(session(user), 201);
+}
+
 export const demoDataInterceptor: HttpInterceptorFn = (req, next) => {
   const handledHere =
     environment.production &&
     req.url.startsWith(environment.BaseUrl) &&
-    /* Sign-in compares a bcrypt hash and the news route fetches publisher RSS;
-       both are the server's job, and neither is demo data. */
-    !/\/(login|register|news)\/?$/.test(req.url.split('?')[0]);
+    /* The news route fetches publisher RSS, which a browser cannot read for
+       want of a CORS header. That one stays with the server. */
+    !/\/news\/?$/.test(req.url.split('?')[0]);
 
   if (!handledHere) {
     return next(req);
@@ -94,6 +153,15 @@ export const demoDataInterceptor: HttpInterceptorFn = (req, next) => {
 
   const db = loadDatabase();
   const { collection, id, filters } = parse(req.url);
+
+  if (collection === 'login' && req.method === 'POST') {
+    return signIn(db, req.body as Credentials);
+  }
+
+  if (collection === 'register' && req.method === 'POST') {
+    return signUp(db, req.body as Registration);
+  }
+
   const rows = db[collection];
 
   if (!rows) {

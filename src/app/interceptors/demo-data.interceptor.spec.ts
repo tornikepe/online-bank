@@ -85,8 +85,9 @@ describe('demoDataInterceptor', () => {
     expect(after.length).toBe(before.length - 1);
   });
 
-  /* Sign-in checks a bcrypt hash, which stays on the server. */
-  it('leaves the auth endpoints to the network', async () => {
+  /* News is the one route the browser cannot serve: publisher RSS carries no
+     CORS header, so that request has to reach the network. */
+  it('leaves the news route to the network', async () => {
     let reachedNetwork = false;
     TestBed.resetTestingModule();
     (environment as { production: boolean }).production = true;
@@ -102,8 +103,80 @@ describe('demoDataInterceptor', () => {
     });
 
     const client = TestBed.inject(HttpClient);
-    await firstValueFrom(client.post(url('login'), {})).catch(() => undefined);
+    await firstValueFrom(client.get(url('news'))).catch(() => undefined);
 
     expect(reachedNetwork).toBe(true);
+  });
+
+  /* An account created against the serverless function lived only in that
+     instance's memory, so it stopped working when the instance recycled. */
+  describe('registration', () => {
+    const account = {
+      email: 'someone@example.test',
+      password: 'Str0ngPass!',
+      Full_Name: 'Some One',
+      Agree_Term: true,
+    };
+
+    it('creates an account that can sign in afterwards', async () => {
+      const created = await firstValueFrom<any>(
+        http.post(url('register'), account)
+      );
+      expect(created.accessToken).toBeTruthy();
+      expect(created.user.email).toBe(account.email);
+
+      const session = await firstValueFrom<any>(
+        http.post(url('login'), { email: account.email, password: account.password })
+      );
+      expect(session.user.id).toBe(created.user.id);
+    });
+
+    it('never hands back the password', async () => {
+      const created = await firstValueFrom<any>(
+        http.post(url('register'), account)
+      );
+      expect(created.user.password).toBeUndefined();
+
+      const session = await firstValueFrom<any>(
+        http.post(url('login'), { email: account.email, password: account.password })
+      );
+      expect(session.user.password).toBeUndefined();
+    });
+
+    it('stores the password hashed rather than as typed', async () => {
+      await firstValueFrom(http.post(url('register'), account));
+
+      const users = await firstValueFrom(http.get<any[]>(url('users')));
+      const stored = users.find((u: any) => u.email === account.email);
+      expect(stored.password).toBeDefined();
+      expect(stored.password).not.toBe(account.password);
+    });
+
+    it('turns away a duplicate email', async () => {
+      await firstValueFrom(http.post(url('register'), account));
+      const second = await firstValueFrom(
+        http.post(url('register'), account)
+      ).catch(() => 'rejected');
+      expect(second).toBe('Email already exists');
+    });
+
+    it('turns away a wrong password', async () => {
+      await firstValueFrom(http.post(url('register'), account));
+      const attempt = await firstValueFrom(
+        http.post(url('login'), { email: account.email, password: 'wrong' })
+      );
+      expect(attempt).toBe('Incorrect password');
+    });
+
+    /* The seeded demo account carries a bcrypt hash and must still work. */
+    it('still signs in the seeded demo account', async () => {
+      const session = await firstValueFrom<any>(
+        http.post(url('login'), {
+          email: 'tornike.peitrishvili@example.com',
+          password: 'Demo1234!',
+        })
+      );
+      expect(session.user.Full_Name).toBe('Tornike Peitrishvili');
+    });
   });
 });
