@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { PaymentLimits } from 'src/app/models/banking.model';
 
 import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
@@ -28,19 +29,19 @@ export class SettingsService {
 		this.showCancelButton.next(value);
 	}
 
-	getAllLimits() {
-		return this._http.get(`${environment.BaseUrl}limits`);
+	getAllLimits(): Observable<PaymentLimits[]> {
+		return this._http.get<PaymentLimits[]>(`${environment.BaseUrl}limits`);
 	}
 
-	updateLimit(id: number, newUserLimit: any) {
+	updateLimit(id: number, newUserLimit: Omit<PaymentLimits, 'id'>) {
 		return this._http.put(`${environment.BaseUrl}limits/${id}`, newUserLimit);
 	}
 
-	createLimit(newUserLimit: any) {
+	createLimit(newUserLimit: Omit<PaymentLimits, 'id'>) {
 		return this._http.post(`${environment.BaseUrl}limits`, newUserLimit);
 	}
 
-	getAllSpendings() {
-		return this._http.get(`${environment.BaseUrl}spendings`);
+	getAllSpendings(): Observable<PaymentLimits[]> {
+		return this._http.get<PaymentLimits[]>(`${environment.BaseUrl}spendings`);
 	}
 }

@@ -1,5 +1,12 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef, DestroyRef, inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PaymentLimits } from 'src/app/models/banking.model';
+
+/** The three progress bars, keyed the same way the limits are. */
+type LimitPercentages = Pick<
+	PaymentLimits,
+	'cashWithdrawals' | 'bankTransactions' | 'onlinePayments'
+>;
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { SettingsService } from '../settings.service';
@@ -17,14 +24,15 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 
 	public existUserLimitInDB: boolean = false;
 	public userId: number;
-	public usersLimits: any;
+	public usersLimits: PaymentLimits;
 
 	private SubCancel: Subscription;
 	constructor(private settingService: SettingsService, private fb: FormBuilder, private cdr: ChangeDetectorRef, private notification: NotificationsService) {}
 
-	usersSpendings: any;
+	usersSpendings: PaymentLimits;
 
-	persents: any;
+	/** How much of each limit is already spent, as a percentage. */
+	persents: LimitPercentages;
 
 	limitForm!: FormGroup;
 	private regexForNumber = /^\d+$/;
@@ -40,7 +48,10 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.userId = Number(localStorage.getItem('userId'));
 
+		/* A placeholder until the real record lands, so the bars have something
+		   to draw. id 0 means "not saved yet". */
 		this.usersLimits = {
+			id: 0,
 			cashWithdrawals: 0,
 			bankTransactions: 0,
 			onlinePayments: 0,
@@ -89,8 +100,8 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 
 		this.valuechangeSub = this.limitForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(formvalue => {
 			this.cancalButton();
-			var showupdate: any = false;
-			for (let i in formvalue) {
+			let showupdate = false;
+			for (const i of Object.keys(formvalue) as (keyof LimitPercentages)[]) {
 				if (formvalue[i] < this.usersSpendings[i]) {
 					showupdate = true;
 				}
@@ -119,8 +130,8 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 	initialUserLimits() {
 		this.initialuserLimitsSub = this.settingService
 			.getAllLimits()
-			.subscribe((limits: any) => {
-				const user_limits = limits.find((limit: any) => {
+			.subscribe((limits) => {
+				const user_limits = limits.find((limit) => {
 					return limit.userId == this.userId;
 				});
 				if (user_limits) {
@@ -140,8 +151,8 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 	initialUserSpending() {
 		this.initialSpendingsSub = this.settingService
 			.getAllSpendings()
-			.subscribe((spendings: any) => {
-				const user_spendings = spendings.find((spending: any) => {
+			.subscribe((spendings) => {
+				const user_spendings = spendings.find((spending) => {
 					return spending.userId == this.userId;
 				});
 				if (user_spendings) {
@@ -152,13 +163,11 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	comperaUserLimitsAndForm() {
-		for (let i in this.limitForm.value) {
-			if (this.limitForm.value[i] != this.usersLimits[i]) {
-				return false;
-			}
-		}
-		return true;
+	comperaUserLimitsAndForm(): boolean {
+		const fields = Object.keys(this.limitForm.value) as (keyof LimitPercentages)[];
+		return fields.every(
+			(field) => this.limitForm.value[field] == this.usersLimits[field]
+		);
 	}
 
 	cancalButton() {
@@ -180,7 +189,6 @@ export class SettingsPaymentLimitsComponent implements OnInit, OnDestroy {
 				(this.usersSpendings.onlinePayments /
 					this.limitForm.get('onlinePayments')?.value) *
 				100,
-			userId: this.userId,
 		};
 	}
 

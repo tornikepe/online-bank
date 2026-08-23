@@ -32,15 +32,16 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 	private SubCancel: Subscription; 
 	private SubUpdateButton: Subscription; 
 	//User Info 
-	public user: any; 
-	public user_email: any; 
-	public user_fullname: any; 
-	public user_username: any; 
-	public user_lastname: any; 
-	public user_phone: any; 
+	public user: User; 
+	public user_email: string; 
+	/** Full_Name split on whitespace: [given, family]. */
+	public user_fullname: string[]; 
+	public user_username: string; 
+	public user_lastname: string; 
+	public user_phone: string; 
 	public user_language: string = 'English'; 
 	public user_sex: string = 'Male'; 
-	public nameSplit: any; //for splitting fullname 
+	public nameSplit: string[]; //for splitting fullname 
 	public nameDisplay: string; //for displaying current user on the page 
 	//Default User Values to restore data after hitting Cancel Button 
 	public user_username_temp: string; 
@@ -75,8 +76,8 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 				this.user_fullname = this.user.Full_Name.split(/\s+/); 
 				this.user_username = this.user_fullname[0]; 
 				this.user_lastname = this.user_fullname[1]; 
-				this.user_phone = this.user.phone; 
-				this.user_language = this.user.language; 
+				this.user_phone = this.user.phone ?? ''; 
+				this.user_language = this.user.language ?? 'English'; 
 				this.user_sex = this.user.sex || 'Male'; 
 				//////////////////////////////////////// 
 				//Assigning user default values to variables 
@@ -174,24 +175,24 @@ export class SettingsGeneralInformationComponent implements OnInit, OnDestroy {
 	firstname!: string; 
 	lastname!: string; 
 	email!: string; 
-	phone!: number; 
+	phone!: string; 
 	sex!: string; 
 	language!: string; 
 	//getting values from inputs! 
-	onInputValue1(event: any) { 
-		this.firstname = event.target.value; 
+	onInputValue1(event: Event) { 
+		this.firstname = (event.target as HTMLInputElement).value; 
 		this.exform.get('firstname')?.patchValue(this.firstname); 
 	} 
-	onInputValue2(event: any) { 
-		this.email = event.target.value; 
+	onInputValue2(event: Event) { 
+		this.email = (event.target as HTMLInputElement).value; 
 		this.exform.get('email')?.patchValue(this.email); 
 	} 
-	onInputValue3(event: any) { 
-		this.lastname = event.target.value; 
+	onInputValue3(event: Event) { 
+		this.lastname = (event.target as HTMLInputElement).value; 
 		this.exform.get('lastname')?.patchValue(this.lastname); 
 	} 
-	onInputValue4(event: any) { 
-		this.phone = event.target.value; 
+	onInputValue4(event: Event) { 
+		this.phone = (event.target as HTMLInputElement).value; 
 		this.exform.get('phone')?.patchValue(this.phone); 
 	} 
 	selectLanguage(curLang: string) { 

@@ -16,23 +16,21 @@ import { NotificationsService } from "src/app/shared/notifications/notifications
 export class RecoverPassComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
-  private destr: any;
   public form: FormGroup = new FormGroup({});
   public form_2: FormGroup = new FormGroup({});
 
-  protected Recover_Id: any;
-  protected currntEmail: any;
-  protected currntFullName: any;
-  protected currentAgree: any;
+  protected Recover_Id: number;
+  protected currntEmail: string;
+  protected currntFullName: string;
+  protected currentAgree?: boolean;
 
   public triger1: boolean = true;
   public triger2: boolean = false;
 
-  private input: any;
   public valid: boolean = true;
 
   public ValueForInput: string = "";
-  public input_class: any = "";
+  public input_class: string = "";
 
   public modalTriger: boolean = false;
 
@@ -67,9 +65,9 @@ export class RecoverPassComponent implements OnInit {
     this.modalTriger = true;
     this._api.Get_User_Id_With_Email().subscribe(
       (res) => {
-        const user = res.find((params: any) => {
-          return params.email == this.form.get("email")?.value;
-        });
+        const user = res.find(
+          (candidate) => candidate.email == this.form.get("email")?.value
+        );
         if (user) {
           this.triger1 = true;
           this.triger2 = false;
