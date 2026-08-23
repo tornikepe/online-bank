@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef} from "@angular/core";
-import { NewsAPIService } from "./news-api.service";
+import { Article, NewsAPIService, NewsResponse } from "./news-api.service";
 @Component({
   standalone: false,
   selector: "app-news",
@@ -9,17 +9,18 @@ import { NewsAPIService } from "./news-api.service";
 export class NewsComponent implements OnInit, OnDestroy {
   constructor(private newsAPI: NewsAPIService, private cdr: ChangeDetectorRef) { }
 
-  dateString: any;
-  singleArticleObj: any;
-  news: any;
-  popularNewsArray: any = [];
-  trendingNewsArray: any = [];
-  recentNewsArray: any = [];
+  /* The feed is not paged by date; the service ignores this. */
+  dateString?: string;
+  singleArticleObj?: Article;
+  news?: NewsResponse;
+  popularNewsArray: Article[] = [];
+  trendingNewsArray: Article[] = [];
+  recentNewsArray: Article[] = [];
   popular: boolean = false;
   latest: boolean = true;
   trending: boolean = false;
 
-  tabClicked(e: any) {
+  tabClicked(e: string) {
     if (e === "Latest News") {
       this.latest = true;
       this.popular = false;
@@ -43,9 +44,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   loadPopularNews() {
     this.newsAPI.getPopularNews(this.dateString).subscribe((data) => {
       this.news = data;
-      this.news.articles.forEach((element: any) => {
-        this.popularNewsArray.push(element);
-      });
+      this.popularNewsArray.push(...data.articles);
           this.cdr.markForCheck();
     });
     this.newsAPI.currentPagePopular++;
@@ -53,10 +52,8 @@ export class NewsComponent implements OnInit, OnDestroy {
   loadRecentNews() {
     this.newsAPI.getRecentNews(this.dateString).subscribe((data) => {
       this.news = data;
-      this.singleArticleObj = this.news.articles[0];
-      this.news.articles.forEach((element: any) => {
-        this.recentNewsArray.push(element);
-      });
+      this.singleArticleObj = data.articles[0];
+      this.recentNewsArray.push(...data.articles);
           this.cdr.markForCheck();
     });
     this.newsAPI.currentPageRecent++;
@@ -64,16 +61,14 @@ export class NewsComponent implements OnInit, OnDestroy {
   loadTrendingNews() {
     this.newsAPI.getTrendingNews(this.dateString).subscribe((data) => {
       this.news = data;
-      this.news.articles.forEach((element: any) => {
-        this.trendingNewsArray.push(element);
-      });
+      this.trendingNewsArray.push(...data.articles);
           this.cdr.markForCheck();
     });
     this.newsAPI.currentPageTrending++;
   }
 
   //right side article
-  singleArticle(obj: any) {
+  singleArticle(obj?: Article) {
     this.singleArticleObj = obj;
   }
   //defalut values to load from begining

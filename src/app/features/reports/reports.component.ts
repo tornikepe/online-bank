@@ -20,6 +20,11 @@ import {
 } from 'ng-apexcharts';
 import { LayoutService } from 'src/app/layout/services/layout.service';
 
+import {
+  ExpenseCategory,
+  MoneySeries,
+  SpendingTotal,
+} from 'src/app/models/banking.model';
 import { environment } from "src/environments/environment";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export type ChartOptions1 = {
@@ -39,7 +44,7 @@ export type ChartOptions3 = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
-  labels: any;
+  labels: string[];
   legend: ApexLegend;
   colors: string[];
   plotOptions: ApexPlotOptions;
@@ -66,25 +71,26 @@ export class ReportsComponent implements OnInit {
   public chartOptions3: ChartOptions3;
 
   empty: boolean = false;
-  data: any = [];
+  data: number[] = [];
   width1: number;
   width2: number;
   width3: number;
   max: number;
   roundUp: number;
   divide: number;
-  numbers: any = 0;
-  numbersArr: any = [];
-  percent: any;
-  series: any;
+  numbers: number = 0;
+  /** Axis ruler labels, e.g. "100K", "200K". */
+  numbersArr: string[] = [];
+  percent: string | number = 0;
+  series: ApexAxisChartSeries = [];
 
-  spendings: any;
-  debitCard: any;
-  creditCard: any;
-  cash: any;
+  spendings: SpendingTotal[] = [];
+  debitCard: number;
+  creditCard: number;
+  cash: number;
 
   getSpendings() {
-    this.http.get(`${environment.BaseUrl}spending`).subscribe(data => {
+    this.http.get<SpendingTotal[]>(`${environment.BaseUrl}spending`).subscribe(data => {
       this.spendings = data;
       this.debitCard = this.spendings[0].value;
       this.creditCard = this.spendings[1].value;
@@ -115,18 +121,18 @@ export class ReportsComponent implements OnInit {
       } else if (maxLength > 3) {
         this.percent = (this.numbers / 1000).toString() + 'K';
       }
-      this.numbersArr.push(this.percent);
+      this.numbersArr.push(String(this.percent));
     }
   }
 
-  incomes: any;
-  incomesCards: any;
-  incomeDeposits: any;
-  concatIncomeArrays: any = [];
-  expenses: any;
-  expensesCards: any;
-  expensesDeposits: any;
-  concatExpensesArrays: any = [];
+  incomes: MoneySeries[] = [];
+  incomesCards: number[] = [];
+  incomeDeposits: number[] = [];
+  concatIncomeArrays: number[] = [];
+  expenses: MoneySeries[] = [];
+  expensesCards: number[] = [];
+  expensesDeposits: number[] = [];
+  concatExpensesArrays: number[] = [];
   canRenderChart1 = false;
 
   overall = 'overall';
@@ -172,17 +178,30 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  private combine(records: any[]): number[] {
-    const first: number[] = records?.[0]?.data ?? [];
-    const second: number[] = records?.[1]?.data ?? [];
-    return first.map((value, i) => value + (second[i] ?? 0));
+  /**
+   * Picks a series out of the response by what it is rather than where it sits.
+   * Unfiltered, cards come back at index 0 and deposits at index 1 — but the
+   * Cards and Deposits tabs ask for one type and get a single record at index
+   * 0, so reading index 1 left the Deposits chart empty.
+   */
+  private seriesFor(records: MoneySeries[], type: string): number[] {
+    return records?.find((record) => record.type === type)?.data ?? [];
+  }
+
+  private combine(records: MoneySeries[]): number[] {
+    const cards = this.seriesFor(records, 'card');
+    const deposits = this.seriesFor(records, 'deposits');
+    const longest = cards.length >= deposits.length ? cards : deposits;
+    return longest.map(
+      (_, i) => (cards[i] ?? 0) + (deposits[i] ?? 0)
+    );
   }
 
   getIncome() {
-    this.http.get<any[]>(this.link('income')).subscribe(data => {
+    this.http.get<MoneySeries[]>(this.link('income')).subscribe(data => {
       this.incomes = data;
-      this.incomesCards = data?.[0]?.data ?? [];
-      this.incomeDeposits = data?.[1]?.data ?? [];
+      this.incomesCards = this.seriesFor(data, 'card');
+      this.incomeDeposits = this.seriesFor(data, 'deposits');
       this.concatIncomeArrays = this.combine(data);
       this.canRenderChart1 = true;
       /* Rebuild the series before handing it to the chart — rendering first left
@@ -194,10 +213,10 @@ export class ReportsComponent implements OnInit {
   }
 
   getExpenses() {
-    this.http.get<any[]>(this.link('expenses')).subscribe(data => {
+    this.http.get<MoneySeries[]>(this.link('expenses')).subscribe(data => {
       this.expenses = data;
-      this.expensesCards = data?.[0]?.data ?? [];
-      this.expensesDeposits = data?.[1]?.data ?? [];
+      this.expensesCards = this.seriesFor(data, 'card');
+      this.expensesDeposits = this.seriesFor(data, 'deposits');
       this.concatExpensesArrays = this.combine(data);
       this.canRenderChart1 = true;
       this.buildSeries();
@@ -244,14 +263,14 @@ export class ReportsComponent implements OnInit {
     this.renderChart1();
   }
 
-  categories: any;
-  grocery: any;
-  health: any;
-  rent: any;
-  transportation: any;
+  categories: ExpenseCategory[] = [];
+  grocery: number;
+  health: number;
+  rent: number;
+  transportation: number;
 
   expenseCategories() {
-    this.http.get(`${environment.BaseUrl}expenseCategories`).subscribe(data => {
+    this.http.get<ExpenseCategory[]>(`${environment.BaseUrl}expenseCategories`).subscribe(data => {
       this.categories = data;
       this.grocery = this.categories[0].value;
       this.health = this.categories[1].value;

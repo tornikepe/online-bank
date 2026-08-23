@@ -16,6 +16,22 @@ import { environment } from "src/environments/environment";
  * if you would rather use one. If neither is reachable — running against a bare
  * json-server, say — the bundled sample feed keeps every screen populated.
  */
+/** One story as the page renders it, whatever feed it came from. */
+export interface Article {
+  title: string;
+  published_date: string;
+  summary: string;
+  /** Thumbnail URL; empty when the feed carries no image for the item. */
+  media: string;
+  link?: string;
+}
+
+export interface NewsResponse {
+  status: string;
+  topic?: string;
+  articles: Article[];
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -32,10 +48,10 @@ export class NewsAPIService {
     return !!environment.news.url && !!environment.news.apiKey;
   }
 
-  private request(topic: string, page: number): Observable<any> {
+  private request(topic: string, page: number): Observable<NewsResponse> {
     if (this.isConfigured) {
       return this.http
-        .get<any>(environment.news.url, {
+        .get<NewsResponse>(environment.news.url, {
           params: {
             q: topic,
             lang: "en",
@@ -50,28 +66,28 @@ export class NewsAPIService {
     }
 
     return this.http
-      .get<any>(`${environment.BaseUrl}news`, { params: { topic } })
+      .get<NewsResponse>(`${environment.BaseUrl}news`, { params: { topic } })
       .pipe(
         /* An empty result is as useless to the page as a failed one. */
         catchError(() => this.bundled())
       );
   }
 
-  private bundled(): Observable<any> {
+  private bundled(): Observable<NewsResponse> {
     return this.http
-      .get<any>(this.fallbackUrl)
+      .get<NewsResponse>(this.fallbackUrl)
       .pipe(catchError(() => of({ status: "ok", articles: [] })));
   }
 
-  getPopularNews(_date?: string): Observable<any> {
+  getPopularNews(_date?: string): Observable<NewsResponse> {
     return this.request("popular", this.currentPagePopular);
   }
 
-  getRecentNews(_date?: string): Observable<any> {
+  getRecentNews(_date?: string): Observable<NewsResponse> {
     return this.request("latest", this.currentPageRecent);
   }
 
-  getTrendingNews(_date?: string): Observable<any> {
+  getTrendingNews(_date?: string): Observable<NewsResponse> {
     return this.request("trending", this.currentPageTrending);
   }
 }

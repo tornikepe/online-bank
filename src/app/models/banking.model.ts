@@ -124,3 +124,24 @@ export interface BalanceChart {
   name: string;
   data: number[];
 }
+
+/** One bar on the Reports page's "accounts spendings" panel. */
+export interface SpendingTotal {
+  type: string;
+  userId: number;
+  value: number;
+}
+
+/** One slice of the Reports page's expense-category donut. */
+export interface ExpenseCategory {
+  type: string;
+  userId: number;
+  value: number;
+}
+
+/** A monthly income or expense series, one record per account kind. */
+export interface MoneySeries {
+  userId: number;
+  type: string;
+  data: number[];
+}
