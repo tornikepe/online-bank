@@ -1,4 +1,5 @@
 import {
+  Config,
   NotificationsService
 } from './notifications.service';
 import {
@@ -13,17 +14,16 @@ import {
 	styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-  text: any;
-  notifClass: any;
+  text: string;
+  notifClass: string;
 
   constructor(notificationsService: NotificationsService, private loading: NotificationsService, private cdr: ChangeDetectorRef) {}
 
   isDisplay: boolean = false;
 
-  config: any;
 
   ngOnInit() {
-    this.loading.show.subscribe((res: any) => {
+    this.loading.show.subscribe((res: Config | null) => {
       if (res) {
         this.isDisplay = true;
         this.text = res.text;

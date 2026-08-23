@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
-interface Config {
+/** A toast: the palette class and the message. */
+export interface Config {
   class: string,
   text: string
 }
@@ -9,7 +10,7 @@ interface Config {
   providedIn: 'root'
 })
 export class NotificationsService {
-  public show: BehaviorSubject<Config | null> = new BehaviorSubject<any>(null)
+  public show = new BehaviorSubject<Config | null>(null);
 
   open(config: Config){
     this.show.next(config);

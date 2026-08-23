@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { UserService } from "../../services/user.service";
 
 import { environment } from "src/environments/environment";
-import { BalanceChart, Card, Deposit, Loan } from "src/app/models/banking.model";
+import { BalanceChart, Card, Deposit, Loan, Transaction } from "src/app/models/banking.model";
 
 /** Fields the create-card form supplies; the API assigns the id. */
 export type NewCard = Omit<Card, "id">;
@@ -94,8 +94,8 @@ export class CardService implements OnInit {
     return this.http.get<BalanceChart[]>(`${this._url}/charts`);
   }
 
-  getTransactions() {
-    return this.http.get<any>(`${this._url}/transactions`)
+  getTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this._url}/transactions`)
     //     .pipe(
     //   map((spots) => {
     //     const cards: any = [];

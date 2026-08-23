@@ -19,7 +19,7 @@ export class SortByDateComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
 
   @Output() dateSortResult = new EventEmitter<string>();
-  public dateList: any = ["All Time"];
+  public dateList: string[] = ["All Time"];
 
   private subscribtion: Subscription;
 
@@ -29,9 +29,9 @@ export class SortByDateComponent implements OnInit, OnDestroy {
     // this.transactionService.getData().subscribe((data: any) => {
 
     this.subscribtion = this.transactionService.filteredTransactions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
-      (res: any) => {
+      (res) => {
         let dates = res.map(
-          (tr: any) => `${tr.date.longMonth} ${tr.date.year}`
+          (tr) => `${tr.date.longMonth} ${tr.date.year}`
         );
 
         let unique = [...new Set(dates)].reverse();
@@ -53,13 +53,7 @@ export class SortByDateComponent implements OnInit, OnDestroy {
     this.subscribtion.unsubscribe();
   }
 
-  sortByDate(event: any) {
+  sortByDate(event: string) {
     this.dateSortResult.emit(event);
-  }
-
-  dateListF() {
-    for (let i of this.dateList) {
-      return i;
-    }
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import { Card, Transaction } from "src/app/models/banking.model";
 import { CardService } from "../../card.service";
 import {GetnotfsService} from "../../../../services/getnotfs.service";
 import {NotificationsService} from "../../../../shared/notifications/notifications.service";
@@ -20,9 +21,10 @@ export class CardComponent implements OnInit {
   }).toUpperCase();
 
   public id: number;
-  public cardInfo: any;
-  public transactions: any;
-  public currentUserId: any = localStorage.getItem('userId')
+  public cardInfo: Card[] = [];
+  /* The template reads transactions?.[0], so the list is wrapped once. */
+  public transactions: Transaction[][] = [];
+  public currentUserId: number = Number(localStorage.getItem('userId'))
 
   constructor(private route: ActivatedRoute,
               private CardService: CardService,
@@ -42,14 +44,14 @@ export class CardComponent implements OnInit {
   }
 
   showConfig() {
-    this.CardService.get(this.id).subscribe((data: any) => {
+    this.CardService.get(this.id).subscribe((data) => {
       this.cardInfo = [data];
       this.cdr.markForCheck();
     });
   }
 
   showTransactions() {
-    this.CardService.getTransactions().subscribe((data: any) => {
+    this.CardService.getTransactions().subscribe((data) => {
       this.transactions = [data];
       this.cdr.markForCheck();
     });

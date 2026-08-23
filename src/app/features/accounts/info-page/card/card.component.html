@@ -27,8 +27,8 @@
 <!--                            </g>-->
 <!--                        </g>-->
 <!--                    </svg>-->
-                    <img *ngIf = 'info.card[0] == 4' width="30px" height="20px" src="../../../assets/img/visa.png" alt="">
-                    <img *ngIf='info.card[0] != 4' width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
+                    <img *ngIf="info.card[0] === '4'" width="30px" height="20px" src="../../../assets/img/visa.png" alt="">
+                    <img *ngIf="info.card[0] !== '4'" width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
 
                     <p>{{info.card | creditcard}}</p>
                 </div>
@@ -66,8 +66,8 @@
 <!--                            <path id="Shape-14" data-name="Shape" d="M4.339,0h0c.2.2.3.349.249.549,0,.6-.8.9-1.5.9A5.421,5.421,0,0,1,.7.948L.349.8,0,2.843a8.086,8.086,0,0,0,2.843.5A4.938,4.938,0,0,0,6.483,2.095Z" transform="translate(23.46 16.621)" fill="#fff"/>-->
 <!--                            <path id="Shape-15" data-name="Shape" d="M0,6.533H2.344l.5-1.5H6.034l.3,1.5H8.727L7.879,2.892,4.887,0l.15.8s.5,2.244.6,2.743H3.541c.2-.5,1-2.643,1-2.643s.2-.549.349-.9" transform="translate(30.691 13.18)" fill="#fff"/>-->
 <!--                        </svg>-->
-                        <img *ngIf = 'info.card[0] == 4' width="30px" height="10px" src="../../../assets/img/visa.png" alt="">
-                        <img *ngIf='info.card[0] != 4' width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
+                        <img *ngIf="info.card[0] === '4'" width="30px" height="10px" src="../../../assets/img/visa.png" alt="">
+                        <img *ngIf="info.card[0] !== '4'" width="30px" height="20px" src="../../../assets/img/mastercard.png" alt="">
 
                     </div>
                     <div class="text-1">
