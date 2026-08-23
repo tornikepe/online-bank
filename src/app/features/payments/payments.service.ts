@@ -1,6 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
+import {
+  Card,
+  PaymentProvider,
+  Transaction,
+  User,
+} from "src/app/models/banking.model";
 import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 
 import { environment } from "src/environments/environment";
@@ -8,14 +14,15 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class PaymentsService {
-  userId: any = 11;
+  /* Replaced with the signed-in id as soon as the payments page loads. */
+  userId: number = 11;
 
-  public data: any;
-  public users: any;
-  public cards: any;
+  public data: PaymentProvider[] = [];
+  public users: User[] = [];
+  public cards: Card[] = [];
 
-  currentUser: any;
-  currentCards: any[] = [];
+  currentUser: User;
+  currentCards: Card[] = [];
 
   constructor(
     private http: HttpClient,
@@ -27,25 +34,25 @@ export class PaymentsService {
   private urlCards = "cards";
   private urlTransactions = "transactions";
 
-  getData(): Observable<any> {
-    return this.http.get<any>(this.url + this.urlPaymentTypes);
+  getData(): Observable<PaymentProvider[]> {
+    return this.http.get<PaymentProvider[]>(this.url + this.urlPaymentTypes);
   }
-  getUsers(): Observable<any> {
-    return this.http.get<any>(this.url + this.urlUsers);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + this.urlUsers);
   }
-  getCards(): Observable<any> {
-    return this.http.get<any>(this.url + this.urlCards);
+  getCards(): Observable<Card[]> {
+    return this.http.get<Card[]>(this.url + this.urlCards);
   }
 
   postTransactions(
     currAccount: string,
     currTransferedTo: string,
-    currAmount: string,
+    currAmount: string | number,
     currCurrency: string,
     currType: string,
     currTransferFrom: number,
     currTransferTo: number
-  ): Observable<any> {
+  ): Observable<Transaction> {
     let currTransferToUserName: string;
     let currTransferFromUserName: string = this.currentUser.Full_Name;
     for (let user of this.users) {
@@ -55,7 +62,7 @@ export class PaymentsService {
       account: currAccount,
       transferedTo: currTransferedTo,
       date: this.getCurrentDate(),
-      amount: currAmount,
+      amount: Number(currAmount),
       currency: currCurrency,
       type: currType,
       transferFromUserId: currTransferFrom,
@@ -65,8 +72,17 @@ export class PaymentsService {
       img: "../../../favicon.ico",
     };
 
-    let currentCard = this.getCard(currAccount);
-    let beneficiaryCard = this.getCard(currTransferedTo);
+    const currentCard = this.getCard(currAccount);
+    const beneficiaryCard = this.getCard(currTransferedTo);
+
+    /* The forms check both accounts before getting here, so this is a guard
+       rather than a path anyone should reach — but reading `.amount` off a
+       card that was never found would take the page down with it. */
+    if (!currentCard || !beneficiaryCard) {
+      return throwError(
+        () => new Error("Transfer failed: one of the accounts no longer exists")
+      );
+    }
 
     /* Card balances are stored as strings in some records, so `+` concatenated
        instead of adding — crediting 100 to a balance of "156300" produced
@@ -85,10 +101,10 @@ export class PaymentsService {
       this.cards = data;
     });
 
-    return this.http.post<any>(this.url + this.urlTransactions, transaction);
+    return this.http.post<Transaction>(this.url + this.urlTransactions, transaction);
   }
 
-  getUppercaseData(data: any) {
+  getUppercaseData(data: PaymentProvider[]) {
     for (var payment of data) {
       for (var provider of payment.providers) {
         let first = provider.name.substring(0, 1).toUpperCase();
@@ -98,33 +114,28 @@ export class PaymentsService {
     this.data = data;
   }
 
-  getCard(number: string) {
-    for (let card of this.cards) {
-      if (card.account == number) {
-        return card;
-      }
-    }
+  getCard(account: string): Card | undefined {
+    return this.cards.find((card) => card.account == account);
   }
 
-  getCurrentUser(data: any) {
-    for (const user of data) {
-      if (user.id == this.userId) {
-        this.currentUser = user;
-        return user;
-      }
+  getCurrentUser(data: User[]): User | undefined {
+    const user = data.find((candidate) => candidate.id == this.userId);
+    if (user) {
+      this.currentUser = user;
     }
+    return user;
   }
 
-  getCurrentCards(data: any) {
+  getCurrentCards(data: Card[]) {
     for (const card of data) {
       if (card.userId == this.userId) this.currentCards.push(card);
     }
   }
 
-  validationAmount(cardNumber: string, cardAmount: string): boolean {
+  validationAmount(cardNumber: string, cardAmount: string | number): boolean {
     for (const card of this.currentCards) {
       if (card.account == cardNumber) {
-        return parseFloat(card.amount) >= parseFloat(cardAmount);
+        return Number(card.amount) >= Number(cardAmount);
       }
     }
     return false;
@@ -134,27 +145,26 @@ export class PaymentsService {
     Beneficiary: string,
     account: string
   ): boolean | string {
-    let userId: string = "";
-    for (let card of this.currentCards) {
-      if (card.account == account)
-        return "You are trying to transfer money to your card";
+    if (this.currentCards.some((card) => card.account == account)) {
+      return "You are trying to transfer money to your card";
     }
+
     /* Compare both sides case-insensitively: the stored names are mixed case,
        so lowercasing only the typed name never matched. */
     const typedName = Beneficiary.trim().toLocaleLowerCase();
-    for (let user of this.users) {
-      if ((user.Full_Name ?? "").trim().toLocaleLowerCase() === typedName)
-        userId = user.id;
-    }
-    for (let card of this.cards) {
-      if (card.userId == Number(userId) && card.account == account) return true;
-    }
-    return "Wrong card number or beneficiary!";
+    const beneficiary = this.users.find(
+      (user) => (user.Full_Name ?? "").trim().toLocaleLowerCase() === typedName
+    );
+
+    const matches = this.cards.some(
+      (card) => card.userId === beneficiary?.id && card.account == account
+    );
+    return matches ? true : "Wrong card number or beneficiary!";
   }
 
   validationAccount(account: string) {
     let i = this.cards.findIndex(
-      (i: any) => i.account === account && i.userId !== this.userId
+      (card) => card.account === account && card.userId !== this.userId
     );
     return i >= 0 ? this.cards[i] : false;
   }
@@ -179,7 +189,7 @@ export class PaymentsService {
 
   getCardUserId(account: string): number {
     let currentId = 0;
-    let i = this.cards.findIndex((i: any) => i.account === account);
+    const i = this.cards.findIndex((card) => card.account === account);
 
     return i >= 0 ? this.cards[i].userId : 0;
   }
