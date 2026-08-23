@@ -84,6 +84,16 @@ export interface Transaction {
   description?: string;
 }
 
+/**
+ * A transaction as the transactions list renders it. Building the list replaces
+ * the numeric amount with a signed, pre-formatted string — "-$480" — and adds
+ * the sentence shown under the title, so this is not a `Transaction`.
+ */
+export type DisplayTransaction = Omit<Transaction, 'amount'> & {
+  amount: string;
+  description: string;
+};
+
 export interface PaymentProvider {
   name: string;
   providers: { name: string }[];
@@ -106,4 +116,11 @@ export interface UserNotification {
   title: string;
   value: string;
   link: string;
+}
+
+/** One of the three balance sparklines on the accounts page. */
+export interface BalanceChart {
+  id: number;
+  name: string;
+  data: number[];
 }

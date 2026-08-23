@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { DisplayTransaction } from 'src/app/models/banking.model';
 import { UserService } from 'src/app/services/user.service';
 import { TransactionsService } from './transactions.service';
 
@@ -11,21 +12,25 @@ import { TransactionsService } from './transactions.service';
 export class TransactionsComponent implements OnInit {
   constructor(private transactionService: TransactionsService, private userService: UserService, private cdr: ChangeDetectorRef) { }
 
-  currentElementForModal: elementType;
+  currentElementForModal: DisplayTransaction;
   modalOpen = false;
 
   //data arrays
-  transactionArray!: any;
-  data!: any;
+  transactionArray: DisplayTransaction[] = [];
+  data: DisplayTransaction[] = [];
 
   //scroll binding
   throttle = 2;
   scrollDistance = 1;
 
-  getCloseModal(searchElement: any, wholeTransaction: any) {
+  getCloseModal(searchElement: HTMLElement, wholeTransaction: HTMLElement) {
     this.modalOpen = false;
   }
-  getCurrentElement(element: any, searchElement: any, wholeTransaction: any) {
+  getCurrentElement(
+    element: DisplayTransaction,
+    searchElement: HTMLElement,
+    wholeTransaction: HTMLElement
+  ) {
     this.modalOpen = true;
     this.currentElementForModal = element;
   }
@@ -48,18 +53,19 @@ export class TransactionsComponent implements OnInit {
     this.transactionService.getData().subscribe((data) => {
         this.data = data
           .filter(
-            (t: any) => t.transferFromUserId == id || t.transferToUserId == id
+            (t) => t.transferFromUserId == id || t.transferToUserId == id
           )
-          .map((t: any) => {
-            if (t.transferFromUserId == id) {
-              t.description = t.type + ' to ' + t.currTransferToUser;
-              t.amount = '-$' + t.amount;
-              return t;
-            } else {
-              t.description = t.type + ' from ' + t.currTransferFromUser;
-              t.amount = '+$' + t.amount;
-              return t;
-            }
+          .map((t): DisplayTransaction => {
+            /* The row shows a signed, pre-formatted amount, so the numeric one
+               is replaced rather than edited in place. */
+            const outgoing = t.transferFromUserId == id;
+            return {
+              ...t,
+              description: outgoing
+                ? `${t.type} to ${t.currTransferToUser}`
+                : `${t.type} from ${t.currTransferFromUser}`,
+              amount: `${outgoing ? '-' : '+'}$${t.amount}`,
+            };
           })
           .reverse();
 
@@ -75,7 +81,7 @@ export class TransactionsComponent implements OnInit {
     //retrieve transactions data
   }
 
-  onFind(result: any, container: HTMLDivElement) {
+  onFind(result: string, container: HTMLDivElement) {
     this.searchValue = result;
     this.transactionArray = this.transactionService
       .universalFilter(
@@ -89,7 +95,7 @@ export class TransactionsComponent implements OnInit {
     container.scroll(0, 0);
   }
 
-  onSort(result: any, container: HTMLDivElement) {
+  onSort(result: string, container: HTMLDivElement) {
     this.typeValue = result;
 
     this.transactionArray = this.transactionService
@@ -104,7 +110,7 @@ export class TransactionsComponent implements OnInit {
     container.scroll(0, 0);
   }
 
-  onSortDate(result: any, container: HTMLDivElement) {
+  onSortDate(result: string, container: HTMLDivElement) {
     this.dateValue = result;
     this.transactionArray = this.transactionService
       .universalFilter(
@@ -129,14 +135,4 @@ export class TransactionsComponent implements OnInit {
 
     if (newData) this.transactionArray = [...this.transactionArray, newData];
   }
-}
-
-export interface elementType {
-  id: number;
-  account: string;
-  img: string;
-  description: string;
-  date: any;
-  type: string;
-  amount: number;
 }

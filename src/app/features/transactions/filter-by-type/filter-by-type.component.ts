@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   styleUrls: ["./filter-by-type.component.scss"],
 })
 export class FilterByTypeComponent implements OnInit {
-  @Output() sortResults = new EventEmitter();
+  @Output() sortResults = new EventEmitter<string>();
 
   constructor() { }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { Transaction } from "src/app/models/banking.model";
+import { DisplayTransaction, Transaction } from "src/app/models/banking.model";
 import { UserService } from "src/app/services/user.service";
 
 import { environment } from "src/environments/environment";
@@ -24,7 +24,7 @@ let months = {
   providedIn: "root",
 })
 export class TransactionsService {
-  filteredTransactions$ = new Subject<Transaction[]>();
+  filteredTransactions$ = new Subject<DisplayTransaction[]>();
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
@@ -38,7 +38,7 @@ export class TransactionsService {
   }
 
   universalFilter(
-    data: Transaction[],
+    data: DisplayTransaction[],
     searchValue: string,
     typeValue: string,
     dateValue: string

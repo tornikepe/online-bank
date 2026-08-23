@@ -15,7 +15,8 @@ export class SearchComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   public form: FormGroup;
-  @Output() public searchResult = new EventEmitter<any[]>(); // any = transaction
+  /* Emits the text typed into the box, not a list of transactions. */
+  @Output() public searchResult = new EventEmitter<string>();
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.form = fb.group({

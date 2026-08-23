@@ -45,8 +45,8 @@
             <div id="div-group" *ngIf="cardsArray.length" [class.underline]="!last" (click) = navigteCardPage(card.id)>
                 <div class="img-text">
                     <div class="img-background">
-                        <img *ngIf = 'card.card[0] == 4' width="30px" src="../../../../assets/img/visa.png" alt="">
-                        <img *ngIf='card.card[0] != 4' width="30px" src="../../../../assets/img/mastercard.png" alt="">
+                        <img *ngIf="card.card[0] === '4'" width="30px" src="../../../../assets/img/visa.png" alt="Visa">
+                        <img *ngIf="card.card[0] !== '4'" width="30px" src="../../../../assets/img/mastercard.png" alt="Mastercard">
                     </div>
                     <div class="text">
                         <p class="p1">{{card.card | creditcard}}</p>

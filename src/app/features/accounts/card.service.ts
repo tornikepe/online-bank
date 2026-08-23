@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { UserService } from "../../services/user.service";
 
 import { environment } from "src/environments/environment";
-import { Card, Deposit, Loan } from "src/app/models/banking.model";
+import { BalanceChart, Card, Deposit, Loan } from "src/app/models/banking.model";
 
 /** Fields the create-card form supplies; the API assigns the id. */
 export type NewCard = Omit<Card, "id">;
@@ -90,8 +90,8 @@ export class CardService implements OnInit {
     return this.http.delete(`${this._url}/loans/${id}`);
   }
 
-  chartValues() {
-    return this.http.get(`${this._url}/charts`);
+  chartValues(): Observable<BalanceChart[]> {
+    return this.http.get<BalanceChart[]>(`${this._url}/charts`);
   }
 
   getTransactions() {

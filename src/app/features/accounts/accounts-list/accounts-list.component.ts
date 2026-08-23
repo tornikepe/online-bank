@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectorRef} from "@angular/core";
 import { Router } from "@angular/router";
+import { BalanceChart, Card, Deposit, Loan } from "src/app/models/banking.model";
 import { CardService } from "../card.service";
 import {NotificationsService} from "../../../shared/notifications/notifications.service";
 
@@ -11,11 +12,12 @@ import {NotificationsService} from "../../../shared/notifications/notifications.
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
   constructor(private cardService: CardService, private rouer: Router, private cdr: ChangeDetectorRef) {}
-  cardsArray: any = [];
-  depositsArray: any = [];
-  loansArray: any = [];
+  cardsArray: Card[] = [];
+  depositsArray: Deposit[] = [];
+  loansArray: Loan[] = [];
 
-  charts: any = [1];
+  /* The template reads charts[0][n], so this stays a single-element array. */
+  charts: BalanceChart[][] = [];
   cardType: string;
   ngOnInit(): void {
     this.cardService.getDeposits().subscribe((data) => {
@@ -42,12 +44,12 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   openCredit() {
     this.rouer.navigate(["/accounts/open/credit"]);
   }
-  navigteCardPage(e: any) {
+  navigteCardPage(e: number) {
     this.rouer.navigate(["/accounts/info/card/", e]);
   }
 
   getCharts() {
-    this.cardService.chartValues().subscribe((charts: any) => {
+    this.cardService.chartValues().subscribe((charts) => {
       this.charts = [charts];
       this.cdr.markForCheck();
     });
@@ -65,15 +67,15 @@ export class AccountsListComponent implements OnInit, OnDestroy {
 
   get outstandingCredit(): number {
     return (this.loansArray ?? []).reduce(
-      (total: number, loan: any) =>
+      (total: number, loan: Loan) =>
         total + (Number(loan.startingAmount) - Number(loan.paidAmount)),
       0
     );
   }
 
-  private sum(rows: any[], key: string): number {
+  private sum<T>(rows: T[], key: keyof T): number {
     return (rows ?? []).reduce(
-      (total: number, row: any) => total + Number(row[key] ?? 0),
+      (total: number, row: T) => total + Number(row[key] ?? 0),
       0
     );
   }

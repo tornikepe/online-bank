@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import { DisplayTransaction } from "src/app/models/banking.model";
 
 @Component({
   standalone: false,
@@ -7,7 +8,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./modal.component.scss"],
 })
 export class ModalComponent implements OnInit {
-  @Input() currentElement: elementType;
+  @Input() currentElement: DisplayTransaction;
 
   @Output() modalClose = new EventEmitter();
 
@@ -15,18 +16,12 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal(event: any) {
-    if (event.className.slice(0, 11) == "close-modal")
-      this.modalClose.emit(event);
+  /* The template hands over `$event.target`, which the DOM types as possibly
+     null and without a className. Only the backdrop and the two close controls
+     carry the class, so a click anywhere inside the card is ignored. */
+  closeModal(target: EventTarget | null) {
+    if (target instanceof Element && target.classList.contains("close-modal")) {
+      this.modalClose.emit(target);
+    }
   }
-}
-
-export interface elementType {
-  id: number;
-  account: string;
-  img: string;
-  description: string;
-  date: any;
-  type: string;
-  amount: number;
 }

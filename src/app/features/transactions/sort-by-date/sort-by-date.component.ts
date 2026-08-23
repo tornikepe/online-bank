@@ -18,7 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SortByDateComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
 
-  @Output() dateSortResult = new EventEmitter();
+  @Output() dateSortResult = new EventEmitter<string>();
   public dateList: any = ["All Time"];
 
   private subscribtion: Subscription;
