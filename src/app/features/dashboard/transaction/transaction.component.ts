@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
+import { MoneyTransferShortcut } from 'src/app/models/banking.model';
 import { environment } from "src/environments/environment";
 @Component({
   standalone: false,
@@ -16,15 +17,16 @@ export class TransactionComponent implements OnInit {
 
   public myarray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  moneytransfer: any[];
-  name: any = [];
-  data: any = [];
+  moneytransfer: MoneyTransferShortcut[] = [];
+  /* The template reads .name, .dataAndTime and .icon off these, so the
+     list holds the records themselves. `data` was never used. */
+  name: MoneyTransferShortcut[] = [];
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.http
-      .get(`${environment.BaseUrl}moneytransfer`)
-      .subscribe((moneytransfer: any) => {
+      .get<MoneyTransferShortcut[]>(`${environment.BaseUrl}moneytransfer`)
+      .subscribe((moneytransfer) => {
         this.moneytransfer = moneytransfer;
         for (let i = 0; i < this.moneytransfer.length; i++) {
           this.name.push(this.moneytransfer[i]);

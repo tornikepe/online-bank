@@ -3,9 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import {catchError, Observable} from "rxjs";
 
+import { UserNotification } from "src/app/models/banking.model";
 import { environment } from "src/environments/environment";
 export interface Notf {
-  userId: any,
+  /** Read straight from localStorage at three call sites, hence the null. */
+  userId: number | string | null,
   title: string,
   value: string,
   link?: string
@@ -18,19 +20,12 @@ export class GetnotfsService {
   private link: string = environment.BaseUrl.replace(/\/$/, "")
   constructor(private http: HttpClient) { }
 
-  getNotfs() {
-    return this.http.get<any>(`${this.link}/userNotifications`)
-        .pipe(
-            map(spots => {
-              const cards: any = [];
-              spots.forEach((spot: any) => {
-                if(spot.userId == localStorage.getItem('userId')) {
-                  cards.push(spot);
-                }
-              })
-              return cards
-            })
-        )
+  /** Only the signed-in user's notifications; the API returns everyone's. */
+  getNotfs(): Observable<UserNotification[]> {
+    const userId = localStorage.getItem('userId');
+    return this.http
+        .get<UserNotification[]>(`${this.link}/userNotifications`)
+        .pipe(map(all => all.filter(notification => notification.userId == Number(userId))))
   }
 
   deleteNotf(id: number) {

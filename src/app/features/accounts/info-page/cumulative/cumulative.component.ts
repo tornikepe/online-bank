@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import { ActivityRow, Deposit } from "src/app/models/banking.model";
 import {CardService} from "../../card.service";
 import {GetnotfsService} from "../../../../services/getnotfs.service";
 import {NotificationsService} from "../../../../shared/notifications/notifications.service";
@@ -22,7 +23,7 @@ export class CumulativeComponent implements OnInit {
 
 
   public id: number;
-  public loadData: any[] = [];
+  public loadData: Deposit[] = [];
 
   constructor(private route: ActivatedRoute,
               private cardService: CardService,
@@ -40,7 +41,7 @@ export class CumulativeComponent implements OnInit {
 
   getData() {
     this.cardService.getDepositsSingle(this.id)
-        .subscribe((data: any) => {
+        .subscribe((data) => {
           this.loadData = [data]
                   this.cdr.markForCheck();
         })
@@ -64,7 +65,7 @@ export class CumulativeComponent implements OnInit {
 
   /* Placeholder activity for the account detail panel until per-account history
      is wired up. Previously this was the same row repeated thirty-five times. */
-  public transactions: any = [
+  public transactions: ActivityRow[] = [
     { name: 'bank transfer', title: 'Transfer to Levan Chkhaidze', amount: 480 },
     { name: 'card payment', title: 'Grocery — Carrefour', amount: 76 },
     { name: 'direct debit', title: 'Monthly home rent', amount: 1200 },

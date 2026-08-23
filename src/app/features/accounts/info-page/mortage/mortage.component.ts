@@ -6,6 +6,7 @@ import {
   ApexChart,
   ChartComponent, ApexDataLabels, ApexLegend, ApexNoData
 } from "ng-apexcharts";
+import { ActivityRow, Loan } from "src/app/models/banking.model";
 import {CardService} from "../../card.service";
 import {GetnotfsService} from "../../../../services/getnotfs.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -16,7 +17,7 @@ export type ChartOptions = {
   series: ApexNonAxisChartSeries | any;
   chart: ApexChart | any;
   responsive: ApexResponsive[] | any;
-  labels: any;
+  labels: string[];
   dataLabels: ApexDataLabels | any;
   legend: ApexLegend | any;
   noData: ApexNoData | any;
@@ -40,10 +41,10 @@ export class MortgageComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  public loadData: any[] = [];
+  public loadData: Loan[] = [];
   private id: number;
 
-  chartValues: any[];
+  chartValues: number[];
 
   constructor(
       private cardService: CardService,
@@ -128,7 +129,7 @@ export class MortgageComponent implements OnInit {
 
   getData() {
     this.cardService.getLoansSingle(this.id)
-        .subscribe((data: any) => {
+        .subscribe((data) => {
           this.loadData = [data]
                   this.cdr.markForCheck();
         })
@@ -166,7 +167,7 @@ export class MortgageComponent implements OnInit {
 
   /* Placeholder activity for the account detail panel until per-account history
      is wired up. Previously this was the same row repeated thirty-five times. */
-  public transactions: any = [
+  public transactions: ActivityRow[] = [
     { name: 'bank transfer', title: 'Transfer to Levan Chkhaidze', amount: 480 },
     { name: 'card payment', title: 'Grocery — Carrefour', amount: 76 },
     { name: 'direct debit', title: 'Monthly home rent', amount: 1200 },

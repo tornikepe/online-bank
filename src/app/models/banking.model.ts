@@ -145,3 +145,18 @@ export interface MoneySeries {
   type: string;
   data: number[];
 }
+
+/** A row in the activity panel on a deposit or loan detail page. */
+export interface ActivityRow {
+  name: string;
+  title: string;
+  amount: number;
+}
+
+/** A saved recipient on the dashboard's money-transfer strip. */
+export interface MoneyTransferShortcut {
+  id: number;
+  name: string;
+  dataAndTime: string;
+  icon: string;
+}

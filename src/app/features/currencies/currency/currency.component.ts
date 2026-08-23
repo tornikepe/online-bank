@@ -3,10 +3,28 @@ import { Component, OnDestroy, OnInit, ChangeDetectorRef} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { CryptoListing, CryptoService } from "../crypto.service";
-// interface currency {
-//   timestamp: any;
-//   rates: any;
-// }
+/**
+ * One currency as the National Bank of Georgia publishes it, plus the two
+ * presentation fields the table adds when it builds the row.
+ */
+export interface CurrencyRate {
+  code: string;
+  name: string;
+  /** The rate is quoted for this many units — 1, 10, 100 or 1000. */
+  quantity: number;
+  rate: number;
+  rateFormated: string;
+  /** Absolute move against the previous rate, in lari. */
+  diff: number;
+  diffFormated: string;
+  /** The day the rate was set. */
+  date: string;
+  /** The day it takes effect — what the bank shows as the rate's date. */
+  validFromDate: string;
+  /** Added client-side when the row is built. */
+  icon?: string;
+  color?: string;
+}
 
 @Component({
   standalone: false,
@@ -15,11 +33,11 @@ import { CryptoListing, CryptoService } from "../crypto.service";
   styleUrls: ["./currency.component.scss"],
 })
 export class CurrencyComponent implements OnInit, OnDestroy {
-  public cryptoArray: any[] = [];
+  public cryptoArray: CryptoListing[] = [];
 
-  public currency_arr: any[] = [];
+  public currency_arr: CurrencyRate[] = [];
 
-  public secondaryArray: any = [];
+  public secondaryArray: CryptoListing[] = [];
 
   public iconMap = new Map<string, string>();
 
@@ -30,8 +48,6 @@ export class CurrencyComponent implements OnInit, OnDestroy {
   public form: FormGroup = new FormGroup({});
 
   public filterString: string = "";
-  ///////////////
-  public currencyArray: any[] = [];
 
   constructor(
     private _http: HttpClient,
@@ -93,13 +109,6 @@ export class CurrencyComponent implements OnInit, OnDestroy {
     if (value >= 0.0001) return "1.2-6";
     return "1.2-8";
   }
-  imageHasBeenLoaded(event: any) {
-    event.url =
-      "https://www.pngplay.com/wp-content/uploads/2/Bitcoin-PNG-Background.png";
-    event.onerror = "";
-    return true;
-  }
-
   /**
    * The bank publishes `diff` as an absolute move in lari, not a fraction. The
    * table used to pipe it straight through `percent`, which simply multiplied
@@ -146,6 +155,6 @@ return url_;
 
   ngOnDestroy(): void {
     this.cryptoArray = [];
-    this.currencyArray = [];
+    this.currency_arr = [];
   }
 }
