@@ -1,16 +1,23 @@
 # Online Bank
 
-A complete online banking application — accounts and cards, money transfers,
-invoicing, spending reports, live exchange rates and account settings. Nine
-screens, all of them working, running against a demo API that needs no signup,
-no keys and no database.
+A working online bank. Open an account, add a card, move money between
+accounts, take out a deposit or a credit, issue an invoice, watch what you
+spend, and check today's exchange rates. Nine screens, all of them real — no
+placeholder pages, no dead buttons.
 
 ```
-Angular 22 · TypeScript · RxJS · SCSS · ApexCharts · Vitest
+Angular · TypeScript · RxJS · SCSS · ApexCharts · Vitest
 ```
 
-**[Try the live demo →](https://online-bank-theta.vercel.app)**  
-Sign in with `tornike.peitrishvili@example.com` / `Demo1234!`
+**[Try the live demo →](https://online-bank-theta.vercel.app)**
+
+Sign in as `tornike.peitrishvili@example.com` / `Demo1234!` to see a full
+account, or **create your own** from the sign-up screen — it works, and what
+you do with it stays there when you come back.
+
+No signup gate, no API keys, no database to install. Exchange rates come from
+the National Bank of Georgia, cryptocurrency prices from CoinGecko and the
+headlines from publisher feeds; none of the three needs a credential.
 
 ---
 
@@ -127,7 +134,11 @@ Every demo account uses the same password: **`Demo1234!`**
 | `levan.chkhaidze@example.com` | The counterparty the transfer flows pay into |
 | `mariam.tsiklauri@example.com` | A quieter account, useful for comparing |
 
-You can also register a new account from the sign-up screen; it starts empty.
+**Or make your own.** The sign-up screen creates a real account: it is stored
+the same way the demo accounts are, with its password hashed, and it is there
+the next time you visit. A new account starts empty and every screen says so
+plainly rather than showing zeros — add a card and the dashboard, accounts and
+transfer screens all come to life.
 
 The data is fictional and lives in `db.json`, which the app writes to as you use
 it. To reset the demo:
@@ -144,7 +155,7 @@ src/app
 ├── features/      accounts, payments, transactions, invoices, reports,
 │                  currency, news, settings, dashboard
 ├── guard/         route guards
-├── interceptors/  bearer-token interceptor and token storage
+├── interceptors/  bearer-token interceptor, token storage, demo data store
 ├── layout/        sidebar, topbar, main shell, footer
 ├── models/        the shapes the API returns
 ├── services/      API and current-user services
@@ -152,14 +163,16 @@ src/app
 │                  toasts, pipes
 └── testing/       shared test setup
 
-api/               serverless demo API used by the deployed build
-tools/             optional CoinMarketCap proxy
+api/               serverless function behind the deployed news feed
+tools/             optional CoinMarketCap proxy, no longer used
 src/assets/data/   offline fallbacks for the news and crypto feeds
 db.json            the demo database
 ```
 
-Feature areas are lazy-loaded, so the initial download stays small — around
-86 kB transferred — and each screen arrives when you first visit it.
+Feature areas are lazy-loaded, so the first load stays small — under 100 kB
+transferred — and each screen arrives when you first visit it.
+
+Every declaration in `src/app` is typed; there is no `any` anywhere in it.
 
 ## The API
 
@@ -219,10 +232,15 @@ CMC_API_KEY=your-key node tools/currency-proxy/app.js
 npm test
 ```
 
-33 tests across 31 files, run with Vitest through Angular's own test builder.
+62 tests across 35 files, run with Vitest through Angular's own test builder.
 Each spec mounts its component inside the module that declares it, with the HTTP
 and router test doubles wired up, so the tests exercise the real template rather
 than a stub.
+
+Most of them exist because something was actually broken: the daily change on
+the exchange-rate table, the dropdown that shared one radio group with every
+other dropdown on the page, the transfer button wired to fire twice, the
+registration that did not survive a restart.
 
 ## Deployment
 
@@ -247,21 +265,24 @@ new deposits persist across reloads and never touch anyone else's session. The
 interceptor is inert outside the production build, where json-server handles
 the same calls.
 
-Two routes are the exception, and both are the server's job rather than demo
-data. Sign-in compares a bcrypt hash, so `POST /api/login` and
-`POST /api/register` go to `api/index.js`. `GET /api/news` lives there too: it
-fetches publisher RSS, which browsers cannot read for want of a CORS header,
-and reshapes it into the feed the page renders.
+Signing in and registering run there too, against the same store, so an account
+someone creates belongs to them and lasts as long as their browser keeps it.
+Passwords are hashed with bcrypt either way — the seeded accounts carry hashes
+and a new one is hashed the same way rather than kept as typed.
 
-An earlier version routed everything through that function and kept the data in
-memory. It worked until the platform spread requests across instances — a
-transfer could land on one instance and the next read on another, so a balance
-updated a moment ago appeared to snap back. Holding the mutable copy in the
-browser removes the problem.
+One route is the exception. `GET /api/news` goes to `api/index.js`, which
+fetches publisher RSS and reshapes it: the feeds send no CORS header, so it is
+the one thing a browser genuinely cannot read for itself.
+
+Both of those arrangements came from watching the earlier one fail. Routing
+everything through the function and keeping the data in its memory worked until
+the platform spread requests across instances — a transfer landed on one and
+the next read on another, so a balance updated a moment ago appeared to snap
+back, and an account created on Monday was gone by Tuesday.
 
 To point the app at a real backend instead, set `BaseUrl` in
-`src/environments/environment.prod.ts`, delete `api/`, and drop
-`demoDataInterceptor` from `src/app/app.config.ts`.
+`src/environments/environment.prod.ts` and drop `demoDataInterceptor` from
+`src/app/app.config.ts`. Nothing else assumes the demo store.
 
 ## Design notes
 
@@ -275,14 +296,17 @@ A few decisions that are worth knowing if you read the code:
   their 401s sign the user out.
 - **The user id is read synchronously.** It is written at sign-in and survives a
   reload, so services filtering data by user never race the profile request.
-- **Change detection is explicit.** Angular 22 does not repaint a view just
+- **Change detection is explicit.** The framework does not repaint a view just
   because a field changed, so anything assigned from an async callback marks its
   own view. The same rule applies to a parent writing to a child's input.
 - **Money is coerced before arithmetic.** Balances arrive as both numbers and
   numeric strings, and `+` on a string concatenates.
-- **The layout has a mobile path.** Below 900px the sidebar becomes a drawer,
-  dense rows restack, and screens that genuinely need the width — the exchange
-  rate table — scroll inside their own panel rather than the page.
+- **The layout has a mobile path.** Every screen was built for a wide desktop,
+  several of them positioned absolutely at fixed pixel offsets. Below 900px the
+  sidebar becomes a drawer, dense rows restack, the auth screens drop their
+  decorative half and flow as a single column, and the one screen that
+  genuinely needs the width — the exchange-rate table — scrolls inside its own
+  panel rather than the page.
 
 ## About the author
 
@@ -291,18 +315,25 @@ A few decisions that are worth knowing if you read the code:
 I build web applications, and the part I enjoy most is taking something apart to
 find out why it actually behaves the way it does instead of guessing.
 
-This project is a fair sample of that. It began as a four-year-old Angular 13
-app that no longer built on a current Node, and the version bump turned out to
-be the easy half. The rest was finding what had quietly broken and what had
-never worked: a change-detection rule in Angular 22 that stops repainting a view
-whose field was set from an async callback; a transfer that ran twice on one
-click because the button was wired to both `(click)` and its form's `(ngSubmit)`;
-a bank-transfer field capped at sixteen characters against a validator demanding
-twenty-two, so the form could never be submitted at all; a report tab that
-picked its series by array position and drew an empty chart the moment the data
-was filtered. Typing the codebase — 210 `any` declarations down to none — turned
-up eleven more, including two dashboard charts that threw on every mouse move
-because they read a property Chrome removed in version 109.
+This project is a fair sample of that. It began as a four-year-old app that no
+longer built at all, and getting it to compile turned out to be the easy half.
+The rest was finding what had quietly broken and what had never worked:
+
+- A transfer that ran twice on a single click, because the button was wired to
+  both its own handler and its form's — so every payment moved the money twice.
+- A bank-transfer field capped at sixteen characters against a validator
+  demanding twenty-two, so the form could never be submitted at all.
+- A report tab that picked its data by position in the response and drew an
+  empty chart the moment that response was filtered.
+- An exchange-rate table reporting the daily change wrong for every currency,
+  because it read an absolute move in lari as though it were already a
+  percentage.
+- Registration that worked until the server recycled, because the account lived
+  in one place and everything the account owned lived in another.
+
+Typing the codebase end to end — 210 `any` declarations down to none — turned up
+several more on its own, including two charts that threw on every mouse move
+over a property the browser had removed three years earlier.
 
 **What I work with.** TypeScript and Angular on the front end, Node and Python
 behind it. Recent work includes [bazari](https://github.com/tornikepe/bazari), a
@@ -311,9 +342,9 @@ bilingual storefront with faceted filtering, cart and an admin panel, and
 a document chat built on FastAPI. I am working through Playwright, SQL and API
 testing to round out the testing side.
 
-**What I am looking for.** A front-end or full-stack role where the work involves
-real products and real users, and where careful debugging is valued as much as
-new features. Open to remote and to teams in Tbilisi.
+**What I am looking for.** A front-end or full-stack role where the work
+involves real products and real users, and where careful debugging counts for as
+much as new features. Open to remote and to teams in Tbilisi.
 
 The quickest way to reach me is through my
 [GitHub profile](https://github.com/tornikepe).
