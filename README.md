@@ -286,16 +286,37 @@ A few decisions that are worth knowing if you read the code:
 
 ## About the author
 
-**Tornike Peitrishvili** — [github.com/tornikepe](https://github.com/tornikepe)
+**Tornike Peitrishvili** — Tbilisi, Georgia · [github.com/tornikepe](https://github.com/tornikepe)
 
-I build web applications and enjoy the part of the work where you take something
-apart to find out why it really behaves the way it does, rather than guessing.
+I build web applications, and the part I enjoy most is taking something apart to
+find out why it actually behaves the way it does instead of guessing.
 
-Currently working with Angular and TypeScript on the front end, and with
-Playwright for test automation.
+This project is a fair sample of that. It began as a four-year-old Angular 13
+app that no longer built on a current Node, and the version bump turned out to
+be the easy half. The rest was finding what had quietly broken and what had
+never worked: a change-detection rule in Angular 22 that stops repainting a view
+whose field was set from an async callback; a transfer that ran twice on one
+click because the button was wired to both `(click)` and its form's `(ngSubmit)`;
+a bank-transfer field capped at sixteen characters against a validator demanding
+twenty-two, so the form could never be submitted at all; a report tab that
+picked its series by array position and drew an empty chart the moment the data
+was filtered. Typing the codebase — 210 `any` declarations down to none — turned
+up eleven more, including two dashboard charts that threw on every mouse move
+because they read a property Chrome removed in version 109.
 
-<!-- Add your own summary here: what you are looking for, what you have shipped,
-     and the best way to reach you. -->
+**What I work with.** TypeScript and Angular on the front end, Node and Python
+behind it. Recent work includes [bazari](https://github.com/tornikepe/bazari), a
+bilingual storefront with faceted filtering, cart and an admin panel, and
+[rag-knowledge-assistant](https://github.com/tornikepe/rag-knowledge-assistant),
+a document chat built on FastAPI. I am working through Playwright, SQL and API
+testing to round out the testing side.
+
+**What I am looking for.** A front-end or full-stack role where the work involves
+real products and real users, and where careful debugging is valued as much as
+new features. Open to remote and to teams in Tbilisi.
+
+The quickest way to reach me is through my
+[GitHub profile](https://github.com/tornikepe).
 
 ## Licence
 
