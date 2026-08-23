@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="column-2">
-        <img *ngIf="singleArticleObj?.media" [src]="singleArticleObj?.media" [alt]="singleArticleObj?.title">
+        <img *ngIf="singleArticleObj?.media" [src]="singleArticleObj!.media" [alt]="singleArticleObj!.title">
         <div class="content">
             <h3>{{singleArticleObj?.title}}</h3>
             <h6>{{singleArticleObj?.published_date}}</h6>

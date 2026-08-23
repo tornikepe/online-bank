@@ -22,8 +22,7 @@ export class CardComponent implements OnInit {
 
   public id: number;
   public cardInfo: Card[] = [];
-  /* The template reads transactions?.[0], so the list is wrapped once. */
-  public transactions: Transaction[][] = [];
+  public transactions: Transaction[] = [];
   public currentUserId: number = Number(localStorage.getItem('userId'))
 
   constructor(private route: ActivatedRoute,
@@ -52,7 +51,7 @@ export class CardComponent implements OnInit {
 
   showTransactions() {
     this.CardService.getTransactions().subscribe((data) => {
-      this.transactions = [data];
+      this.transactions = data;
       this.cdr.markForCheck();
     });
   }
