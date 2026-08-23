@@ -146,8 +146,10 @@ describe('demoDataInterceptor', () => {
     it('stores the password hashed rather than as typed', async () => {
       await firstValueFrom(http.post(url('register'), account));
 
-      const users = await firstValueFrom(http.get<any[]>(url('users')));
-      const stored = users.find((u: any) => u.email === account.email);
+      const users = await firstValueFrom(
+        http.get<{ email: string; password: string }[]>(url('users'))
+      );
+      const stored = users.find(u => u.email === account.email)!;
       expect(stored.password).toBeDefined();
       expect(stored.password).not.toBe(account.password);
     });
