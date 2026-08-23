@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef} from "@angular/core";
 // import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Card } from "src/app/models/banking.model";
+import { ListWithIcons } from "src/app/shared/components/dropdown/list-with-icons.model";
 import {
   FormBuilder,
   FormControl,
@@ -16,15 +18,15 @@ import { PaymentsService } from '../payments.service';
   styleUrls: ["./electronic-transfer.component.scss"],
 })
 export class ElectronicTransferComponent implements OnInit {
-  @Output() makeCloseTransfer = new EventEmitter();
+  @Output() makeCloseTransfer = new EventEmitter<MouseEvent>();
 
   amountValue: number;
   fee: number;
-  activeCard: any;
+  activeCard: Card;
   transferType: string = "Personal transfer";
   currencyType: string = "USD";
 
-  cardList: any = [];
+  cardList: ListWithIcons[] = [];
 
   public eTransferForm: FormGroup;
 
@@ -45,7 +47,7 @@ export class ElectronicTransferComponent implements OnInit {
   userIsSame: boolean;
   // Validator variables
 
-  closeTransfer(event: any) {
+  closeTransfer(event: MouseEvent) {
     this.makeCloseTransfer.emit(event);
   }
 
@@ -66,14 +68,17 @@ export class ElectronicTransferComponent implements OnInit {
   // -- CUSTOM VALIDATORS END HERE
 
   ngOnInit(): void {
-    this.paymentsService.currentCards.forEach((card: any) => {
+    this.paymentsService.currentCards.forEach((card: Card) => {
       this.cardList.push({
+        /* This compared the card number against the literal "VisaMasterCard",
+           which never matches, so every card drew the Mastercard icon. Visa
+           numbers begin with 4 — the same test the accounts page uses. */
         iconClass:
-          card.card == "VisaMasterCard"
+          card.card[0] === "4"
             ? "fab fa-cc-visa"
             : "fab fa-cc-mastercard",
         value: card.account,
-        secondValue: card.amount,
+        secondValue: String(card.amount),
       });
     });
   }
@@ -164,7 +169,7 @@ export class ElectronicTransferComponent implements OnInit {
     return this.eTransferForm.controls;
   }
 
-  getCurrentCard(event: any) {
+  getCurrentCard(event: ListWithIcons) {
     for (let card of this.paymentsService.currentCards) {
       if (card.account === event.value) {
         this.activeCard = card;

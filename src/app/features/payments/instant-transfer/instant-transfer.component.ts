@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef} from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Card } from "src/app/models/banking.model";
+import { ListWithIcons } from "src/app/shared/components/dropdown/list-with-icons.model";
 import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 
 import { PaymentsService } from "../payments.service";
@@ -13,8 +15,8 @@ import { PaymentsService } from "../payments.service";
 export class InstantTransferComponent implements OnInit {
   transferType: string = "Personal transfer";
   //dropdown list array
-  cardList: any = [];
-  activeCard: any;
+  cardList: ListWithIcons[] = [];
+  activeCard: Card;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +35,7 @@ export class InstantTransferComponent implements OnInit {
   amountIsInvalid: boolean;
   accountIsValid: boolean;
   userIsSame: boolean;
-  errorMessage: any;
+  errorMessage: boolean | string;
   // Validator variables
 
   // CUSTOM VALIDATORS START HERE
@@ -66,7 +68,7 @@ export class InstantTransferComponent implements OnInit {
   ngOnInit(): void {
     this.getCardList();
   }
-  getCurrentCard(event: any) {
+  getCurrentCard(event: ListWithIcons) {
     for (let card of this.paymentService.currentCards) {
       if (card.account === event.value) {
         this.activeCard = card;
@@ -76,14 +78,17 @@ export class InstantTransferComponent implements OnInit {
 
   //for dropdown list array
   getCardList() {
-    this.paymentService.currentCards.forEach((card: any) => {
+    this.paymentService.currentCards.forEach((card: Card) => {
       this.cardList.push({
+        /* This compared the card number against the literal "VisaMasterCard",
+           which never matches, so every card drew the Mastercard icon. Visa
+           numbers begin with 4 — the same test the accounts page uses. */
         iconClass:
-          card.card == "VisaMasterCard"
+          card.card[0] === "4"
             ? "fab fa-cc-visa"
             : "fab fa-cc-mastercard",
         value: card.account,
-        secondValue: card.amount,
+        secondValue: String(card.amount),
       });
     });
   }

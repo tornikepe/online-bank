@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Card } from "src/app/models/banking.model";
+import { ListWithIcons } from "src/app/shared/components/dropdown/list-with-icons.model";
 import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 import { PaymentsService } from '../payments.service';
 
@@ -17,8 +19,6 @@ export class BankTransferComponent implements OnInit {
     private http: HttpClient,
     private notification: NotificationsService, private cdr: ChangeDetectorRef) {
     this.activeCard = this.paymentService.currentCards[0];
-    this.cards = this.paymentService.cards;
-    this.users = this.paymentService.users;
     this.bankTransferForm = this.fb.group({
       account: ["", [Validators.required, Validators.pattern("^.{22}$")]],
       benName: ["", [Validators.required]],
@@ -26,44 +26,41 @@ export class BankTransferComponent implements OnInit {
     });
   }
   amountValue: number;
-  activeCard: any;
+  activeCard: Card;
   transferType: string = "Personal transfer";
   currencyType: string = "USD";
 
-  cardList: any = [];
+  cardList: ListWithIcons[] = [];
 
-  // data: any;
-  cards: any;
-  users: any;
-  accountsArray: any = [];
 
-  currentCards: any;
 
   // Validator variables
   amountIsInvalid: boolean;
   accountIsValid: boolean;
   userIsSame: boolean;
-  errorMessage: any;
+  errorMessage: boolean | string;
   // Validator variables
 
   public bankTransferForm: FormGroup;
 
   getCardList() {
-    this.paymentService.currentCards.forEach((card: any) => {
+    this.paymentService.currentCards.forEach((card: Card) => {
       this.cardList.push({
+        /* This compared the card number against the literal "VisaMasterCard",
+           which never matches, so every card drew the Mastercard icon. Visa
+           numbers begin with 4 — the same test the accounts page uses. */
         iconClass:
-          card.card == "VisaMasterCard"
+          card.card[0] === "4"
             ? "fab fa-cc-visa"
             : "fab fa-cc-mastercard",
         value: card.account,
-        secondValue: card.amount,
+        secondValue: String(card.amount),
       });
     });
   }
 
   ngOnInit(): void {
     this.getCardList();
-    this.currentCards = this.paymentService.currentCards;
   }
 
   // CUSTOM VALIDATORS START HERE
@@ -95,7 +92,7 @@ export class BankTransferComponent implements OnInit {
   getCurrencyType(event: string) {
     this.currencyType = event;
   }
-  getCurrentCard(event: any) {
+  getCurrentCard(event: ListWithIcons) {
     for (let card of this.paymentService.currentCards) {
       if (card.account === event.value) {
         this.activeCard = card;
