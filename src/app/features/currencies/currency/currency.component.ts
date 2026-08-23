@@ -81,14 +81,40 @@ export class CurrencyComponent implements OnInit, OnDestroy {
 
   }
 
-  mathRounding(event: any) {
-    return event.toFixed(2);
+  /**
+   * How many decimals a price needs to stay honest. Two is right for bitcoin
+   * and wrong for anything trading under a cent: `toFixed(2)` turned a coin at
+   * $0.0000094 into $0.00. Widen the window as the price shrinks.
+   */
+  priceDigits(price: number): string {
+    const value = Math.abs(price);
+    if (value >= 1) return "1.2-2";
+    if (value >= 0.01) return "1.2-4";
+    if (value >= 0.0001) return "1.2-6";
+    return "1.2-8";
   }
   imageHasBeenLoaded(event: any) {
     event.url =
       "https://www.pngplay.com/wp-content/uploads/2/Bitcoin-PNG-Background.png";
     event.onerror = "";
     return true;
+  }
+
+  /**
+   * The bank publishes `diff` as an absolute move in lari, not a fraction. The
+   * table used to pipe it straight through `percent`, which simply multiplied
+   * it by a hundred — a 0.0014 lari move on a 7.11 rate was printed as -0.14%
+   * when it is -0.02%. Divide by yesterday's rate to get the real one.
+   *
+   * The sign stays on the number so `percent` renders the minus itself, the
+   * same way the crypto table does it; `sign()` only adds the plus.
+   */
+  dailyChange(row: { rate: number; diff: number }): number {
+    const previous = row.rate - row.diff;
+    if (!previous) {
+      return 0;
+    }
+    return row.diff / previous;
   }
 
   sign(temp: number): "+" | "" {

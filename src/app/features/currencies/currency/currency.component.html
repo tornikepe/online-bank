@@ -3,49 +3,45 @@
         <app-tab [TitleText]="'Currency'">
             <div class="page">
                 <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th></th>
+                            <th>Code</th>
+                            <th>Currency</th>
+                            <th>Valid from</th>
+                            <th>Rate in GEL</th>
+                            <th>Per 1 unit</th>
+                            <th>Daily change</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <!-- //======================================= -->
                         <tr *ngFor="let i of currency_arr">
                             <td>
-                                <!--                <img-->
-                                <!--                  style="width: 50px; height: 30px"-->
-                                <!--                  src="{{i.icon}}"-->
-                                <!--                  alt="img"-->
-                                <!--                  onError="this.src = '../../../../assets/images/auth/Bitcoin-PNG-Background.png'"-->
-                                <!--                />-->
                                 <div class="currency-flag currency-flag-{{i.code.toLocaleLowerCase()}}"></div>
-
-                                <td>
-                                    {{i.code}}
-                                </td>
-                                <td>
-                                    {{i.name}}
-                                </td>
-                                <td>
-                                    {{i.date |date}}
-                                </td>
-                                <!-- color :  #FE4D97
-opacity 9%
-color  : #6DD230; -->
-                                <td [style]="i.color">
-                                    {{i.rateFormated}}
-                                </td>
-                                <td>
-                                    {{i.rate/i.quantity| number:"1.1-3"}}
-                                </td>
-                                <td [ngStyle]="{
-                  color: colorChanger(i.diff)
-                    ? 'green'
-                    : 'red'
-                }">
-                                    {{sign(i.diff)+i.diff| percent: "1.1-2" }}
-                                </td>
-                                <td>
-                                    {{i.date| date:"mediumTime"}}
-                                </td>
+                            </td>
+                            <td>
+                                <!-- The bank quotes some currencies per 10, 100 or 1000 units,
+                                     so the amount has to travel with the code. -->
+                                <span *ngIf="i.quantity > 1">{{ i.quantity }}&nbsp;</span>{{ i.code }}
+                            </td>
+                            <td>
+                                {{ i.name }}
+                            </td>
+                            <td>
+                                <!-- validFromDate is the day the rate is in effect; `date` is
+                                     the day it was set, which is one business day earlier. -->
+                                {{ i.validFromDate | date }}
+                            </td>
+                            <td [style]="i.color">
+                                {{ i.rateFormated }}
+                            </td>
+                            <td>
+                                {{ i.rate / i.quantity | number: "1.2-4" }}
+                            </td>
+                            <td [ngStyle]="{ color: colorChanger(i.diff) ? 'green' : 'red' }">
+                                {{ sign(i.diff) }}{{ dailyChange(i) | percent: "1.2-2" }}
+                            </td>
                         </tr>
-
-                        <!-- //======================================================== -->
                         <div class="overlay"></div>
                     </tbody>
                 </table>
@@ -122,7 +118,10 @@ color  : #6DD230; -->
               </td>
               <td id="second-child">{{ crypto.symbol }}</td>
               <td>
-                {{ mathRounding(crypto.quote.USD.price) | number: "1.2" }}
+                {{
+                  crypto.quote.USD.price
+                    | number: priceDigits(crypto.quote.USD.price)
+                }}
               </td>
               <td>${{ crypto.quote.USD.market_cap | numberSuffix }}</td>
               <td>${{ crypto.quote.USD.volume_24h | numberSuffix }}</td>
